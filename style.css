@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
+
+:root {
+  --background-color: #dff9fb;
+  --customer-height: 180px;
+}
+
+* {
+  border-radius: 1rem;
+}
+
+body {
+  font-size: 36px;
+  font-family: "Noto Serif", serif;
+}
+
+header {
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.customer-satisfaction {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  height: var(--customer-height);
+}
+
+.customer-satisfaction h2,
+.customer-satisfaction p {
+  margin: 0;
+  position: relative;
+  padding: 0 0.5rem;
+  border-radius: 0;
+}
+
+.customer-satisfaction::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  border-bottom: var(--customer-height) solid var(--background-color);
+}
+
+.pilars {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.pilars section {
+  text-align: center;
+}
+
+.pilars h3 {
+  background-color: var(--background-color);
+  padding: 1rem 4rem;
+  margin-bottom: 0;
+}
+
+.people-improvement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.people-improvement svg {
+  max-width: 40vh;
+  width: 100%;
+  align-self: center;
+}
+
+.just-in-time,
+.jidoka {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pilars ul {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+li {
+  list-style: none;
+  background-color: var(--background-color);
+  text-align: center;
+  padding: 1rem;
+}
+
+.improvement ul,
+.stability ul {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1250px) {
+  :root {
+    --customer-height: 120px;
+  }
+
+  body {
+    font-size: 26px;
+  }
+
+  .customer-satisfaction {
+    background-color: var(--background-color);
+    padding: 0 0.5rem;
+    font-size: min(36px, 50vw);
+  }
+
+  .customer-satisfaction::before {
+    content: initial;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .pilars {
+    flex-direction: row;
+  }
+}
+
+// SVG
+
+.person,
+.arrow {
+  fill: var(--background-color);
+}
