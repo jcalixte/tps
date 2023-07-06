@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
 
 :root {
-  --background-color: #dff9fb;
+  --background-color: #b2f1ad;
   --customer-height: 180px;
 }
 
@@ -75,8 +75,7 @@ main {
 }
 
 .people-improvement svg {
-  min-width: 30vh;
-  max-width: 50vh;
+  min-width: 20vw;
   width: 100%;
 }
 
@@ -133,6 +132,10 @@ li {
 @media only screen and (min-width: 750px) {
   .pilars {
     flex-direction: row;
+  }
+
+  svg {
+    max-width: 30vw;
   }
 }
 
