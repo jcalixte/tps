@@ -12,6 +12,7 @@
 body {
   font-size: 36px;
   font-family: "Noto Serif", serif;
+  margin: 0;
 }
 
 header {
@@ -24,6 +25,7 @@ main {
   justify-content: center;
   gap: 0;
   margin: 0 1rem;
+  max-height: 100vh;
 }
 
 .customer-satisfaction {
@@ -115,13 +117,13 @@ li {
   }
 
   body {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .customer-satisfaction {
     background-color: var(--background-color);
     padding: 0 0.5rem;
-    font-size: min(36px, 50vw);
+    font-size: min(22px, 50vw);
     height: initial;
   }
 
