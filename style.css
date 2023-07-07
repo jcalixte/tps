@@ -122,6 +122,7 @@ li {
     background-color: var(--background-color);
     padding: 0 0.5rem;
     font-size: min(36px, 50vw);
+    height: initial;
   }
 
   .customer-satisfaction::before {
