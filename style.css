@@ -34,9 +34,12 @@ ul {
 
 li {
   list-style: none;
-  background-color: var(--background-color);
   text-align: center;
   padding: 0.5rem 1rem;
+}
+
+.focusable {
+  background-color: var(--background-color);
 }
 
 .customer-satisfaction-roof {
@@ -46,7 +49,6 @@ li {
   align-items: center;
   text-align: center;
   border-radius: 5rem 5rem 0.5rem 0.5rem;
-  background-color: var(--background-color);
 }
 
 .customer-satisfaction-roof h2,
@@ -57,7 +59,6 @@ li {
 }
 
 .levers {
-  background-color: var(--background-color);
   margin: 0.5rem 0;
 }
 
@@ -89,7 +90,6 @@ li {
 }
 
 .pilars h3 {
-  background-color: var(--background-color);
   margin-top: 0;
   margin-bottom: 0;
   padding: 1rem 2rem;
@@ -121,7 +121,6 @@ li {
 
 .improvement ul,
 .stability ul {
-  background-color: var(--background-color);
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
