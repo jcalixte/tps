@@ -2,7 +2,7 @@
 
 :root {
   --background-color: #b2f1ad;
-  --background-color-no-focus: #b2f1ad80;
+  --background-color-no-focus: #f4f9f3;
 }
 
 * {
@@ -40,6 +40,10 @@ li {
 
 .focusable {
   background-color: var(--background-color);
+}
+
+.focusable.no-focus {
+  background-color: var(--background-color-no-focus);
 }
 
 .customer-satisfaction-roof {

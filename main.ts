@@ -18,3 +18,19 @@ if (size === "small") {
     body.style.fontSize = "15px"
   }
 }
+
+const focusElements = params.getAll("focus")
+
+if (focusElements.length >= 0) {
+  const focusables = document.querySelectorAll(".focusable")
+
+  focusables.forEach((focusable) => {
+    const elementToFocus = focusElements.some((element) =>
+      focusable.classList.contains(element)
+    )
+
+    if (!elementToFocus) {
+      focusable.classList.add("no-focus")
+    }
+  })
+}
