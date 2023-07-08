@@ -9,3 +9,12 @@ const display = params.get("display")
 if (display === "pure") {
   document.querySelector("header")?.remove()
 }
+
+const size = params.get("size")
+
+if (size === "small") {
+  const body = document.querySelector("body")
+  if (body) {
+    body.style.fontSize = "15px"
+  }
+}
