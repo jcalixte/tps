@@ -76,6 +76,8 @@ li {
   flex-wrap: wrap;
   justify-content: space-between;
   padding-left: 0;
+  row-gap: 0.5rem;
+  gap: 0.5rem;
 }
 
 .people-improvement {
