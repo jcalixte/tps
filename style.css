@@ -2,7 +2,6 @@
 
 :root {
   --background-color: #b2f1ad;
-  --customer-height: 180px;
 }
 
 * {
@@ -25,7 +24,6 @@ main {
   justify-content: center;
   gap: 0;
   margin: 0 1rem;
-  max-height: 100vh;
 }
 
 .customer-satisfaction {
@@ -34,25 +32,15 @@ main {
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  height: var(--customer-height);
+  border-radius: 6rem 6rem 0.5rem 0.5rem;
+  background-color: var(--background-color);
 }
 
 .customer-satisfaction h2,
 .customer-satisfaction p {
   margin: 0;
-  position: relative;
   padding: 0 0.5rem;
   border-radius: 0;
-}
-
-.customer-satisfaction::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 50vw solid transparent;
-  border-right: 50vw solid transparent;
-  border-bottom: var(--customer-height) solid var(--background-color);
 }
 
 .pilars {
@@ -78,6 +66,7 @@ main {
 
 .people-improvement svg {
   min-width: 20vw;
+  max-width: 50vw;
   width: 100%;
 }
 
@@ -121,14 +110,9 @@ li {
   }
 
   .customer-satisfaction {
-    background-color: var(--background-color);
     padding: 0 0.5rem;
     font-size: min(22px, 50vw);
     height: initial;
-  }
-
-  .customer-satisfaction::before {
-    content: initial;
   }
 }
 
