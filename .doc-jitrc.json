@@ -1,0 +1,10 @@
+{
+  "patterns": {
+    "index.html": [
+      {
+        "label": "Vite documentation",
+        "uri": "https://vitejs.dev/"
+      }
+    ]
+  }
+}
