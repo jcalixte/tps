@@ -21,7 +21,7 @@ if (size === "small") {
 
 const focusElements = params.getAll("focus")
 
-if (focusElements.length >= 0) {
+if (focusElements.length > 0) {
   const focusables = document.querySelectorAll(".focusable")
 
   focusables.forEach((focusable) => {
@@ -33,4 +33,11 @@ if (focusElements.length >= 0) {
       focusable.classList.add("no-focus")
     }
   })
+}
+
+const textHide = params.get("text")
+
+if (textHide === "hide") {
+  const focusables = document.querySelectorAll(".focusable")
+  focusables.forEach((focusable) => focusable.classList.add("text-hide"))
 }

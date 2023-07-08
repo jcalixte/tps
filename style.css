@@ -46,6 +46,10 @@ li {
   background-color: var(--background-color-no-focus);
 }
 
+.text-hide {
+  color: var(--background-color);
+}
+
 .customer-satisfaction-roof {
   display: flex;
   flex-direction: column;
