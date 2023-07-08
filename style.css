@@ -2,6 +2,7 @@
 
 :root {
   --background-color: #b2f1ad;
+  --background-color-no-focus: #b2f1ad80;
 }
 
 * {
@@ -38,7 +39,7 @@ li {
   padding: 0.5rem 1rem;
 }
 
-.customer-satisfaction {
+.customer-satisfaction-roof {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -48,8 +49,8 @@ li {
   background-color: var(--background-color);
 }
 
-.customer-satisfaction h2,
-.customer-satisfaction p {
+.customer-satisfaction-roof h2,
+.customer-satisfaction-roof p {
   margin: 0;
   padding: 0 0.5rem 0.5rem;
   border-radius: 0;
@@ -96,8 +97,8 @@ li {
   text-align: center;
 }
 
-.just-in-time,
-.jidoka {
+.just-in-time-pilar,
+.jidoka-pilar {
   display: flex;
   flex: 2;
   flex-direction: column;
@@ -134,10 +135,4 @@ li {
   svg {
     max-width: 30vw;
   }
-}
-
-/* SVG */
-.person,
-.arrow {
-  fill: var(--background-color);
 }
