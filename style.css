@@ -5,7 +5,7 @@
 }
 
 * {
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 body {
@@ -32,15 +32,29 @@ main {
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  border-radius: 6rem 6rem 0.5rem 0.5rem;
+  border-radius: 5rem 5rem 0.5rem 0.5rem;
   background-color: var(--background-color);
 }
 
 .customer-satisfaction h2,
 .customer-satisfaction p {
   margin: 0;
-  padding: 0 0.5rem;
+  padding: 0 0.5rem 0.5rem;
   border-radius: 0;
+}
+
+.levers {
+  background-color: var(--background-color);
+  margin: 0.5rem 0;
+}
+
+.levers ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 0;
+  margin: 0;
 }
 
 .pilars {
@@ -51,6 +65,7 @@ main {
 
 .pilars h3 {
   background-color: var(--background-color);
+  margin-top: 0;
   margin-bottom: 0;
   padding: 1rem 2rem;
   width: calc(100% - (2rem * 2));
