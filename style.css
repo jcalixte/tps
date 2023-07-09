@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
 
 :root {
-  --background-color: #b2f1ad;
-  --background-color-no-focus: #f4f9f3;
+  --background-color: #002992;
+  --background-color-no-focus: #abbbdf;
+  --color: white;
 }
 
 * {
@@ -25,6 +26,7 @@ main {
   justify-content: center;
   gap: 0;
   margin: 1rem 1rem 0;
+  color: var(--color);
 }
 
 ul {

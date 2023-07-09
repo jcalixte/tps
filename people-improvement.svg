@@ -1,9 +1,9 @@
 <svg width="1393" height="1288" viewBox="0 0 1393 1288" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="1393" height="1288" fill="white"/>
-<circle cx="696.5" cy="295.5" r="88.5" fill="var(--background-color)"/>
-<rect x="537" y="384" width="319" height="408" rx="106" fill="var(--background-color)"/>
-<rect x="593" y="672" width="207" height="408" rx="103.5" fill="var(--background-color)"/>
-<path d="M657 1177L732 1220.3L732 1133.7L657 1177Z" fill="var(--background-color)"/>
-<path d="M746 107L671 63.6987V150.301L746 107Z" fill="var(--background-color)"/>
-<circle cx="696.5" cy="643.5" r="535" stroke="var(--background-color)" stroke-width="23"/>
+<circle cx="696.5" cy="295.5" r="88.5" fill="#130f40"/>
+<rect x="537" y="384" width="319" height="408" rx="106" fill="#130f40"/>
+<rect x="593" y="672" width="207" height="408" rx="103.5" fill="#130f40"/>
+<path d="M657 1177L732 1220.3L732 1133.7L657 1177Z" fill="#130f40"/>
+<path d="M746 107L671 63.6987V150.301L746 107Z" fill="#130f40"/>
+<circle cx="696.5" cy="643.5" r="535" stroke="#130f40" stroke-width="23"/>
 </svg>
