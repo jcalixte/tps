@@ -91,9 +91,9 @@ li {
 }
 
 .people-improvement svg {
-  min-width: 20vw;
-  max-width: 50vw;
-  width: 100%;
+  flex: 1;
+  min-width: max(15vw, 200px);
+  max-width: 30vw;
 }
 
 .pilars {
@@ -121,7 +121,9 @@ li {
 
 .pilars ul {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  justify-content: space-evenly;
   gap: 0.5rem;
 }
 
