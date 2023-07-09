@@ -138,12 +138,9 @@ li {
   flex-wrap: wrap;
 }
 
+/* Wide screen */
 @media only screen and (min-width: 750px) {
   .pilars {
     flex-direction: row;
-  }
-
-  svg {
-    max-width: 30vw;
   }
 }
