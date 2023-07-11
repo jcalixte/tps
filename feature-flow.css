@@ -1,0 +1,63 @@
+main {
+  height: 100vh;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+main > ul {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 0 1rem;
+  border: 3px solid var(--background-color);
+}
+
+li {
+  flex: 1;
+  height: 100%;
+  margin: 0;
+  color: var(--background-color);
+}
+
+main > ul > li:first-child {
+  margin-left: 1rem;
+}
+
+main > ul > li:last-child {
+  margin-right: 1rem;
+}
+
+main > ul > li:not(:last-child) {
+  padding-right: 1rem;
+  border-right: 3px solid var(--background-color);
+  border-radius: 0;
+}
+
+header {
+  padding: 0.5rem;
+  border: solid 2px var(--background-color);
+  margin-top: 1rem;
+}
+
+section {
+  margin: 1rem 0;
+}
+
+section ul {
+  padding: 1rem;
+}
+
+h5 {
+  margin-bottom: 0;
+}
+
+.blue-bucket {
+  margin-top: 1rem;
+  border: 3px solid var(--background-color);
+  height: 60px;
+}
