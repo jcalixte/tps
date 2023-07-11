@@ -54,10 +54,16 @@ section ul {
 
 h5 {
   margin-bottom: 0;
+  background-color: var(--background-color);
+  color: var(--color);
+  padding: 0.35rem;
 }
 
-.blue-bucket {
+.blue-bin {
   margin-top: 1rem;
   border: 3px solid var(--background-color);
   height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
