@@ -63,7 +63,7 @@ li {
 .people-improvement svg {
   flex: 1;
   min-width: max(15vw, 200px);
-  max-width: 30vw;
+  max-width: 20vw;
 }
 
 .pilars {
