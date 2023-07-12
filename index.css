@@ -98,6 +98,10 @@ li {
   gap: 0.5rem;
 }
 
+.pilars li {
+  flex: 0;
+}
+
 .ground {
   display: flex;
   flex-direction: column;
