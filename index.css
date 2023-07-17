@@ -99,8 +99,11 @@ li {
 }
 
 .pilars li {
-  flex: 0;
+  flex: 1;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ground {
