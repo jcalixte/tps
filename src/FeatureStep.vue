@@ -14,7 +14,7 @@ const remainingBlueBuckets = computed(() =>
   <li class="feature-step">
     <header>{{ step.title }}</header>
     <section class="doing">
-      <h5>📝</h5>
+      <h5>📝⌛</h5>
       <ul v-if="step.featuresInProgress.length > 0">
         <li v-for="feature in step.featuresInProgress" :key="feature">
           {{ feature }}
@@ -22,7 +22,7 @@ const remainingBlueBuckets = computed(() =>
       </ul>
     </section>
     <section class="done">
-      <h5>✅</h5>
+      <h5>📝✅</h5>
       <ul v-if="step.featuresDone.length > 0">
         <li v-for="feature in step.featuresDone" :key="feature">
           {{ feature }}
