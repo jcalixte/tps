@@ -41,5 +41,35 @@ const remainingBlueBuckets = computed(() =>
 
 <style scoped lang="scss">
 .feature-step {
+  header {
+    padding: 0.5rem;
+    border: solid 2px var(--background-color);
+    margin-top: 1rem;
+  }
+
+  section {
+    margin: 1rem 0;
+    flex: 1;
+  }
+
+  section ul {
+    padding: 1rem;
+  }
+
+  h5 {
+    margin-bottom: 0;
+    background-color: var(--background-color);
+    padding: 0.35rem;
+    text-align: center;
+  }
+
+  .blue-bin {
+    margin-top: 1rem;
+    border: 3px solid var(--background-color);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>

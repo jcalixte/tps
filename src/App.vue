@@ -8,7 +8,8 @@ import FeatureSteps from '@/FeatureSteps.vue'
   </main>
 </template>
 
-<!-- <style scoped lang="scss">
-#main-app {
+<style scoped lang="scss">
+main {
+  height: calc(100vh - 2 * 1rem);
 }
-</style> -->
+</style>
