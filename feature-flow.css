@@ -2,3 +2,33 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+.bin {
+  margin-top: 1rem;
+  border: 3px solid var(--background-color);
+  color: var(--background-color);
+  background-color: white;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12pt;
+  padding: 0 0.5rem;
+  text-align: center;
+  transition-property: border, color, background-color, font-size;
+  transition-duration: 1s;
+}
+
+.blue-bin {
+  background-color: var(--background-color);
+  color: white;
+  font-size: 18pt;
+}
+
+.green-bin {
+  background-color: var(--success-color);
+  border: 3px solid var(--success-color);
+  color: white;
+  transition-delay: 3s;
+}

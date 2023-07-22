@@ -21,7 +21,7 @@ export const featureSteps: FeatureStep[] = [
     blueBuckets: 1
   },
   {
-    title: 'Product design',
+    title: 'Product',
     stepIndex: 3,
     blueBuckets: 2
   },

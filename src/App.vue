@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
+import { StarportCarrier } from 'vue-starport'
 </script>
 
 <template>
   <main id="main-app">
-    <FeatureSteps />
+    <StarportCarrier>
+      <FeatureSteps />
+    </StarportCarrier>
   </main>
 </template>
 

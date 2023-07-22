@@ -2,6 +2,7 @@
 import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
 import { computed } from 'vue'
+import { Starport } from 'vue-starport'
 
 const props = defineProps<{
   step: FeatureStep
@@ -32,33 +33,20 @@ const isLive = computed(
     <section class="doing">
       <h5>📝⌛</h5>
       <ul v-if="hasFeaturesInProgress">
-        <li
-          v-for="feature in featuresInProgress"
-          :key="feature.name"
-          class="bin"
-        >
-          <div>
-            {{ feature.name }}
-          </div>
-          <div class="lead-time">{{ feature.leadTime }} days</div>
+        <li v-for="feature in featuresInProgress" :key="feature.name">
+          <Starport :port="feature.name" style="height: 62px">
+            <div class="bin">
+              <div>
+                {{ feature.name }}
+              </div>
+              <div class="lead-time">{{ feature.leadTime }} days</div>
+            </div>
+          </Starport>
         </li>
       </ul>
     </section>
     <section class="done">
       <h5>📝✅</h5>
-      <ul v-if="hasFeaturesDone">
-        <li
-          v-for="feature in featuresDone"
-          :key="feature.name"
-          class="bin"
-          :class="{ 'green-bin': isLive }"
-        >
-          <div>
-            {{ feature.name }}
-          </div>
-          <div class="lead-time">{{ feature.leadTime }} days</div>
-        </li>
-      </ul>
       <div
         v-for="blueBucket in remainingBlueBuckets"
         :key="blueBucket"
@@ -66,6 +54,18 @@ const isLive = computed(
       >
         Blue bucket
       </div>
+      <ul class="done-list" v-if="hasFeaturesDone">
+        <li v-for="feature in featuresDone" :key="feature.name">
+          <Starport :port="feature.name" style="height: 62px">
+            <div class="bin">
+              <div>
+                {{ feature.name }}
+              </div>
+              <div class="lead-time">{{ feature.leadTime }} days</div>
+            </div>
+          </Starport>
+        </li>
+      </ul>
     </section>
   </li>
 </template>
@@ -85,6 +85,8 @@ const isLive = computed(
   section {
     margin: 1rem 0;
     flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   h5 {
@@ -94,30 +96,6 @@ const isLive = computed(
     text-align: center;
   }
 
-  .bin {
-    margin-top: 1rem;
-    border: 3px solid var(--background-color);
-    height: 62px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12pt;
-    padding: 0 0.5rem;
-    text-align: center;
-  }
-
-  .blue-bin {
-    background-color: var(--background-color);
-    color: white;
-    font-size: 18pt;
-  }
-
-  .green-bin {
-    background-color: var(--success-color);
-    border: 3px solid var(--success-color);
-    color: white;
-  }
-
   li {
     flex-direction: column;
   }
@@ -125,6 +103,11 @@ const isLive = computed(
   .lead-time {
     font-family: 'Cutive Mono', monospace;
     font-weight: bold;
+  }
+
+  .done-list {
+    flex: 1;
+    overflow-y: auto;
   }
 }
 </style>
