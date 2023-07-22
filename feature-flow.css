@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
+
+:root {
+  --feature-item-height: 70px;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -8,7 +14,7 @@ ul {
   border: 3px solid var(--background-color);
   color: var(--background-color);
   background-color: white;
-  height: 62px;
+  height: var(--feature-item-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,4 +37,9 @@ ul {
   border: 3px solid var(--success-color);
   color: white;
   transition-delay: 3s;
+}
+
+.numeric {
+  font-family: 'Cutive Mono', monospace;
+  font-weight: bold;
 }

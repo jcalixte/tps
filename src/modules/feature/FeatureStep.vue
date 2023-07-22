@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureItem from '@/modules/feature/FeatureItem.vue'
 import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
 import { computed } from 'vue'
@@ -34,13 +35,11 @@ const isLive = computed(
       <h5>📝⌛</h5>
       <ul v-if="hasFeaturesInProgress">
         <li v-for="feature in featuresInProgress" :key="feature.name">
-          <Starport :port="feature.name" style="height: 62px">
-            <div class="bin">
-              <div>
-                {{ feature.name }}
-              </div>
-              <div class="lead-time">{{ feature.leadTime }} days</div>
-            </div>
+          <Starport
+            :port="feature.name"
+            style="height: var(--feature-item-height)"
+          >
+            <FeatureItem :feature="feature" />
           </Starport>
         </li>
       </ul>
@@ -56,13 +55,11 @@ const isLive = computed(
       </div>
       <ul class="done-list" v-if="hasFeaturesDone">
         <li v-for="feature in featuresDone" :key="feature.name">
-          <Starport :port="feature.name" style="height: 62px">
-            <div class="bin">
-              <div>
-                {{ feature.name }}
-              </div>
-              <div class="lead-time">{{ feature.leadTime }} days</div>
-            </div>
+          <Starport
+            :port="feature.name"
+            style="height: var(--feature-item-height)"
+          >
+            <FeatureItem :feature="feature" />
           </Starport>
         </li>
       </ul>
@@ -71,11 +68,7 @@ const isLive = computed(
 </template>
 
 <style scoped lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
-
 .feature-step {
-  --success-color: #20bf6b;
-
   header {
     padding: 0.5rem;
     border: solid 2px var(--background-color);
@@ -98,11 +91,6 @@ const isLive = computed(
 
   li {
     flex-direction: column;
-  }
-
-  .lead-time {
-    font-family: 'Cutive Mono', monospace;
-    font-weight: bold;
   }
 
   .done-list {

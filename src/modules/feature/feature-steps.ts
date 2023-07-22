@@ -6,24 +6,14 @@ export type FeatureStep = {
 
 export const featureSteps: FeatureStep[] = [
   {
-    title: 'Pitch',
-    stepIndex: 6,
+    title: 'Product',
+    stepIndex: 4,
     blueBuckets: 2
   },
   {
     title: 'Design',
-    stepIndex: 5,
-    blueBuckets: 1
-  },
-  {
-    title: 'Investigation',
-    stepIndex: 4,
-    blueBuckets: 1
-  },
-  {
-    title: 'Product',
     stepIndex: 3,
-    blueBuckets: 2
+    blueBuckets: 1
   },
   {
     title: 'Development',

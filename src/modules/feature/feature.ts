@@ -6,4 +6,5 @@ export type Feature = {
   leadTime: number
   status: FeatureStatus
   step: number
+  qualityIssue: number
 }
