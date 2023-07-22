@@ -20,7 +20,11 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     <section class="doing">
       <h5>📝⌛</h5>
       <ul v-if="hasFeaturesInProgress">
-        <li v-for="feature in step.featuresInProgress" :key="feature">
+        <li
+          v-for="feature in step.featuresInProgress"
+          :key="feature"
+          class="bin"
+        >
           {{ feature }}
         </li>
       </ul>
@@ -28,14 +32,14 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     <section class="done">
       <h5>📝✅</h5>
       <ul v-if="hasFeaturesDone">
-        <li v-for="feature in step.featuresDone" :key="feature">
+        <li v-for="feature in step.featuresDone" :key="feature" class="bin">
           {{ feature }}
         </li>
       </ul>
       <div
         v-for="blueBucket in remainingBlueBuckets"
         :key="blueBucket"
-        class="blue-bin"
+        class="bin blue-bin"
       >
         Blue bucket
       </div>
@@ -67,13 +71,18 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     text-align: center;
   }
 
-  .blue-bin {
+  .bin {
     margin-top: 1rem;
     border: 3px solid var(--background-color);
     height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .blue-bin {
+    background-color: var(--background-color);
+    color: white;
   }
 }
 </style>
