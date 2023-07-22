@@ -10,6 +10,6 @@ import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
 
 <style scoped lang="scss">
 main {
-  height: calc(100vh - 2 * 1rem);
+  min-height: calc(100vh - 2 * 1rem);
 }
 </style>

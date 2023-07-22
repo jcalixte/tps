@@ -24,8 +24,17 @@ export const createFeatureBoard = () => {
       if (isFeatureLive) {
         return
       }
-
       feature.leadTime++
+
+      switch (feature.status) {
+        case 'doing':
+          feature.status = 'done'
+          break
+        case 'done':
+          feature.status = 'doing'
+          feature.step--
+          break
+      }
     })
 
     return features

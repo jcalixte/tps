@@ -10,20 +10,37 @@ const featureBoard = createFeatureBoard()
 
 const features = ref<Feature[]>([])
 
-const meanComplexity = computed(() =>
-  sumElements(features.value.map((feature) => feature.complexity))
+const meanComplexity = computed(
+  () =>
+    sumElements(features.value.map((feature) => feature.complexity)) /
+    features.value.length
 )
 
-const meanLeadTime = computed(() =>
-  sumElements(features.value.map((feature) => feature.leadTime))
+const meanLeadTime = computed(
+  () =>
+    sumElements(features.value.map((feature) => feature.leadTime)) /
+    features.value.length
 )
 
 onMounted(() => (features.value = featureBoard.initBoard(featureSteps)))
 
-const nextDay = () => (features.value = featureBoard.nextDay(features.value))
+const nextDay = () => {
+  features.value = featureBoard.nextDay(features.value)
+}
 
-const getStepFeatures = (stepIndex: number) =>
-  features.value.filter((feature) => feature.step === stepIndex)
+const featuresGroupedByStep = computed(() => {
+  const groupedByStep: Record<number, Feature[]> = {}
+
+  features.value.forEach((feature) => {
+    if (!groupedByStep[feature.step]) {
+      groupedByStep[feature.step] = [feature]
+    } else {
+      groupedByStep[feature.step].push(feature)
+    }
+  })
+
+  return groupedByStep
+})
 </script>
 
 <template>
@@ -41,13 +58,14 @@ const getStepFeatures = (stepIndex: number) =>
       v-for="step in featureSteps"
       :key="step.title"
       :step="step"
-      :features="getStepFeatures(step.stepIndex)"
+      :features="featuresGroupedByStep[step.stepIndex] ?? []"
     />
   </ul>
 </template>
 
 <style scoped lang="scss">
-.dashboard {
+.dashboard,
+pre {
   color: black;
 }
 
@@ -56,7 +74,7 @@ const getStepFeatures = (stepIndex: number) =>
   flex: 1;
   gap: 1rem;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: stretch;
   margin: 0 1rem;
   border: 3px solid var(--background-color);
 
@@ -70,7 +88,6 @@ const getStepFeatures = (stepIndex: number) =>
 
   li:not(:last-child) {
     padding-right: 1rem;
-    border-right: 3px solid var(--background-color);
     border-radius: 0;
   }
 

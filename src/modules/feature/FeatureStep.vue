@@ -20,7 +20,10 @@ const remainingBlueBuckets = computed(() =>
 const hasFeaturesInProgress = computed(
   () => featuresInProgress.value.length > 0
 )
-const hasFeaturesDone = computed(() => featuresInProgress.value.length > 0)
+const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
+const isLive = computed(
+  () => props.step.title.toLocaleLowerCase() === 'release'
+)
 </script>
 
 <template>
@@ -44,7 +47,12 @@ const hasFeaturesDone = computed(() => featuresInProgress.value.length > 0)
     <section class="done">
       <h5>📝✅</h5>
       <ul v-if="hasFeaturesDone">
-        <li v-for="feature in featuresDone" :key="feature.name" class="bin">
+        <li
+          v-for="feature in featuresDone"
+          :key="feature.name"
+          class="bin"
+          :class="{ 'green-bin': isLive }"
+        >
           <div>
             {{ feature.name }}
           </div>
@@ -66,6 +74,8 @@ const hasFeaturesDone = computed(() => featuresInProgress.value.length > 0)
 @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
 
 .feature-step {
+  --success-color: #20bf6b;
+
   header {
     padding: 0.5rem;
     border: solid 2px var(--background-color);
@@ -100,6 +110,12 @@ const hasFeaturesDone = computed(() => featuresInProgress.value.length > 0)
     background-color: var(--background-color);
     color: white;
     font-size: 18pt;
+  }
+
+  .green-bin {
+    background-color: var(--success-color);
+    border: 3px solid var(--success-color);
+    color: white;
   }
 
   li {
