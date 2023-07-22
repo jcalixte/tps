@@ -25,5 +25,17 @@ export const createFeatureBoard = () => {
     return featureSteps
   }
 
-  return { initBoard }
+  const nextDay = (featureSteps: FeatureStep[]): FeatureStep[] => {
+    featureSteps.forEach((step) => {
+      step.featuresInProgress.forEach((feature) => feature.leadTime++)
+
+      if (step.title.toLowerCase() !== 'release') {
+        step.featuresDone.forEach((feature) => feature.leadTime++)
+      }
+    })
+
+    return featureSteps
+  }
+
+  return { initBoard, nextDay }
 }

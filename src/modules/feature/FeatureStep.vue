@@ -25,7 +25,10 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
           :key="feature.name"
           class="bin"
         >
-          {{ feature.name }}
+          <div>
+            {{ feature.name }}
+          </div>
+          <div class="lead-time">{{ feature.leadTime }} days</div>
         </li>
       </ul>
     </section>
@@ -37,7 +40,10 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
           :key="feature.name"
           class="bin"
         >
-          {{ feature.name }}
+          <div>
+            {{ feature.name }}
+          </div>
+          <div class="lead-time">{{ feature.leadTime }} days</div>
         </li>
       </ul>
       <div
@@ -52,6 +58,8 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
 </template>
 
 <style scoped lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
+
 .feature-step {
   header {
     padding: 0.5rem;
@@ -74,7 +82,7 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
   .bin {
     margin-top: 1rem;
     border: 3px solid var(--background-color);
-    height: 60px;
+    height: 62px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,6 +95,15 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     background-color: var(--background-color);
     color: white;
     font-size: 18pt;
+  }
+
+  li {
+    flex-direction: column;
+  }
+
+  .lead-time {
+    font-family: 'Cutive Mono', monospace;
+    font-weight: bold;
   }
 }
 </style>

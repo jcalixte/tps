@@ -30,3 +30,5 @@ export const pickRandomIndex = <T>(array: T[]) =>
 
 export const pickRandomElement = <T>(array: T[]) =>
   array[pickRandomIndex(array)]
+
+export const sumElements = (array: number[]) => array.reduce((a, b) => a + b, 0)
