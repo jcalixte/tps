@@ -8,6 +8,10 @@ const props = defineProps<{
 const remainingBlueBuckets = computed(() =>
   Math.max(0, props.step.blueBuckets - props.step.featuresDone.length)
 )
+const hasFeaturesInProgress = computed(
+  () => props.step.featuresInProgress.length > 0
+)
+const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
 </script>
 
 <template>
@@ -15,7 +19,7 @@ const remainingBlueBuckets = computed(() =>
     <header>{{ step.title }}</header>
     <section class="doing">
       <h5>📝⌛</h5>
-      <ul v-if="step.featuresInProgress.length > 0">
+      <ul v-if="hasFeaturesInProgress">
         <li v-for="feature in step.featuresInProgress" :key="feature">
           {{ feature }}
         </li>
@@ -23,7 +27,7 @@ const remainingBlueBuckets = computed(() =>
     </section>
     <section class="done">
       <h5>📝✅</h5>
-      <ul v-if="step.featuresDone.length > 0">
+      <ul v-if="hasFeaturesDone">
         <li v-for="feature in step.featuresDone" :key="feature">
           {{ feature }}
         </li>
