@@ -21,9 +21,9 @@ export const featureSteps: FeatureStep[] = [
     blueBuckets: 2
   },
   {
-    title: 'UAT',
+    title: 'Test',
     stepIndex: 1,
-    blueBuckets: 3
+    blueBuckets: 2
   },
   {
     title: 'Release',

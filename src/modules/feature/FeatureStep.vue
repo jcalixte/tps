@@ -13,7 +13,9 @@ const featuresInProgress = computed(() =>
   props.features.filter((feature) => feature.status === 'doing')
 )
 const featuresDone = computed(() =>
-  props.features.filter((feature) => feature.status === 'done')
+  props.features
+    .filter((feature) => feature.status === 'done')
+    .sort((a, b) => (a.leadTime > b.leadTime ? -1 : 1))
 )
 
 const remainingBlueBuckets = computed(() =>
@@ -46,26 +48,30 @@ const isLive = computed(
     </section>
     <section class="done">
       <h5>📝✅ ({{ featuresDone.length }})</h5>
-      <div
-        v-for="blueBucket in remainingBlueBuckets"
-        :key="blueBucket"
-        class="bin blue-bin"
-      >
-        Blue bucket
-      </div>
-      <div v-if="isLive" class="live">
-        {{ featuresDone.length }} features live!
-      </div>
-      <ul class="done-list" v-else-if="hasFeaturesDone">
-        <li v-for="feature in featuresDone" :key="feature.name">
-          <Starport
-            :port="feature.name"
-            style="height: calc(var(--feature-item-height) + 0.2rem)"
+      <div>
+        <div class="blue-bin-container">
+          <div
+            v-for="blueBucket in remainingBlueBuckets"
+            :key="blueBucket"
+            class="bin blue-bin"
           >
-            <FeatureItem :feature="feature" />
-          </Starport>
-        </li>
-      </ul>
+            Blue bucket
+          </div>
+        </div>
+        <div v-if="isLive" class="live">
+          {{ featuresDone.length }} features live!
+        </div>
+        <ul class="done-list">
+          <li v-for="feature in featuresDone" :key="feature.name">
+            <Starport
+              :port="feature.name"
+              style="height: calc(var(--feature-item-height) + 0.2rem)"
+            >
+              <FeatureItem :feature="feature" :is-live="isLive" />
+            </Starport>
+          </li>
+        </ul>
+      </div>
     </section>
   </li>
 </template>
