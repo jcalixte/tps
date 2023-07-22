@@ -1,7 +1,8 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import { defineConfig } from 'vite'
 
-export default {
+export default defineConfig({
   plugins: [vue()],
   build: {
     rollupOptions: {
@@ -17,4 +18,4 @@ export default {
       'node-fetch': 'isomorphic-fetch'
     }
   }
-}
+})

@@ -36,6 +36,7 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  justify-content: space-around;
 
   &.live {
     visibility: hidden;
