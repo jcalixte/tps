@@ -23,6 +23,9 @@ const hasFeaturesInProgress = computed(
   () => featuresInProgress.value.length > 0
 )
 const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
+const isLive = computed(
+  () => props.step.title.toLocaleLowerCase() === 'release'
+)
 </script>
 
 <template>
@@ -50,7 +53,10 @@ const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
       >
         Blue bucket
       </div>
-      <ul class="done-list" v-if="hasFeaturesDone">
+      <div v-if="isLive" class="live">
+        {{ featuresDone.length }} features live!
+      </div>
+      <ul class="done-list" v-else-if="hasFeaturesDone">
         <li v-for="feature in featuresDone" :key="feature.name">
           <Starport
             :port="feature.name"
@@ -66,18 +72,10 @@ const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
 
 <style scoped lang="scss">
 @mixin hideScrollbar {
-  // https://blogs.msdn.microsoft.com/kurlak/2013/11/03/hiding-vertical-scrollbars-with-pure-css-in-chrome-ie-6-firefox-opera-and-safari/
-  // There is a CSS rule that can hide scrollbars in Webkit-based browsers (Chrome and Safari).
   &::-webkit-scrollbar {
     width: 0 !important;
   }
-  // There is a CSS rule that can hide scrollbars in IE 10+.
   -ms-overflow-style: none;
-
-  // Use -ms-autohiding-scrollbar if you wish to display on hover.
-  // -ms-overflow-style: -ms-autohiding-scrollbar;
-
-  // There used to be a CSS rule that could hide scrollbars in Firefox, but it has since been deprecated.
   scrollbar-width: none;
 }
 
@@ -112,6 +110,10 @@ const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
 
   .done-list {
     flex: 1;
+  }
+
+  .live {
+    text-align: center;
   }
 }
 </style>

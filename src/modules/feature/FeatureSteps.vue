@@ -57,8 +57,8 @@ const featuresGroupedByStep = computed(() => {
 <template>
   <div class="dashboard">
     <div>
-      mean complexity : {{ meanComplexity }}, mean lead time :
-      {{ meanLeadTime }} days
+      {{ features.length }} features | mean complexity : {{ meanComplexity }} |
+      mean lead time : {{ meanLeadTime }} days
     </div>
     <div>
       <button @click="nextDay">next day</button>
