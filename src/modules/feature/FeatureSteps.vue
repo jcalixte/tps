@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import FeatureStep from '@/FeatureStep.vue'
-import { featureSteps } from '@/feature-steps'
+import FeatureStep from '@/modules/feature/FeatureStep.vue'
+import { createFeatureBoard } from '@/modules/feature/feature-board'
+import { featureSteps as initialFeatureSteps } from '@/modules/feature/feature-steps'
+import { ref } from 'vue'
+
+const featureBoard = createFeatureBoard()
+
+const featureSteps = ref(featureBoard.initBoard(initialFeatureSteps))
 </script>
 
 <template>

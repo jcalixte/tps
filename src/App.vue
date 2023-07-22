@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FeatureSteps from '@/FeatureSteps.vue'
+import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
 </script>
 
 <template>

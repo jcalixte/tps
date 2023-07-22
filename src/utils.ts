@@ -10,3 +10,23 @@ export const shuffleArray = <T>(array: T[]) => {
 
   return arrayCopy
 }
+
+export const popNElement = <T>(array: T[], numberOfElements: number) => {
+  const poppedElements: T[] = []
+
+  for (let i = 0; i < numberOfElements; i++) {
+    const element = array.pop()
+
+    if (element) {
+      poppedElements.push(element)
+    }
+  }
+
+  return poppedElements
+}
+
+export const pickRandomIndex = <T>(array: T[]) =>
+  Math.floor(Math.random() * array.length)
+
+export const pickRandomElement = <T>(array: T[]) =>
+  array[pickRandomIndex(array)]

@@ -1,15 +1,17 @@
+export type FeatureStatus = 'doing' | 'done'
+
 export type FeatureStep = {
   title: string
-  featuresInProgress: string[]
-  featuresDone: string[]
+  featuresInProgress: Feature[]
+  featuresDone: Feature[]
   blueBuckets: number
 }
 
 export const featureSteps: FeatureStep[] = [
   {
     title: 'Pitch',
-    featuresInProgress: ['Feature 3', 'Feature 4'],
-    featuresDone: ['Feature 1', 'Feature 2'],
+    featuresInProgress: [],
+    featuresDone: [],
     blueBuckets: 2
   },
   {

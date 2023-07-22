@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FeatureStep } from '@/feature-steps'
+import { FeatureStep } from '@/modules/feature/feature-steps'
 import { computed } from 'vue'
 
 const props = defineProps<{
@@ -22,18 +22,22 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
       <ul v-if="hasFeaturesInProgress">
         <li
           v-for="feature in step.featuresInProgress"
-          :key="feature"
+          :key="feature.name"
           class="bin"
         >
-          {{ feature }}
+          {{ feature.name }}
         </li>
       </ul>
     </section>
     <section class="done">
       <h5>📝✅</h5>
       <ul v-if="hasFeaturesDone">
-        <li v-for="feature in step.featuresDone" :key="feature" class="bin">
-          {{ feature }}
+        <li
+          v-for="feature in step.featuresDone"
+          :key="feature.name"
+          class="bin"
+        >
+          {{ feature.name }}
         </li>
       </ul>
       <div
@@ -60,10 +64,6 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     flex: 1;
   }
 
-  section ul {
-    padding: 1rem;
-  }
-
   h5 {
     margin-bottom: 0;
     background-color: var(--background-color);
@@ -78,11 +78,15 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 12pt;
+    padding: 0 0.5rem;
+    text-align: center;
   }
 
   .blue-bin {
     background-color: var(--background-color);
     color: white;
+    font-size: 18pt;
   }
 }
 </style>
