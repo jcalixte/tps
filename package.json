@@ -13,6 +13,7 @@
   "author": "Julien Calixte <julienc@bam.tech>",
   "license": "ISC",
   "dependencies": {
+    "pinia": "^2.1.4",
     "vue": "^3.3.4",
     "vue-starport": "^0.3.0"
   },

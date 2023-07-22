@@ -24,7 +24,6 @@ const remainingBlueBuckets = computed(() =>
 const hasFeaturesInProgress = computed(
   () => featuresInProgress.value.length > 0
 )
-const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
 const isLive = computed(
   () => props.step.title.toLocaleLowerCase() === 'release'
 )
@@ -86,6 +85,9 @@ const isLive = computed(
 }
 
 .feature-step {
+  display: flex;
+  flex-direction: column;
+
   header {
     padding: 0.5rem;
     border: solid 2px var(--background-color);
@@ -103,7 +105,7 @@ const isLive = computed(
   }
 
   h5 {
-    margin-bottom: 0;
+    margin: 0;
     background-color: var(--background-color);
     padding: 0.35rem;
     text-align: center;
