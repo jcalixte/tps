@@ -8,24 +8,35 @@ import { computed, onMounted, ref } from 'vue'
 
 const featureBoard = createFeatureBoard()
 
+const totalDays = ref(0)
 const features = ref<Feature[]>([])
 
 const meanComplexity = computed(
   () =>
-    sumElements(features.value.map((feature) => feature.complexity)) /
-    features.value.length
+    Math.round(
+      100 *
+        (sumElements(features.value.map((feature) => feature.complexity)) /
+          features.value.length)
+    ) / 100
 )
 
 const meanLeadTime = computed(
   () =>
-    sumElements(features.value.map((feature) => feature.leadTime)) /
-    features.value.length
+    Math.round(
+      100 *
+        (sumElements(features.value.map((feature) => feature.leadTime)) /
+          features.value.length)
+    ) / 100
 )
 
 onMounted(() => (features.value = featureBoard.initBoard(featureSteps)))
 
 const nextDay = () => {
-  features.value = featureBoard.nextDay(features.value)
+  totalDays.value++
+  features.value = featureBoard.nextDay(
+    features.value,
+    featureSteps[0].stepIndex
+  )
 }
 
 const featuresGroupedByStep = computed(() => {
@@ -51,6 +62,7 @@ const featuresGroupedByStep = computed(() => {
     </div>
     <div>
       <button @click="nextDay">next day</button>
+      Total days: {{ totalDays }}
     </div>
   </div>
   <ul class="features-steps">

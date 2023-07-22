@@ -3,6 +3,8 @@ import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features } from '@/modules/feature/feature.fixture'
 import { pickRandomElement, popNElement, shuffleArray } from '@/utils'
 
+const MAX_FEATURES = 30
+
 const hasQualityIssue = (
   complexity: number,
   tasksInParallel: number
@@ -10,18 +12,24 @@ const hasQualityIssue = (
   let probabilityOfQualityIssue = 0
 
   switch (complexity) {
+    case 0:
+      probabilityOfQualityIssue = 0.99
+
     case 1:
-      probabilityOfQualityIssue = 0.8
+      probabilityOfQualityIssue = 0.93
       break
     case 2:
-      probabilityOfQualityIssue = 0.7
+      probabilityOfQualityIssue = 0.9
       break
     case 3:
-      probabilityOfQualityIssue = 0.6
+      probabilityOfQualityIssue = 0.85
+      break
+    case 4:
+      probabilityOfQualityIssue = 0.77
       break
 
     default:
-      probabilityOfQualityIssue = 0.5
+      probabilityOfQualityIssue = 0.65
       break
   }
 
@@ -38,6 +46,8 @@ const hasQualityIssue = (
       multiplicator = 1.1
     case 5:
       multiplicator = 1.15
+    default:
+      multiplicator = 1.25
   }
 
   return Math.random() > probabilityOfQualityIssue / multiplicator
@@ -58,7 +68,7 @@ export const createFeatureBoard = () => {
     return initialFeatures
   }
 
-  const nextDay = (features: Feature[]): Feature[] => {
+  const nextDay = (features: Feature[], initialStep: number): Feature[] => {
     features.forEach((feature) => {
       const isFeatureLive = feature.step === 0 && feature.status === 'done'
       if (isFeatureLive) {
@@ -90,6 +100,14 @@ export const createFeatureBoard = () => {
           break
       }
     })
+
+    if (features.length < MAX_FEATURES) {
+      const [newFeature] = popNElement(boardFeatures, 1)
+
+      if (newFeature) {
+        features.push({ ...newFeature, step: initialStep })
+      }
+    }
 
     return features
   }

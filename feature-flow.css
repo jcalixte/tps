@@ -14,13 +14,13 @@ ul {
   border: 3px solid var(--background-color);
   color: var(--background-color);
   background-color: white;
-  height: var(--feature-item-height);
+  min-height: var(--feature-item-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 12pt;
-  padding: 0 0.5rem;
+  padding: 0 0.5rem 0.2rem;
   text-align: center;
   transition-property: border, color, background-color, font-size;
   transition-duration: 1s;

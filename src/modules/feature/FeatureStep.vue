@@ -23,16 +23,13 @@ const hasFeaturesInProgress = computed(
   () => featuresInProgress.value.length > 0
 )
 const hasFeaturesDone = computed(() => featuresDone.value.length > 0)
-const isLive = computed(
-  () => props.step.title.toLocaleLowerCase() === 'release'
-)
 </script>
 
 <template>
   <li class="feature-step">
     <header>{{ step.title }}</header>
     <section class="doing">
-      <h5>📝⌛</h5>
+      <h5>📝⌛ ({{ featuresInProgress.length }})</h5>
       <ul v-if="hasFeaturesInProgress">
         <li v-for="feature in featuresInProgress" :key="feature.name">
           <Starport
@@ -45,7 +42,7 @@ const isLive = computed(
       </ul>
     </section>
     <section class="done">
-      <h5>📝✅</h5>
+      <h5>📝✅ ({{ featuresDone.length }})</h5>
       <div
         v-for="blueBucket in remainingBlueBuckets"
         :key="blueBucket"
@@ -57,7 +54,7 @@ const isLive = computed(
         <li v-for="feature in featuresDone" :key="feature.name">
           <Starport
             :port="feature.name"
-            style="height: var(--feature-item-height)"
+            style="height: calc(var(--feature-item-height) + 0.2rem)"
           >
             <FeatureItem :feature="feature" />
           </Starport>
@@ -68,6 +65,22 @@ const isLive = computed(
 </template>
 
 <style scoped lang="scss">
+@mixin hideScrollbar {
+  // https://blogs.msdn.microsoft.com/kurlak/2013/11/03/hiding-vertical-scrollbars-with-pure-css-in-chrome-ie-6-firefox-opera-and-safari/
+  // There is a CSS rule that can hide scrollbars in Webkit-based browsers (Chrome and Safari).
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  // There is a CSS rule that can hide scrollbars in IE 10+.
+  -ms-overflow-style: none;
+
+  // Use -ms-autohiding-scrollbar if you wish to display on hover.
+  // -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  // There used to be a CSS rule that could hide scrollbars in Firefox, but it has since been deprecated.
+  scrollbar-width: none;
+}
+
 .feature-step {
   header {
     padding: 0.5rem;
@@ -76,10 +89,13 @@ const isLive = computed(
   }
 
   section {
+    @include hideScrollbar();
     margin: 1rem 0;
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    max-height: 40vh;
   }
 
   h5 {
@@ -87,6 +103,7 @@ const isLive = computed(
     background-color: var(--background-color);
     padding: 0.35rem;
     text-align: center;
+    color: white;
   }
 
   li {
@@ -95,7 +112,6 @@ const isLive = computed(
 
   .done-list {
     flex: 1;
-    overflow-y: auto;
   }
 }
 </style>
