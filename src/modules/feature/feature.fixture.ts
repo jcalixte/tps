@@ -203,5 +203,6 @@ const featureNames = [
 
 export const features: Feature[] = featureNames.map((name) => ({
   name,
-  complexity: Math.floor(Math.random() * 5)
+  complexity: Math.floor(Math.random() * 5),
+  leadTime: 0
 }))
