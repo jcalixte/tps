@@ -1,40 +1,34 @@
-import { FeatureStatus, FeatureStep } from '@/modules/feature/feature-steps'
+import { Feature } from '@/modules/feature/feature'
+import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features } from '@/modules/feature/feature.fixture'
 import { pickRandomElement, popNElement, shuffleArray } from '@/utils'
 
 export const createFeatureBoard = () => {
   const boardFeatures = shuffleArray(features)
 
-  const initBoard = (featureSteps: FeatureStep[]): FeatureStep[] => {
+  const initBoard = (steps: FeatureStep[]): Feature[] => {
     const initialFeatures = popNElement(boardFeatures, 10)
 
     initialFeatures.forEach((feature) => {
-      const step = pickRandomElement(featureSteps)
-      const doingOrDone: FeatureStatus = pickRandomElement(['doing', 'done'])
-
-      switch (doingOrDone) {
-        case 'doing':
-          step.featuresInProgress.push(feature)
-          break
-        case 'done':
-          step.featuresDone.push(feature)
-          break
-      }
+      const step = pickRandomElement(steps)
+      feature.status = pickRandomElement(['doing', 'done'])
+      feature.step = step.stepIndex
     })
 
-    return featureSteps
+    return initialFeatures
   }
 
-  const nextDay = (featureSteps: FeatureStep[]): FeatureStep[] => {
-    featureSteps.forEach((step) => {
-      step.featuresInProgress.forEach((feature) => feature.leadTime++)
-
-      if (step.title.toLowerCase() !== 'release') {
-        step.featuresDone.forEach((feature) => feature.leadTime++)
+  const nextDay = (features: Feature[]): Feature[] => {
+    features.forEach((feature) => {
+      const isFeatureLive = feature.step === 0 && feature.status === 'done'
+      if (isFeatureLive) {
+        return
       }
+
+      feature.leadTime++
     })
 
-    return featureSteps
+    return features
   }
 
   return { initBoard, nextDay }

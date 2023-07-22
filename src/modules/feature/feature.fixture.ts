@@ -1,3 +1,5 @@
+import { Feature } from '@/modules/feature/feature'
+
 const featureNames = [
   'Dachshund',
   'Jagdterrier',
@@ -204,5 +206,7 @@ const featureNames = [
 export const features: Feature[] = featureNames.map((name) => ({
   name,
   complexity: Math.floor(Math.random() * 5),
-  leadTime: 0
+  leadTime: 0,
+  status: 'doing',
+  step: Infinity
 }))

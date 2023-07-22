@@ -1,38 +1,29 @@
 <script setup lang="ts">
 import FeatureStep from '@/modules/feature/FeatureStep.vue'
+import { Feature } from '@/modules/feature/feature'
 import { createFeatureBoard } from '@/modules/feature/feature-board'
-import {
-  FeatureStep as FeatureStepType,
-  featureSteps as initialFeatureSteps
-} from '@/modules/feature/feature-steps'
+import { featureSteps } from '@/modules/feature/feature-steps'
 import { sumElements } from '@/utils'
 import { computed, onMounted, ref } from 'vue'
 
 const featureBoard = createFeatureBoard()
 
-const featureSteps = ref<FeatureStepType[]>([])
-
-const allFeatures = computed(() =>
-  featureSteps.value.flatMap((step) => [
-    ...step.featuresInProgress,
-    ...step.featuresDone
-  ])
-)
+const features = ref<Feature[]>([])
 
 const meanComplexity = computed(() =>
-  sumElements(allFeatures.value.map((feature) => feature.complexity))
+  sumElements(features.value.map((feature) => feature.complexity))
 )
 
 const meanLeadTime = computed(() =>
-  sumElements(allFeatures.value.map((feature) => feature.leadTime))
+  sumElements(features.value.map((feature) => feature.leadTime))
 )
 
-onMounted(
-  () => (featureSteps.value = featureBoard.initBoard(initialFeatureSteps))
-)
+onMounted(() => (features.value = featureBoard.initBoard(featureSteps)))
 
-const nextDay = () =>
-  (featureSteps.value = featureBoard.nextDay(featureSteps.value))
+const nextDay = () => (features.value = featureBoard.nextDay(features.value))
+
+const getStepFeatures = (stepIndex: number) =>
+  features.value.filter((feature) => feature.step === stepIndex)
 </script>
 
 <template>
@@ -46,7 +37,12 @@ const nextDay = () =>
     </div>
   </div>
   <ul class="features-steps">
-    <FeatureStep v-for="step in featureSteps" :key="step.title" :step="step" />
+    <FeatureStep
+      v-for="step in featureSteps"
+      :key="step.title"
+      :step="step"
+      :features="getStepFeatures(step.stepIndex)"
+    />
   </ul>
 </template>
 

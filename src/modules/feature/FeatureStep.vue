@@ -1,17 +1,26 @@
 <script setup lang="ts">
+import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
 import { computed } from 'vue'
 
 const props = defineProps<{
   step: FeatureStep
+  features: Feature[]
 }>()
+const featuresInProgress = computed(() =>
+  props.features.filter((feature) => feature.status === 'doing')
+)
+const featuresDone = computed(() =>
+  props.features.filter((feature) => feature.status === 'done')
+)
+
 const remainingBlueBuckets = computed(() =>
-  Math.max(0, props.step.blueBuckets - props.step.featuresDone.length)
+  Math.max(0, props.step.blueBuckets - featuresDone.value.length)
 )
 const hasFeaturesInProgress = computed(
-  () => props.step.featuresInProgress.length > 0
+  () => featuresInProgress.value.length > 0
 )
-const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
+const hasFeaturesDone = computed(() => featuresInProgress.value.length > 0)
 </script>
 
 <template>
@@ -21,7 +30,7 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
       <h5>📝⌛</h5>
       <ul v-if="hasFeaturesInProgress">
         <li
-          v-for="feature in step.featuresInProgress"
+          v-for="feature in featuresInProgress"
           :key="feature.name"
           class="bin"
         >
@@ -35,11 +44,7 @@ const hasFeaturesDone = computed(() => props.step.featuresInProgress.length > 0)
     <section class="done">
       <h5>📝✅</h5>
       <ul v-if="hasFeaturesDone">
-        <li
-          v-for="feature in step.featuresDone"
-          :key="feature.name"
-          class="bin"
-        >
+        <li v-for="feature in featuresDone" :key="feature.name" class="bin">
           <div>
             {{ feature.name }}
           </div>
