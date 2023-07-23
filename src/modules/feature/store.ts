@@ -5,18 +5,34 @@ import { Strategy } from '@/modules/lean/strategy'
 import { sumElements } from '@/utils'
 import { defineStore } from 'pinia'
 
+type Meta = {
+  totalDays: number
+  daysWithProblemSolving: number
+  strategy: Record<Strategy, number>
+}
+
+type Analysis = {
+  worstFeature: Feature
+  daysToDeliver: number
+  meanComplexity: number
+  meanLeadTime: number
+}
+
+type Dashboard = Array<{
+  uuid: string
+  meta: Meta
+  analysis: Analysis
+}>
+
 type State = {
   steps: FeatureStep[]
   features: Feature[]
   backlog: Feature[]
-  meta: {
-    totalDays: number
-    daysWithProblemSolving: number
-    strategy: Record<Strategy, number>
-  }
+  meta: Meta
+  dashboard: Dashboard
 }
 
-const resetMeta = (): State['meta'] => ({
+const resetMeta = (): Meta => ({
   totalDays: 0,
   daysWithProblemSolving: 0,
   strategy: {
@@ -31,7 +47,8 @@ export const useFeatureStore = defineStore('feature', {
     steps: [],
     features: [],
     backlog: [],
-    meta: resetMeta()
+    meta: resetMeta(),
+    dashboard: []
   }),
   actions: {
     initBoard() {
@@ -46,7 +63,6 @@ export const useFeatureStore = defineStore('feature', {
 
       if (strategy === 'problem-solving') {
         this.meta.daysWithProblemSolving++
-        return
       }
 
       this.features = nextDay({
