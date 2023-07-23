@@ -5,6 +5,12 @@
         "label": "Vite documentation",
         "uri": "https://vitejs.dev/"
       }
+    ],
+    "**/*store.ts": [
+      {
+        "label": "Pinia documentation",
+        "uri": "https://pinia.vuejs.org/getting-started.html"
+      }
     ]
   }
 }
