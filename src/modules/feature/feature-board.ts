@@ -75,10 +75,12 @@ export const nextDay = ({
   backlog,
   features,
   initialStep,
+  steps,
   strategy
 }: {
   backlog: Feature[]
   features: Feature[]
+  steps: FeatureStep[]
   initialStep: number
   strategy: Strategy
 }): Feature[] => {
@@ -95,7 +97,27 @@ export const nextDay = ({
         feature.status = 'done'
         break
       case 'done':
-        feature.status = 'doing'
+        if (strategy === 'pull') {
+          const nextStep = steps.find(
+            (step) => step.stepIndex === feature.step - 1
+          )
+          if (!nextStep) {
+            break
+          }
+
+          const hasBlueBinAvailableNextStep =
+            nextStep.blueBins -
+              features.filter(
+                (f) => f.step === feature.step - 1 && f.status === 'done'
+              ).length >
+            0
+
+          if (hasBlueBinAvailableNextStep) {
+            feature.status = 'doing'
+          }
+        } else {
+          feature.status = 'doing'
+        }
 
         if (
           hasQualityIssue(
@@ -114,11 +136,39 @@ export const nextDay = ({
     }
   })
 
-  if (strategy === 'push' && features.length < MAX_FEATURES) {
-    const [newFeature] = popNElement(backlog, 1)
+  if (features.length < MAX_FEATURES) {
+    switch (strategy) {
+      case 'push': {
+        const [newFeature] = popNElement(backlog, 1)
 
-    if (newFeature) {
-      features.push({ ...newFeature, step: initialStep })
+        if (newFeature) {
+          features.push({ ...newFeature, step: initialStep })
+        }
+        break
+      }
+      case 'pull': {
+        const firstStep = steps.find((step) => step.stepIndex === initialStep)
+        if (!firstStep) {
+          break
+        }
+
+        const hasBlueBinAvailableOnFirstStep =
+          firstStep.blueBins -
+            features.filter(
+              (f) => f.step === initialStep && f.status === 'done'
+            ).length >
+          0
+
+        if (hasBlueBinAvailableOnFirstStep) {
+          const [newFeature] = popNElement(backlog, 1)
+
+          if (newFeature) {
+            features.push({ ...newFeature, step: initialStep })
+          }
+        }
+      }
+      case 'turn-off':
+        break
     }
   }
 

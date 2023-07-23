@@ -17,9 +17,8 @@ onMounted(() => featureStore.initBoard())
       {{ featureStore.meanLeadTime }} days
     </div>
     <div>
-      <button @click="featureStore.nextDay('push')">
-        add feature and next day
-      </button>
+      <button @click="featureStore.nextDay('push')">push system</button>
+      <button @click="featureStore.nextDay('pull')">pull system</button>
       <button @click="featureStore.nextDay('turn-off')">
         next day without new feature
       </button>

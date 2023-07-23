@@ -18,8 +18,8 @@ const featuresDone = computed(() =>
     .sort((a, b) => (a.leadTime > b.leadTime ? -1 : 1))
 )
 
-const remainingBlueBuckets = computed(() =>
-  Math.max(0, props.step.blueBuckets - featuresDone.value.length)
+const remainingBlueBins = computed(() =>
+  Math.max(0, props.step.blueBins - featuresDone.value.length)
 )
 const hasFeaturesInProgress = computed(
   () => featuresInProgress.value.length > 0
@@ -48,10 +48,10 @@ const isLive = computed(
     <section class="done">
       <h5>📝✅ [{{ featuresDone.length }}]</h5>
       <div>
-        <div class="blue-bin-container">
+        <div v-if="!isLive" class="blue-bin-container">
           <div
-            v-for="blueBucket in remainingBlueBuckets"
-            :key="blueBucket"
+            v-for="blueBin in remainingBlueBins"
+            :key="blueBin"
             class="bin blue-bin"
           >
             Blue bucket

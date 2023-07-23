@@ -19,6 +19,7 @@ const resetMeta = (): State['meta'] => ({
   totalDays: 0,
   strategy: {
     push: 0,
+    pull: 0,
     'turn-off': 0
   }
 })
@@ -41,6 +42,7 @@ export const useFeatureStore = defineStore('feature', {
       this.features = nextDay({
         backlog: this.backlog,
         features: this.features,
+        steps: this.steps,
         initialStep: this.steps[0].stepIndex,
         strategy
       })
