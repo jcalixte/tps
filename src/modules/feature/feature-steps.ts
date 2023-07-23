@@ -4,26 +4,28 @@ export type FeatureStep = {
   stepIndex: number
 }
 
+const BLUE_BIN_MAX = 2
+
 export const featureSteps: FeatureStep[] = [
   {
     title: 'Product',
     stepIndex: 4,
-    blueBins: 2
+    blueBins: BLUE_BIN_MAX
   },
   {
     title: 'Design',
     stepIndex: 3,
-    blueBins: 2
+    blueBins: BLUE_BIN_MAX
   },
   {
     title: 'Development',
     stepIndex: 2,
-    blueBins: 2
+    blueBins: BLUE_BIN_MAX
   },
   {
     title: 'Test',
     stepIndex: 1,
-    blueBins: 2
+    blueBins: BLUE_BIN_MAX
   },
   {
     title: 'Release',
