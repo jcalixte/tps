@@ -51,7 +51,7 @@ const pushAndProblemSolving20Percent = () => {
       <button @click="featureStore.simulate('pull')">
         simulate pull system
       </button>
-      <button @click="featureStore.simulate('pull')">
+      <button @click="featureStore.simulate('problem-solving')">
         simulate pull and problem solving
       </button>
       <button @click="featureStore.clearDashboard()">clear dashboard</button>

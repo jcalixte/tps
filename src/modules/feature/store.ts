@@ -78,7 +78,15 @@ export const useFeatureStore = defineStore('feature', {
     simulate(strategy: Strategy) {
       this.initBoard()
       while (!this.isProjectFinished) {
-        this.nextDay(strategy)
+        if (strategy === 'problem-solving') {
+          if (this.meta.totalDays % 5 === 0) {
+            this.nextDay('problem-solving')
+          } else {
+            this.nextDay('pull')
+          }
+        } else {
+          this.nextDay(strategy)
+        }
       }
       const [worstFeature] = this.features.sort((a, b) =>
         a.qualityIssue > b.qualityIssue ? -1 : 1
