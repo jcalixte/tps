@@ -8,7 +8,14 @@ const featureStore = useFeatureStore()
 
 onMounted(() => featureStore.initBoard())
 
-const problemSolving20Percent = () => {
+const pullAndProblemSolving20Percent = () => {
+  if (featureStore.meta.totalDays % 5 === 0) {
+    featureStore.nextDay('problem-solving')
+  } else {
+    featureStore.nextDay('pull')
+  }
+}
+const pushAndProblemSolving20Percent = () => {
   if (featureStore.meta.totalDays % 5 === 0) {
     featureStore.nextDay('problem-solving')
   } else {
@@ -27,7 +34,12 @@ const problemSolving20Percent = () => {
     <div>
       <button @click="featureStore.nextDay('push')">push system</button>
       <button @click="featureStore.nextDay('pull')">pull system</button>
-      <button @click="problemSolving20Percent">pull and problem solving</button>
+      <button @click="pushAndProblemSolving20Percent">
+        push and problem solving
+      </button>
+      <button @click="pullAndProblemSolving20Percent">
+        pull and problem solving
+      </button>
       <button @click="featureStore.nextDay('problem-solving')">
         problem solving
       </button>
