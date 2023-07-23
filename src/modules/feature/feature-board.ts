@@ -21,8 +21,9 @@ const hasQualityIssue = ({
   )
 
   let multiplicator = getOverburdenMultiplicator(tasksInParallel)
+  const quality = Math.random()
 
-  return Math.random() > qualityProbability / multiplicator
+  return quality > qualityProbability / multiplicator
 }
 
 export const newBoard = () => shuffleArray(features)

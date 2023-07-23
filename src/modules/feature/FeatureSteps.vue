@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureDashboard from '@/modules/feature/FeatureDashboard.vue'
 import FeatureStep from '@/modules/feature/FeatureStep.vue'
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { useFeatureStore } from '@/modules/feature/store'
@@ -29,7 +30,8 @@ const pushAndProblemSolving20Percent = () => {
     <div>
       {{ featureStore.features.length }} features | mean complexity :
       {{ featureStore.meanComplexity }} | mean lead time :
-      {{ featureStore.meanLeadTime }} days
+      {{ featureStore.meanLeadTime }} days | Total days:
+      {{ featureStore.meta.totalDays }}
     </div>
     <div>
       <button @click="featureStore.nextDay('push')">push system</button>
@@ -43,7 +45,16 @@ const pushAndProblemSolving20Percent = () => {
       <button @click="featureStore.nextDay('problem-solving')">
         problem solving
       </button>
-      Total days: {{ featureStore.meta.totalDays }}
+      <button @click="featureStore.simulate('push')">
+        simulate push system
+      </button>
+      <button @click="featureStore.simulate('pull')">
+        simulate pull system
+      </button>
+      <button @click="featureStore.simulate('pull')">
+        simulate pull and problem solving
+      </button>
+      <button @click="featureStore.clearDashboard()">clear dashboard</button>
     </div>
   </div>
   <ul class="features-steps">
@@ -54,6 +65,7 @@ const pushAndProblemSolving20Percent = () => {
       :features="featureStore.featuresGroupedByStep[step.stepIndex] ?? []"
     />
   </ul>
+  <FeatureDashboard />
 </template>
 
 <style scoped lang="scss">

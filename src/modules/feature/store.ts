@@ -13,9 +13,10 @@ type Meta = {
 
 type Analysis = {
   worstFeature: Feature
-  daysToDeliver: number
+  meanQualityIssue: number
   meanComplexity: number
   meanLeadTime: number
+  mainStrategy: Strategy | string
 }
 
 type Dashboard = Array<{
@@ -29,7 +30,7 @@ type State = {
   features: Feature[]
   backlog: Feature[]
   meta: Meta
-  dashboard: Dashboard
+  dashboards: Dashboard
 }
 
 const resetMeta = (): Meta => ({
@@ -48,7 +49,7 @@ export const useFeatureStore = defineStore('feature', {
     features: [],
     backlog: [],
     meta: resetMeta(),
-    dashboard: []
+    dashboards: []
   }),
   actions: {
     initBoard() {
@@ -73,6 +74,32 @@ export const useFeatureStore = defineStore('feature', {
         strategy,
         daysWithProblemSolving: this.meta.daysWithProblemSolving
       })
+    },
+    simulate(strategy: Strategy) {
+      this.initBoard()
+      while (!this.isProjectFinished) {
+        this.nextDay(strategy)
+      }
+      const [worstFeature] = this.features.sort((a, b) =>
+        a.qualityIssue > b.qualityIssue ? -1 : 1
+      )
+
+      this.dashboards.push({
+        uuid: new Date().getTime().toString(),
+        meta: this.meta,
+        analysis: {
+          meanComplexity: this.meanComplexity,
+          meanLeadTime: this.meanLeadTime,
+          meanQualityIssue: this.meanQualityIssue,
+          worstFeature,
+          mainStrategy: Object.entries(this.meta.strategy).sort((a, b) =>
+            a[1] > b[1] ? -1 : 1
+          )[0][0]
+        }
+      })
+    },
+    clearDashboard() {
+      this.dashboards = []
     }
   },
   getters: {
@@ -94,6 +121,17 @@ export const useFeatureStore = defineStore('feature', {
         ) / 100
       )
     },
+    meanQualityIssue: (state) => {
+      return (
+        Math.round(
+          100 *
+            (sumElements(
+              state.features.map((feature) => feature.qualityIssue)
+            ) /
+              state.features.length)
+        ) / 100
+      )
+    },
     featuresGroupedByStep: (state) => {
       const groupedByStep: Record<number, Feature[]> = {}
 
@@ -106,6 +144,10 @@ export const useFeatureStore = defineStore('feature', {
       })
 
       return groupedByStep
-    }
+    },
+    isProjectFinished: (state) =>
+      state.features.every(
+        (feature) => feature.step === 0 && feature.status === 'done'
+      )
   }
 })
