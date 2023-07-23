@@ -33,7 +33,7 @@ const isLive = computed(
   <li class="feature-step">
     <header>{{ step.title }}</header>
     <section class="doing">
-      <h5>📝⌛ ({{ featuresInProgress.length }})</h5>
+      <h5>📝⌛ [{{ featuresInProgress.length }}]</h5>
       <ul v-if="hasFeaturesInProgress">
         <li v-for="feature in featuresInProgress" :key="feature.name">
           <Starport
@@ -46,7 +46,7 @@ const isLive = computed(
       </ul>
     </section>
     <section class="done">
-      <h5>📝✅ ({{ featuresDone.length }})</h5>
+      <h5>📝✅ [{{ featuresDone.length }}]</h5>
       <div>
         <div class="blue-bin-container">
           <div
