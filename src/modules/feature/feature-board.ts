@@ -53,64 +53,71 @@ const hasQualityIssue = (
   return Math.random() > probabilityOfQualityIssue / multiplicator
 }
 
-export const createFeatureBoard = () => {
-  const boardFeatures = shuffleArray(features)
+export const newBoard = () => shuffleArray(features)
 
-  const initBoard = (steps: FeatureStep[]): Feature[] => {
-    const initialFeatures = popNElement(boardFeatures, 10)
+export const initBoard = (
+  steps: FeatureStep[],
+  features: Feature[]
+): Feature[] => {
+  const initialFeatures = popNElement(features, 10)
 
-    initialFeatures.forEach((feature) => {
-      const step = pickRandomElement(steps)
-      feature.status = pickRandomElement(['doing', 'done'])
-      feature.step = step.stepIndex
-    })
+  initialFeatures.forEach((feature) => {
+    const step = pickRandomElement(steps)
+    feature.status = pickRandomElement(['doing', 'done'])
+    feature.step = step.stepIndex
+  })
 
-    return initialFeatures
-  }
+  return initialFeatures
+}
 
-  const nextDay = (features: Feature[], initialStep: number): Feature[] => {
-    features.forEach((feature) => {
-      const isFeatureLive = feature.step === 0 && feature.status === 'done'
-      if (isFeatureLive) {
-        return
-      }
-
-      feature.leadTime++
-
-      switch (feature.status) {
-        case 'doing':
-          feature.status = 'done'
-          break
-        case 'done':
-          feature.status = 'doing'
-
-          if (
-            hasQualityIssue(
-              feature.complexity,
-              features.filter(
-                (f) => f.status === 'doing' && f.step === feature.step
-              ).length
-            )
-          ) {
-            feature.step = Math.min(4, feature.step + 1)
-            feature.qualityIssue++
-          } else {
-            feature.step--
-          }
-          break
-      }
-    })
-
-    if (features.length < MAX_FEATURES) {
-      const [newFeature] = popNElement(boardFeatures, 1)
-
-      if (newFeature) {
-        features.push({ ...newFeature, step: initialStep })
-      }
+export const nextDay = ({
+  backlog,
+  features,
+  initialStep
+}: {
+  backlog: Feature[]
+  features: Feature[]
+  initialStep: number
+}): Feature[] => {
+  features.forEach((feature) => {
+    const isFeatureLive = feature.step === 0 && feature.status === 'done'
+    if (isFeatureLive) {
+      return
     }
 
-    return features
+    feature.leadTime++
+
+    switch (feature.status) {
+      case 'doing':
+        feature.status = 'done'
+        break
+      case 'done':
+        feature.status = 'doing'
+
+        if (
+          hasQualityIssue(
+            feature.complexity,
+            features.filter(
+              (f) => f.status === 'doing' && f.step === feature.step
+            ).length
+          )
+        ) {
+          feature.step = Math.min(4, feature.step + 1)
+          feature.qualityIssue++
+        } else {
+          feature.step--
+        }
+        break
+    }
+  })
+
+  if (features.length < MAX_FEATURES) {
+    const [newFeature] = popNElement(backlog, 1)
+
+    if (newFeature) {
+      features.push({ ...newFeature, step: initialStep })
+    }
   }
 
-  return { initBoard, nextDay }
+  return features
 }

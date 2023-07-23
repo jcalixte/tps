@@ -1,68 +1,24 @@
 <script setup lang="ts">
 import FeatureStep from '@/modules/feature/FeatureStep.vue'
-import { Feature } from '@/modules/feature/feature'
-import { createFeatureBoard } from '@/modules/feature/feature-board'
 import { featureSteps } from '@/modules/feature/feature-steps'
-import { sumElements } from '@/utils'
-import { computed, onMounted, ref } from 'vue'
+import { useFeatureStore } from '@/modules/feature/store'
+import { onMounted } from 'vue'
 
-const featureBoard = createFeatureBoard()
+const featureStore = useFeatureStore()
 
-const totalDays = ref(0)
-const features = ref<Feature[]>([])
-
-const meanComplexity = computed(
-  () =>
-    Math.round(
-      100 *
-        (sumElements(features.value.map((feature) => feature.complexity)) /
-          features.value.length)
-    ) / 100
-)
-
-const meanLeadTime = computed(
-  () =>
-    Math.round(
-      100 *
-        (sumElements(features.value.map((feature) => feature.leadTime)) /
-          features.value.length)
-    ) / 100
-)
-
-onMounted(() => (features.value = featureBoard.initBoard(featureSteps)))
-
-const nextDay = () => {
-  totalDays.value++
-  features.value = featureBoard.nextDay(
-    features.value,
-    featureSteps[0].stepIndex
-  )
-}
-
-const featuresGroupedByStep = computed(() => {
-  const groupedByStep: Record<number, Feature[]> = {}
-
-  features.value.forEach((feature) => {
-    if (!groupedByStep[feature.step]) {
-      groupedByStep[feature.step] = [feature]
-    } else {
-      groupedByStep[feature.step].push(feature)
-    }
-  })
-
-  return groupedByStep
-})
+onMounted(() => featureStore.initBoard())
 </script>
 
 <template>
   <div class="dashboard">
     <div>
-      {{ features.length }} features | mean complexity : {{ meanComplexity }} |
-      mean lead time : {{ meanLeadTime }} days
+      {{ featureStore.features.length }} features | mean complexity :
+      {{ featureStore.meanComplexity }} | mean lead time :
+      {{ featureStore.meanLeadTime }} days
     </div>
     <div>
-      <button @click="nextDay">next day</button>
-      Total days: {{ totalDays }}
+      <button @click="featureStore.nextDay()">next day</button>
+      Total days: {{ featureStore.meta.totalDays }}
     </div>
   </div>
   <ul class="features-steps">
@@ -70,7 +26,7 @@ const featuresGroupedByStep = computed(() => {
       v-for="step in featureSteps"
       :key="step.title"
       :step="step"
-      :features="featuresGroupedByStep[step.stepIndex] ?? []"
+      :features="featureStore.featuresGroupedByStep[step.stepIndex] ?? []"
     />
   </ul>
 </template>
