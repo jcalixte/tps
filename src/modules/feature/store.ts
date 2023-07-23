@@ -1,6 +1,7 @@
 import { Feature } from '@/modules/feature/feature'
 import { initBoard, newBoard, nextDay } from '@/modules/feature/feature-board'
 import { FeatureStep, featureSteps } from '@/modules/feature/feature-steps'
+import { Strategy } from '@/modules/lean/strategy'
 import { sumElements } from '@/utils'
 import { defineStore } from 'pinia'
 
@@ -29,11 +30,12 @@ export const useFeatureStore = defineStore('feature', {
       this.features = initBoard(this.steps, this.backlog)
       this.meta.totalDays = 0
     },
-    nextDay() {
+    nextDay(strategy: Strategy) {
       this.features = nextDay({
         backlog: this.backlog,
         features: this.features,
-        initialStep: this.steps[0].stepIndex
+        initialStep: this.steps[0].stepIndex,
+        strategy
       })
       this.meta.totalDays++
     }

@@ -1,6 +1,7 @@
 import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features } from '@/modules/feature/feature.fixture'
+import { Strategy } from '@/modules/lean/strategy'
 import { pickRandomElement, popNElement, shuffleArray } from '@/utils'
 
 const MAX_FEATURES = 30
@@ -73,11 +74,13 @@ export const initBoard = (
 export const nextDay = ({
   backlog,
   features,
-  initialStep
+  initialStep,
+  strategy
 }: {
   backlog: Feature[]
   features: Feature[]
   initialStep: number
+  strategy: Strategy
 }): Feature[] => {
   features.forEach((feature) => {
     const isFeatureLive = feature.step === 0 && feature.status === 'done'
@@ -111,7 +114,7 @@ export const nextDay = ({
     }
   })
 
-  if (features.length < MAX_FEATURES) {
+  if (strategy === 'push' && features.length < MAX_FEATURES) {
     const [newFeature] = popNElement(backlog, 1)
 
     if (newFeature) {

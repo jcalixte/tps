@@ -1,0 +1,1 @@
+export type Strategy = 'push'

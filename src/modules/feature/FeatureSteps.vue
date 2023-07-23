@@ -17,7 +17,9 @@ onMounted(() => featureStore.initBoard())
       {{ featureStore.meanLeadTime }} days
     </div>
     <div>
-      <button @click="featureStore.nextDay()">next day</button>
+      <button @click="featureStore.nextDay('push')">
+        add feature and next day
+      </button>
       Total days: {{ featureStore.meta.totalDays }}
     </div>
   </div>
