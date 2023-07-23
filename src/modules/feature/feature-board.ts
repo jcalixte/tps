@@ -15,50 +15,14 @@ const hasQualityIssue = ({
   tasksInParallel: number
   daysWithProblemSolving: number
 }): boolean => {
-  let probabilityOfGoodQuality = 1
+  const qualityProbability = getQualityProbability(
+    complexity,
+    daysWithProblemSolving
+  )
 
-  switch (complexity) {
-    case 1:
-      probabilityOfGoodQuality = 0.97
+  let multiplicator = getOverburdenMultiplicator(tasksInParallel)
 
-    case 2:
-      probabilityOfGoodQuality = 0.93
-      break
-    case 3:
-      probabilityOfGoodQuality = 0.88
-      break
-    case 4:
-      probabilityOfGoodQuality = 0.82
-      break
-    case 5:
-      probabilityOfGoodQuality = 0.75
-      break
-  }
-
-  // learnings
-  probabilityOfGoodQuality =
-    probabilityOfGoodQuality + (1.2 * daysWithProblemSolving) / 100
-
-  let multiplicator = 1
-
-  switch (tasksInParallel) {
-    case 1:
-      multiplicator = 1
-    case 2:
-      multiplicator = 1.05
-    case 3:
-      multiplicator = 1.08
-    case 4:
-      multiplicator = 1.1
-    case 5:
-      multiplicator = 1.15
-    case 6:
-      multiplicator = 1.25
-    default:
-      multiplicator = 1.4
-  }
-
-  return Math.random() > probabilityOfGoodQuality / multiplicator
+  return Math.random() > qualityProbability / multiplicator
 }
 
 export const newBoard = () => shuffleArray(features)
@@ -101,6 +65,10 @@ export const nextDay = ({
 
     feature.leadTime++
 
+    if (strategy === 'problem-solving') {
+      return
+    }
+
     switch (feature.status) {
       case 'doing':
         feature.status = 'done'
@@ -128,19 +96,21 @@ export const nextDay = ({
           feature.status = 'doing'
         }
 
-        if (
-          hasQualityIssue({
-            complexity: feature.complexity,
-            tasksInParallel: features.filter(
-              (f) => f.status === 'doing' && f.step === feature.step
-            ).length,
-            daysWithProblemSolving
-          })
-        ) {
-          feature.step = Math.min(4, feature.step + 1)
-          feature.qualityIssue++
-        } else {
-          feature.step--
+        if (feature.status === 'doing') {
+          if (
+            hasQualityIssue({
+              complexity: feature.complexity,
+              tasksInParallel: features.filter(
+                (f) => f.status === 'doing' && f.step === feature.step
+              ).length,
+              daysWithProblemSolving
+            })
+          ) {
+            feature.step = Math.min(4, feature.step + 1)
+            feature.qualityIssue++
+          } else {
+            feature.step--
+          }
         }
         break
     }
@@ -181,4 +151,58 @@ export const nextDay = ({
   }
 
   return features
+}
+
+const getOverburdenMultiplicator = (tasksInParallel: number) => {
+  switch (tasksInParallel) {
+    case 1:
+      return 1
+    case 2:
+      return 1.05
+    case 3:
+      return 1.08
+    case 4:
+      return 1.1
+    case 5:
+      return 1.15
+    case 6:
+      return 1.25
+    case 7:
+      return 1.35
+    case 8:
+      return 1.4
+    default:
+      return 1.5
+  }
+}
+
+const getQualityProbability = (
+  complexity: number,
+  daysWithProblemSolving: number
+) => {
+  let probabilityOfGoodQuality = 1
+
+  switch (complexity) {
+    case 1:
+      probabilityOfGoodQuality = 0.97
+
+    case 2:
+      probabilityOfGoodQuality = 0.93
+      break
+    case 3:
+      probabilityOfGoodQuality = 0.88
+      break
+    case 4:
+      probabilityOfGoodQuality = 0.82
+      break
+    case 5:
+      probabilityOfGoodQuality = 0.75
+      break
+  }
+
+  // learnings
+  probabilityOfGoodQuality =
+    probabilityOfGoodQuality + (1.2 * daysWithProblemSolving) / 100
+
+  return probabilityOfGoodQuality
 }
