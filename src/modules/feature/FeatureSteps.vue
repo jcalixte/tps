@@ -20,6 +20,9 @@ onMounted(() => featureStore.initBoard())
       <button @click="featureStore.nextDay('push')">
         add feature and next day
       </button>
+      <button @click="featureStore.nextDay('turn-off')">
+        next day without new feature
+      </button>
       Total days: {{ featureStore.meta.totalDays }}
     </div>
   </div>

@@ -11,24 +11,31 @@ type State = {
   backlog: Feature[]
   meta: {
     totalDays: number
+    strategy: Record<Strategy, number>
   }
 }
+
+const resetMeta = (): State['meta'] => ({
+  totalDays: 0,
+  strategy: {
+    push: 0,
+    'turn-off': 0
+  }
+})
 
 export const useFeatureStore = defineStore('feature', {
   state: (): State => ({
     steps: [],
     features: [],
     backlog: [],
-    meta: {
-      totalDays: 0
-    }
+    meta: resetMeta()
   }),
   actions: {
     initBoard() {
       this.backlog = newBoard()
       this.steps = featureSteps
       this.features = initBoard(this.steps, this.backlog)
-      this.meta.totalDays = 0
+      this.meta = resetMeta()
     },
     nextDay(strategy: Strategy) {
       this.features = nextDay({
@@ -38,6 +45,7 @@ export const useFeatureStore = defineStore('feature', {
         strategy
       })
       this.meta.totalDays++
+      this.meta.strategy[strategy]++
     }
   },
   getters: {
