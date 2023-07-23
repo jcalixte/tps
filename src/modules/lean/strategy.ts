@@ -1,1 +1,1 @@
-export type Strategy = 'push' | 'pull' | 'turn-off'
+export type Strategy = 'push' | 'pull' | 'problem-solving'

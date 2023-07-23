@@ -6,33 +6,38 @@ import { pickRandomElement, popNElement, shuffleArray } from '@/utils'
 
 const MAX_FEATURES = 30
 
-const hasQualityIssue = (
-  complexity: number,
+const hasQualityIssue = ({
+  complexity,
+  tasksInParallel,
+  daysWithProblemSolving
+}: {
+  complexity: number
   tasksInParallel: number
-): boolean => {
-  let probabilityOfQualityIssue = 0
+  daysWithProblemSolving: number
+}): boolean => {
+  let probabilityOfGoodQuality = 1
 
   switch (complexity) {
     case 1:
-      probabilityOfQualityIssue = 0.97
+      probabilityOfGoodQuality = 0.97
 
     case 2:
-      probabilityOfQualityIssue = 0.93
+      probabilityOfGoodQuality = 0.93
       break
     case 3:
-      probabilityOfQualityIssue = 0.88
+      probabilityOfGoodQuality = 0.88
       break
     case 4:
-      probabilityOfQualityIssue = 0.82
+      probabilityOfGoodQuality = 0.82
       break
     case 5:
-      probabilityOfQualityIssue = 0.75
-      break
-
-    default:
-      probabilityOfQualityIssue = 0.65
+      probabilityOfGoodQuality = 0.75
       break
   }
+
+  // learnings
+  probabilityOfGoodQuality =
+    probabilityOfGoodQuality + (1.2 * daysWithProblemSolving) / 100
 
   let multiplicator = 1
 
@@ -47,11 +52,13 @@ const hasQualityIssue = (
       multiplicator = 1.1
     case 5:
       multiplicator = 1.15
-    default:
+    case 6:
       multiplicator = 1.25
+    default:
+      multiplicator = 1.4
   }
 
-  return Math.random() > probabilityOfQualityIssue / multiplicator
+  return Math.random() > probabilityOfGoodQuality / multiplicator
 }
 
 export const newBoard = () => shuffleArray(features)
@@ -76,13 +83,15 @@ export const nextDay = ({
   features,
   initialStep,
   steps,
-  strategy
+  strategy,
+  daysWithProblemSolving
 }: {
   backlog: Feature[]
   features: Feature[]
   steps: FeatureStep[]
   initialStep: number
   strategy: Strategy
+  daysWithProblemSolving: number
 }): Feature[] => {
   features.forEach((feature) => {
     const isFeatureLive = feature.step === 0 && feature.status === 'done'
@@ -120,12 +129,13 @@ export const nextDay = ({
         }
 
         if (
-          hasQualityIssue(
-            feature.complexity,
-            features.filter(
+          hasQualityIssue({
+            complexity: feature.complexity,
+            tasksInParallel: features.filter(
               (f) => f.status === 'doing' && f.step === feature.step
-            ).length
-          )
+            ).length,
+            daysWithProblemSolving
+          })
         ) {
           feature.step = Math.min(4, feature.step + 1)
           feature.qualityIssue++
@@ -167,8 +177,6 @@ export const nextDay = ({
           }
         }
       }
-      case 'turn-off':
-        break
     }
   }
 

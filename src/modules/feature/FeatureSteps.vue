@@ -7,6 +7,14 @@ import { onMounted } from 'vue'
 const featureStore = useFeatureStore()
 
 onMounted(() => featureStore.initBoard())
+
+const problemSolving20Percent = () => {
+  if (featureStore.meta.totalDays % 5 === 0) {
+    featureStore.nextDay('problem-solving')
+  } else {
+    featureStore.nextDay('pull')
+  }
+}
 </script>
 
 <template>
@@ -19,8 +27,9 @@ onMounted(() => featureStore.initBoard())
     <div>
       <button @click="featureStore.nextDay('push')">push system</button>
       <button @click="featureStore.nextDay('pull')">pull system</button>
-      <button @click="featureStore.nextDay('turn-off')">
-        next day without new feature
+      <button @click="problemSolving20Percent">pull and problem solving</button>
+      <button @click="featureStore.nextDay('problem-solving')">
+        problem solving
       </button>
       Total days: {{ featureStore.meta.totalDays }}
     </div>
