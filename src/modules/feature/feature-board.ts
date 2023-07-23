@@ -12,20 +12,20 @@ const hasQualityIssue = (
   let probabilityOfQualityIssue = 0
 
   switch (complexity) {
-    case 0:
-      probabilityOfQualityIssue = 0.99
-
     case 1:
+      probabilityOfQualityIssue = 0.97
+
+    case 2:
       probabilityOfQualityIssue = 0.93
       break
-    case 2:
-      probabilityOfQualityIssue = 0.9
-      break
     case 3:
-      probabilityOfQualityIssue = 0.85
+      probabilityOfQualityIssue = 0.88
       break
     case 4:
-      probabilityOfQualityIssue = 0.77
+      probabilityOfQualityIssue = 0.82
+      break
+    case 5:
+      probabilityOfQualityIssue = 0.75
       break
 
     default:
