@@ -33,7 +33,7 @@ const hasQualityIssue = ({
   return quality > qualityProbability / multiplicator
 }
 
-export const newBoard = () => shuffleArray(initialFeatures)
+export const newBacklog = () => shuffleArray(initialFeatures)
 
 export const initBoard = (
   steps: FeatureStep[],
@@ -212,7 +212,10 @@ const getQualityProbability = (
   return probabilityOfGoodQuality
 }
 
-export const nextDay = (state: State, strategy: Strategy): State => {
+export const nextDay = (
+  state: Omit<State, 'dashboards'>,
+  strategy: Strategy
+): Omit<State, 'dashboards'> => {
   state.meta.totalDays++
   state.meta.strategy[strategy]++
 
@@ -268,7 +271,10 @@ export const meanQualityIssue = (features: Feature[]) => {
   )
 }
 
-export const simulate = (state: State, strategy: Strategy): State => {
+export const simulate = (
+  state: Omit<State, 'dashboards'>,
+  strategy: Strategy
+): Omit<State, 'dashboards'> => {
   let i = 0
 
   while (!isProjectFinished(state.features) && i++ < HARD_STOP) {

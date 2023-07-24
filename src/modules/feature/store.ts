@@ -35,9 +35,8 @@ export const useFeatureStore = defineStore('feature', {
   }),
   actions: {
     async initBoard() {
-      const newBoard = await instance.newBoard()
-
-      this.backlog = newBoard
+      const newBacklog = await instance.newBacklog()
+      this.backlog = newBacklog
       this.steps = featureSteps
       this.features = await instance.initBoard(
         clone(this.steps),
@@ -57,9 +56,19 @@ export const useFeatureStore = defineStore('feature', {
       this.features = newState.features
     },
     async simulate(strategy: Strategy) {
-      await this.initBoard()
+      const backlog = await instance.newBacklog()
+      const steps = featureSteps
+      const features = await instance.initBoard(steps, backlog)
 
-      const newState = await instance.simulate(clone(this.$state), strategy)
+      const newState = await instance.simulate(
+        {
+          backlog,
+          steps,
+          features,
+          meta: resetMeta()
+        },
+        strategy
+      )
 
       const [worstFeature] = newState.features.sort((a, b) =>
         a.qualityIssue > b.qualityIssue ? -1 : 1
@@ -78,7 +87,6 @@ export const useFeatureStore = defineStore('feature', {
           )[0][0]
         }
       })
-      await this.initBoard()
     },
     clearDashboard() {
       this.dashboards = []
