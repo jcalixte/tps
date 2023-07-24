@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSimulationStore } from '@/modules/simulation/simulation-store'
 const simulationStore = useSimulationStore()
-const NUMBER_OF_SIMULATION = 300
+const NUMBER_OF_SIMULATION = 1000
 </script>
 
 <template>

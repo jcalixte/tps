@@ -31,6 +31,30 @@ const simulationStore = useSimulationStore()
             {{ simulationStore.meanPullDPSLeadTime }}
           </td>
         </tr>
+        <tr>
+          <td>Complexity</td>
+          <td>
+            {{ simulationStore.meanPushComplexity }}
+          </td>
+          <td>
+            {{ simulationStore.meanPullComplexity }}
+          </td>
+          <td>
+            {{ simulationStore.meanPullDPSComplexity }}
+          </td>
+        </tr>
+        <tr>
+          <td>Quality issue</td>
+          <td>
+            {{ simulationStore.meanPushQuality }}
+          </td>
+          <td>
+            {{ simulationStore.meanPullQuality }}
+          </td>
+          <td>
+            {{ simulationStore.meanPullDPSQuality }}
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

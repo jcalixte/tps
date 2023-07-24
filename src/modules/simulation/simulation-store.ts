@@ -1,14 +1,29 @@
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { Dashboard, Meta } from '@/store-type'
-import { getMean } from '@/utils'
+import { getRound } from '@/utils'
 import { defineStore } from 'pinia'
+
+type Mean = {
+  leadTimeSum: number
+  complexitySum: number
+  qualityIssueSum: number
+  simulations: number
+}
 
 type State = {
   dashboards: Dashboard[]
   requestedSimulation: number
   simulationsDone: number
+  mean: Record<Strategy, Mean>
 }
+
+const newMean = (): Mean => ({
+  leadTimeSum: 0,
+  complexitySum: 0,
+  qualityIssueSum: 0,
+  simulations: 0
+})
 
 const instance = new ComlinkWorker<typeof import('../feature/feature-board')>(
   new URL('../feature/feature-board', import.meta.url)
@@ -29,7 +44,12 @@ export const useSimulationStore = defineStore('dashboard', {
     return {
       dashboards: [],
       requestedSimulation: 0,
-      simulationsDone: 0
+      simulationsDone: 0,
+      mean: {
+        push: newMean(),
+        pull: newMean(),
+        'problem-solving': newMean()
+      }
     }
   },
   actions: {
@@ -55,7 +75,7 @@ export const useSimulationStore = defineStore('dashboard', {
         a.qualityIssue > b.qualityIssue ? -1 : 1
       )
 
-      this.newDashboard({
+      const dashboard: Dashboard = {
         uuid: new Date().getTime().toString(),
         meta: newState.meta,
         analysis: {
@@ -67,7 +87,13 @@ export const useSimulationStore = defineStore('dashboard', {
           worstFeature,
           strategy
         }
-      })
+      }
+
+      this.newDashboard(dashboard)
+      this.mean[strategy].leadTimeSum += dashboard.analysis.meanLeadTime
+      this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
+      this.mean[strategy].qualityIssueSum += dashboard.analysis.meanQualityIssue
+      this.mean[strategy].simulations++
     },
     async multiSimulation(simulations: number, strategy: Strategy) {
       this.requestedSimulation += simulations
@@ -82,26 +108,51 @@ export const useSimulationStore = defineStore('dashboard', {
   },
   getters: {
     meanPushLeadTime: (state) => {
-      return getMean(
-        state.dashboards
-          .filter((dashboard) => dashboard.analysis.strategy === 'push')
-          .map((dashboard) => dashboard.analysis.meanLeadTime)
-      )
+      return getRound(state.mean.push.leadTimeSum, state.mean.push.simulations)
     },
     meanPullLeadTime: (state) => {
-      return getMean(
-        state.dashboards
-          .filter((dashboard) => dashboard.analysis.strategy === 'pull')
-          .map((dashboard) => dashboard.analysis.meanLeadTime)
-      )
+      return getRound(state.mean.pull.leadTimeSum, state.mean.pull.simulations)
     },
     meanPullDPSLeadTime: (state) => {
-      return getMean(
-        state.dashboards
-          .filter(
-            (dashboard) => dashboard.analysis.strategy === 'problem-solving'
-          )
-          .map((dashboard) => dashboard.analysis.meanLeadTime)
+      return getRound(
+        state.mean['problem-solving'].leadTimeSum,
+        state.mean['problem-solving'].simulations
+      )
+    },
+    meanPushComplexity: (state) => {
+      return getRound(
+        state.mean.push.complexitySum,
+        state.mean.push.simulations
+      )
+    },
+    meanPullComplexity: (state) => {
+      return getRound(
+        state.mean.pull.complexitySum,
+        state.mean.pull.simulations
+      )
+    },
+    meanPullDPSComplexity: (state) => {
+      return getRound(
+        state.mean['problem-solving'].complexitySum,
+        state.mean['problem-solving'].simulations
+      )
+    },
+    meanPushQuality: (state) => {
+      return getRound(
+        state.mean.push.qualityIssueSum,
+        state.mean.push.simulations
+      )
+    },
+    meanPullQuality: (state) => {
+      return getRound(
+        state.mean.pull.qualityIssueSum,
+        state.mean.pull.simulations
+      )
+    },
+    meanPullDPSQuality: (state) => {
+      return getRound(
+        state.mean['problem-solving'].qualityIssueSum,
+        state.mean['problem-solving'].simulations
       )
     }
   }

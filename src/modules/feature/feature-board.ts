@@ -5,7 +5,7 @@ import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState } from '@/store-type'
 import { getMean, pickRandomElement, popNElement, shuffleArray } from '@/utils'
 
-const MAX_FEATURES = 30
+const MAX_FEATURES = 200
 const HARD_STOP = 5000
 
 const hasQualityIssue = ({
@@ -22,7 +22,7 @@ const hasQualityIssue = ({
     daysWithProblemSolving
   )
 
-  let multiplicator = getOverburdenMultiplicator(tasksInParallel)
+  const multiplicator = getOverburdenMultiplicator(tasksInParallel)
   const quality = Math.random()
 
   return quality > qualityProbability / multiplicator
