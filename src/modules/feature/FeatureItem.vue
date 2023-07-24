@@ -29,7 +29,7 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
 <style scoped lang="scss">
 .feature-item {
   transition-property: opacity, visibility;
-  transition-duration: 0.8s;
+  transition-duration: 0.9s;
   transition-timing-function: ease-out;
   transition-delay: 1s 2s;
 
