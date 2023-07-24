@@ -13,7 +13,7 @@ export type Analysis = {
   meanQualityIssue: number
   meanComplexity: number
   meanLeadTime: number
-  mainStrategy: Strategy | string
+  strategy: Strategy | string
 }
 
 export type Dashboard = {

@@ -3,12 +3,7 @@ import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features as initialFeatures } from '@/modules/feature/feature.fixture'
 import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState } from '@/store-type'
-import {
-  pickRandomElement,
-  popNElement,
-  shuffleArray,
-  sumElements
-} from '@/utils'
+import { getMean, pickRandomElement, popNElement, shuffleArray } from '@/utils'
 
 const MAX_FEATURES = 30
 const HARD_STOP = 5000
@@ -241,34 +236,16 @@ export const nextDay = (
 export const isProjectFinished = (features: Feature[]) =>
   features.every((feature) => feature.step === 0 && feature.status === 'done')
 
-export const meanComplexity = (features: Feature[]) => {
-  return (
-    Math.round(
-      100 *
-        (sumElements(features.map((feature) => feature.complexity)) /
-          features.length)
-    ) / 100
-  )
+export const getMeanComplexity = (features: Feature[]) => {
+  return getMean(features.map((feature) => feature.complexity))
 }
 
-export const meanLeadTime = (features: Feature[]) => {
-  return (
-    Math.round(
-      100 *
-        (sumElements(features.map((feature) => feature.leadTime)) /
-          features.length)
-    ) / 100
-  )
+export const getMeanLeadTime = (features: Feature[]) => {
+  return getMean(features.map((feature) => feature.leadTime))
 }
 
-export const meanQualityIssue = (features: Feature[]) => {
-  return (
-    Math.round(
-      100 *
-        (sumElements(features.map((feature) => feature.qualityIssue)) /
-          features.length)
-    ) / 100
-  )
+export const getMeanQualityIssue = (features: Feature[]) => {
+  return getMean(features.map((feature) => feature.qualityIssue))
 }
 
 export const simulate = (

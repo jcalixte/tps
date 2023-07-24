@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
+import SimulationControls from '@/modules/simulation/SimulationControls.vue'
+import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 import { StarportCarrier } from 'vue-starport'
 </script>
 
@@ -8,6 +10,8 @@ import { StarportCarrier } from 'vue-starport'
     <StarportCarrier>
       <FeatureSteps />
     </StarportCarrier>
+    <SimulationControls />
+    <SimulationDashboard />
   </main>
 </template>
 

@@ -1,9 +1,9 @@
 import { Feature } from '@/modules/feature/feature'
 import {
+  getMeanComplexity,
+  getMeanLeadTime,
+  getMeanQualityIssue,
   initBoard,
-  meanComplexity,
-  meanLeadTime,
-  meanQualityIssue,
   newBacklog,
   nextDay
 } from '@/modules/feature/feature-board'
@@ -50,9 +50,9 @@ export const useFeatureStore = defineStore('feature', {
     }
   },
   getters: {
-    meanComplexity: (state) => meanComplexity(state.features),
-    meanLeadTime: (state) => meanLeadTime(state.features),
-    meanQualityIssue: (state) => meanQualityIssue(state.features),
+    meanComplexity: (state) => getMeanComplexity(state.features),
+    meanLeadTime: (state) => getMeanLeadTime(state.features),
+    meanQualityIssue: (state) => getMeanQualityIssue(state.features),
     featuresGroupedByStep: (state) => {
       const groupedByStep: Record<number, Feature[]> = {}
 
