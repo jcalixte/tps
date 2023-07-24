@@ -54,7 +54,7 @@ const isLive = computed(
             :key="blueBin"
             class="bin blue-bin"
           >
-            Blue bucket
+            Blue bin
           </div>
         </div>
         <div v-if="isLive" class="live">
