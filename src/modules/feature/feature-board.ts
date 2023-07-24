@@ -232,8 +232,6 @@ export const nextDay = (state: State, strategy: Strategy): State => {
   state.backlog = backlog
   state.features = features
 
-  console.log(state.features)
-
   return state
 }
 
