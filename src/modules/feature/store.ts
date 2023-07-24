@@ -1,37 +1,19 @@
 import { Feature } from '@/modules/feature/feature'
-import { initBoard, newBoard, nextDay } from '@/modules/feature/feature-board'
-import { FeatureStep, featureSteps } from '@/modules/feature/feature-steps'
+import {
+  meanComplexity,
+  meanLeadTime,
+  meanQualityIssue
+} from '@/modules/feature/feature-board'
+import { featureSteps } from '@/modules/feature/feature-steps'
+import { Meta, State } from '@/modules/feature/store-type'
 import { Strategy } from '@/modules/lean/strategy'
-import { sumElements } from '@/utils'
 import { defineStore } from 'pinia'
 
-type Meta = {
-  totalDays: number
-  daysWithProblemSolving: number
-  strategy: Record<Strategy, number>
-}
+const clone = (data: any) => JSON.parse(JSON.stringify(data))
 
-type Analysis = {
-  worstFeature: Feature
-  meanQualityIssue: number
-  meanComplexity: number
-  meanLeadTime: number
-  mainStrategy: Strategy | string
-}
-
-type Dashboard = Array<{
-  uuid: string
-  meta: Meta
-  analysis: Analysis
-}>
-
-type State = {
-  steps: FeatureStep[]
-  features: Feature[]
-  backlog: Feature[]
-  meta: Meta
-  dashboards: Dashboard
-}
+const instance = new ComlinkWorker<typeof import('./feature-board')>(
+  new URL('./feature-board', import.meta.url)
+)
 
 const resetMeta = (): Meta => ({
   totalDays: 0,
@@ -52,94 +34,60 @@ export const useFeatureStore = defineStore('feature', {
     dashboards: []
   }),
   actions: {
-    initBoard() {
-      this.backlog = newBoard()
+    async initBoard() {
+      const newBoard = await instance.newBoard()
+
+      this.backlog = newBoard
       this.steps = featureSteps
-      this.features = initBoard(this.steps, this.backlog)
+      this.features = await instance.initBoard(
+        clone(this.steps),
+        clone(this.backlog)
+      )
+
+      this.backlog = this.backlog.filter(
+        (l) => !this.features.find((f) => f.name === l.name)
+      )
       this.meta = resetMeta()
     },
-    nextDay(strategy: Strategy) {
-      this.meta.totalDays++
-      this.meta.strategy[strategy]++
+    async nextDay(strategy: Strategy) {
+      const newState = await instance.nextDay(clone(this.$state), strategy)
 
-      if (strategy === 'problem-solving') {
-        this.meta.daysWithProblemSolving++
-      }
-
-      this.features = nextDay({
-        backlog: this.backlog,
-        features: this.features,
-        steps: this.steps,
-        initialStep: this.steps[0].stepIndex,
-        strategy,
-        daysWithProblemSolving: this.meta.daysWithProblemSolving
-      })
+      this.backlog = newState.backlog
+      this.meta = newState.meta
+      this.features = newState.features
     },
-    simulate(strategy: Strategy) {
-      this.initBoard()
-      while (!this.isProjectFinished) {
-        if (strategy === 'problem-solving') {
-          if (this.meta.totalDays % 5 === 0) {
-            this.nextDay('problem-solving')
-          } else {
-            this.nextDay('pull')
-          }
-        } else {
-          this.nextDay(strategy)
-        }
-      }
-      const [worstFeature] = this.features.sort((a, b) =>
+    async simulate(strategy: Strategy) {
+      await this.initBoard()
+
+      const newState = await instance.simulate(clone(this.$state), strategy)
+
+      const [worstFeature] = newState.features.sort((a, b) =>
         a.qualityIssue > b.qualityIssue ? -1 : 1
       )
 
       this.dashboards.push({
         uuid: new Date().getTime().toString(),
-        meta: this.meta,
+        meta: newState.meta,
         analysis: {
-          meanComplexity: this.meanComplexity,
-          meanLeadTime: this.meanLeadTime,
-          meanQualityIssue: this.meanQualityIssue,
+          meanComplexity: await instance.meanComplexity(newState.features),
+          meanLeadTime: await instance.meanLeadTime(newState.features),
+          meanQualityIssue: await instance.meanQualityIssue(newState.features),
           worstFeature,
-          mainStrategy: Object.entries(this.meta.strategy).sort((a, b) =>
+          mainStrategy: Object.entries(newState.meta.strategy).sort((a, b) =>
             a[1] > b[1] ? -1 : 1
           )[0][0]
         }
       })
+      await this.initBoard()
     },
     clearDashboard() {
       this.dashboards = []
     }
   },
   getters: {
-    meanComplexity: (state) => {
-      return (
-        Math.round(
-          100 *
-            (sumElements(state.features.map((feature) => feature.complexity)) /
-              state.features.length)
-        ) / 100
-      )
-    },
-    meanLeadTime: (state) => {
-      return (
-        Math.round(
-          100 *
-            (sumElements(state.features.map((feature) => feature.leadTime)) /
-              state.features.length)
-        ) / 100
-      )
-    },
-    meanQualityIssue: (state) => {
-      return (
-        Math.round(
-          100 *
-            (sumElements(
-              state.features.map((feature) => feature.qualityIssue)
-            ) /
-              state.features.length)
-        ) / 100
-      )
-    },
+    meanComplexity: (state) => meanComplexity(state.features),
+    meanLeadTime: (state) => meanLeadTime(state.features),
+    meanQualityIssue: (state) => meanQualityIssue(state.features),
     featuresGroupedByStep: (state) => {
       const groupedByStep: Record<number, Feature[]> = {}
 
@@ -152,10 +100,6 @@ export const useFeatureStore = defineStore('feature', {
       })
 
       return groupedByStep
-    },
-    isProjectFinished: (state) =>
-      state.features.every(
-        (feature) => feature.step === 0 && feature.status === 'done'
-      )
+    }
   }
 })

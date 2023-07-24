@@ -1,10 +1,17 @@
 import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
-import { features } from '@/modules/feature/feature.fixture'
+import { features as initialFeatures } from '@/modules/feature/feature.fixture'
+import { State } from '@/modules/feature/store-type'
 import { Strategy } from '@/modules/lean/strategy'
-import { pickRandomElement, popNElement, shuffleArray } from '@/utils'
+import {
+  pickRandomElement,
+  popNElement,
+  shuffleArray,
+  sumElements
+} from '@/utils'
 
 const MAX_FEATURES = 30
+const HARD_STOP = 5000
 
 const hasQualityIssue = ({
   complexity,
@@ -26,7 +33,7 @@ const hasQualityIssue = ({
   return quality > qualityProbability / multiplicator
 }
 
-export const newBoard = () => shuffleArray(features)
+export const newBoard = () => shuffleArray(initialFeatures)
 
 export const initBoard = (
   steps: FeatureStep[],
@@ -43,7 +50,7 @@ export const initBoard = (
   return initialFeatures
 }
 
-export const nextDay = ({
+export const getFeaturesForNextDay = ({
   backlog,
   features,
   initialStep,
@@ -57,65 +64,62 @@ export const nextDay = ({
   initialStep: number
   strategy: Strategy
   daysWithProblemSolving: number
-}): Feature[] => {
-  features.forEach((feature) => {
-    const isFeatureLive = feature.step === 0 && feature.status === 'done'
-    if (isFeatureLive) {
-      return
-    }
+}): [Feature[], Feature[]] => {
+  features
+    .filter((feature) => feature.step > 0 || feature.status === 'doing')
+    .forEach((feature) => {
+      feature.leadTime++
 
-    feature.leadTime++
+      if (strategy === 'problem-solving') {
+        return
+      }
 
-    if (strategy === 'problem-solving') {
-      return
-    }
+      switch (feature.status) {
+        case 'doing':
+          feature.status = 'done'
+          break
+        case 'done':
+          if (strategy === 'pull') {
+            const nextStep = steps.find(
+              (step) => step.stepIndex === feature.step - 1
+            )
+            if (!nextStep) {
+              break
+            }
 
-    switch (feature.status) {
-      case 'doing':
-        feature.status = 'done'
-        break
-      case 'done':
-        if (strategy === 'pull') {
-          const nextStep = steps.find(
-            (step) => step.stepIndex === feature.step - 1
-          )
-          if (!nextStep) {
-            break
-          }
+            const hasBlueBinAvailableNextStep =
+              nextStep.blueBins -
+                features.filter(
+                  (f) => f.step === feature.step - 1 && f.status === 'done'
+                ).length >
+              0
 
-          const hasBlueBinAvailableNextStep =
-            nextStep.blueBins -
-              features.filter(
-                (f) => f.step === feature.step - 1 && f.status === 'done'
-              ).length >
-            0
-
-          if (hasBlueBinAvailableNextStep) {
+            if (hasBlueBinAvailableNextStep) {
+              feature.status = 'doing'
+            }
+          } else {
             feature.status = 'doing'
           }
-        } else {
-          feature.status = 'doing'
-        }
 
-        if (feature.status === 'doing') {
-          if (
-            hasQualityIssue({
-              complexity: feature.complexity,
-              tasksInParallel: features.filter(
-                (f) => f.status === 'doing' && f.step === feature.step
-              ).length,
-              daysWithProblemSolving
-            })
-          ) {
-            feature.step = Math.min(4, feature.step + 1)
-            feature.qualityIssue++
-          } else {
-            feature.step--
+          if (feature.status === 'doing') {
+            if (
+              hasQualityIssue({
+                complexity: feature.complexity,
+                tasksInParallel: features.filter(
+                  (f) => f.status === 'doing' && f.step === feature.step
+                ).length,
+                daysWithProblemSolving
+              })
+            ) {
+              feature.step = Math.min(4, feature.step + 1)
+              feature.qualityIssue++
+            } else {
+              feature.step--
+            }
           }
-        }
-        break
-    }
-  })
+          break
+      }
+    })
 
   if (features.length < MAX_FEATURES) {
     switch (strategy) {
@@ -151,7 +155,7 @@ export const nextDay = ({
     }
   }
 
-  return features
+  return [backlog, features]
 }
 
 const getOverburdenMultiplicator = (tasksInParallel: number) => {
@@ -201,9 +205,85 @@ const getQualityProbability = (
       break
   }
 
-  // learnings
+  // team learning
   probabilityOfGoodQuality =
     probabilityOfGoodQuality + (1.2 * daysWithProblemSolving) / 100
 
   return probabilityOfGoodQuality
+}
+
+export const nextDay = (state: State, strategy: Strategy): State => {
+  state.meta.totalDays++
+  state.meta.strategy[strategy]++
+
+  if (strategy === 'problem-solving') {
+    state.meta.daysWithProblemSolving++
+  }
+
+  const [backlog, features] = getFeaturesForNextDay({
+    backlog: state.backlog,
+    features: state.features,
+    steps: state.steps,
+    initialStep: state.steps[0].stepIndex,
+    strategy,
+    daysWithProblemSolving: state.meta.daysWithProblemSolving
+  })
+
+  state.backlog = backlog
+  state.features = features
+
+  console.log(state.features)
+
+  return state
+}
+
+export const isProjectFinished = (features: Feature[]) =>
+  features.every((feature) => feature.step === 0 && feature.status === 'done')
+
+export const meanComplexity = (features: Feature[]) => {
+  return (
+    Math.round(
+      100 *
+        (sumElements(features.map((feature) => feature.complexity)) /
+          features.length)
+    ) / 100
+  )
+}
+
+export const meanLeadTime = (features: Feature[]) => {
+  return (
+    Math.round(
+      100 *
+        (sumElements(features.map((feature) => feature.leadTime)) /
+          features.length)
+    ) / 100
+  )
+}
+
+export const meanQualityIssue = (features: Feature[]) => {
+  return (
+    Math.round(
+      100 *
+        (sumElements(features.map((feature) => feature.qualityIssue)) /
+          features.length)
+    ) / 100
+  )
+}
+
+export const simulate = (state: State, strategy: Strategy): State => {
+  let i = 0
+
+  while (!isProjectFinished(state.features) && i++ < HARD_STOP) {
+    if (strategy === 'problem-solving') {
+      if (state.meta.totalDays % 5 === 0) {
+        state = nextDay(state, 'problem-solving')
+      } else {
+        state = nextDay(state, 'pull')
+      }
+    } else {
+      state = nextDay(state, strategy)
+    }
+  }
+
+  return state
 }

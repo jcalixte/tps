@@ -30,6 +30,6 @@ export const featureSteps: FeatureStep[] = [
   {
     title: 'Release',
     stepIndex: 0,
-    blueBins: Infinity
+    blueBins: 99999
   }
 ]
