@@ -1,9 +1,10 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { defineConfig } from 'vite'
+import { comlink } from 'vite-plugin-comlink'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [comlink(), vue()],
   build: {
     rollupOptions: {
       input: {
@@ -17,5 +18,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       'node-fetch': 'isomorphic-fetch'
     }
+  },
+  worker: {
+    plugins: [comlink()]
   }
 })
