@@ -1,14 +1,17 @@
 export const shuffleArray = <T>(array: T[]) => {
-  const arrayCopy = [...array]
+  let currentIndex = array.length,
+    randomIndex
 
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    const temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+    ;[array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex]
+    ]
   }
 
-  return arrayCopy
+  return array
 }
 
 export const popNElement = <T>(array: T[], numberOfElements: number) => {
