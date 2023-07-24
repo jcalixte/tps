@@ -1,8 +1,8 @@
 import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features as initialFeatures } from '@/modules/feature/feature.fixture'
-import { State } from '@/modules/feature/store-type'
 import { Strategy } from '@/modules/lean/strategy'
+import { FeatureState } from '@/store-type'
 import {
   pickRandomElement,
   popNElement,
@@ -213,9 +213,9 @@ const getQualityProbability = (
 }
 
 export const nextDay = (
-  state: Omit<State, 'dashboards'>,
+  state: FeatureState,
   strategy: Strategy
-): Omit<State, 'dashboards'> => {
+): FeatureState => {
   state.meta.totalDays++
   state.meta.strategy[strategy]++
 
@@ -272,9 +272,9 @@ export const meanQualityIssue = (features: Feature[]) => {
 }
 
 export const simulate = (
-  state: Omit<State, 'dashboards'>,
+  state: FeatureState,
   strategy: Strategy
-): Omit<State, 'dashboards'> => {
+): FeatureState => {
   let i = 0
 
   while (!isProjectFinished(state.features) && i++ < HARD_STOP) {

@@ -16,16 +16,15 @@ export type Analysis = {
   mainStrategy: Strategy | string
 }
 
-export type Dashboard = Array<{
+export type Dashboard = {
   uuid: string
   meta: Meta
   analysis: Analysis
-}>
+}
 
-export type State = {
+export type FeatureState = {
   steps: FeatureStep[]
   features: Feature[]
   backlog: Feature[]
   meta: Meta
-  dashboards: Dashboard
 }

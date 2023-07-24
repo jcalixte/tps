@@ -1,3 +1,4 @@
+import { useDashboardStore } from '@/modules/dashboard/dashboard-store'
 import { Feature } from '@/modules/feature/feature'
 import {
   meanComplexity,
@@ -5,11 +6,12 @@ import {
   meanQualityIssue
 } from '@/modules/feature/feature-board'
 import { featureSteps } from '@/modules/feature/feature-steps'
-import { Meta, State } from '@/modules/feature/store-type'
 import { Strategy } from '@/modules/lean/strategy'
+import { FeatureState, Meta } from '@/store-type'
+import { clone } from '@/utils'
 import { defineStore } from 'pinia'
 
-const clone = (data: any) => JSON.parse(JSON.stringify(data))
+const dashboardStore = useDashboardStore()
 
 const instance = new ComlinkWorker<typeof import('./feature-board')>(
   new URL('./feature-board', import.meta.url)
@@ -26,12 +28,11 @@ const resetMeta = (): Meta => ({
 })
 
 export const useFeatureStore = defineStore('feature', {
-  state: (): State => ({
+  state: (): FeatureState => ({
     steps: [],
     features: [],
     backlog: [],
-    meta: resetMeta(),
-    dashboards: []
+    meta: resetMeta()
   }),
   actions: {
     async initBoard() {
@@ -74,7 +75,7 @@ export const useFeatureStore = defineStore('feature', {
         a.qualityIssue > b.qualityIssue ? -1 : 1
       )
 
-      this.dashboards.push({
+      dashboardStore.newDashboard({
         uuid: new Date().getTime().toString(),
         meta: newState.meta,
         analysis: {
@@ -88,8 +89,10 @@ export const useFeatureStore = defineStore('feature', {
         }
       })
     },
-    clearDashboard() {
-      this.dashboards = []
+    async simulate100(strategy: Strategy) {
+      for (let i = 0; i < 100; i++) {
+        await this.simulate(strategy)
+      }
     }
   },
   getters: {

@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { useDashboardStore } from '@/modules/dashboard/dashboard-store'
 import FeatureDashboard from '@/modules/feature/FeatureDashboard.vue'
 import FeatureStep from '@/modules/feature/FeatureStep.vue'
 import { featureSteps } from '@/modules/feature/feature-steps'
-import { useFeatureStore } from '@/modules/feature/store'
+import { useFeatureStore } from '@/modules/feature/feature-store'
 import { onMounted } from 'vue'
 
 const featureStore = useFeatureStore()
+const dashboardStore = useDashboardStore()
 
 onMounted(() => featureStore.initBoard())
 
@@ -51,10 +53,13 @@ const pushAndProblemSolving20Percent = () => {
       <button @click="featureStore.simulate('pull')">
         simulate pull system
       </button>
+      <button @click="featureStore.simulate100('pull')">
+        simulate 100 pull system
+      </button>
       <button @click="featureStore.simulate('problem-solving')">
         simulate pull and problem solving
       </button>
-      <button @click="featureStore.clearDashboard()">clear dashboard</button>
+      <button @click="dashboardStore.clearDashboard()">clear dashboard</button>
     </div>
   </div>
   <ul class="features-steps">

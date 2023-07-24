@@ -1,3 +1,5 @@
+export const clone = (data: any) => JSON.parse(JSON.stringify(data))
+
 export const shuffleArray = <T>(array: T[]) => {
   let currentIndex = array.length,
     randomIndex

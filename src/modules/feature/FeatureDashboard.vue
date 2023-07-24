@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFeatureStore } from '@/modules/feature/store'
+import { useFeatureStore } from '@/modules/feature/feature-store'
 
 const featureStore = useFeatureStore()
 </script>
