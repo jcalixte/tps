@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useFeatureStore } from '@/modules/feature/feature-store'
+import { useDashboardStore } from '@/modules/dashboard/dashboard-store'
 
-const featureStore = useFeatureStore()
+const dashboardStore = useDashboardStore()
 </script>
 
 <template>
   <div class="feature-dashboard">
     Dashboard
     <ul>
-      <li v-for="dashboard in featureStore.dashboards" :key="dashboard.uuid">
+      <li v-for="dashboard in dashboardStore.dashboards" :key="dashboard.uuid">
         {{ dashboard.analysis.mainStrategy }}: mean lead time
         {{ dashboard.analysis.meanLeadTime }} | worst feature for quality
         {{ dashboard.analysis.worstFeature.qualityIssue }} [{{

@@ -1,21 +1,17 @@
-import { useDashboardStore } from '@/modules/dashboard/dashboard-store'
 import { Feature } from '@/modules/feature/feature'
 import {
+  initBoard,
   meanComplexity,
   meanLeadTime,
-  meanQualityIssue
+  meanQualityIssue,
+  newBacklog,
+  nextDay
 } from '@/modules/feature/feature-board'
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState, Meta } from '@/store-type'
 import { clone } from '@/utils'
 import { defineStore } from 'pinia'
-
-const dashboardStore = useDashboardStore()
-
-const instance = new ComlinkWorker<typeof import('./feature-board')>(
-  new URL('./feature-board', import.meta.url)
-)
 
 const resetMeta = (): Meta => ({
   totalDays: 0,
@@ -36,13 +32,9 @@ export const useFeatureStore = defineStore('feature', {
   }),
   actions: {
     async initBoard() {
-      const newBacklog = await instance.newBacklog()
-      this.backlog = newBacklog
+      this.backlog = newBacklog()
       this.steps = featureSteps
-      this.features = await instance.initBoard(
-        clone(this.steps),
-        clone(this.backlog)
-      )
+      this.features = initBoard(clone(this.steps), clone(this.backlog))
 
       this.backlog = this.backlog.filter(
         (l) => !this.features.find((f) => f.name === l.name)
@@ -50,49 +42,11 @@ export const useFeatureStore = defineStore('feature', {
       this.meta = resetMeta()
     },
     async nextDay(strategy: Strategy) {
-      const newState = await instance.nextDay(clone(this.$state), strategy)
+      const newState = nextDay(clone(this.$state), strategy)
 
       this.backlog = newState.backlog
       this.meta = newState.meta
       this.features = newState.features
-    },
-    async simulate(strategy: Strategy) {
-      const backlog = await instance.newBacklog()
-      const steps = featureSteps
-      const features = await instance.initBoard(steps, backlog)
-
-      const newState = await instance.simulate(
-        {
-          backlog,
-          steps,
-          features,
-          meta: resetMeta()
-        },
-        strategy
-      )
-
-      const [worstFeature] = newState.features.sort((a, b) =>
-        a.qualityIssue > b.qualityIssue ? -1 : 1
-      )
-
-      dashboardStore.newDashboard({
-        uuid: new Date().getTime().toString(),
-        meta: newState.meta,
-        analysis: {
-          meanComplexity: await instance.meanComplexity(newState.features),
-          meanLeadTime: await instance.meanLeadTime(newState.features),
-          meanQualityIssue: await instance.meanQualityIssue(newState.features),
-          worstFeature,
-          mainStrategy: Object.entries(newState.meta.strategy).sort((a, b) =>
-            a[1] > b[1] ? -1 : 1
-          )[0][0]
-        }
-      })
-    },
-    async simulate100(strategy: Strategy) {
-      for (let i = 0; i < 100; i++) {
-        await this.simulate(strategy)
-      }
     }
   },
   getters: {
