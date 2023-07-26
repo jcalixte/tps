@@ -195,19 +195,19 @@ const getQualityProbability = (
 
   switch (complexity) {
     case 1:
-      probabilityOfGoodQuality = 0.97
+      probabilityOfGoodQuality = 0.95
 
     case 2:
-      probabilityOfGoodQuality = 0.9
+      probabilityOfGoodQuality = 0.88
       break
     case 3:
-      probabilityOfGoodQuality = 0.82
+      probabilityOfGoodQuality = 0.72
       break
     case 4:
-      probabilityOfGoodQuality = 0.71
+      probabilityOfGoodQuality = 0.65
       break
     case 5:
-      probabilityOfGoodQuality = 0.6
+      probabilityOfGoodQuality = 0.5
       break
   }
 
