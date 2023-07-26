@@ -1,7 +1,7 @@
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { Dashboard, Meta } from '@/store-type'
-import { getRound, sumElements } from '@/utils'
+import { getRound } from '@/utils'
 import { defineStore } from 'pinia'
 
 // Get features done per day to plot it
@@ -64,6 +64,7 @@ export const useSimulationStore = defineStore('dashboard', {
       this.dashboards.push(dashboard)
     },
     async simulate(strategy: Strategy) {
+      this.requestedSimulation++
       const steps = featureSteps
       const backlog = await instance.newBacklog()
       const features = await instance.initBoard(steps, backlog)
@@ -98,10 +99,8 @@ export const useSimulationStore = defineStore('dashboard', {
 
       this.newDashboard(dashboard)
       this.mean[strategy].leadTimeSum += dashboard.analysis.meanLeadTime
-      // todo: set directly the number of features
       this.mean[strategy].taktTimeSum +=
-        dashboard.meta.totalDays /
-        sumElements(dashboard.meta.featuresDonePerDay)
+        dashboard.meta.totalDays / newState.features.length
       this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
       this.mean[strategy].qualityIssueSum += dashboard.analysis.meanQualityIssue
       this.mean[strategy].simulations++

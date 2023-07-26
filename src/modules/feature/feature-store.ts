@@ -4,13 +4,13 @@ import {
   getMeanLeadTime,
   getMeanQualityIssue,
   initBoard,
+  isFeatureDone,
   newBacklog,
   nextDay
 } from '@/modules/feature/feature-board'
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState, Meta } from '@/store-type'
-import { sumElements } from '@/utils'
 import { defineStore } from 'pinia'
 
 const resetMeta = (): Meta => ({
@@ -33,9 +33,9 @@ export const useFeatureStore = defineStore('feature', {
     meta: resetMeta()
   }),
   actions: {
-    // set the number of feature we want
-    async initBoard() {
-      this.backlog = newBacklog()
+    // todo set the number of feature we want
+    async initBoard(limit: number) {
+      this.backlog = newBacklog(limit)
       this.steps = featureSteps
       this.features = initBoard(this.steps, this.backlog)
 
@@ -56,10 +56,10 @@ export const useFeatureStore = defineStore('feature', {
     meanComplexity: (state) => getMeanComplexity(state.features),
     meanLeadTime: (state) => getMeanLeadTime(state.features),
     meanQualityIssue: (state) => getMeanQualityIssue(state.features),
-    taktTime: (state) =>
+    taktTime: (state): string =>
       (
-        state.meta.totalDays / sumElements(state.meta.featuresDonePerDay)
-      ).toFixed(2) ?? 0,
+        state.meta.totalDays / state.features.filter(isFeatureDone).length
+      ).toFixed(2) ?? `0`,
     featuresGroupedByStep: (state) => {
       const groupedByStep: Record<number, Feature[]> = {}
 
@@ -72,6 +72,13 @@ export const useFeatureStore = defineStore('feature', {
       })
 
       return groupedByStep
+    },
+    eat(): string {
+      return (
+        parseFloat(this.taktTime) *
+        (this.features.filter((feature) => !isFeatureDone(feature)).length +
+          this.backlog.length)
+      ).toFixed(2)
     }
   }
 })

@@ -4,22 +4,25 @@ import { featureSteps } from '@/modules/feature/feature-steps'
 import { useFeatureStore } from '@/modules/feature/feature-store'
 import { onMounted } from 'vue'
 
+const NUMBER_OF_FEATURES = 20
+
 const featureStore = useFeatureStore()
 
-onMounted(() => featureStore.initBoard())
+onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
 </script>
 
 <template>
   <div class="dashboard">
     <div>
-      {{ featureStore.features.length }} features | mean complexity :
-      {{ featureStore.meanComplexity }} | mean lead time :
-      {{ featureStore.meanLeadTime }} days | Total days:
+      {{ featureStore.features.length }} / {{ NUMBER_OF_FEATURES }} features in
+      the board | mean complexity : {{ featureStore.meanComplexity }} | mean
+      lead time : {{ featureStore.meanLeadTime }} days | Total days:
       {{ featureStore.meta.totalDays }} | Team work experience:
       {{ featureStore.meta.teamWorkExperience }}
     </div>
     <div class="row">
-      New feature live every {{ featureStore.taktTime }} days.
+      New feature live every {{ featureStore.taktTime }} days. Finishing in
+      {{ featureStore.eat }} days.
     </div>
     <div class="row">Strategy of the day:</div>
     <div class="row">

@@ -21,8 +21,8 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
           <th>#</th>
           <th class="numeric">push</th>
           <th class="numeric">pull</th>
-          <th class="numeric">pull and DPS</th>
           <th class="numeric">push and DPS</th>
+          <th class="numeric">pull and DPS</th>
         </tr>
       </thead>
       <tbody>

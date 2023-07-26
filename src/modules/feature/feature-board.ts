@@ -11,7 +11,6 @@ import {
   sumElements
 } from '@/utils'
 
-const MAX_FEATURES = 200
 const HARD_STOP = 5000
 
 const hasQualityIssue = ({
@@ -34,7 +33,10 @@ const hasQualityIssue = ({
   return quality > qualityProbability / multiplicator
 }
 
-export const newBacklog = () => shuffleArray(initialFeatures)
+export const newBacklog = (limit?: number) =>
+  limit !== undefined
+    ? popNElement(shuffleArray(initialFeatures), limit)
+    : shuffleArray(initialFeatures)
 
 export const initBoard = (
   steps: FeatureStep[],
@@ -125,7 +127,7 @@ export const getFeaturesForNextDay = ({
       }
     })
 
-  if (features.length < MAX_FEATURES) {
+  if (backlog.length > 0) {
     switch (strategy) {
       case 'push': {
         const [nextFeature] = popNElement(backlog, 1)
@@ -217,7 +219,7 @@ const getQualityProbability = (
   return probabilityOfGoodQuality
 }
 
-const isFeatureDone = (feature: Feature) =>
+export const isFeatureDone = (feature: Feature) =>
   feature.step === 0 && feature.status === 'done'
 
 export const nextDay = (
@@ -276,7 +278,7 @@ export const simulate = (
   let i = 0
 
   while (!isProjectFinished(state.features) && i++ < HARD_STOP) {
-    if (strategy === 'pull-dps' || strategy === 'push-dps') {
+    if (strategy.includes('dps')) {
       if (state.meta.totalDays % 5 === 0) {
         state = nextDay(state, 'problem-solving')
       } else {
