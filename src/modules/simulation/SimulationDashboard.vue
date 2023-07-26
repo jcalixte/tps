@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { Strategy } from '@/modules/lean/strategy'
 import { useSimulationStore } from '@/modules/simulation/simulation-store'
 
 const simulationStore = useSimulationStore()
+
+const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
 </script>
 
 <template>
@@ -16,56 +19,35 @@ const simulationStore = useSimulationStore()
       <thead>
         <tr>
           <th>#</th>
-          <th>push</th>
-          <th>pull</th>
-          <th>pull and DPS</th>
-          <th>push and DPS</th>
+          <th class="numeric">push</th>
+          <th class="numeric">pull</th>
+          <th class="numeric">pull and DPS</th>
+          <th class="numeric">push and DPS</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>lead time</td>
-          <td class="numeric">
-            {{ simulationStore.meanPushLeadTime }}
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanLeadTime(strategy) }}
           </td>
-          <td class="numeric">
-            {{ simulationStore.meanPullLeadTime }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPullDPSLeadTime }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPushDPSLeadTime }}
+        </tr>
+        <tr>
+          <td>takt time</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanTaktTime(strategy) }}
           </td>
         </tr>
         <tr>
           <td>Complexity</td>
-          <td class="numeric">
-            {{ simulationStore.meanPushComplexity }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPullComplexity }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPullDPSComplexity }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPushDPSComplexity }}
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanComplexity(strategy) }}
           </td>
         </tr>
         <tr>
           <td>Quality issue</td>
-          <td class="numeric">
-            {{ simulationStore.meanPushQuality }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPullQuality }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPullDPSQuality }}
-          </td>
-          <td class="numeric">
-            {{ simulationStore.meanPushDPSQuality }}
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanQuality(strategy) }}
           </td>
         </tr>
       </tbody>
@@ -76,9 +58,13 @@ const simulationStore = useSimulationStore()
 <style scoped lang="scss">
 .simulation-dashboard {
   color: var(--primary-color);
+
+  table {
+    padding: 1rem;
+  }
 }
 
-td.numeric {
+.numeric {
   text-align: right;
 }
 </style>

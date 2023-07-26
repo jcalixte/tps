@@ -1,13 +1,14 @@
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { Dashboard, Meta } from '@/store-type'
-import { getRound } from '@/utils'
+import { getRound, sumElements } from '@/utils'
 import { defineStore } from 'pinia'
 
 // Get features done per day to plot it
 
 type Mean = {
   leadTimeSum: number
+  taktTimeSum: number
   complexitySum: number
   qualityIssueSum: number
   simulations: number
@@ -22,6 +23,7 @@ type State = {
 
 const newMean = (): Mean => ({
   leadTimeSum: 0,
+  taktTimeSum: 0,
   complexitySum: 0,
   qualityIssueSum: 0,
   simulations: 0
@@ -33,7 +35,8 @@ const instance = new ComlinkWorker<typeof import('../feature/feature-board')>(
 
 const resetMeta = (): Meta => ({
   totalDays: 0,
-  daysWithProblemSolving: 0,
+  teamWorkExperience: 0,
+  featuresDonePerDay: [],
   strategy: {
     push: 0,
     pull: 0,
@@ -95,6 +98,10 @@ export const useSimulationStore = defineStore('dashboard', {
 
       this.newDashboard(dashboard)
       this.mean[strategy].leadTimeSum += dashboard.analysis.meanLeadTime
+      // todo: set directly the number of features
+      this.mean[strategy].taktTimeSum +=
+        dashboard.meta.totalDays /
+        sumElements(dashboard.meta.featuresDonePerDay)
       this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
       this.mean[strategy].qualityIssueSum += dashboard.analysis.meanQualityIssue
       this.mean[strategy].simulations++
@@ -115,71 +122,25 @@ export const useSimulationStore = defineStore('dashboard', {
     }
   },
   getters: {
-    meanPushLeadTime: (state) => {
-      return getRound(state.mean.push.leadTimeSum, state.mean.push.simulations)
-    },
-    meanPullLeadTime: (state) => {
-      return getRound(state.mean.pull.leadTimeSum, state.mean.pull.simulations)
-    },
-    meanPullDPSLeadTime: (state) => {
-      return getRound(
-        state.mean['pull-dps'].leadTimeSum,
-        state.mean['pull-dps'].simulations
+    meanLeadTime: (state) => (strategy: Strategy) =>
+      getRound(
+        state.mean[strategy].leadTimeSum,
+        state.mean[strategy].simulations
+      ),
+    meanTaktTime: (state) => (strategy: Strategy) =>
+      getRound(
+        state.mean[strategy].taktTimeSum,
+        state.mean[strategy].simulations
+      ),
+    meanComplexity: (state) => (strategy: Strategy) =>
+      getRound(
+        state.mean[strategy].complexitySum,
+        state.mean[strategy].simulations
+      ),
+    meanQuality: (state) => (strategy: Strategy) =>
+      getRound(
+        state.mean[strategy].qualityIssueSum,
+        state.mean[strategy].simulations
       )
-    },
-    meanPushDPSLeadTime: (state) => {
-      return getRound(
-        state.mean['push-dps'].leadTimeSum,
-        state.mean['push-dps'].simulations
-      )
-    },
-    meanPushComplexity: (state) => {
-      return getRound(
-        state.mean.push.complexitySum,
-        state.mean.push.simulations
-      )
-    },
-    meanPullComplexity: (state) => {
-      return getRound(
-        state.mean.pull.complexitySum,
-        state.mean.pull.simulations
-      )
-    },
-    meanPullDPSComplexity: (state) => {
-      return getRound(
-        state.mean['pull-dps'].complexitySum,
-        state.mean['pull-dps'].simulations
-      )
-    },
-    meanPushDPSComplexity: (state) => {
-      return getRound(
-        state.mean['push-dps'].complexitySum,
-        state.mean['push-dps'].simulations
-      )
-    },
-    meanPushQuality: (state) => {
-      return getRound(
-        state.mean.push.qualityIssueSum,
-        state.mean.push.simulations
-      )
-    },
-    meanPullQuality: (state) => {
-      return getRound(
-        state.mean.pull.qualityIssueSum,
-        state.mean.pull.simulations
-      )
-    },
-    meanPullDPSQuality: (state) => {
-      return getRound(
-        state.mean['pull-dps'].qualityIssueSum,
-        state.mean['pull-dps'].simulations
-      )
-    },
-    meanPushDPSQuality: (state) => {
-      return getRound(
-        state.mean['push-dps'].qualityIssueSum,
-        state.mean['push-dps'].simulations
-      )
-    }
   }
 })

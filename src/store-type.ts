@@ -4,8 +4,9 @@ import { Strategy } from '@/modules/lean/strategy'
 
 export type Meta = {
   totalDays: number
-  daysWithProblemSolving: number
+  teamWorkExperience: number
   strategy: Record<Strategy, number>
+  featuresDonePerDay: number[]
 }
 
 export type Analysis = {

@@ -7,22 +7,6 @@ import { onMounted } from 'vue'
 const featureStore = useFeatureStore()
 
 onMounted(() => featureStore.initBoard())
-
-const pullAndProblemSolving20Percent = () => {
-  if (featureStore.meta.totalDays % 5 === 0) {
-    featureStore.nextDay('pull-dps')
-  } else {
-    featureStore.nextDay('pull')
-  }
-}
-
-const pushAndProblemSolving20Percent = () => {
-  if (featureStore.meta.totalDays % 5 === 0) {
-    featureStore.nextDay('push-dps')
-  } else {
-    featureStore.nextDay('push')
-  }
-}
 </script>
 
 <template>
@@ -31,17 +15,16 @@ const pushAndProblemSolving20Percent = () => {
       {{ featureStore.features.length }} features | mean complexity :
       {{ featureStore.meanComplexity }} | mean lead time :
       {{ featureStore.meanLeadTime }} days | Total days:
-      {{ featureStore.meta.totalDays }}
+      {{ featureStore.meta.totalDays }} | Team work experience:
+      {{ featureStore.meta.teamWorkExperience }}
     </div>
+    <div class="row">
+      New feature live every {{ featureStore.taktTime }} days.
+    </div>
+    <div class="row">Strategy of the day:</div>
     <div class="row">
       <button @click="featureStore.nextDay('push')">push system</button>
       <button @click="featureStore.nextDay('pull')">pull system</button>
-      <button @click="pushAndProblemSolving20Percent">
-        push and problem solving
-      </button>
-      <button @click="pullAndProblemSolving20Percent">
-        pull and problem solving
-      </button>
       <button @click="featureStore.nextDay('problem-solving')">
         problem solving
       </button>

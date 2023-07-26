@@ -3,7 +3,13 @@ import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features as initialFeatures } from '@/modules/feature/feature.fixture'
 import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState } from '@/store-type'
-import { getMean, pickRandomElement, popNElement, shuffleArray } from '@/utils'
+import {
+  getMean,
+  pickRandomElement,
+  popNElement,
+  shuffleArray,
+  sumElements
+} from '@/utils'
 
 const MAX_FEATURES = 200
 const HARD_STOP = 5000
@@ -11,15 +17,15 @@ const HARD_STOP = 5000
 const hasQualityIssue = ({
   complexity,
   tasksInParallel,
-  daysWithProblemSolving
+  teamWorkExperience
 }: {
   complexity: number
   tasksInParallel: number
-  daysWithProblemSolving: number
+  teamWorkExperience: number
 }): boolean => {
   const qualityProbability = getQualityProbability(
     complexity,
-    daysWithProblemSolving
+    teamWorkExperience
   )
 
   const multiplicator = getOverburdenMultiplicator(tasksInParallel)
@@ -51,14 +57,14 @@ export const getFeaturesForNextDay = ({
   initialStep,
   steps,
   strategy,
-  daysWithProblemSolving
+  teamWorkExperience
 }: {
   backlog: Feature[]
   features: Feature[]
   steps: FeatureStep[]
   initialStep: number
   strategy: Strategy | 'problem-solving'
-  daysWithProblemSolving: number
+  teamWorkExperience: number
 }): [Feature[], Feature[]] => {
   features
     .filter((feature) => feature.step > 0 || feature.status === 'doing')
@@ -107,7 +113,7 @@ export const getFeaturesForNextDay = ({
               tasksInParallel: features.filter(
                 (f) => f.status === 'doing' && f.step === feature.step
               ).length,
-              daysWithProblemSolving
+              teamWorkExperience
             })
           ) {
             feature.step = Math.min(4, feature.step + 1)
@@ -182,7 +188,7 @@ const getOverburdenMultiplicator = (tasksInParallel: number) => {
 
 const getQualityProbability = (
   complexity: number,
-  daysWithProblemSolving: number
+  teamWorkExperience: number
 ) => {
   let probabilityOfGoodQuality = 1
 
@@ -206,10 +212,13 @@ const getQualityProbability = (
 
   // team learning
   probabilityOfGoodQuality =
-    probabilityOfGoodQuality + (1.2 * daysWithProblemSolving) / 100
+    probabilityOfGoodQuality + (1.2 * teamWorkExperience) / 100
 
   return probabilityOfGoodQuality
 }
+
+const isFeatureDone = (feature: Feature) =>
+  feature.step === 0 && feature.status === 'done'
 
 export const nextDay = (
   state: FeatureState,
@@ -218,7 +227,10 @@ export const nextDay = (
   state.meta.totalDays++
 
   if (strategy === 'problem-solving') {
-    state.meta.daysWithProblemSolving++
+    const hasTeamLearned = Math.random() > 0.25
+    if (hasTeamLearned) {
+      state.meta.teamWorkExperience++
+    }
   } else {
     state.meta.strategy[strategy]++
   }
@@ -229,16 +241,21 @@ export const nextDay = (
     steps: state.steps,
     initialStep: state.steps[0].stepIndex,
     strategy,
-    daysWithProblemSolving: state.meta.daysWithProblemSolving
+    teamWorkExperience: state.meta.teamWorkExperience
   })
   state.backlog = backlog
   state.features = features
+
+  const featuresDone = sumElements(state.meta.featuresDonePerDay) ?? 0
+  const featuresDoneNextDay = features.filter(isFeatureDone).length
+
+  state.meta.featuresDonePerDay.push(featuresDoneNextDay - featuresDone)
 
   return state
 }
 
 export const isProjectFinished = (features: Feature[]) =>
-  features.every((feature) => feature.step === 0 && feature.status === 'done')
+  features.every(isFeatureDone)
 
 export const getMeanComplexity = (features: Feature[]) => {
   return getMean(features.map((feature) => feature.complexity))
