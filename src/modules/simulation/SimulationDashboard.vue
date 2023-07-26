@@ -6,9 +6,12 @@ const simulationStore = useSimulationStore()
 
 <template>
   <div class="simulation-dashboard">
-    Dashboard ({{ simulationStore.simulationsDone }} /
-    {{ simulationStore.requestedSimulation }}
-    simulations)
+    <h3>Dashboard</h3>
+    <h4>
+      ({{ simulationStore.simulationsDone }} /
+      {{ simulationStore.requestedSimulation }}
+      simulations)
+    </h4>
     <table>
       <thead>
         <tr>
@@ -21,37 +24,37 @@ const simulationStore = useSimulationStore()
       <tbody>
         <tr>
           <td>lead time</td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPushLeadTime }}
           </td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPullLeadTime }}
           </td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPullDPSLeadTime }}
           </td>
         </tr>
         <tr>
           <td>Complexity</td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPushComplexity }}
           </td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPullComplexity }}
           </td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPullDPSComplexity }}
           </td>
         </tr>
         <tr>
           <td>Quality issue</td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPushQuality }}
           </td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPullQuality }}
           </td>
-          <td>
+          <td class="numeric">
             {{ simulationStore.meanPullDPSQuality }}
           </td>
         </tr>
@@ -62,6 +65,10 @@ const simulationStore = useSimulationStore()
 
 <style scoped lang="scss">
 .simulation-dashboard {
-  color: var(--background-color);
+  color: var(--primary-color);
+}
+
+td.numeric {
+  text-align: right;
 }
 </style>

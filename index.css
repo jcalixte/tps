@@ -11,15 +11,15 @@ li {
 }
 
 .focusable {
-  background-color: var(--background-color);
+  background-color: var(--primary-color);
 }
 
 .focusable.no-focus {
-  background-color: var(--background-color-no-focus);
+  background-color: var(--primary-color-no-focus);
 }
 
 .text-hide {
-  color: var(--background-color);
+  color: var(--primary-color);
 }
 
 .customer-satisfaction-roof {

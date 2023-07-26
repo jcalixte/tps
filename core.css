@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
 :root {
-  --background-color: #002992;
-  --background-color-no-focus: #abbbdf;
+  --primary-color: #002992;
+  --primary-color-no-focus: #abbbdf;
   --color: white;
 }
 
@@ -12,13 +12,13 @@
 
 body {
   font-size: 28px;
-  font-family: "Noto Serif", serif;
+  font-family: 'Noto Serif', serif;
   margin: 0;
 }
 
 header {
   text-align: center;
-  color: var(--background-color);
+  color: var(--primary-color);
 }
 
 main {

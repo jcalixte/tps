@@ -90,7 +90,7 @@ const isLive = computed(
 
   header {
     padding: 0.5rem;
-    border: solid 2px var(--background-color);
+    border: solid 2px var(--primary-color);
     margin-top: 1rem;
   }
 
@@ -106,7 +106,7 @@ const isLive = computed(
 
   h5 {
     margin: 0;
-    background-color: var(--background-color);
+    background-color: var(--primary-color);
     padding: 0.35rem;
     text-align: center;
     color: white;

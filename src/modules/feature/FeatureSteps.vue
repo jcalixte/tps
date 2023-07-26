@@ -32,7 +32,7 @@ const pushAndProblemSolving20Percent = () => {
       {{ featureStore.meanLeadTime }} days | Total days:
       {{ featureStore.meta.totalDays }}
     </div>
-    <div>
+    <div class="row">
       <button @click="featureStore.nextDay('push')">push system</button>
       <button @click="featureStore.nextDay('pull')">pull system</button>
       <button @click="pushAndProblemSolving20Percent">
@@ -69,7 +69,7 @@ pre {
   flex-wrap: wrap;
   align-items: stretch;
   margin: 0 1rem;
-  border: 3px solid var(--background-color);
+  border: 3px solid var(--primary-color);
 
   li:first-child {
     margin-left: 1rem;
@@ -88,7 +88,7 @@ pre {
     flex: 1;
     min-height: 100%;
     margin: 0;
-    color: var(--background-color);
+    color: var(--primary-color);
     display: flex;
     flex-direction: column;
   }

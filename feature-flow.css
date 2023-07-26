@@ -4,6 +4,12 @@
   --feature-item-height: 70px;
 }
 
+.row {
+  display: flex;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -11,8 +17,8 @@ ul {
 
 .bin {
   margin-top: 1rem;
-  border: 3px solid var(--background-color);
-  color: var(--background-color);
+  border: 3px solid var(--primary-color);
+  color: var(--primary-color);
   background-color: white;
   min-height: var(--feature-item-height);
   display: flex;
@@ -27,7 +33,7 @@ ul {
 }
 
 .blue-bin {
-  background-color: var(--background-color);
+  background-color: var(--primary-color);
   color: white;
   font-size: 18pt;
 }
@@ -42,4 +48,34 @@ ul {
 .numeric {
   font-family: 'Cutive Mono', monospace;
   font-weight: bold;
+}
+
+/* Miligram reset */
+
+.button,
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  background-color: var(--primary-color);
+  border: 0.1rem solid var(--primary-color);
+}
+
+.button.button-outline,
+button.button-outline,
+input[type='button'].button-outline,
+input[type='reset'].button-outline,
+input[type='submit'].button-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.button.button-clear,
+button.button-clear,
+input[type='button'].button-clear,
+input[type='reset'].button-clear,
+input[type='submit'].button-clear {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-color);
 }

@@ -104,6 +104,9 @@ export const useSimulationStore = defineStore('dashboard', {
     },
     clearDashboard() {
       this.dashboards = []
+      this.mean.push = newMean()
+      this.mean.pull = newMean()
+      this.mean['problem-solving'] = newMean()
     }
   },
   getters: {

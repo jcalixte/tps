@@ -2,7 +2,7 @@ export const getMean = (data: number[]) =>
   Math.round(100 * (sumElements(data) / data.length)) / 100
 
 export const getRound = (data: number, total: number) =>
-  Math.round(100 * (data / total)) / 100
+  (Math.round(100 * (data / total)) / 100 || 0).toFixed(2)
 
 export const clone = (data: any) => JSON.parse(JSON.stringify(data))
 
