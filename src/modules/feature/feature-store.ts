@@ -5,6 +5,7 @@ import {
   getMeanQualityIssue,
   initBoard,
   isFeatureDone,
+  isProjectFinished,
   newBacklog,
   nextDay
 } from '@/modules/feature/feature-board'
@@ -53,6 +54,7 @@ export const useFeatureStore = defineStore('feature', {
     }
   },
   getters: {
+    isProjectFinished: (state) => isProjectFinished(state.features),
     meanComplexity: (state) => getMeanComplexity(state.features),
     meanLeadTime: (state) => getMeanLeadTime(state.features),
     meanQualityIssue: (state) => getMeanQualityIssue(state.features),

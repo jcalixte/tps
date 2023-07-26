@@ -24,14 +24,16 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
       New feature live every {{ featureStore.taktTime }} days. Finishing in
       {{ featureStore.eat }} days.
     </div>
-    <div class="row">Strategy of the day:</div>
-    <div class="row">
-      <button @click="featureStore.nextDay('push')">push system</button>
-      <button @click="featureStore.nextDay('pull')">pull system</button>
-      <button @click="featureStore.nextDay('problem-solving')">
-        problem solving
-      </button>
-    </div>
+    <template v-if="!featureStore.isProjectFinished">
+      <div class="row">Strategy of the day:</div>
+      <div class="row">
+        <button @click="featureStore.nextDay('push')">push system</button>
+        <button @click="featureStore.nextDay('pull')">pull system</button>
+        <button @click="featureStore.nextDay('problem-solving')">
+          problem solving
+        </button>
+      </div>
+    </template>
   </div>
   <ul class="features-steps">
     <FeatureStep
