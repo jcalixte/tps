@@ -4,6 +4,16 @@ A interactive website to better understand the Thinking People System.
 
 ## Feature flow
 
+### The project
+
+- 0 defect policy,
+- has no external dependancies,
+- the team has a strong opinion on Jidoka:
+  - teams spot 100% of the defects,
+  - teams do not take a feature who has defects,
+  - the team who introduced the defect needs to rework on the feature.
+- there is no limit on how many defects a feature can have.
+
 ### Push system
 
 When pushing all the feature as fast as possible, we make the assumption that we can deliver in (# step × # features = 150 days) if everything goes well. The fastest a team can do. We overburden but it's for the good cause. We pay everybody to work so if there is someone with nothing to do, we have to make him do something.
