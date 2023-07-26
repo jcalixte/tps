@@ -118,7 +118,6 @@ export const getFeaturesForNextDay = ({
               teamWorkExperience
             })
           ) {
-            feature.step = Math.min(4, feature.step + 1)
             feature.qualityIssue++
           } else {
             feature.step--
@@ -170,21 +169,21 @@ const getOverburdenMultiplicator = (tasksInParallel: number) => {
     case 1:
       return 1
     case 2:
-      return 1.1
+      return 1.2
     case 3:
-      return 1.3
+      return 1.5
     case 4:
-      return 1.6
+      return 1.8
     case 5:
-      return 2.2
+      return 2.6
     case 6:
-      return 3.2
+      return 4
     case 7:
-      return 4.5
+      return 5.5
     case 8:
-      return 6
+      return 7
     default:
-      return 8
+      return 10
   }
 }
 
@@ -199,16 +198,16 @@ const getQualityProbability = (
       probabilityOfGoodQuality = 0.97
 
     case 2:
-      probabilityOfGoodQuality = 0.93
+      probabilityOfGoodQuality = 0.9
       break
     case 3:
-      probabilityOfGoodQuality = 0.88
-      break
-    case 4:
       probabilityOfGoodQuality = 0.82
       break
+    case 4:
+      probabilityOfGoodQuality = 0.71
+      break
     case 5:
-      probabilityOfGoodQuality = 0.75
+      probabilityOfGoodQuality = 0.6
       break
   }
 

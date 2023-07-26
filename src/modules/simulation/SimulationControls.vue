@@ -9,25 +9,25 @@ const NUMBER_OF_SIMULATION = 1000
     <div class="row">
       <button
         class="button button-outline"
-        @click="simulationStore.simulate('push')"
+        @click="simulationStore.multiSimulation(1, 'push')"
       >
         simulate push system
       </button>
       <button
         class="button button-outline"
-        @click="simulationStore.simulate('pull')"
+        @click="simulationStore.multiSimulation(1, 'pull')"
       >
         simulate pull system
       </button>
       <button
         class="button button-outline"
-        @click="simulationStore.simulate('pull-dps')"
+        @click="simulationStore.multiSimulation(1, 'pull-dps')"
       >
         simulate pull and problem solving
       </button>
       <button
         class="button button-outline"
-        @click="simulationStore.simulate('push-dps')"
+        @click="simulationStore.multiSimulation(1, 'push-dps')"
       >
         simulate push and problem solving
       </button>

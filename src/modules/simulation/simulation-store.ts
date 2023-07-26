@@ -64,7 +64,6 @@ export const useSimulationStore = defineStore('dashboard', {
       this.dashboards.push(dashboard)
     },
     async simulate(strategy: Strategy) {
-      this.requestedSimulation++
       const steps = featureSteps
       const backlog = await instance.newBacklog()
       const features = await instance.initBoard(steps, backlog)
