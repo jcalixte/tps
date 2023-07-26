@@ -4,6 +4,8 @@ import { Dashboard, Meta } from '@/store-type'
 import { getRound } from '@/utils'
 import { defineStore } from 'pinia'
 
+// Get features done per day to plot it
+
 type Mean = {
   leadTimeSum: number
   complexitySum: number
@@ -35,7 +37,8 @@ const resetMeta = (): Meta => ({
   strategy: {
     push: 0,
     pull: 0,
-    'problem-solving': 0
+    'pull-dps': 0,
+    'push-dps': 0
   }
 })
 
@@ -48,7 +51,8 @@ export const useSimulationStore = defineStore('dashboard', {
       mean: {
         push: newMean(),
         pull: newMean(),
-        'problem-solving': newMean()
+        'pull-dps': newMean(),
+        'push-dps': newMean()
       }
     }
   },
@@ -106,7 +110,8 @@ export const useSimulationStore = defineStore('dashboard', {
       this.dashboards = []
       this.mean.push = newMean()
       this.mean.pull = newMean()
-      this.mean['problem-solving'] = newMean()
+      this.mean['pull-dps'] = newMean()
+      this.mean['push-dps'] = newMean()
     }
   },
   getters: {
@@ -118,8 +123,14 @@ export const useSimulationStore = defineStore('dashboard', {
     },
     meanPullDPSLeadTime: (state) => {
       return getRound(
-        state.mean['problem-solving'].leadTimeSum,
-        state.mean['problem-solving'].simulations
+        state.mean['pull-dps'].leadTimeSum,
+        state.mean['pull-dps'].simulations
+      )
+    },
+    meanPushDPSLeadTime: (state) => {
+      return getRound(
+        state.mean['push-dps'].leadTimeSum,
+        state.mean['push-dps'].simulations
       )
     },
     meanPushComplexity: (state) => {
@@ -136,8 +147,14 @@ export const useSimulationStore = defineStore('dashboard', {
     },
     meanPullDPSComplexity: (state) => {
       return getRound(
-        state.mean['problem-solving'].complexitySum,
-        state.mean['problem-solving'].simulations
+        state.mean['pull-dps'].complexitySum,
+        state.mean['pull-dps'].simulations
+      )
+    },
+    meanPushDPSComplexity: (state) => {
+      return getRound(
+        state.mean['push-dps'].complexitySum,
+        state.mean['push-dps'].simulations
       )
     },
     meanPushQuality: (state) => {
@@ -154,8 +171,14 @@ export const useSimulationStore = defineStore('dashboard', {
     },
     meanPullDPSQuality: (state) => {
       return getRound(
-        state.mean['problem-solving'].qualityIssueSum,
-        state.mean['problem-solving'].simulations
+        state.mean['pull-dps'].qualityIssueSum,
+        state.mean['pull-dps'].simulations
+      )
+    },
+    meanPushDPSQuality: (state) => {
+      return getRound(
+        state.mean['push-dps'].qualityIssueSum,
+        state.mean['push-dps'].simulations
       )
     }
   }

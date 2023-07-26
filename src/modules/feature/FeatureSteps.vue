@@ -10,16 +10,17 @@ onMounted(() => featureStore.initBoard())
 
 const pullAndProblemSolving20Percent = () => {
   if (featureStore.meta.totalDays % 5 === 0) {
-    featureStore.nextDay('problem-solving')
+    featureStore.nextDay('pull-dps')
   } else {
     featureStore.nextDay('pull')
   }
 }
+
 const pushAndProblemSolving20Percent = () => {
   if (featureStore.meta.totalDays % 5 === 0) {
-    featureStore.nextDay('problem-solving')
+    featureStore.nextDay('push-dps')
   } else {
-    featureStore.nextDay('pull')
+    featureStore.nextDay('push')
   }
 }
 </script>

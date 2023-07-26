@@ -8,6 +8,20 @@
   display: flex;
   gap: 1rem;
   padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+dl dl,
+dl ol,
+dl ul,
+ol dl,
+ol ol,
+ol ul,
+ul dl,
+ul ol,
+ul ul {
+  font-size: 90%;
+  margin: 0;
 }
 
 ul {

@@ -58,7 +58,14 @@ const isLive = computed(
           </div>
         </div>
         <div v-if="isLive" class="live">
-          {{ featuresDone.length }} features live!
+          <span v-if="featuresDone.length === 0">No features live yet</span>
+          <span v-else>
+            {{ featuresDone.length }} feature<template
+              v-if="featuresDone.length > 1"
+              >s</template
+            >
+            live!
+          </span>
         </div>
         <ul class="done-list">
           <li v-for="feature in featuresDone" :key="feature.name">

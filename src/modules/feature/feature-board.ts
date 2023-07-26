@@ -57,7 +57,7 @@ export const getFeaturesForNextDay = ({
   features: Feature[]
   steps: FeatureStep[]
   initialStep: number
-  strategy: Strategy
+  strategy: Strategy | 'problem-solving'
   daysWithProblemSolving: number
 }): [Feature[], Feature[]] => {
   features
@@ -78,6 +78,7 @@ export const getFeaturesForNextDay = ({
             const nextStep = steps.find(
               (step) => step.stepIndex === feature.step - 1
             )
+
             if (!nextStep) {
               break
             }
@@ -96,21 +97,23 @@ export const getFeaturesForNextDay = ({
             feature.status = 'doing'
           }
 
-          if (feature.status === 'doing') {
-            if (
-              hasQualityIssue({
-                complexity: feature.complexity,
-                tasksInParallel: features.filter(
-                  (f) => f.status === 'doing' && f.step === feature.step
-                ).length,
-                daysWithProblemSolving
-              })
-            ) {
-              feature.step = Math.min(4, feature.step + 1)
-              feature.qualityIssue++
-            } else {
-              feature.step--
-            }
+          if (feature.status === 'done') {
+            break
+          }
+
+          if (
+            hasQualityIssue({
+              complexity: feature.complexity,
+              tasksInParallel: features.filter(
+                (f) => f.status === 'doing' && f.step === feature.step
+              ).length,
+              daysWithProblemSolving
+            })
+          ) {
+            feature.step = Math.min(4, feature.step + 1)
+            feature.qualityIssue++
+          } else {
+            feature.step--
           }
           break
       }
@@ -119,11 +122,12 @@ export const getFeaturesForNextDay = ({
   if (features.length < MAX_FEATURES) {
     switch (strategy) {
       case 'push': {
-        const [newFeature] = popNElement(backlog, 1)
+        const [nextFeature] = popNElement(backlog, 1)
 
-        if (newFeature) {
-          features.push({ ...newFeature, step: initialStep })
+        if (nextFeature) {
+          features.push({ ...nextFeature, step: initialStep })
         }
+
         break
       }
       case 'pull': {
@@ -158,21 +162,21 @@ const getOverburdenMultiplicator = (tasksInParallel: number) => {
     case 1:
       return 1
     case 2:
-      return 1.05
-    case 3:
-      return 1.08
-    case 4:
       return 1.1
+    case 3:
+      return 1.3
+    case 4:
+      return 1.6
     case 5:
-      return 1.15
+      return 2.2
     case 6:
-      return 1.25
+      return 3.2
     case 7:
-      return 1.35
+      return 4.5
     case 8:
-      return 1.4
+      return 6
     default:
-      return 1.5
+      return 8
   }
 }
 
@@ -209,13 +213,14 @@ const getQualityProbability = (
 
 export const nextDay = (
   state: FeatureState,
-  strategy: Strategy
+  strategy: Strategy | 'problem-solving'
 ): FeatureState => {
   state.meta.totalDays++
-  state.meta.strategy[strategy]++
 
   if (strategy === 'problem-solving') {
     state.meta.daysWithProblemSolving++
+  } else {
+    state.meta.strategy[strategy]++
   }
 
   const [backlog, features] = getFeaturesForNextDay({
@@ -226,7 +231,6 @@ export const nextDay = (
     strategy,
     daysWithProblemSolving: state.meta.daysWithProblemSolving
   })
-
   state.backlog = backlog
   state.features = features
 
@@ -255,11 +259,11 @@ export const simulate = (
   let i = 0
 
   while (!isProjectFinished(state.features) && i++ < HARD_STOP) {
-    if (strategy === 'problem-solving') {
+    if (strategy === 'pull-dps' || strategy === 'push-dps') {
       if (state.meta.totalDays % 5 === 0) {
         state = nextDay(state, 'problem-solving')
       } else {
-        state = nextDay(state, 'pull')
+        state = nextDay(state, strategy.split('-')[0] as Strategy)
       }
     } else {
       state = nextDay(state, strategy)

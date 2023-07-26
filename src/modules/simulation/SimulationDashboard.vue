@@ -6,7 +6,7 @@ const simulationStore = useSimulationStore()
 
 <template>
   <div class="simulation-dashboard">
-    <h3>Dashboard</h3>
+    <h3>Simulation dashboard</h3>
     <h4>
       ({{ simulationStore.simulationsDone }} /
       {{ simulationStore.requestedSimulation }}
@@ -19,6 +19,7 @@ const simulationStore = useSimulationStore()
           <th>push</th>
           <th>pull</th>
           <th>pull and DPS</th>
+          <th>push and DPS</th>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +34,9 @@ const simulationStore = useSimulationStore()
           <td class="numeric">
             {{ simulationStore.meanPullDPSLeadTime }}
           </td>
+          <td class="numeric">
+            {{ simulationStore.meanPushDPSLeadTime }}
+          </td>
         </tr>
         <tr>
           <td>Complexity</td>
@@ -45,6 +49,9 @@ const simulationStore = useSimulationStore()
           <td class="numeric">
             {{ simulationStore.meanPullDPSComplexity }}
           </td>
+          <td class="numeric">
+            {{ simulationStore.meanPushDPSComplexity }}
+          </td>
         </tr>
         <tr>
           <td>Quality issue</td>
@@ -56,6 +63,9 @@ const simulationStore = useSimulationStore()
           </td>
           <td class="numeric">
             {{ simulationStore.meanPullDPSQuality }}
+          </td>
+          <td class="numeric">
+            {{ simulationStore.meanPushDPSQuality }}
           </td>
         </tr>
       </tbody>

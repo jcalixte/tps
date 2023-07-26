@@ -19,7 +19,8 @@ const resetMeta = (): Meta => ({
   strategy: {
     push: 0,
     pull: 0,
-    'problem-solving': 0
+    'pull-dps': 0,
+    'push-dps': 0
   }
 })
 
