@@ -18,7 +18,7 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
       the board | mean complexity : {{ featureStore.meanComplexity }} | mean
       lead time : {{ featureStore.meanLeadTime }} days | Total days:
       {{ featureStore.meta.totalDays }} | Team work experience:
-      {{ featureStore.meta.teamWorkExperience }}
+      {{ featureStore.meta.teamWorkExperience.toFixed(2) }}
     </div>
     <div class="row">
       New feature live every {{ featureStore.taktTime }} days. Finishing in

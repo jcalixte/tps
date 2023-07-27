@@ -226,11 +226,13 @@ export const nextDay = (
   strategy: Strategy | 'problem-solving'
 ): FeatureState => {
   state.meta.totalDays++
+  // each day, the teams know how to better work together
+  state.meta.teamWorkExperience += 0.01
 
   if (strategy === 'problem-solving') {
     const hasTeamLearned = Math.random() > 0.25
     if (hasTeamLearned) {
-      state.meta.teamWorkExperience++
+      state.meta.teamWorkExperience += 1.2
     }
   } else {
     state.meta.strategy[strategy]++
