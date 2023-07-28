@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeatureControls from '@/modules/feature/FeatureControls.vue'
 import FeatureStep from '@/modules/feature/FeatureStep.vue'
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { useFeatureStore } from '@/modules/feature/feature-store'
@@ -12,29 +13,7 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
 </script>
 
 <template>
-  <div class="dashboard">
-    <div>
-      {{ featureStore.features.length }} / {{ NUMBER_OF_FEATURES }} features in
-      the board | mean complexity : {{ featureStore.meanComplexity }} | mean
-      lead time : {{ featureStore.meanLeadTime }} days | Total days:
-      {{ featureStore.meta.totalDays }} | Team work experience:
-      {{ featureStore.meta.teamWorkExperience.toFixed(2) }}
-    </div>
-    <div class="row">
-      New feature live every {{ featureStore.taktTime }} days. Finishing in
-      {{ featureStore.eat }} days.
-    </div>
-    <template v-if="!featureStore.isProjectFinished">
-      <div class="row">Strategy of the day:</div>
-      <div class="row">
-        <button @click="featureStore.nextDay('push')">push system</button>
-        <button @click="featureStore.nextDay('pull')">pull system</button>
-        <button @click="featureStore.nextDay('problem-solving')">
-          problem solving
-        </button>
-      </div>
-    </template>
-  </div>
+  <FeatureControls :features-to-deliver="NUMBER_OF_FEATURES" />
   <ul class="features-steps">
     <FeatureStep
       v-for="step in featureSteps"
@@ -46,11 +25,6 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
 </template>
 
 <style scoped lang="scss">
-.dashboard,
-pre {
-  color: black;
-}
-
 .features-steps {
   display: flex;
   flex: 1;
