@@ -15,9 +15,8 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
       {{ feature.name }}
     </div>
     <div class="numeric">
-      ({{ feature.complexity }})
+      ({{ feature.complexity }}) | [{{ feature.leadTime }}]
       <div class="indicator">
-        <div class="lead-time numeric">{{ feature.leadTime }} days</div>
         <div v-if="hasQualityIssues" class="red-bin">
           {{ feature.qualityIssue }} 🔴
         </div>

@@ -6,25 +6,20 @@ export type FeatureStep = {
 
 const BLUE_BIN_MAX = 2
 
-export const featureSteps: FeatureStep[] = [
+const featureSteps: FeatureStep[] = [
   {
     title: 'Product',
-    stepIndex: 4,
+    stepIndex: 0,
     blueBins: BLUE_BIN_MAX
   },
   {
     title: 'Design',
-    stepIndex: 3,
+    stepIndex: 0,
     blueBins: BLUE_BIN_MAX
   },
   {
     title: 'Development',
-    stepIndex: 2,
-    blueBins: BLUE_BIN_MAX
-  },
-  {
-    title: 'Test',
-    stepIndex: 1,
+    stepIndex: 0,
     blueBins: BLUE_BIN_MAX
   },
   {
@@ -33,3 +28,9 @@ export const featureSteps: FeatureStep[] = [
     blueBins: 99999
   }
 ]
+
+featureSteps.forEach(
+  (feature, index) => (feature.stepIndex = featureSteps.length - index - 1)
+)
+
+export { featureSteps }

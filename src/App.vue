@@ -1,17 +1,10 @@
 <script setup lang="ts">
-import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
-import SimulationControls from '@/modules/simulation/SimulationControls.vue'
-import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
-import { StarportCarrier } from 'vue-starport'
+import FlowArticle from '@/modules/FlowArticle.vue'
 </script>
 
 <template>
   <main id="main-app">
-    <StarportCarrier>
-      <FeatureSteps />
-    </StarportCarrier>
-    <SimulationControls />
-    <SimulationDashboard />
+    <FlowArticle />
   </main>
 </template>
 

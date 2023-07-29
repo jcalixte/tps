@@ -81,6 +81,9 @@ export const useFeatureStore = defineStore('feature', {
         (this.features.filter((feature) => !isFeatureDone(feature)).length +
           this.backlog.length)
       ).toFixed(2)
-    }
+    },
+    totalFeaturesCount: (state) => state.backlog.length + state.features.length,
+    totalFeaturesDone: (state) =>
+      state.features.filter((feature) => isFeatureDone(feature)).length
   }
 })
