@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseIcon from './BaseIcon.vue'
 
-withDefaults(defineProps<{ color: string }>(), {
+withDefaults(defineProps<{ color?: string }>(), {
   color: 'var(--primary-color)'
 })
 </script>

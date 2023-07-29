@@ -4,13 +4,13 @@ import { Dashboard, Meta } from '@/store-type'
 import { getRound } from '@/utils'
 import { defineStore } from 'pinia'
 
-// Get features done per day to plot it
-
 type Mean = {
   leadTimeSum: number
   taktTimeSum: number
   complexitySum: number
   qualityIssueSum: number
+  teamWorkExperienceSum: number
+  totalDaysSum: number
   simulations: number
 }
 
@@ -26,6 +26,8 @@ const newMean = (): Mean => ({
   taktTimeSum: 0,
   complexitySum: 0,
   qualityIssueSum: 0,
+  teamWorkExperienceSum: 0,
+  totalDaysSum: 0,
   simulations: 0
 })
 
@@ -102,6 +104,9 @@ export const useSimulationStore = defineStore('dashboard', {
         dashboard.meta.totalDays / newState.features.length
       this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
       this.mean[strategy].qualityIssueSum += dashboard.analysis.meanQualityIssue
+      this.mean[strategy].teamWorkExperienceSum +=
+        dashboard.meta.teamWorkExperience
+      this.mean[strategy].totalDaysSum += dashboard.meta.totalDays
       this.mean[strategy].simulations++
     },
     async multiSimulation(simulations: number, strategy: Strategy) {
@@ -138,6 +143,16 @@ export const useSimulationStore = defineStore('dashboard', {
     meanQuality: (state) => (strategy: Strategy) =>
       getRound(
         state.mean[strategy].qualityIssueSum,
+        state.mean[strategy].simulations
+      ),
+    meanTeamWorkExperience: (state) => (strategy: Strategy) =>
+      getRound(
+        state.mean[strategy].teamWorkExperienceSum,
+        state.mean[strategy].simulations
+      ),
+    meanTotalDays: (state) => (strategy: Strategy) =>
+      getRound(
+        state.mean[strategy].totalDaysSum,
         state.mean[strategy].simulations
       )
   }

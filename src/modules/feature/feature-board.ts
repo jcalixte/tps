@@ -169,21 +169,21 @@ const getOverburdenMultiplicator = (tasksInParallel: number) => {
     case 1:
       return 1
     case 2:
-      return 1.2
-    case 3:
       return 1.5
+    case 3:
+      return 5
     case 4:
-      return 1.8
+      return 8
     case 5:
-      return 2.6
-    case 6:
-      return 4
-    case 7:
-      return 5.5
-    case 8:
-      return 7
+      return 13
+    // case 6:
+    //   return 4
+    // case 7:
+    //   return 5.5
+    // case 8:
+    //   return 7
     default:
-      return 10
+      return 25
   }
 }
 

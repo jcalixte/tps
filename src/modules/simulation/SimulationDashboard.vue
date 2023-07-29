@@ -9,7 +9,7 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
 
 <template>
   <div class="simulation-dashboard">
-    <h3>Simulation dashboard</h3>
+    <h3>Dashboard</h3>
     <h4>
       {{ simulationStore.simulationsDone }}/{{
         simulationStore.requestedSimulation
@@ -19,7 +19,7 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
     <table>
       <thead>
         <tr>
-          <th></th>
+          <th>mean values</th>
           <th class="numeric">push</th>
           <th class="numeric">pull</th>
           <th class="numeric">push and DPS</th>
@@ -28,13 +28,19 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
       </thead>
       <tbody>
         <tr>
-          <td>lead time</td>
+          <td>Total days</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanTotalDays(strategy) }}
+          </td>
+        </tr>
+        <tr>
+          <td>Lead time</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanLeadTime(strategy) }}
           </td>
         </tr>
         <tr>
-          <td>takt time</td>
+          <td>Takt time</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanTaktTime(strategy) }}
           </td>
@@ -49,6 +55,12 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
           <td>Quality issue</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanQuality(strategy) }}
+          </td>
+        </tr>
+        <tr>
+          <td>Team work exp.</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanTeamWorkExperience(strategy) }}
           </td>
         </tr>
       </tbody>

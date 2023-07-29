@@ -4,6 +4,7 @@ import FlowHypothesis from '@/modules/article/FlowHypothesis.vue'
 import FlowIntro from '@/modules/article/FlowIntro.vue'
 import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
 import FlowDashboard from '@/modules/feature/FlowDashboard.vue'
+import SimulationChart from '@/modules/simulation/SimulationChart.vue'
 import SimulationControls from '@/modules/simulation/SimulationControls.vue'
 import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 </script>
@@ -21,6 +22,7 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     <SeparatorIcon />
     <SimulationControls />
     <SimulationDashboard />
+    <SimulationChart />
   </div>
 </template>
 
