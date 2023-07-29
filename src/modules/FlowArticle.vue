@@ -12,8 +12,9 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     <FlowIntro class="text" />
     <hr />
     <FlowHypothesis class="text" />
+    <FeatureSteps alias="introducing" />
     <FlowDashboard />
-    <FeatureSteps />
+    <FeatureSteps alias="playground" />
     <SimulationControls />
     <SimulationDashboard />
   </div>

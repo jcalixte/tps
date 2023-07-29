@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import FlowArticle from '@/modules/FlowArticle.vue'
+import { StarportCarrier } from 'vue-starport'
 </script>
 
 <template>
   <main id="main-app">
-    <FlowArticle />
+    <StarportCarrier>
+      <FlowArticle />
+    </StarportCarrier>
   </main>
 </template>
 

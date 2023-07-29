@@ -30,7 +30,7 @@ The more the team investigate, the more the team learn and start to be extremely
 
 ### Stock
 
-Blue bins are your security stock. It's to make sure the next team will always have material to transform. But it comes with a cost: overburden, stagnation (increase lead time) and duplicated mistakes (not simulated here).
+Blue bins are your security stock, to make sure teams can work without any blockers. It's to make sure the next team will always have material to transform. But it comes with a cost: overburden, stagnation (increase lead time) and duplicated mistakes (not simulated here).
 
 The less you have, the less your team has mental charge.
 

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
+import PullSystemIcon from '@/icons/PullSystemIcon.vue'
+import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import { useFeatureStore } from '@/modules/feature/feature-store'
 
 const featureStore = useFeatureStore()
@@ -12,7 +15,7 @@ const featureStore = useFeatureStore()
       complexity : {{ featureStore.meanComplexity }} | mean lead time :
       {{ featureStore.meanLeadTime }} days | Total days:
       {{ featureStore.meta.totalDays }} | Team work experience:
-      {{ featureStore.meta.teamWorkExperience }}
+      {{ featureStore.meta.teamWorkExperience.toFixed(2) }}
     </div>
     <div class="row">
       New feature live every {{ featureStore.taktTime }} days. Finishing in
@@ -21,10 +24,14 @@ const featureStore = useFeatureStore()
     <template v-if="!featureStore.isProjectFinished">
       <div class="row">Strategy of the day:</div>
       <div class="row">
-        <button @click="featureStore.nextDay('push')">push system</button>
-        <button @click="featureStore.nextDay('pull')">pull system</button>
+        <button @click="featureStore.nextDay('push')">
+          <PushSystemIcon color="white" />
+        </button>
+        <button @click="featureStore.nextDay('pull')">
+          <PullSystemIcon color="white" />
+        </button>
         <button @click="featureStore.nextDay('problem-solving')">
-          problem solving
+          <ProblemSolvingIcon color="white" />
         </button>
       </div>
     </template>
@@ -34,5 +41,6 @@ const featureStore = useFeatureStore()
 <style scoped lang="scss">
 .flow-dashboard {
   color: black;
+  font-size: 16pt;
 }
 </style>

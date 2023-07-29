@@ -6,6 +6,7 @@ import { computed } from 'vue'
 import { Starport } from 'vue-starport'
 
 const props = defineProps<{
+  prefix: string
   step: FeatureStep
   features: Feature[]
 }>()
@@ -37,7 +38,7 @@ const isLive = computed(
       <ul v-if="hasFeaturesInProgress">
         <li v-for="feature in featuresInProgress" :key="feature.name">
           <Starport
-            :port="feature.name"
+            :port="`${props.prefix}-${feature.name}`"
             style="height: var(--feature-item-height)"
           >
             <FeatureItem :feature="feature" />
@@ -70,7 +71,7 @@ const isLive = computed(
         <ul class="done-list">
           <li v-for="feature in featuresDone" :key="feature.name">
             <Starport
-              :port="feature.name"
+              :port="`${props.prefix}-${feature.name}`"
               style="height: calc(var(--feature-item-height) + 0.2rem)"
             >
               <FeatureItem :feature="feature" :is-live="isLive" />

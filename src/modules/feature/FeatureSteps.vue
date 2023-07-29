@@ -3,9 +3,10 @@ import FeatureStep from '@/modules/feature/FeatureStep.vue'
 import { featureSteps } from '@/modules/feature/feature-steps'
 import { useFeatureStore } from '@/modules/feature/feature-store'
 import { onMounted } from 'vue'
-import { StarportCarrier } from 'vue-starport'
 
 const NUMBER_OF_FEATURES = 20
+
+defineProps<{ alias: string }>()
 
 const featureStore = useFeatureStore()
 
@@ -14,14 +15,13 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
 
 <template>
   <ul class="features-steps">
-    <StarportCarrier>
-      <FeatureStep
-        v-for="step in featureSteps"
-        :key="step.title"
-        :step="step"
-        :features="featureStore.featuresGroupedByStep[step.stepIndex] ?? []"
-      />
-    </StarportCarrier>
+    <FeatureStep
+      v-for="step in featureSteps"
+      :prefix="alias"
+      :key="step.title"
+      :step="step"
+      :features="featureStore.featuresGroupedByStep[step.stepIndex] ?? []"
+    />
   </ul>
 </template>
 
