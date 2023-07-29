@@ -154,6 +154,9 @@ export const useSimulationStore = defineStore('dashboard', {
       getRound(
         state.mean[strategy].totalDaysSum,
         state.mean[strategy].simulations
-      )
+      ),
+    hasSimulationFinished: (state) =>
+      state.requestedSimulation > 0 &&
+      state.requestedSimulation === state.simulationsDone
   }
 })

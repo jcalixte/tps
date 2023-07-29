@@ -1,53 +1,61 @@
 <script setup lang="ts">
 import { useSimulationStore } from '@/modules/simulation/simulation-store'
+import { popNElement } from '@/utils'
 import chartXkcd from 'chart.xkcd'
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const simulationStore = useSimulationStore()
+const SAMPLE = 15
+const isChartInit = ref(false)
 
 const reloadGraph = () => {
-  if (
-    simulationStore.dashboards.length === 0 ||
-    simulationStore.dashboards.length > 15
-  ) {
+  if (simulationStore.dashboards.length === 0) {
     return
   }
+  isChartInit.value = true
 
-  const svg = document.querySelector('.chart')
+  const samples = popNElement(
+    [...simulationStore.dashboards],
+    SAMPLE
+  ).toReversed()
+
+  const svg = document.querySelector('svg.chart')
   const config = {
-    title: 'Features done per day',
+    title: `${SAMPLE} simulations`,
     xLabel: 'days',
     yLabel: 'features done',
     data: {
       labels: Array.from(
         {
           length: Math.max(
-            ...simulationStore.dashboards.map(
-              (dashboard) => dashboard.meta.totalDays
-            )
+            ...samples.map((dashboard) => dashboard.meta.totalDays)
           )
         },
         (_, index) => index + 1
       ),
-      datasets: simulationStore.dashboards.map((dashboard, index) => ({
+      datasets: samples.map((dashboard, index) => ({
         label: `${dashboard.analysis.strategy} ${index + 1}`,
         data: dashboard.meta.featuresDonePerDay
       }))
     },
     options: {
-      showLegend: false
+      showLegend: false,
+      fontFamily: 'Noto Serif'
     }
   }
   new chartXkcd.Line(svg, config)
 }
 
-// watch(simulationStore.dashboards, reloadGraph)
+watch(() => simulationStore.hasSimulationFinished, reloadGraph)
 onMounted(reloadGraph)
 </script>
 
 <template>
   <div class="simulation-chart">
     <svg class="chart"></svg>
+    <div v-if="!isChartInit" class="chart no-init">
+      Chart appears once every simulations resume
+    </div>
   </div>
 </template>
 
@@ -55,5 +63,13 @@ onMounted(reloadGraph)
 .chart {
   width: 80vw;
   height: 100vh;
+}
+
+.no-init {
+  position: relative;
+  top: -100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

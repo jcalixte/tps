@@ -2,7 +2,7 @@
 import { Strategy } from '@/modules/lean/strategy'
 import { useSimulationStore } from '@/modules/simulation/simulation-store'
 const simulationStore = useSimulationStore()
-const NUMBER_OF_SIMULATION = 400
+const NUMBER_OF_SIMULATION = 200
 
 const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
 
