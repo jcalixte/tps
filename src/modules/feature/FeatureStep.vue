@@ -116,7 +116,7 @@ const isLive = computed(
     background-color: var(--primary-color);
     padding: 0.35rem;
     text-align: center;
-    color: white;
+    color: var(--color);
   }
 
   li {

@@ -33,7 +33,7 @@ ul {
   margin-top: 1rem;
   border: 3px solid var(--primary-color);
   color: var(--primary-color);
-  background-color: white;
+  background-color: var(--color);
   min-height: var(--feature-item-height);
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@ ul {
 
 .blue-bin {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--color);
   font-size: 18pt;
 }
 
