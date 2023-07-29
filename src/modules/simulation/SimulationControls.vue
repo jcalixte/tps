@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { Strategy } from '@/modules/lean/strategy'
 import { useSimulationStore } from '@/modules/simulation/simulation-store'
 const simulationStore = useSimulationStore()
-const NUMBER_OF_SIMULATION = 1000
+const NUMBER_OF_SIMULATION = 400
+
+const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
+
+const simulateEverything = () => {
+  strategies.forEach((strategy) =>
+    simulationStore.multiSimulation(NUMBER_OF_SIMULATION, strategy)
+  )
+}
 </script>
 
 <template>
@@ -23,43 +32,18 @@ const NUMBER_OF_SIMULATION = 1000
         class="button button-outline"
         @click="simulationStore.multiSimulation(1, 'push-dps')"
       >
-        simulate push and problem solving
+        simulate push with DPS
       </button>
       <button
         class="button button-outline"
         @click="simulationStore.multiSimulation(1, 'pull-dps')"
       >
-        simulate pull and problem solving
+        simulate pull with DPS
       </button>
     </div>
     <div class="row">
-      <button
-        class="button button-outline"
-        @click="simulationStore.multiSimulation(NUMBER_OF_SIMULATION, 'push')"
-      >
-        simulate {{ NUMBER_OF_SIMULATION }} push system
-      </button>
-      <button
-        class="button button-outline"
-        @click="simulationStore.multiSimulation(NUMBER_OF_SIMULATION, 'pull')"
-      >
-        simulate {{ NUMBER_OF_SIMULATION }} pull system
-      </button>
-      <button
-        class="button button-outline"
-        @click="
-          simulationStore.multiSimulation(NUMBER_OF_SIMULATION, 'push-dps')
-        "
-      >
-        simulate {{ NUMBER_OF_SIMULATION }} push and problem solving
-      </button>
-      <button
-        class="button button-outline"
-        @click="
-          simulationStore.multiSimulation(NUMBER_OF_SIMULATION, 'pull-dps')
-        "
-      >
-        simulate {{ NUMBER_OF_SIMULATION }} pull and problem solving
+      <button class="button button-outline" @click="simulateEverything">
+        simulate {{ NUMBER_OF_SIMULATION }} simulations for each system
       </button>
       <button
         class="button button-clear"

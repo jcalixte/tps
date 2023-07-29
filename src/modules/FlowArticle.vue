@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SeparatorIcon from '@/icons/SeparatorIcon.vue'
 import FlowHypothesis from '@/modules/article/FlowHypothesis.vue'
 import FlowIntro from '@/modules/article/FlowIntro.vue'
 import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
@@ -10,11 +11,14 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 <template>
   <div class="flow-article">
     <FlowIntro class="text" />
-    <hr />
+    <SeparatorIcon />
     <FlowHypothesis class="text" />
+    <SeparatorIcon />
     <FeatureSteps alias="introducing" />
+    <SeparatorIcon />
     <FlowDashboard />
     <FeatureSteps alias="playground" />
+    <SeparatorIcon />
     <SimulationControls />
     <SimulationDashboard />
   </div>
@@ -23,6 +27,12 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 <style lang="scss">
 .flow-article {
   color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1080px;
+  margin: auto;
 
   .text {
     font-size: 16pt;

@@ -28,13 +28,14 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
 <style scoped lang="scss">
 .features-steps {
   display: flex;
-  flex: 1;
   gap: 1rem;
   flex-wrap: wrap;
   align-items: stretch;
   margin: 0 1rem;
   border: 3px solid var(--primary-color);
-  min-height: 50vh;
+  height: 50vh;
+  width: 100%;
+  overflow-y: hidden;
 
   li:first-child {
     margin-left: 1rem;

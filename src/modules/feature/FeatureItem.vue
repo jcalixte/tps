@@ -12,14 +12,12 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
 <template>
   <div class="feature-item bin" :class="{ live: isLive }">
     <div>
-      {{ feature.name }}
+      <span class="numeric">({{ feature.complexity }})</span> {{ feature.name }}
     </div>
     <div class="numeric">
-      ({{ feature.complexity }}) | [{{ feature.leadTime }}]
-      <div class="indicator">
-        <div v-if="hasQualityIssues" class="red-bin">
-          {{ feature.qualityIssue }} 🔴
-        </div>
+      {{ feature.leadTime }}d
+      <div v-if="hasQualityIssues" class="red-bin">
+        {{ feature.qualityIssue }}
       </div>
     </div>
   </div>
@@ -42,18 +40,11 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
     opacity: 0;
   }
 
-  .indicator {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0.2rem;
-    flex-wrap: wrap;
-  }
-
   .red-bin {
-    border: 2px solid #ff7979;
+    --warning-color: #ca0e0e;
+    border: 2px solid var(--warning-color);
     padding: 0 0.5rem 0.1rem;
+    color: var(--warning-color);
   }
 }
 </style>

@@ -11,9 +11,10 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
   <div class="simulation-dashboard">
     <h3>Simulation dashboard</h3>
     <h4>
-      ({{ simulationStore.simulationsDone }} /
-      {{ simulationStore.requestedSimulation }}
-      simulations)
+      {{ simulationStore.simulationsDone }}/{{
+        simulationStore.requestedSimulation
+      }}
+      simulations
     </h4>
     <table>
       <thead>
@@ -58,6 +59,7 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
 <style scoped lang="scss">
 .simulation-dashboard {
   color: var(--primary-color);
+  width: 100%;
 
   table {
     padding: 1rem;
