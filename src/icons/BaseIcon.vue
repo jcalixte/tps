@@ -23,6 +23,6 @@ withDefaults(defineProps<{ color?: string }>(), {
 
 <style>
 svg {
-  vertical-align: text-bottom;
+  vertical-align: middle;
 }
 </style>
