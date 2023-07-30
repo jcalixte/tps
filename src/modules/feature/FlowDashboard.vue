@@ -14,9 +14,8 @@ const featureStore = useFeatureStore()
       <div class="card">
         Features
         <span class="numeric">
-          {{ featureStore.totalFeaturesDone }}/<span class="sub">
-            {{ featureStore.totalFeaturesCount }}
-          </span>
+          {{ featureStore.totalFeaturesDone
+          }}<span class="sub">/{{ featureStore.totalFeaturesCount }} </span>
         </span>
       </div>
       <div class="card">
@@ -92,10 +91,6 @@ const featureStore = useFeatureStore()
   .row {
     display: flex;
     justify-content: center;
-  }
-
-  .sub {
-    font-size: 12pt;
   }
 
   .cards {

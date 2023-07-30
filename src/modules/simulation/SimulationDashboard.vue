@@ -11,9 +11,8 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
   <div class="simulation-dashboard">
     <h3>Dashboard</h3>
     <h4>
-      {{ simulationStore.simulationsDone }}/{{
-        simulationStore.requestedSimulation
-      }}
+      {{ simulationStore.simulationsDone
+      }}<span class="sub">/{{ simulationStore.requestedSimulation }}</span>
       simulations
     </h4>
     <table>

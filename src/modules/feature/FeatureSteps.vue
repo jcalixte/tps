@@ -33,7 +33,7 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
   align-items: stretch;
   margin: 0 1rem;
   border: 3px solid var(--primary-color);
-  height: 50vh;
+  height: 60vh;
   width: 100%;
   overflow-y: hidden;
 

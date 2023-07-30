@@ -2,7 +2,8 @@
 import FeatureItem from '@/modules/feature/FeatureItem.vue'
 import { Feature } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
-import { computed } from 'vue'
+import { useElementSize } from '@vueuse/core'
+import { computed, ref } from 'vue'
 import { Starport } from 'vue-starport'
 
 const props = defineProps<{
@@ -14,20 +15,26 @@ const featuresInProgress = computed(() =>
   props.features.filter((feature) => feature.status === 'doing')
 )
 const featuresDone = computed(() =>
-  props.features
-    .filter((feature) => feature.status === 'done')
-    .sort((a, b) => (a.leadTime > b.leadTime ? -1 : 1))
+  props.features.filter((feature) => feature.status === 'done')
 )
 
-const remainingBlueBins = computed(() =>
-  Math.max(0, props.step.blueBins - featuresDone.value.length)
-)
 const hasFeaturesInProgress = computed(
   () => featuresInProgress.value.length > 0
 )
 const isLive = computed(
   () => props.step.title.toLocaleLowerCase() === 'release'
 )
+
+const binContainer = ref<HTMLElement | null>(null)
+
+const { width } = useElementSize(binContainer)
+
+const binContainerWidth = computed(() => {
+  if (!width) {
+    return ''
+  }
+  return `width: ${width.value}px`
+})
 </script>
 
 <template>
@@ -48,14 +55,18 @@ const isLive = computed(
     </section>
     <section class="done">
       <h5>✅ [{{ featuresDone.length }}]</h5>
-      <div>
-        <div v-if="!isLive" class="blue-bin-container">
+      <div ref="binContainer">
+        <div
+          v-if="!isLive"
+          class="blue-bin-container"
+          :style="binContainerWidth"
+        >
           <div
-            v-for="blueBin in remainingBlueBins"
+            v-for="blueBin in step.blueBins"
             :key="blueBin"
             class="bin blue-bin"
           >
-            Blue bin
+            blue bin
           </div>
         </div>
         <div v-if="isLive" class="live">
@@ -72,7 +83,7 @@ const isLive = computed(
           <li v-for="feature in featuresDone" :key="feature.name">
             <Starport
               :port="`${props.prefix}-${feature.name}`"
-              style="height: calc(var(--feature-item-height) + 0.2rem)"
+              style="height: var(--feature-item-height)"
             >
               <FeatureItem :feature="feature" :is-live="isLive" />
             </Starport>
@@ -120,12 +131,29 @@ const isLive = computed(
     color: var(--color);
   }
 
-  li {
+  ul {
+    margin-top: 0.5rem;
+    display: flex;
     flex-direction: column;
+    gap: 1rem;
+
+    li {
+      z-index: 1;
+    }
   }
 
-  .done-list {
-    flex: 1;
+  .bin {
+    height: var(--feature-item-height);
+    border: none;
+  }
+
+  .blue-bin-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    z-index: 0;
   }
 
   .live {

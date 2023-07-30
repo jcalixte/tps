@@ -119,6 +119,8 @@ export const useSimulationStore = defineStore('dashboard', {
       this.mean.pull = newMean()
       this.mean['pull-dps'] = newMean()
       this.mean['push-dps'] = newMean()
+      this.simulationsDone = 0
+      this.requestedSimulation = 0
     }
   },
   getters: {

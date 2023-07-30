@@ -15,11 +15,9 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     <FlowHypothesis class="text" />
     <SeparatorIcon />
     <FeatureSteps alias="introducing" />
-    <SeparatorIcon />
-    <FlowDashboard />
+    <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
-    <SeparatorIcon />
-    <SimulationControls />
+    <SimulationControls class="above" />
     <SimulationDashboard />
   </div>
 </template>
@@ -27,6 +25,7 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 <style lang="scss">
 .flow-article {
   color: black;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +38,12 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     max-width: 800px;
     margin: auto;
     text-align: justify;
+  }
+
+  .above {
+    z-index: 1;
+    padding-top: 1rem;
+    background-color: white;
   }
 }
 </style>
