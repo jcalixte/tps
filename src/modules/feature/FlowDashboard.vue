@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
-import PullSystemIcon from '@/icons/PullSystemIcon.vue'
-import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import SeparatorIcon from '@/icons/SeparatorIcon.vue'
+import FlowControls from '@/modules/feature/FlowControls.vue'
 import { useFeatureStore } from '@/modules/feature/feature-store'
 
 const featureStore = useFeatureStore()
@@ -58,26 +56,7 @@ const featureStore = useFeatureStore()
       </div>
     </div>
     <SeparatorIcon />
-    <div class="row">
-      <button
-        @click="featureStore.nextDay('push')"
-        :disabled="featureStore.isProjectFinished"
-      >
-        <PushSystemIcon color="white" />
-      </button>
-      <button
-        @click="featureStore.nextDay('pull')"
-        :disabled="featureStore.isProjectFinished"
-      >
-        <PullSystemIcon color="white" />
-      </button>
-      <button
-        @click="featureStore.nextDay('problem-solving')"
-        :disabled="featureStore.isProjectFinished"
-      >
-        <ProblemSolvingIcon color="white" />
-      </button>
-    </div>
+    <FlowControls />
   </div>
 </template>
 
@@ -88,11 +67,6 @@ const featureStore = useFeatureStore()
   flex-direction: column;
   align-items: center;
 
-  .row {
-    display: flex;
-    justify-content: center;
-  }
-
   .cards {
     display: flex;
     flex-wrap: wrap;
@@ -102,7 +76,19 @@ const featureStore = useFeatureStore()
   }
 
   .card {
-    background-color: #f7d794;
+    background-image: linear-gradient(
+      335deg,
+      hsl(223deg 58% 88%) 0%,
+      hsl(224deg 57% 88%) 21%,
+      hsl(224deg 58% 89%) 30%,
+      hsl(223deg 57% 89%) 39%,
+      hsl(222deg 56% 89%) 46%,
+      hsl(223deg 57% 90%) 54%,
+      hsl(222deg 55% 90%) 61%,
+      hsl(223deg 53% 91%) 69%,
+      hsl(221deg 56% 91%) 79%,
+      hsl(222deg 53% 92%) 100%
+    );
     padding: 0 1rem;
     display: flex;
     flex-direction: column;
