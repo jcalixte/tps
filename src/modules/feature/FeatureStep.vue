@@ -119,7 +119,7 @@ const binContainerWidth = computed(() => {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: hidden;
     max-height: 40vh;
   }
 
