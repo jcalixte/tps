@@ -7,6 +7,8 @@ import { useFeatureStore } from '@/modules/feature/feature-store'
 
 const NUMBER_OF_FEATURES = 20
 
+withDefaults(defineProps<{ withEraser?: boolean }>(), { withEraser: true })
+
 const featureStore = useFeatureStore()
 </script>
 
@@ -31,7 +33,10 @@ const featureStore = useFeatureStore()
       >
         <ProblemSolvingIcon color="white" />
       </button>
-      <button @click="featureStore.initBoard(NUMBER_OF_FEATURES)">
+      <button
+        v-if="withEraser"
+        @click="featureStore.initBoard(NUMBER_OF_FEATURES)"
+      >
         <EraserIcon color="white" />
       </button>
     </div>
