@@ -15,7 +15,9 @@ const featuresInProgress = computed(() =>
   props.features.filter((feature) => feature.status === 'doing')
 )
 const featuresDone = computed(() =>
-  props.features.filter((feature) => feature.status === 'done')
+  props.features
+    .filter((feature) => feature.status === 'done')
+    .sort((a, b) => (a.leadTime > b.leadTime ? -1 : 1))
 )
 
 const hasFeaturesInProgress = computed(
