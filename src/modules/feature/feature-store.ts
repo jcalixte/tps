@@ -34,8 +34,7 @@ export const useFeatureStore = defineStore('feature', {
     meta: resetMeta()
   }),
   actions: {
-    // todo set the number of feature we want
-    async initBoard(limit: number) {
+    async initBoard(limit?: number) {
       this.backlog = newBacklog(limit)
       this.steps = featureSteps
       this.features = initBoard(this.steps, this.backlog)
@@ -60,8 +59,8 @@ export const useFeatureStore = defineStore('feature', {
     meanQualityIssue: (state) => getMeanQualityIssue(state.features),
     taktTime: (state): string =>
       (
-        state.meta.totalDays / state.features.filter(isFeatureDone).length
-      ).toFixed(2) ?? `0`,
+        state.meta.totalDays / state.features.filter(isFeatureDone).length || 0
+      ).toFixed(2),
     featuresGroupedByStep: (state) => {
       const groupedByStep: Record<number, Feature[]> = {}
 
