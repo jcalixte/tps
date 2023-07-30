@@ -62,9 +62,6 @@ export const useSimulationStore = defineStore('dashboard', {
     }
   },
   actions: {
-    newDashboard(dashboard: Dashboard) {
-      this.dashboards.push(dashboard)
-    },
     async simulate(strategy: Strategy) {
       const steps = featureSteps
       const backlog = await instance.newBacklog()
@@ -98,7 +95,7 @@ export const useSimulationStore = defineStore('dashboard', {
         }
       }
 
-      this.newDashboard(dashboard)
+      this.dashboards.push(dashboard)
       this.mean[strategy].leadTimeSum += dashboard.analysis.meanLeadTime
       this.mean[strategy].taktTimeSum +=
         dashboard.meta.totalDays / newState.features.length
