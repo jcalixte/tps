@@ -6,20 +6,25 @@ import { onMounted, ref, watch } from 'vue'
 
 const simulationStore = useSimulationStore()
 const SAMPLE = 15
+const svgElement = ref<HTMLInputElement | null>(null)
 const isChartInit = ref(false)
 
 const reloadGraph = () => {
   if (simulationStore.dashboards.length === 0) {
     return
   }
+
   isChartInit.value = true
+
+  if (!svgElement.value) {
+    return
+  }
 
   const samples = popNElement(
     [...simulationStore.dashboards],
     SAMPLE
   ).toReversed()
 
-  const svg = document.querySelector('svg.chart')
   const config = {
     title: `${SAMPLE} simulations`,
     xLabel: 'days',
@@ -43,31 +48,35 @@ const reloadGraph = () => {
       fontFamily: 'Noto Serif'
     }
   }
-  new chartXkcd.Line(svg, config)
+  new chartXkcd.Line(svgElement.value, config)
 }
 
 watch(() => simulationStore.hasSimulationFinished, reloadGraph)
+watch(svgElement, reloadGraph)
 onMounted(reloadGraph)
 </script>
 
 <template>
   <div class="simulation-chart">
-    <svg class="chart"></svg>
     <div v-if="!isChartInit" class="chart no-init">
       Chart appears once every simulations resume
     </div>
+    <svg ref="svgElement" v-else class="chart"></svg>
   </div>
 </template>
 
 <style scoped lang="scss">
+.simulation-chart {
+  --chart-height: 80vh;
+  height: var(--chart-height);
+}
+
 .chart {
   width: 80vw;
-  height: 100vh;
+  height: var(--chart-height);
 }
 
 .no-init {
-  position: relative;
-  top: -100vh;
   display: flex;
   justify-content: center;
   align-items: center;
