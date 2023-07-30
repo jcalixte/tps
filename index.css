@@ -126,3 +126,15 @@ li {
     flex-direction: row;
   }
 }
+
+a {
+  color: var(--color);
+  text-decoration: none;
+}
+
+a:visited,
+a:focus,
+a:focus-visible {
+  color: var(--color);
+  text-decoration: none;
+}

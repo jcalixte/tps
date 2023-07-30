@@ -11,6 +11,8 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 
 <template>
   <div class="flow-article">
+    <h1>Pull system</h1>
+    <h2>Ekiden (駅伝): long-distance running relay race</h2>
     <FlowIntro class="text" />
     <SeparatorIcon />
     <FlowHypothesis class="text" />

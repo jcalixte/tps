@@ -31,6 +31,10 @@ import FlowControls from '@/modules/feature/FlowControls.vue'
       In this article we'll focus on how these strategies are efficient and what
       are the impact on the quality the teams produce.
     </p>
+    <h3>The push system: start features as many as possible</h3>
+    <h3>The pull system: make features only when the next team needs it</h3>
+    <h3>Problem solving: no production, just reflection</h3>
+
     <FlowControls />
   </div>
 </template>
