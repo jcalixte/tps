@@ -2,6 +2,7 @@
 import SeparatorIcon from '@/icons/SeparatorIcon.vue'
 import FlowHypothesis from '@/modules/article/FlowHypothesis.vue'
 import FlowIntro from '@/modules/article/FlowIntro.vue'
+import FlowSetup from '@/modules/article/FlowSetup.vue'
 import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
 import FlowDashboard from '@/modules/feature/FlowDashboard.vue'
 import SimulationControls from '@/modules/simulation/SimulationControls.vue'
@@ -14,6 +15,7 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     <SeparatorIcon />
     <FlowHypothesis class="text" />
     <SeparatorIcon />
+    <FlowSetup class="text" />
     <FeatureSteps alias="introducing" />
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
@@ -35,7 +37,7 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
 
   .text {
     font-size: 16pt;
-    max-width: 800px;
+    max-width: 650px;
     margin: auto;
     text-align: justify;
   }
