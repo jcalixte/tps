@@ -30,7 +30,6 @@ ul {
 }
 
 .bin {
-  margin-top: 1rem;
   border: 3px solid var(--primary-color);
   color: var(--primary-color);
   background-color: var(--color);
@@ -73,6 +72,13 @@ input[type='reset'],
 input[type='submit'] {
   background-color: var(--primary-color);
   border: 0.1rem solid var(--primary-color);
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 1rem 0;
 }
 
 .button.button-outline,
@@ -123,4 +129,8 @@ th:last-child {
     display: table;
     overflow-x: initial;
   }
+}
+
+.sub {
+  font-size: 12pt;
 }
