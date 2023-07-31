@@ -11,7 +11,7 @@ const feature: Feature = {
   name: 'As a user, in the homepage, I can login',
   complexity: 3,
   leadTime: 2,
-  qualityIssue: 2,
+  qualityIssue: 4,
   status: 'doing',
   step: 2
 }

@@ -11,8 +11,9 @@
     </p>
     <p>
       When money and pressure are in the game, fear, uncertainty, and doubt
-      spread out rapidly. So we rush, as fast as we can, and if a team has
-      nothing to do, it becomes a disaster.
+      spread out rapidly. So we rush, as fast as we can, and we produce as many
+      features as we can. And if a team has nothing to do, it becomes a disaster
+      as it is money lost.
     </p>
   </div>
 </template>
