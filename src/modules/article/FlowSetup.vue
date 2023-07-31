@@ -4,6 +4,7 @@ import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import FeatureItem from '@/modules/feature/FeatureItem.vue'
 import FlowControls from '@/modules/feature/FlowControls.vue'
+import QualityIssue from '@/modules/feature/QualityIssue.vue'
 import { Feature } from '@/modules/feature/feature'
 
 const feature: Feature = {
@@ -36,8 +37,8 @@ const feature: Feature = {
       number and deliver as fast as possible.
     </p>
     <p>
-      <span class="numeric">{{ feature.qualityIssue }}</span> are the number of
-      defects the feature had during the flow.
+      <QualityIssue class="inline" :quality-issue="feature.qualityIssue" />
+      are the number of defects the feature had during the flow.
     </p>
     <p>
       You have 20 features to deliver, and each day you can choose between 3
@@ -97,3 +98,9 @@ const feature: Feature = {
     </p>
   </div>
 </template>
+
+<style scoped>
+.inline {
+  display: inline;
+}
+</style>
