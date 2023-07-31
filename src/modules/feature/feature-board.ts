@@ -7,6 +7,7 @@ import {
   getMean,
   pickRandomElement,
   popNElement,
+  randomFloat,
   shuffleArray,
   sumElements
 } from '@/utils'
@@ -28,7 +29,7 @@ const hasQualityIssue = ({
   )
 
   const multiplicator = getOverburdenMultiplicator(tasksInParallel)
-  const quality = Math.random()
+  const quality = randomFloat(0, 1)
 
   return quality > qualityProbability / multiplicator
 }
@@ -230,7 +231,7 @@ export const nextDay = (
   state.meta.teamWorkExperience += 0.01
 
   if (strategy === 'problem-solving') {
-    const hasTeamLearned = Math.random() > 0.25
+    const hasTeamLearned = randomFloat(0, 1) > 0.25
     if (hasTeamLearned) {
       state.meta.teamWorkExperience += 1.2
     }

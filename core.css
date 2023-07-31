@@ -32,9 +32,8 @@ main {
 
 .meaning {
   color: #9f9a9a;
-  font-style: italic;
   font-weight: 100;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .meaning::before {

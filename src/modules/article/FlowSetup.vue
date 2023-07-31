@@ -91,7 +91,8 @@ const feature: Feature = {
       Blue bins are your security stock, to make sure teams can work without any
       blockers. It's to make sure the next team will always have material to
       transform. But it comes with a cost: overburden, stagnation (increase lead
-      time) and duplicated mistakes (not simulated here). The less you have, the
+      time) and duplicated mistakes
+      <span class="meaning">not simulated here</span>. The less you have, the
       less your team has mental charge. The more you have, the more secure you
       are to make teams work. One solution: simplify your flow and lower the
       number of operation the teams have to do to deliver a feature.

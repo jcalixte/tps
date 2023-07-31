@@ -1,3 +1,15 @@
+import { Random } from 'random-js'
+
+const random = new Random()
+
+export const randomInteger = (min: number, max: number) => {
+  return random.integer(min, max)
+}
+
+export const randomFloat = (min: number, max: number) => {
+  return random.real(min, max)
+}
+
 export const getMean = (data: number[]) =>
   Math.round(100 * (sumElements(data) / data.length)) / 100
 
@@ -11,7 +23,7 @@ export const shuffleArray = <T>(array: T[]) => {
     randomIndex
 
   while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex)
+    randomIndex = randomInteger(0, currentIndex - 1)
     currentIndex--
     ;[array[currentIndex], array[randomIndex]] = [
       array[randomIndex],
@@ -37,7 +49,7 @@ export const popNElement = <T>(array: T[], numberOfElements: number) => {
 }
 
 export const pickRandomIndex = <T>(array: T[]) =>
-  Math.floor(Math.random() * array.length)
+  randomInteger(0, array.length - 1)
 
 export const pickRandomElement = <T>(array: T[]) =>
   array[pickRandomIndex(array)]
