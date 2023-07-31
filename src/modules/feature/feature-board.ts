@@ -1,4 +1,4 @@
-import { Feature } from '@/modules/feature/feature'
+import { Feature, FeatureStatus } from '@/modules/feature/feature'
 import { FeatureStep } from '@/modules/feature/feature-steps'
 import { features as initialFeatures } from '@/modules/feature/feature.fixture'
 import { Strategy } from '@/modules/lean/strategy'
@@ -32,6 +32,39 @@ const getQualityIssue = ({
   const quality = randomFloat(0, 1)
 
   return quality > qualityProbability / multiplicator
+}
+
+const mayBeInProgress = ({
+  features,
+  feature,
+  strategy,
+  steps
+}: {
+  features: Feature[]
+  feature: Feature
+  steps: FeatureStep[]
+  strategy: Strategy
+}): FeatureStatus => {
+  if (strategy !== 'pull') {
+    return 'doing'
+  }
+
+  const nextStep = steps.find((step) => step.stepIndex === feature.step - 1)
+
+  if (!nextStep) {
+    return feature.status
+  }
+
+  const hasBlueBinAvailableNextStep =
+    nextStep.blueBins -
+      features.filter((f) => f.step === feature.step - 1).length >
+    0
+
+  if (hasBlueBinAvailableNextStep) {
+    return 'doing'
+  }
+
+  return feature.status
 }
 
 export const newBacklog = (limit?: number) =>
@@ -84,26 +117,12 @@ export const getFeaturesForNextDay = ({
           feature.status = 'done'
           break
         case 'done':
-          if (strategy === 'pull') {
-            const nextStep = steps.find(
-              (step) => step.stepIndex === feature.step - 1
-            )
-
-            if (!nextStep) {
-              break
-            }
-
-            const hasBlueBinAvailableNextStep =
-              nextStep.blueBins -
-                features.filter((f) => f.step === feature.step - 1).length >
-              0
-
-            if (hasBlueBinAvailableNextStep) {
-              feature.status = 'doing'
-            }
-          } else {
-            feature.status = 'doing'
-          }
+          feature.status = mayBeInProgress({
+            features,
+            feature,
+            steps,
+            strategy
+          })
 
           if (feature.status === 'done') {
             break
@@ -120,6 +139,7 @@ export const getFeaturesForNextDay = ({
           if (hasQualityIssue) {
             feature.qualityIssue++
           } else {
+            // moving to the next team
             feature.step--
           }
           break
