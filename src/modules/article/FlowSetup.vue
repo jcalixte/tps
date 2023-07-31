@@ -86,7 +86,7 @@ const feature: Feature = {
       understand and limit rework. The more the team investigate, the more the
       team learn and start to be extremely good at problem solving.
     </p>
-    <h3>Blue bin: the security stocks</h3>
+    <h3>Blue bin: the security stock</h3>
     <p>
       Blue bins are your security stock, to make sure teams can work without any
       blockers. It's to make sure the next team will always have material to
