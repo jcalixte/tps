@@ -6,7 +6,7 @@
   --color: white;
 }
 
-* {
+*:not(td):not(th) {
   border-radius: 0.5rem;
 }
 
@@ -28,4 +28,19 @@ main {
   gap: 0;
   margin: 1rem 1rem 0;
   color: var(--color);
+}
+
+.meaning {
+  color: #9f9a9a;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+
+.meaning::before {
+  content: '(';
+}
+
+.meaning::after {
+  content: ')';
 }
