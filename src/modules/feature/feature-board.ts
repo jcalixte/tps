@@ -14,7 +14,7 @@ import {
 
 const HARD_STOP = 5000
 
-const hasQualityIssue = ({
+const getQualityIssue = ({
   complexity,
   tasksInParallel,
   teamWorkExperience
@@ -71,6 +71,7 @@ export const getFeaturesForNextDay = ({
 }): [Feature[], Feature[]] => {
   features
     .filter((feature) => feature.step > 0 || feature.status === 'doing')
+    .sort((a, b) => (a.step < b.step ? -1 : 1))
     .forEach((feature) => {
       feature.leadTime++
 
@@ -94,9 +95,7 @@ export const getFeaturesForNextDay = ({
 
             const hasBlueBinAvailableNextStep =
               nextStep.blueBins -
-                features.filter(
-                  (f) => f.step === feature.step - 1 && f.status === 'done'
-                ).length >
+                features.filter((f) => f.step === feature.step - 1).length >
               0
 
             if (hasBlueBinAvailableNextStep) {
@@ -110,15 +109,15 @@ export const getFeaturesForNextDay = ({
             break
           }
 
-          if (
-            hasQualityIssue({
-              complexity: feature.complexity,
-              tasksInParallel: features.filter(
-                (f) => f.status === 'doing' && f.step === feature.step
-              ).length,
-              teamWorkExperience
-            })
-          ) {
+          const hasQualityIssue = getQualityIssue({
+            complexity: feature.complexity,
+            tasksInParallel: features.filter(
+              (f) => f.status === 'doing' && f.step === feature.step
+            ).length,
+            teamWorkExperience
+          })
+
+          if (hasQualityIssue) {
             feature.qualityIssue++
           } else {
             feature.step--
@@ -177,12 +176,6 @@ const getOverburdenMultiplicator = (tasksInParallel: number) => {
       return 8
     case 5:
       return 13
-    // case 6:
-    //   return 4
-    // case 7:
-    //   return 5.5
-    // case 8:
-    //   return 7
     default:
       return 25
   }

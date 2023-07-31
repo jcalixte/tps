@@ -1,6 +1,9 @@
 <template>
   <div class="flow-conclusion">
-    <p>Teams tend to underestimate how long a project will be.</p>
+    <p>
+      Teams tend to underestimate how long a project will be. And how hard it
+      will be to work with others.
+    </p>
     <p>
       If we're not in a good pace, we just have to try harder. Only once. "Just
       in time" becomes "Just this time". So teams overproduce. Creating stock
