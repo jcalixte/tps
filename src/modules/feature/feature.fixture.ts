@@ -1,9 +1,10 @@
 import { birds } from '@/data/bird'
 import { Feature } from '@/modules/feature/feature'
+import { randomInteger } from '@/utils'
 
 export const features: Feature[] = birds.map((name) => ({
   name,
-  complexity: Math.floor(Math.random() * 5) + 1,
+  complexity: randomInteger(1, 5),
   leadTime: 0,
   status: 'doing',
   step: Infinity,

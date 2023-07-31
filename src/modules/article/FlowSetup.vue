@@ -4,13 +4,14 @@ import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import FeatureItem from '@/modules/feature/FeatureItem.vue'
 import FlowControls from '@/modules/feature/FlowControls.vue'
+import QualityIssue from '@/modules/feature/QualityIssue.vue'
 import { Feature } from '@/modules/feature/feature'
 
 const feature: Feature = {
   name: 'As a user, in the homepage, I can login',
   complexity: 3,
   leadTime: 2,
-  qualityIssue: 2,
+  qualityIssue: 4,
   status: 'doing',
   step: 2
 }
@@ -36,8 +37,8 @@ const feature: Feature = {
       number and deliver as fast as possible.
     </p>
     <p>
-      <span class="numeric">{{ feature.qualityIssue }}</span> are the number of
-      defects the feature had during the flow.
+      <QualityIssue class="inline" :quality-issue="feature.qualityIssue" />
+      are the number of defects the feature had during the flow.
     </p>
     <p>
       You have 20 features to deliver, and each day you can choose between 3
@@ -85,15 +86,22 @@ const feature: Feature = {
       understand and limit rework. The more the team investigate, the more the
       team learn and start to be extremely good at problem solving.
     </p>
-    <h3>Blue bin: the security stocks</h3>
+    <h3>Blue bin: the security stock</h3>
     <p>
       Blue bins are your security stock, to make sure teams can work without any
       blockers. It's to make sure the next team will always have material to
       transform. But it comes with a cost: overburden, stagnation (increase lead
-      time) and duplicated mistakes (not simulated here). The less you have, the
+      time) and duplicated mistakes
+      <span class="meaning">not simulated here</span>. The less you have, the
       less your team has mental charge. The more you have, the more secure you
       are to make teams work. One solution: simplify your flow and lower the
       number of operation the teams have to do to deliver a feature.
     </p>
   </div>
 </template>
+
+<style scoped>
+.inline {
+  display: inline;
+}
+</style>

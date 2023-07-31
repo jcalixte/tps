@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import QualityIssue from '@/modules/feature/QualityIssue.vue'
 import { Feature } from '@/modules/feature/feature'
 import { computed } from 'vue'
 
@@ -16,9 +17,10 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
     </div>
     <div class="numeric">
       {{ feature.leadTime }}d
-      <div v-if="hasQualityIssues" class="red-bin">
-        {{ feature.qualityIssue }}
-      </div>
+      <QualityIssue
+        v-if="hasQualityIssues"
+        :quality-issue="feature.qualityIssue"
+      />
     </div>
   </div>
 </template>
@@ -38,13 +40,6 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
   &.live {
     visibility: hidden;
     opacity: 0;
-  }
-
-  .red-bin {
-    --warning-color: #ca0e0e;
-    border: 2px solid var(--warning-color);
-    padding: 0 0.5rem 0.1rem;
-    color: var(--warning-color);
   }
 }
 </style>
