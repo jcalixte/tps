@@ -33,18 +33,20 @@ const featureStore = useFeatureStore()
           days
         </div>
       </div>
-      <div class="card">
-        Days
-        <div class="data">
-          <span class="numeric">{{ featureStore.meta.totalDays }}</span
-          >d
-        </div>
-      </div>
+    </div>
+    <div class="row cards">
       <div class="card">
         Takt time
         <div class="data">
           <span class="numeric">{{ featureStore.taktTime }}</span>
           days
+        </div>
+      </div>
+      <div class="card">
+        Days
+        <div class="data">
+          <span class="numeric">{{ featureStore.meta.totalDays }}</span
+          >d
         </div>
       </div>
       <div class="card">
@@ -66,6 +68,7 @@ const featureStore = useFeatureStore()
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 
   .cards {
     display: flex;

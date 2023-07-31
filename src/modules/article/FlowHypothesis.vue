@@ -2,7 +2,7 @@
 
 <template>
   <div class="flow-hypothesis">
-    <p>Hypothesis:</p>
+    <p>Here our hypothesis:</p>
     <ol>
       <li>it takes the same amount of time for each team to complete a task</li>
       <li>

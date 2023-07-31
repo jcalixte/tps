@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { Strategy } from '@/modules/lean/strategy'
 import { useSimulationStore } from '@/modules/simulation/simulation-store'
+
+defineProps<{
+  type: 'single' | 'multiple'
+}>()
+
 const simulationStore = useSimulationStore()
 const NUMBER_OF_SIMULATION = 200
 
@@ -15,7 +20,7 @@ const simulateEverything = () => {
 
 <template>
   <div class="simulation-controls">
-    <div class="row">
+    <div class="row" v-if="type === 'single'">
       <button
         class="button button-outline"
         @click="simulationStore.multiSimulation(1, 'push')"
@@ -41,7 +46,7 @@ const simulateEverything = () => {
         simulate pull with DPS
       </button>
     </div>
-    <div class="row">
+    <div class="row" v-else-if="type === 'multiple'">
       <button class="button button-outline" @click="simulateEverything">
         simulate {{ NUMBER_OF_SIMULATION }} simulations for each system
       </button>

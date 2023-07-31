@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import SeparatorIcon from '@/icons/SeparatorIcon.vue'
+import FlowConclusion from '@/modules/article/FlowConclusion.vue'
 import FlowHypothesis from '@/modules/article/FlowHypothesis.vue'
 import FlowIntro from '@/modules/article/FlowIntro.vue'
+import FlowMultipleSimulation from '@/modules/article/FlowMultipleSimulation.vue'
 import FlowSetup from '@/modules/article/FlowSetup.vue'
+import FlowSingleSimulation from '@/modules/article/FlowSingleSimulation.vue'
 import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
 import FlowDashboard from '@/modules/feature/FlowDashboard.vue'
 import SimulationControls from '@/modules/simulation/SimulationControls.vue'
@@ -21,8 +24,14 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     <FeatureSteps alias="introducing" />
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
-    <SimulationControls class="above" />
+    <SimulationControls type="single" class="above" />
     <SimulationDashboard />
+    <FlowSingleSimulation class="text" />
+    <SimulationControls type="multiple" class="above" />
+    <SimulationDashboard />
+    <FlowMultipleSimulation class="text" />
+    <SeparatorIcon />
+    <FlowConclusion class="text" />
   </div>
 </template>
 
