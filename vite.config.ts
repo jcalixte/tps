@@ -9,7 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: 'index.html',
-        'feature-flow': 'feature-flow.html'
+        'pull-system': 'pull-system.html'
       }
     }
   },
