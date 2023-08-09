@@ -241,7 +241,7 @@ export const nextDay = (
 ): FeatureState => {
   state.meta.totalDays++
   // each day, the teams know how to better work together
-  state.meta.teamWorkExperience += 0.01
+  state.meta.teamWorkExperience += 0.1
 
   if (strategy === 'problem-solving') {
     const hasTeamLearned = randomFloat(0, 1) > 0.25

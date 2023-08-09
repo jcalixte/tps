@@ -64,17 +64,18 @@ const feature: Feature = {
       are the impact on the quality the teams produce.
     </p>
     <h3>The push system: start features as many as possible</h3>
+    <h4>Seeking for the most of each team</h4>
     <p>
-      Pushing all the feature as fast as possible, we make the assumption that
-      we can deliver in (# step × # features = 150 days) if everything goes
-      well. The fastest a team can do. We overburden the teams but it's for the
-      good cause. We already payed everybody to work so if there is someone who
-      has nothing to do, this is just money down the drain.
+      Pushing all the feature as fast as possible, this is the only strategy
+      that allows us to target the best possible result: `# step × # status × #
+      features`. We may overburden teams in the process though. But as we
+      already invest money everybody to work so if there is someone who has
+      nothing to do, this is just money down the drain.
     </p>
-    <h3>The pull system: make features only when the next team needs it</h3>
+    <h3>The pull system: produce features only when the next team needs it</h3>
     <p>
-      We know that we will never reach the best score ever: the push system
-      where everything goes right. But we limit overburden. We know we prefer
+      It comes from the assumptions that we will never reach the best score ever
+      aka "the push system where everything goes right". We know we prefer
       waiting for next team to be ready before doing some extra work than having
       stock of feature pre-baked.
     </p>
