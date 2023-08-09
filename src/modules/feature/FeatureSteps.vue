@@ -29,7 +29,6 @@ onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
 .features-steps {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
   align-items: stretch;
   margin: 0 1rem;
   border: 3px solid var(--primary-color);

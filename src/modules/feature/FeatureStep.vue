@@ -56,7 +56,11 @@ const binContainerWidth = computed(() => {
       </ul>
     </section>
     <section class="done">
-      <h5>✅ [{{ featuresDone.length }}]</h5>
+      <h5>
+        ✅ [{{ featuresDone.length
+        }}<template v-if="!isLive">/{{ step.blueBins }}</template
+        >]
+      </h5>
       <div ref="binContainer">
         <div
           v-if="!isLive"
@@ -156,6 +160,13 @@ const binContainerWidth = computed(() => {
     gap: 1rem;
     margin-top: 0.5rem;
     z-index: 0;
+  }
+
+  /* mobile screen */
+  @media only screen and (max-width: 750px) {
+    .blue-bin-container {
+      display: none;
+    }
   }
 
   .live {
