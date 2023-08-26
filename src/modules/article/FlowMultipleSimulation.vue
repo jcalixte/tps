@@ -14,7 +14,7 @@
     </p>
     <p>
       Short term objectives become the norm. It is never the right time to do
-      problem solving. To think on how we think.
+      problem solving. To think on how we work.
     </p>
   </div>
 </template>
