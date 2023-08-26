@@ -18,7 +18,11 @@ li {
   background-color: var(--primary-color-no-focus);
 }
 
-.text-hide {
+.text-hide,
+.text-hide a,
+.text-hide a:visited,
+.text-hide a:focus,
+.text-hide a:focus-visible {
   color: var(--primary-color);
 }
 
