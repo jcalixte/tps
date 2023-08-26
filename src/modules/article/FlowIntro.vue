@@ -1,6 +1,6 @@
 <template>
   <div class="flow-intro">
-    <h2>What's the fatest way to deliver an app?</h2>
+    <h2>What's the fastest way to deliver an app?</h2>
     <p>
       How good are we to succeed a project? Delivering the features at the good
       quality and at the right time. We're pretty bad at it and there is a lot
