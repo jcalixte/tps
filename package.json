@@ -13,22 +13,22 @@
   "author": "Julien Calixte <julienc@bam.tech>",
   "license": "ISC",
   "dependencies": {
-    "@vueuse/core": "^10.2.1",
-    "chart.xkcd": "^1.1.13",
+    "@vueuse/core": "^10.7.2",
+    "chart.xkcd": "^1.1.15",
     "comlink": "^4.4.1",
-    "pinia": "^2.1.4",
+    "pinia": "^2.1.7",
     "random-js": "^2.1.0",
-    "vue": "^3.3.4",
-    "vue-starport": "^0.3.0"
+    "vue": "^3.4.18",
+    "vue-starport": "^0.4.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.0.2",
-    "@types/node": "^20.4.2",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "sass": "^1.64.0",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.1",
-    "vite-plugin-comlink": "^3.0.5",
-    "vitest": "^0.33.0"
+    "@faker-js/faker": "^8.4.1",
+    "@types/node": "^20.11.17",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "sass": "^1.70.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.1",
+    "vite-plugin-comlink": "^4.0.2",
+    "vitest": "^1.2.2"
   }
 }
