@@ -115,7 +115,6 @@ const binContainerWidth = computed(() => {
 
   header {
     padding: 0.5rem;
-    border: solid 2px var(--primary-color);
     margin-top: 1rem;
   }
 
