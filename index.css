@@ -131,14 +131,23 @@ li {
   }
 }
 
-a {
+main a {
   color: var(--color);
   text-decoration: none;
 }
 
-a:visited,
-a:focus,
-a:focus-visible {
+main a:visited,
+main a:focus,
+main a:focus-visible {
   color: var(--color);
   text-decoration: none;
+}
+
+details.hud {
+  font-size: 16px;
+  margin: 1rem;
+}
+
+details.hud li {
+  text-align: left;
 }

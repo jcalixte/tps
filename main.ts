@@ -1,13 +1,9 @@
-type TPSSearchParams = {
-  display?: 'house-only' | 'full'
-}
-
 const params = new URL(document.location.href).searchParams
 
 const display = params.get('display')
 
 if (display === 'house-only') {
-  document.querySelector('header')?.remove()
+  document.querySelectorAll('.hud')?.forEach((hud) => hud.remove())
 }
 
 const size = params.get('size')

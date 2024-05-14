@@ -16,7 +16,7 @@
     <link rel="mask-icon" href="people-improvement.svg" color="#ffffff" />
   </head>
   <body>
-    <header>
+    <header class="hud">
       <h1 class="thinking-people-system">Thinking People System</h1>
     </header>
     <main>
@@ -118,6 +118,28 @@
         </section>
       </section>
     </main>
+    <details class="hud">
+      <summary>Enablers</summary>
+      <p>
+        You can use the following options to interact with the TPS. It works
+        with the query string. Like so:
+        <a href="https://thinking-people-system.house?size=small"
+          >https://thinking-people-system.house?size=small</a
+        >.
+      </p>
+      <ul>
+        <li>
+          <code>display</code>: display without any HUD with the option
+          <code>house-only</code>
+        </li>
+        <li><code>size</code>: can be <code>small</code></li>
+        <li>
+          <code>focus</code>: focus only a part of the TPS. Can be multiple.
+        </li>
+        <li><code>text</code>: hide text to only have the house</li>
+        <li><code>scroll</code>: scroll to the <code>end</code></li>
+      </ul>
+    </details>
     <script type="module" src="main.ts"></script>
   </body>
 </html>
