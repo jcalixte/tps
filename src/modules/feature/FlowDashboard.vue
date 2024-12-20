@@ -8,6 +8,7 @@ const featureStore = useFeatureStore()
 
 <template>
   <div class="flow-dashboard">
+    <SeparatorIcon />
     <div class="row cards">
       <div class="card">
         Features
@@ -57,7 +58,6 @@ const featureStore = useFeatureStore()
         </div>
       </div>
     </div>
-    <SeparatorIcon />
     <FlowControls />
   </div>
 </template>

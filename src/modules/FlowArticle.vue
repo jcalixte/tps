@@ -21,7 +21,6 @@ import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
     <FlowHypothesis class="text" />
     <SeparatorIcon />
     <FlowSetup class="text" />
-    <FeatureSteps alias="introducing" />
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
     <SimulationControls type="single" class="above" />
