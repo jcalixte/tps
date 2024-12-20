@@ -21,8 +21,8 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
           <th>mean values</th>
           <th class="numeric">push</th>
           <th class="numeric">pull</th>
-          <th class="numeric">push and DPS</th>
-          <th class="numeric">pull and DPS</th>
+          <th class="numeric">push with problem solving</th>
+          <th class="numeric">pull with problem solving</th>
         </tr>
       </thead>
       <tbody>
