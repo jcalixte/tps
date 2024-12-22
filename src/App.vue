@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FlowArticle from '@/modules/FlowArticle.vue'
+import FlowArticle from '@/modules/pull-system/FlowArticle.vue'
 import { StarportCarrier } from 'vue-starport'
 </script>
 

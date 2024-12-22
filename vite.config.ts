@@ -9,7 +9,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: 'index.html',
-        'pull-system': 'pull-system.html'
+        'pull-system': 'pull-system.html',
+        '5s': '5s.html'
       }
     }
   },
@@ -20,6 +21,6 @@ export default defineConfig({
     }
   },
   worker: {
-    plugins: [comlink()]
+    plugins: () => [comlink()]
   }
 })

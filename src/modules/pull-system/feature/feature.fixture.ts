@@ -1,5 +1,5 @@
 import { birds } from '@/data/bird'
-import { Feature } from '@/modules/feature/feature'
+import { Feature } from '@/modules/pull-system/feature/feature'
 import { randomInteger } from '@/utils'
 
 export const features: Feature[] = birds.map((name) => ({

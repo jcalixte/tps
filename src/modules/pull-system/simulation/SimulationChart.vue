@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSimulationStore } from '@/modules/simulation/simulation-store'
+import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
 import { popNElement } from '@/utils'
 import chartXkcd from 'chart.xkcd'
 import { onMounted, ref, watch } from 'vue'

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import SeparatorIcon from '@/icons/SeparatorIcon.vue'
-import FlowConclusion from '@/modules/article/FlowConclusion.vue'
-import FlowHypothesis from '@/modules/article/FlowHypothesis.vue'
-import FlowIntro from '@/modules/article/FlowIntro.vue'
-import FlowMultipleSimulation from '@/modules/article/FlowMultipleSimulation.vue'
-import FlowSetup from '@/modules/article/FlowSetup.vue'
-import FlowSingleSimulation from '@/modules/article/FlowSingleSimulation.vue'
-import FeatureSteps from '@/modules/feature/FeatureSteps.vue'
-import FlowDashboard from '@/modules/feature/FlowDashboard.vue'
-import SimulationControls from '@/modules/simulation/SimulationControls.vue'
-import SimulationDashboard from '@/modules/simulation/SimulationDashboard.vue'
+import FlowConclusion from '@/modules/pull-system/article/FlowConclusion.vue'
+import FlowHypothesis from '@/modules/pull-system/article/FlowHypothesis.vue'
+import FlowIntro from '@/modules/pull-system/article/FlowIntro.vue'
+import FlowMultipleSimulation from '@/modules/pull-system/article/FlowMultipleSimulation.vue'
+import FlowSetup from '@/modules/pull-system/article/FlowSetup.vue'
+import FlowSingleSimulation from '@/modules/pull-system/article/FlowSingleSimulation.vue'
+import FeatureSteps from '@/modules/pull-system/feature/FeatureSteps.vue'
+import FlowDashboard from '@/modules/pull-system/feature/FlowDashboard.vue'
+import SimulationControls from '@/modules/pull-system/simulation/SimulationControls.vue'
+import SimulationDashboard from '@/modules/pull-system/simulation/SimulationDashboard.vue'
 </script>
 
 <template>

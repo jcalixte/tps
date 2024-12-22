@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SeparatorIcon from '@/icons/SeparatorIcon.vue'
-import FlowControls from '@/modules/feature/FlowControls.vue'
-import { useFeatureStore } from '@/modules/feature/feature-store'
+import FlowControls from '@/modules/pull-system/feature/FlowControls.vue'
+import { useFeatureStore } from '@/modules/pull-system/feature/feature-store'
 
 const featureStore = useFeatureStore()
 </script>

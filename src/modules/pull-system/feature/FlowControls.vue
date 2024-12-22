@@ -3,7 +3,7 @@ import EraserIcon from '@/icons/EraserIcon.vue'
 import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
 import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
-import { useFeatureStore } from '@/modules/feature/feature-store'
+import { useFeatureStore } from '@/modules/pull-system/feature/feature-store'
 
 const NUMBER_OF_FEATURES = 20
 

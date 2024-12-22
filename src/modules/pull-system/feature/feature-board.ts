@@ -1,6 +1,6 @@
-import { Feature, FeatureStatus } from '@/modules/feature/feature'
-import { FeatureStep } from '@/modules/feature/feature-steps'
-import { features as initialFeatures } from '@/modules/feature/feature.fixture'
+import { Feature, FeatureStatus } from '@/modules/pull-system/feature/feature'
+import { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
+import { features as initialFeatures } from '@/modules/pull-system/feature/feature.fixture'
 import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState } from '@/store-type'
 import {

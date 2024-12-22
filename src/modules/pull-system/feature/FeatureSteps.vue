@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import FeatureStep from '@/modules/feature/FeatureStep.vue'
-import { featureSteps } from '@/modules/feature/feature-steps'
-import { useFeatureStore } from '@/modules/feature/feature-store'
+import FeatureStep from '@/modules/pull-system/feature/FeatureStep.vue'
+import { featureSteps } from '@/modules/pull-system/feature/feature-steps'
+import { useFeatureStore } from '@/modules/pull-system/feature/feature-store'
 import { onMounted } from 'vue'
 
 const NUMBER_OF_FEATURES = 20

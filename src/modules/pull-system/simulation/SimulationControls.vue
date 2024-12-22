@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Strategy } from '@/modules/lean/strategy'
-import { useSimulationStore } from '@/modules/simulation/simulation-store'
+import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
 
 defineProps<{
   type: 'single' | 'multiple'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import QualityIssue from '@/modules/feature/QualityIssue.vue'
-import { Feature } from '@/modules/feature/feature'
+import QualityIssue from '@/modules/pull-system/feature/QualityIssue.vue'
+import { Feature } from '@/modules/pull-system/feature/feature'
 import { computed } from 'vue'
 
 const props = withDefaults(

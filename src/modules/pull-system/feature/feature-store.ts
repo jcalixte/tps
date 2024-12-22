@@ -1,4 +1,4 @@
-import { Feature } from '@/modules/feature/feature'
+import { Feature } from '@/modules/pull-system/feature/feature'
 import {
   getMeanComplexity,
   getMeanLeadTime,
@@ -8,8 +8,8 @@ import {
   isProjectFinished,
   newBacklog,
   nextDay
-} from '@/modules/feature/feature-board'
-import { featureSteps } from '@/modules/feature/feature-steps'
+} from '@/modules/pull-system/feature/feature-board'
+import { featureSteps } from '@/modules/pull-system/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { FeatureState, Meta } from '@/store-type'
 import { defineStore } from 'pinia'

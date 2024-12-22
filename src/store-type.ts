@@ -1,5 +1,5 @@
-import { Feature } from '@/modules/feature/feature'
-import { FeatureStep } from '@/modules/feature/feature-steps'
+import { Feature } from '@/modules/pull-system/feature/feature'
+import { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 
 export type Meta = {

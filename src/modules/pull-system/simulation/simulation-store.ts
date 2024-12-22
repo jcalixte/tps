@@ -1,4 +1,4 @@
-import { featureSteps } from '@/modules/feature/feature-steps'
+import { featureSteps } from '@/modules/pull-system/feature/feature-steps'
 import { Strategy } from '@/modules/lean/strategy'
 import { Dashboard, Meta } from '@/store-type'
 import { getRound } from '@/utils'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import FeatureItem from '@/modules/feature/FeatureItem.vue'
-import { Feature } from '@/modules/feature/feature'
-import { FeatureStep } from '@/modules/feature/feature-steps'
+import FeatureItem from '@/modules/pull-system/feature/FeatureItem.vue'
+import { Feature } from '@/modules/pull-system/feature/feature'
+import { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
 import { useElementSize } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { Starport } from 'vue-starport'

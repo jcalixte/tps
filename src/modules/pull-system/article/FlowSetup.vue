@@ -2,10 +2,10 @@
 import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
 import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
-import FeatureItem from '@/modules/feature/FeatureItem.vue'
-import FlowControls from '@/modules/feature/FlowControls.vue'
-import QualityIssue from '@/modules/feature/QualityIssue.vue'
-import { Feature } from '@/modules/feature/feature'
+import FeatureItem from '@/modules/pull-system/feature/FeatureItem.vue'
+import FlowControls from '@/modules/pull-system/feature/FlowControls.vue'
+import QualityIssue from '@/modules/pull-system/feature/QualityIssue.vue'
+import { Feature } from '@/modules/pull-system/feature/feature'
 
 const feature: Feature = {
   name: 'As a user, in the homepage, I can login',
