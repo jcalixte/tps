@@ -1,5 +1,5 @@
 :root {
-  --color: var(--primary-color);
+  --color: black;
 }
 
 *:not(td):not(th) {
