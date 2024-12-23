@@ -1,6 +1,6 @@
 import { featureSteps } from '@/modules/pull-system/feature/feature-steps'
-import { Strategy } from '@/modules/lean/strategy'
-import { Dashboard, Meta } from '@/store-type'
+import type { Strategy } from '@/modules/pull-system/lean/strategy'
+import type { Dashboard, Meta } from '@/store-type'
 import { getRound } from '@/utils'
 import { defineStore } from 'pinia'
 
@@ -64,7 +64,7 @@ export const useSimulationStore = defineStore('dashboard', {
   actions: {
     async simulate(strategy: Strategy) {
       const steps = featureSteps
-      const backlog = await instance.newBacklog()
+      const backlog = await instance.newBacklog('bird')
       const features = await instance.initBoard(steps, backlog)
 
       const newState = await instance.simulate(

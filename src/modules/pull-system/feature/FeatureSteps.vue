@@ -10,7 +10,7 @@ defineProps<{ alias: string }>()
 
 const featureStore = useFeatureStore()
 
-onMounted(() => featureStore.initBoard(NUMBER_OF_FEATURES))
+onMounted(() => featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES))
 </script>
 
 <template>

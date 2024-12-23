@@ -34,8 +34,8 @@ export const useFeatureStore = defineStore('feature', {
     meta: resetMeta()
   }),
   actions: {
-    async initBoard(limit?: number) {
-      this.backlog = newBacklog(limit)
+    async initBoard(type: 'bird' | 'mobile-app', limit?: number) {
+      this.backlog = newBacklog(type, limit)
       this.steps = featureSteps
       this.features = initBoard(this.steps, this.backlog)
 

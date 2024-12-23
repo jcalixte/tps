@@ -1,8 +1,14 @@
-import { Feature, FeatureStatus } from '@/modules/pull-system/feature/feature'
-import { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
-import { features as initialFeatures } from '@/modules/pull-system/feature/feature.fixture'
-import { Strategy } from '@/modules/lean/strategy'
-import { FeatureState } from '@/store-type'
+import type {
+  Feature,
+  FeatureStatus
+} from '@/modules/pull-system/feature/feature'
+import type { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
+import {
+  birdFeatures,
+  mobileAppFeatures
+} from '@/modules/pull-system/feature/feature.fixture'
+import type { Strategy } from '@/modules/pull-system/lean/strategy'
+import type { FeatureState } from '@/store-type'
 import {
   getMean,
   pickRandomElement,
@@ -67,10 +73,12 @@ const mayBeInProgress = ({
   return feature.status
 }
 
-export const newBacklog = (limit?: number) =>
-  limit !== undefined
+export const newBacklog = (type: 'bird' | 'mobile-app', limit?: number) => {
+  const initialFeatures = type === 'bird' ? birdFeatures : mobileAppFeatures
+  return limit !== undefined
     ? popNElement(shuffleArray(initialFeatures), limit)
     : shuffleArray(initialFeatures)
+}
 
 export const initBoard = (
   steps: FeatureStep[],
@@ -210,7 +218,7 @@ const getQualityProbability = (
   switch (complexity) {
     case 1:
       probabilityOfGoodQuality = 0.95
-
+      break
     case 2:
       probabilityOfGoodQuality = 0.88
       break
