@@ -51,7 +51,7 @@ const featureStore = useFeatureStore()
       <div class="card">
         ETA
         <div class="data">
-          <span class="numeric">{{ featureStore.eat }}</span>
+          <span class="numeric">{{ featureStore.eta }}</span>
           days
         </div>
       </div>
