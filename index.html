@@ -20,12 +20,14 @@
       <h1 class="thinking-people-system">Thinking People System</h1>
     </header>
     <main>
-      <section class="customer-satisfaction-roof focusable">
-        <h2 class="customer-satisfaction">Customer Satisfaction</h2>
-        <p class="value-analysis-value-engineering">
-          Value analysis / Value engineering
-        </p>
-      </section>
+      <div class="customer-satisfaction-roof-parent">
+        <section class="customer-satisfaction-roof focusable">
+          <h2 class="customer-satisfaction">Customer Satisfaction</h2>
+          <p class="value-analysis-value-engineering">
+            Value analysis / Value engineering
+          </p>
+        </section>
+      </div>
       <section class="levers">
         <ul>
           <li class="security focusable">Security</li>
@@ -152,6 +154,20 @@
         </li>
       </ul>
     </details>
+    <svg class="flt_svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="round">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+            result="flt_tag"
+          />
+          <feComposite in="SourceGraphic" in2="flt_tag" operator="atop" />
+        </filter>
+      </defs>
+    </svg>
     <script type="module" src="main.ts"></script>
   </body>
 </html>

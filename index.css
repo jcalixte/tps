@@ -26,13 +26,42 @@ li {
   color: var(--primary-color);
 }
 
+.customer-satisfaction-roof-parent {
+  filter: url(#round);
+  /* Making the triangle fit the rest of the house */
+  margin: 0 -1rem;
+}
+
 .customer-satisfaction-roof {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  border-radius: 5rem 5rem 0.5rem 0.5rem;
+  clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+  min-height: 150px;
+  font-size: 12pt;
+}
+
+/* mini screen */
+@media only screen and (max-width: 480px) {
+  .customer-satisfaction-roof {
+    font-size: 11pt;
+  }
+}
+
+/* medium screen */
+@media only screen and (min-width: 751px) and (max-width: 1300px) {
+  .customer-satisfaction-roof {
+    font-size: 16pt;
+  }
+}
+
+/* large screen */
+@media only screen and (min-width: 1301px) {
+  .customer-satisfaction-roof {
+    font-size: inherit;
+  }
 }
 
 .customer-satisfaction-roof h2,
