@@ -1,3 +1,7 @@
+body {
+  font-size: clamp(11px, 2.1vw, 28px);
+}
+
 ul {
   padding-left: 0;
   margin: 0;
@@ -40,28 +44,7 @@ li {
   text-align: center;
   clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
   min-height: 150px;
-  font-size: 12pt;
-}
-
-/* mini screen */
-@media only screen and (max-width: 480px) {
-  .customer-satisfaction-roof {
-    font-size: 11pt;
-  }
-}
-
-/* medium screen */
-@media only screen and (min-width: 751px) and (max-width: 1300px) {
-  .customer-satisfaction-roof {
-    font-size: 16pt;
-  }
-}
-
-/* large screen */
-@media only screen and (min-width: 1301px) {
-  .customer-satisfaction-roof {
-    font-size: inherit;
-  }
+  font-size: clamp(15px, 2.1vw, 28px);
 }
 
 .customer-satisfaction-roof h2,
@@ -179,4 +162,9 @@ details.hud {
 
 details.hud li {
   text-align: left;
+}
+
+.round-svg {
+  visibility: hidden;
+  height: 0;
 }
