@@ -34,8 +34,6 @@ const featureStore = useFeatureStore()
           days
         </div>
       </div>
-    </div>
-    <div class="row cards">
       <div class="card">
         Takt time
         <div class="data">
@@ -64,7 +62,7 @@ const featureStore = useFeatureStore()
 
 <style scoped lang="scss">
 .flow-dashboard {
-  font-size: 16pt;
+  font-size: 13pt;
   display: flex;
   flex-direction: column;
   align-items: center;
