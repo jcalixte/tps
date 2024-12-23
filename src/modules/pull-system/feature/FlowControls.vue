@@ -48,6 +48,10 @@ const featureStore = useFeatureStore()
   .row {
     display: flex;
     justify-content: center;
+
+    button {
+      margin: 1rem 0;
+    }
   }
 }
 </style>

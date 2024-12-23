@@ -9,5 +9,6 @@
       consequences of different strategy patterns and which is the most
       effective.
     </p>
+    <p><em>Note: better experience on desktop.</em></p>
   </div>
 </template>

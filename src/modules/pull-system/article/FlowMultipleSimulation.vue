@@ -1,8 +1,19 @@
 <template>
   <div class="flow-conclusion">
     <p>
+      Okay, now we're pretty sure! For a long time, I wanted a proof
+      <em>to trust the process</em>, that's the beauty of simulations. . It's
+      quite impossible to convince people when we're in the middle of the
+      battle. If teams change every time, you are doomed to get this problem
+      over and over again.
+    </p>
+    <p>
       Teams tend to underestimate how long a project will be. And how hard it
       will be to work with others.
+    </p>
+    <p>
+      Note that problem solving is always a good practice. The capacity of the
+      team to stop and think about how they work is critical.
     </p>
     <p>
       If we're not in a good pace, we just have to try harder. Only once. "Just

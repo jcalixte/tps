@@ -37,13 +37,13 @@ const simulateEverything = () => {
         class="button button-outline"
         @click="simulationStore.multiSimulation(1, 'push-dps')"
       >
-        simulate push with DPS
+        simulate push with problem solving
       </button>
       <button
         class="button button-outline"
         @click="simulationStore.multiSimulation(1, 'pull-dps')"
       >
-        simulate pull with DPS
+        simulate pull with problem solving
       </button>
     </div>
     <div class="row" v-else-if="type === 'multiple'">
