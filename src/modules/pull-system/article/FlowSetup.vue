@@ -81,6 +81,7 @@ const feature: Feature = {
     </p>
     <h3>The pull system: produce features only when the next team needs it</h3>
     <p>
+      Now, instead of pushing features, we wait for the next team to be ready.
       It comes from the assumptions that we will never reach the best score ever
       aka "the push system where everything goes right". We know we prefer
       waiting for next team to be ready before doing some extra work than having
