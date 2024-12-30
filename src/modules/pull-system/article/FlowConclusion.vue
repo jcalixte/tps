@@ -17,8 +17,9 @@
     </p>
     <p>
       But the best way to succeed is to ask: "Is this what you need? How can I
-      help you?". Just like in Ekiden, handovers are where the real struggles
-      happen but we're on the same race, together.
+      help you?".
+      <!-- Just like in Ekiden, handovers are where the real struggles
+      happen but we're on the same race, together. -->
     </p>
   </div>
 </template>

@@ -15,11 +15,11 @@ import SimulationDashboard from '@/modules/pull-system/simulation/SimulationDash
 <template>
   <div class="flow-article">
     <h1>Pull system</h1>
-    <h2>Ekiden (駅伝): long-distance running relay race</h2>
+    <!-- <h2>Ekiden (駅伝): long-distance running relay race</h2> -->
     <FlowIntro class="text" />
     <SeparatorIcon />
-    <FlowHypothesis class="text" />
-    <SeparatorIcon />
+    <!-- <FlowHypothesis class="text" /> -->
+    <!-- <SeparatorIcon /> -->
     <FlowSetup class="text" />
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />

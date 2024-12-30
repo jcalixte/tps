@@ -1,3 +1,26 @@
+export const newsAppFeatures = [
+  'Accessing the latest news articles',
+  'Reading one new article',
+  'Breaking news alerts',
+  'Live news streaming',
+  'Search',
+  'Login / sign up',
+  'Personalized news feed',
+  'News article bookmarking',
+  'News article sharing',
+  'Commenting on articles',
+  'Multi-language support',
+  'News article recommendations',
+  'News article summarization',
+  'News article audio playback',
+  'Offline reading',
+  'Polls',
+  'News article ratings',
+  'News article history',
+  'News articles based on geolocation',
+  'Public access to data sources'
+]
+
 export const appFeatures = [
   'Login / Sign Up',
   'Search',
