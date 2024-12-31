@@ -12,7 +12,7 @@ export const features: Feature[] = birds.map((name) => ({
   qualityIssue: 0
 }))
 
-export const birdFeatures: Feature[] = birds.map((name) => ({
+export const birdFeatures: readonly Feature[] = birds.map((name) => ({
   name,
   complexity: randomInteger(1, 5),
   leadTime: 0,
@@ -21,11 +21,13 @@ export const birdFeatures: Feature[] = birds.map((name) => ({
   qualityIssue: 0
 }))
 
-export const mobileAppFeatures: Feature[] = newsAppFeatures.map((name) => ({
-  name,
-  complexity: randomInteger(1, 5),
-  leadTime: 0,
-  status: 'doing',
-  step: Infinity,
-  qualityIssue: 0
-}))
+export const mobileAppFeatures: readonly Feature[] = newsAppFeatures.map(
+  (name) => ({
+    name,
+    complexity: randomInteger(1, 5),
+    leadTime: 0,
+    status: 'doing',
+    step: Infinity,
+    qualityIssue: 0
+  })
+)

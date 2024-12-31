@@ -1,3 +1,4 @@
+import { newsAppFeatures } from '@/data/app-feature'
 import type {
   Feature,
   FeatureStatus
@@ -74,7 +75,8 @@ const mayBeInProgress = ({
 }
 
 export const newBacklog = (type: 'bird' | 'mobile-app', limit?: number) => {
-  const initialFeatures = type === 'bird' ? birdFeatures : mobileAppFeatures
+  const initialFeatures =
+    type === 'bird' ? [...birdFeatures] : [...mobileAppFeatures]
   return limit !== undefined
     ? popNElement(shuffleArray(initialFeatures), limit)
     : shuffleArray(initialFeatures)

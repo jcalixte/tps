@@ -15,28 +15,16 @@ const featureStore = useFeatureStore()
 <template>
   <div class="flow-controls">
     <div class="row">
-      <button
-        @click="featureStore.nextDay('push')"
-        :disabled="featureStore.isProjectFinished"
-      >
+      <button @click="featureStore.nextDay('push')" :disabled="featureStore.isProjectFinished">
         <PushSystemIcon color="white" />
       </button>
-      <button
-        @click="featureStore.nextDay('pull')"
-        :disabled="featureStore.isProjectFinished"
-      >
+      <button @click="featureStore.nextDay('pull')" :disabled="featureStore.isProjectFinished">
         <PullSystemIcon color="white" />
       </button>
-      <button
-        @click="featureStore.nextDay('problem-solving')"
-        :disabled="featureStore.isProjectFinished"
-      >
+      <button @click="featureStore.nextDay('problem-solving')" :disabled="featureStore.isProjectFinished">
         <ProblemSolvingIcon color="white" />
       </button>
-      <button
-        v-if="withEraser"
-        @click="featureStore.initBoard(NUMBER_OF_FEATURES)"
-      >
+      <button v-if="withEraser" @click="featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES)">
         <EraserIcon color="white" />
       </button>
     </div>

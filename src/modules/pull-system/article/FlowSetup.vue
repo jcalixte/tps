@@ -57,16 +57,16 @@ const feature: Feature = {
     <p>Each day, you can choose between 3 strategies:</p>
     <ol>
       <li>
-        Push system
         <PushSystemIcon />
+        Push system
       </li>
       <li>
-        Pull system
         <PullSystemIcon />
+        Pull system
       </li>
       <li>
-        Problem solving
         <ProblemSolvingIcon />
+        Problem solving
       </li>
     </ol>
     <p>

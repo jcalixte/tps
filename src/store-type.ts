@@ -1,6 +1,6 @@
-import { Feature } from '@/modules/pull-system/feature/feature'
-import { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
-import { Strategy } from '@/modules/lean/strategy'
+import type { Feature } from '@/modules/pull-system/feature/feature'
+import type { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
+import type { Strategy } from '@/modules/pull-system/lean/strategy'
 
 export type Meta = {
   totalDays: number
