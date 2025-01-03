@@ -92,6 +92,7 @@ export const initBoard = (
     const step = pickRandomElement(steps)
     feature.status = pickRandomElement(['doing', 'done'])
     feature.step = Math.max(step.stepIndex, 1)
+    feature.qualityIssue = 0
   })
 
   return initialFeatures
