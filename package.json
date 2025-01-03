@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Thinking People System",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -29,7 +30,7 @@
     "sass": "^1.83.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.6",
-    "vite-plugin-comlink": "^4.0.2",
+    "vite-plugin-comlink": "^5.1.0",
     "vitest": "^2.1.8"
   }
 }
