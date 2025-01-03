@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vueuse/core':
-        specifier: ^12.1.0
-        version: 12.1.0(typescript@5.7.2)
+        specifier: ^12.2.0
+        version: 12.2.0(typescript@5.7.2)
       chart.xkcd:
         specifier: ^1.1.15
         version: 1.1.15
@@ -626,20 +626,20 @@ packages:
   '@vueuse/core@10.7.2':
     resolution: {integrity: sha512-AOyAL2rK0By62Hm+iqQn6Rbu8bfmbgaIMXcE3TSr7BdQ42wnSFlwIdPjInO62onYsEMK/yDMU8C6oGfDAtZ2qQ==}
 
-  '@vueuse/core@12.1.0':
-    resolution: {integrity: sha512-uoAhT3cnDtG/UuhgKxO6fXPCtW2F8axmKGaHWeHdV3YhsbSILxi2ATURbSkAmdQwgzI6jOpJarfVfGXCl78v5g==}
+  '@vueuse/core@12.2.0':
+    resolution: {integrity: sha512-jksyNu+5EGwggNkRWd6xX+8qBkYbmrwdFQMgCABsz+wq8bKF6w3soPFLB8vocFp3wFIzn0OYkSPM9JP+AFKwsg==}
 
   '@vueuse/metadata@10.7.2':
     resolution: {integrity: sha512-kCWPb4J2KGrwLtn1eJwaJD742u1k5h6v/St5wFe8Quih90+k2a0JP8BS4Zp34XUuJqS2AxFYMb1wjUL8HfhWsQ==}
 
-  '@vueuse/metadata@12.1.0':
-    resolution: {integrity: sha512-XxU3sYdOhqKLO+LbreHzMqklCjs/rdRQcZGtu/AHPTXb2No/GUBVFJr/JruUB1NPWG26F8mr+c55P4YG6nMzcQ==}
+  '@vueuse/metadata@12.2.0':
+    resolution: {integrity: sha512-x6zynZtTh1l52m0y8d/EgzpshnMjg8cNZ2KWoncJ62Z5qPSGoc4FUunmMVrrRM/I/5542rTEY89CGftngZvrkQ==}
 
   '@vueuse/shared@10.7.2':
     resolution: {integrity: sha512-qFbXoxS44pi2FkgFjPvF4h7c9oMDutpyBdcJdMYIMg9XyXli2meFMuaKn+UMgsClo//Th6+beeCgqweT/79BVA==}
 
-  '@vueuse/shared@12.1.0':
-    resolution: {integrity: sha512-tnuYb6Rp9dwMjsi/gukNeE+En3RFOfzrnVZX1vwbvq7+MbCkBNnXFvKgMGPlo1TQxgVd46D3NYwhBmM8Ioxd2A==}
+  '@vueuse/shared@12.2.0':
+    resolution: {integrity: sha512-SRr4AZwv/giS+EmyA1ZIzn3/iALjjnWAGaBNmoDTMEob9JwQaevAocuaMDnPAvU7Z35Y5g3CFRusCWgp1gVJ3Q==}
 
   assertion-error@2.0.1:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
@@ -1448,18 +1448,18 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@12.1.0(typescript@5.7.2)':
+  '@vueuse/core@12.2.0(typescript@5.7.2)':
     dependencies:
       '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 12.1.0
-      '@vueuse/shared': 12.1.0(typescript@5.7.2)
+      '@vueuse/metadata': 12.2.0
+      '@vueuse/shared': 12.2.0(typescript@5.7.2)
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:
       - typescript
 
   '@vueuse/metadata@10.7.2': {}
 
-  '@vueuse/metadata@12.1.0': {}
+  '@vueuse/metadata@12.2.0': {}
 
   '@vueuse/shared@10.7.2(vue@3.5.13(typescript@5.7.2))':
     dependencies:
@@ -1468,7 +1468,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/shared@12.1.0(typescript@5.7.2)':
+  '@vueuse/shared@12.2.0(typescript@5.7.2)':
     dependencies:
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:

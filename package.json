@@ -15,7 +15,7 @@
   "author": "Julien Calixte <julienc@bam.tech>",
   "license": "ISC",
   "dependencies": {
-    "@vueuse/core": "^12.1.0",
+    "@vueuse/core": "^12.2.0",
     "chart.xkcd": "^1.1.15",
     "comlink": "^4.4.2",
     "pinia": "^2.3.0",
