@@ -33,11 +33,13 @@ const feature: Feature = {
     </p>
     <FeatureItem :feature="feature" />
     <p>
-      It starts with the intention "<code>{{ feature.name }}</code>". This is what we'll add to the mobile app.
+      It starts with the intention "<code>{{ feature.name }}</code
+      >". This is what we'll add to the mobile app.
     </p>
     <p>
       <span class="numeric">({{ feature.complexity }})</span> is the complexity
-      of the feature. The more complex a feature is, the more chance we introduce a defect.
+      of the feature. The more complex a feature is, the more chance we
+      introduce a defect.
     </p>
     <p>
       <span class="numeric">{{ feature.leadTime }}d</span> is the number of days
@@ -51,10 +53,11 @@ const feature: Feature = {
       never deliver defects.
     </p>
     <p>
-      Okay! We have 20 features to deliver. It takes one day for each team to finish
-      their part for each feature.
+      Okay! We have 20 features to deliver. It takes one day for each team to
+      finish their part for each feature.
     </p>
-    <p>Each day, you can choose between 3 strategies:</p>
+    <!-- [dps] <p>Each day, you can choose between 3 strategies:</p> -->
+    <p>Each day, you can choose between 2 strategies:</p>
     <ol>
       <li>
         <PushSystemIcon />
@@ -64,10 +67,11 @@ const feature: Feature = {
         <PullSystemIcon />
         Pull system
       </li>
+      <!-- [dps]
       <li>
         <ProblemSolvingIcon />
         Problem solving
-      </li>
+      </li> -->
     </ol>
     <p>
       In this article we'll focus on how these strategies are efficient and what
@@ -76,8 +80,9 @@ const feature: Feature = {
     </p>
     <h3>The push system: start as many features as possible</h3>
     <p>
-      By pushing features from the start, we try to maximize the time worked by teams on the product.
-      This way, no money is wasted, everyone has everytime something to do.
+      By pushing features from the start, we try to maximize the time worked by
+      teams on the product. This way, no money is wasted, everyone has everytime
+      something to do.
     </p>
     <h3>The pull system: produce features only when the next team needs it</h3>
     <p>
@@ -93,14 +98,15 @@ const feature: Feature = {
       will always have material to transform. Here, we'll have 2 blue bins per
       team.
     </p>
-    <h3>Problem solving: no production, just reflection</h3>
+    <!-- [dps]
+     <h3>Problem solving: no production, just reflection</h3>
     <p>
       We invest days where we are not productive at all to investigate and
       learning from our mistake. We know that we will never reach the best score
       ever and we know that mistakes will reappear. So we take more time to
       understand and limit rework. The more the team investigate, the more the
       team learn and start to be extremely good at problem solving.
-    </p>
+    </p> -->
   </div>
 </template>
 

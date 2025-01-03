@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Strategy } from '@/modules/lean/strategy'
+import type { Strategy } from '@/modules/pull-system/lean/strategy'
 import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
 
 defineProps<{
@@ -9,7 +9,9 @@ defineProps<{
 const simulationStore = useSimulationStore()
 const NUMBER_OF_SIMULATION = 200
 
-const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
+// [dps]
+// const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
+const strategies: Strategy[] = ['push', 'pull']
 
 const simulateEverything = () => {
   strategies.forEach((strategy) =>
@@ -33,6 +35,7 @@ const simulateEverything = () => {
       >
         simulate pull system
       </button>
+      <!-- [dps]
       <button
         class="button button-outline"
         @click="simulationStore.multiSimulation(1, 'push-dps')"
@@ -44,7 +47,7 @@ const simulateEverything = () => {
         @click="simulationStore.multiSimulation(1, 'pull-dps')"
       >
         simulate pull with problem solving
-      </button>
+      </button> -->
     </div>
     <div class="row" v-else-if="type === 'multiple'">
       <button class="button button-outline" @click="simulateEverything">

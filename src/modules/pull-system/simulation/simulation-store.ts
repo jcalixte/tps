@@ -1,3 +1,5 @@
+/// <reference types="vite-plugin-comlink/client" />
+
 import { featureSteps } from '@/modules/pull-system/feature/feature-steps'
 import type { Strategy } from '@/modules/pull-system/lean/strategy'
 import type { Dashboard, Meta } from '@/store-type'
@@ -21,7 +23,7 @@ type State = {
   mean: Record<Strategy, Mean>
 }
 
-const newMean = (): Mean => ({
+const initMean = (): Mean => ({
   leadTimeSum: 0,
   taktTimeSum: 0,
   complexitySum: 0,
@@ -54,10 +56,10 @@ export const useSimulationStore = defineStore('dashboard', {
       requestedSimulation: 0,
       simulationsDone: 0,
       mean: {
-        push: newMean(),
-        pull: newMean(),
-        'pull-dps': newMean(),
-        'push-dps': newMean()
+        push: initMean(),
+        pull: initMean(),
+        'pull-dps': initMean(),
+        'push-dps': initMean()
       }
     }
   },
@@ -101,8 +103,8 @@ export const useSimulationStore = defineStore('dashboard', {
         dashboard.meta.totalDays / newState.features.length
       this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
       this.mean[strategy].qualityIssueSum += dashboard.analysis.meanQualityIssue
-      this.mean[strategy].teamWorkExperienceSum +=
-        dashboard.meta.teamWorkExperience
+      // this.mean[strategy].teamWorkExperienceSum +=
+      //   dashboard.meta.teamWorkExperience
       this.mean[strategy].totalDaysSum += dashboard.meta.totalDays
       this.mean[strategy].simulations++
     },
@@ -115,10 +117,10 @@ export const useSimulationStore = defineStore('dashboard', {
     },
     clearDashboard() {
       this.dashboards = []
-      this.mean.push = newMean()
-      this.mean.pull = newMean()
-      this.mean['pull-dps'] = newMean()
-      this.mean['push-dps'] = newMean()
+      this.mean.push = initMean()
+      this.mean.pull = initMean()
+      this.mean['pull-dps'] = initMean()
+      this.mean['push-dps'] = initMean()
       this.simulationsDone = 0
       this.requestedSimulation = 0
     }

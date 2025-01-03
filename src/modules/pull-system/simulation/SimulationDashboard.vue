@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { Strategy } from '@/modules/lean/strategy'
+import type { Strategy } from '@/modules/pull-system/lean/strategy'
 import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
 
 const simulationStore = useSimulationStore()
 
-const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
+const strategies: Strategy[] = ['push', 'pull']
+// [dps]
+// const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
 </script>
 
 <template>
@@ -21,8 +23,9 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
           <th>mean values</th>
           <th class="numeric">push</th>
           <th class="numeric">pull</th>
-          <th class="numeric">push with problem solving</th>
-          <th class="numeric">pull with problem solving</th>
+          <!-- [dps]
+           <th class="numeric">push with problem solving</th>
+          <th class="numeric">pull with problem solving</th> -->
         </tr>
       </thead>
       <tbody>
@@ -45,23 +48,24 @@ const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']
           </td>
         </tr>
         <tr>
-          <td>Complexity</td>
-          <td class="numeric" v-for="strategy in strategies" :key="strategy">
-            {{ simulationStore.meanComplexity(strategy) }}
-          </td>
-        </tr>
-        <tr>
           <td>Quality issue</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanQuality(strategy) }}
           </td>
         </tr>
         <tr>
+          <td>Complexity</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanComplexity(strategy) }}
+          </td>
+        </tr>
+        <!-- [dps]
+        <tr>
           <td>Team work exp.</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanTeamWorkExperience(strategy) }}
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>

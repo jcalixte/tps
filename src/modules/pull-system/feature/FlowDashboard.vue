@@ -17,12 +17,13 @@ const featureStore = useFeatureStore()
           }}<span class="sub">/{{ featureStore.totalFeaturesCount }} </span>
         </span>
       </div>
+      <!-- [dps]
       <div class="card">
         Team work exp.
         <span class="numeric">
           {{ featureStore.meta.teamWorkExperience.toFixed(2) }}
         </span>
-      </div>
+      </div> -->
       <div class="card">
         Mean complexity
         <div class="numeric">{{ featureStore.meanComplexity }}</div>
