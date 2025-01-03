@@ -23,11 +23,11 @@ const HARD_STOP = 5000
 
 const getQualityIssue = ({
   complexity,
-  tasksInParallel,
+  featuresInParallel,
   teamWorkExperience
 }: {
   complexity: number
-  tasksInParallel: number
+  featuresInParallel: number
   teamWorkExperience: number
 }): boolean => {
   const qualityProbability = getQualityProbability(
@@ -35,7 +35,7 @@ const getQualityIssue = ({
     teamWorkExperience
   )
 
-  const multiplicator = getOverburdenMultiplicator(tasksInParallel)
+  const multiplicator = getOverburdenMultiplicator(featuresInParallel)
   const quality = randomFloat(0, 1)
 
   return quality > qualityProbability / multiplicator
@@ -91,7 +91,7 @@ export const initBoard = (
   initialFeatures.forEach((feature) => {
     const step = pickRandomElement(steps)
     feature.status = pickRandomElement(['doing', 'done'])
-    feature.step = Math.max(step.stepIndex, 1)
+    feature.step = step.stepIndex
     feature.qualityIssue = 0
   })
 
@@ -141,7 +141,7 @@ export const getFeaturesForNextDay = ({
 
           const hasQualityIssue = getQualityIssue({
             complexity: feature.complexity,
-            tasksInParallel: features.filter(
+            featuresInParallel: features.filter(
               (f) => f.status === 'doing' && f.step === feature.step
             ).length,
             teamWorkExperience

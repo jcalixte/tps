@@ -11,6 +11,20 @@ const featureStore = useFeatureStore()
     <SeparatorIcon />
     <div class="row cards">
       <div class="card">
+        Days
+        <div class="data">
+          <span class="numeric">{{ featureStore.meta.totalDays }}</span
+          >d
+        </div>
+      </div>
+      <div class="card">
+        ETA
+        <div class="data">
+          <span class="numeric">{{ featureStore.eta }}</span>
+          days
+        </div>
+      </div>
+      <div class="card">
         Features
         <span class="numeric">
           {{ featureStore.totalFeaturesDone
@@ -24,10 +38,6 @@ const featureStore = useFeatureStore()
           {{ featureStore.meta.teamWorkExperience.toFixed(2) }}
         </span>
       </div> -->
-      <div class="card">
-        Mean complexity
-        <div class="numeric">{{ featureStore.meanComplexity }}</div>
-      </div>
       <div class="card">
         Mean lead time
         <div class="data">
@@ -43,18 +53,12 @@ const featureStore = useFeatureStore()
         </div>
       </div>
       <div class="card">
-        Days
-        <div class="data">
-          <span class="numeric">{{ featureStore.meta.totalDays }}</span
-          >d
-        </div>
+        Quality issues
+        <div class="numeric">{{ featureStore.qualityIssues }}</div>
       </div>
       <div class="card">
-        ETA
-        <div class="data">
-          <span class="numeric">{{ featureStore.eta }}</span>
-          days
-        </div>
+        Mean complexity
+        <div class="numeric">{{ featureStore.meanComplexity }}</div>
       </div>
     </div>
     <FlowControls />

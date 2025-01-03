@@ -18,7 +18,7 @@ import SimulationDashboard from '@/modules/pull-system/simulation/SimulationDash
     <!-- <h2>Ekiden (駅伝): long-distance running relay race</h2> -->
     <FlowIntro class="text" />
     <SeparatorIcon />
-    <!-- <FlowHypothesis class="text" /> -->
+    <FlowHypothesis class="text" />
     <!-- <SeparatorIcon /> -->
     <FlowSetup class="text" />
     <FlowDashboard class="above" />

@@ -37,7 +37,10 @@ export const useFeatureStore = defineStore('feature', {
     async initBoard(type: 'bird' | 'mobile-app', limit?: number) {
       this.backlog = newBacklog(type, limit)
       this.steps = featureSteps
-      this.features = initBoard(this.steps, this.backlog)
+      const initialSteps = featureSteps.filter(
+        (step) => step.title !== 'Release' && step.title !== 'Development'
+      )
+      this.features = initBoard(initialSteps, this.backlog)
 
       this.backlog = this.backlog.filter(
         (l) => !this.features.find((f) => f.name === l.name)
@@ -56,6 +59,8 @@ export const useFeatureStore = defineStore('feature', {
     isProjectFinished: (state) => isProjectFinished(state.features),
     meanComplexity: (state) => getMeanComplexity(state.features),
     meanLeadTime: (state) => getMeanLeadTime(state.features),
+    qualityIssues: (state) =>
+      state.features.map((f) => f.qualityIssue).reduce((a, b) => a + b, 0),
     meanQualityIssue: (state) => getMeanQualityIssue(state.features),
     taktTime: (state): string => {
       const taktTime = (

@@ -2,7 +2,18 @@
 
 <template>
   <div class="flow-hypothesis">
-    <p>Here our hypothesis:</p>
+    We need some hypothesis to start with. Here are ours:
+    <ol>
+      <li>
+        The more feature done in parallel, the more it is difficult to focus and
+        it is more likely to introduce a defect.
+      </li>
+      <li>
+        it takes the same amount of time for each team to complete a task
+        <span class="meaning">same task time</span>
+      </li>
+    </ol>
+    <!-- <p>Here our hypothesis:</p>
     <ol>
       <li>
         it takes the same amount of time for each team to complete a task
@@ -19,7 +30,7 @@
       </li>
       <li>release team never fails</li>
       <li>there is no limit on how many defects a feature can have.</li>
-    </ol>
+    </ol> -->
   </div>
 </template>
 

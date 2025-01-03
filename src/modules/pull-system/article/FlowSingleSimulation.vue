@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import PullSystemIcon from '@/icons/PullSystemIcon.vue'
+import PushSystemIcon from '@/icons/PushSystemIcon.vue'
+</script>
+
 <template>
   <div class="flow-conclusion">
     <!-- TODO: Mettre ici le comportement en pull system et en push system.
@@ -5,20 +10,26 @@
      En pull system, on voit petit à petit du danse avec une passation de plus en plus facile.
      Il n'empêche que dans les deux systèmes il y ai de la création de défaut -->
     <p>
-      Pull system wins! The fact that
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.052303#:~:text=The%20%E2%80%9Cfaster%2Dis%2Dslower,evacuation%20time%20can%20be%20achieved"
-        >faster is slower
-      </a>
-      is counter-intuitive but it is a fact. The more we push the more we are
-      slowing down the system.
+      Not so obvious... So what can we learn? What are the patterns we can
+      identify?
+    </p>
+    <p>
+      In a primarly <PushSystemIcon /> push system, we see teams struggling and
+      stuck reworking the same features again and again to finally having all
+      features live all at once.
+    </p>
+    <p>
+      In a primarly <PullSystemIcon /> pull system however, we see a smoother
+      flow of work with teams able to pass on features more easily and
+      continuously, leading to a more steady and predictable delivery. It's not
+      perfect, but you may have see a balai of features when teams work and
+      finish at the same time. 💃🏽
+      <!-- TODO complete this sentence -->
     </p>
     <p>
       Before any conclusion, comparing two simulations is not enough. Let's be
-      more scientific here and let's generate 200 projects delivering 200
-      features each and see what happens.
+      more scientific here and let's generate 200 projects delivering the 20
+      features of the Newsletter app and see what happens.
     </p>
   </div>
 </template>
