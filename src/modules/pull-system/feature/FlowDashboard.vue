@@ -18,7 +18,7 @@ const featureStore = useFeatureStore()
         </div>
       </div>
       <div class="card">
-        ETA
+        Estimated Time of Arrival
         <div class="data">
           <span class="numeric">{{ featureStore.eta }}</span>
           days
