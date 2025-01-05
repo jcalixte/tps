@@ -22,7 +22,7 @@ const feature: Feature = {
 </script>
 
 <template>
-  <div class="flow-article">
+  <article class="flow-article">
     <h1>Pull system</h1>
     <!-- <h2>Ekiden (駅伝): long-distance running relay race</h2> -->
     <div class="flow-intro text">
@@ -55,19 +55,16 @@ const feature: Feature = {
       </p>
     </div>
     <SeparatorIcon />
-    <div class="flow-hypothesis">
+    <!-- <div class="flow-hypothesis">
       We need some hypothesis to start with. Here are ours:
       <ol>
         <li>
-          The more feature done in parallel, the more it is difficult to focus
-          and it is more likely to introduce a defect.
         </li>
         <li>
-          it takes the same amount of time for each team to complete a task
-          <span class="meaning">same task time</span>
+          it takes the same amount of time for each team to complete a task.
         </li>
       </ol>
-      <!-- <p>Here our hypothesis:</p>
+      <p>Here our hypothesis:</p>
     <ol>
       <li>
         it takes the same amount of time for each team to complete a task
@@ -84,14 +81,14 @@ const feature: Feature = {
       </li>
       <li>release team never fails</li>
       <li>there is no limit on how many defects a feature can have.</li>
-    </ol> -->
-    </div>
+    </ol>
+    </div> -->
     <!-- <SeparatorIcon /> -->
     <div class="flow-setup text">
       <p>
-        The project who has just started, our goal is to make a product as fast
-        as you can. With you, you'll have the product team, designers,
-        developers and a release team.
+        The project has just started, our goal is to make a product as fast as
+        you can. You'll have teams dedicated to the product, the design, the
+        coding and one making sure it is going live.
       </p>
       <p>
         First things first, what is a feature? A feature is a piece of software
@@ -105,11 +102,12 @@ const feature: Feature = {
         It starts with the intention "<code>{{ feature.name }}</code
         >". This is what we'll add to the mobile app.
       </p>
+      <!-- [complexity]
       <p>
         <span class="numeric">({{ feature.complexity }})</span> is the
         complexity of the feature. The more complex a feature is, the more
         chance we introduce a defect.
-      </p>
+      </p> -->
       <p>
         <span class="numeric">{{ feature.leadTime }}d</span> is the number of
         days the teams work on the feature. The goal is to reduce this number
@@ -117,7 +115,7 @@ const feature: Feature = {
       </p>
       <p>
         <QualityIssue class="inline" :quality-issue="feature.qualityIssue" />
-        are the number of defects the feature had during the flow. For the sake
+        are the number of defects the feature has during the flow. For the sake
         of simplicity, we assume teams are capable of detecting every defects
         and we never deliver defects.
       </p>
@@ -128,18 +126,11 @@ const feature: Feature = {
       <!-- [dps] <p>Each day, you can choose between 3 strategies:</p> -->
       <p>Each day, you can choose between 2 strategies:</p>
       <ol>
-        <li>
-          <PushSystemIcon />
-          Push system
-        </li>
-        <li>
-          <PullSystemIcon />
-          Pull system
-        </li>
+        <li><PushSystemIcon /> Push system</li>
+        <li><PullSystemIcon /> Pull system</li>
         <!-- [dps]
       <li>
-        <ProblemSolvingIcon />
-        Problem solving
+        <ProblemSolvingIcon /> Problem solving
       </li> -->
       </ol>
       <p>
@@ -152,6 +143,10 @@ const feature: Feature = {
         By pushing features from the start, we try to maximize the time worked
         by teams on the product. This way, no money is wasted, everyone has
         everytime something to do.
+      </p>
+      <p>
+        But it comes with a cost: the more feature ongoing in parallel, the more
+        it is difficult to focus and it is more likely to introduce a defect..
       </p>
       <h3>
         The pull system: produce features only when the next team needs it
@@ -181,16 +176,14 @@ const feature: Feature = {
     </div>
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
-    <SimulationControls type="single" class="above" />
-    <SimulationDashboard />
-    <div class="flow-single-simulation text">
+    <div class="manual-simulation text">
       <!-- TODO: Mettre ici le comportement en pull system et en push system.
      En push system, on voit un goulot d'étranglement.
      En pull system, on voit petit à petit du danse avec une passation de plus en plus facile.
      Il n'empêche que dans les deux systèmes il y ai de la création de défaut -->
       <p>
-        Not so obvious... So what can we learn? What are the patterns we can
-        identify?
+        So what do you think? Not so obvious... So what can we learn? What are
+        the patterns we can identify?
       </p>
       <p>
         In a primarly <PushSystemIcon /> push system, we see teams struggling
@@ -201,13 +194,20 @@ const feature: Feature = {
         In a primarly <PullSystemIcon /> pull system however, we see a smoother
         flow of work with teams able to pass on features more easily and
         continuously, leading to a more steady and predictable delivery. It's
-        not perfect, but you may have see a balai of features when teams work
-        and finish at the same time. 💃🏽
-        <!-- TODO complete this sentence -->
+        not perfect, defects are still there. But when we start to see
+        synchronisation, we can see a better quality too.
       </p>
       <p>
-        Before any conclusion, comparing two simulations is not enough. Let's be
-        more scientific here and let's generate 200 projects delivering the 20
+        Here are two buttons to simulate the same project with only one strategy
+        involved so we can compare.
+      </p>
+    </div>
+    <SimulationControls type="single" class="above" />
+    <SimulationDashboard />
+    <div class="text">
+      <p>
+        Pull systems seem better. But before any conclusion, comparing two
+        simulations is not enough. Let's generate 200 projects delivering the 20
         features of the Newsletter app and see what happens.
       </p>
     </div>
@@ -215,8 +215,11 @@ const feature: Feature = {
     <SimulationDashboard />
     <div class="flow-multiple-simulation text">
       <p>
-        Okay, now we're pretty sure! For a long time, I wanted a proof
-        <em>to trust the process</em>, that's the beauty of simulations. . It's
+        Okay, now we're pretty sure! The takt time is quite close actually. But
+        as the quality issue increase in the push system, these defects and
+        corrections pile up and generate at about 15 days of difference. For a
+        long time, I wanted a proof
+        <em>to trust the process</em>, that's the beauty of simulations. It's
         quite impossible to convince people when we're in the middle of the
         battle. If teams change every time, you are doomed to get this problem
         over and over again.
@@ -225,10 +228,11 @@ const feature: Feature = {
         Teams tend to underestimate how long a project will be. And how hard it
         will be to work with others.
       </p>
+      <!-- [dps]
       <p>
         Note that problem solving is always a good practice. The capacity of the
         team to stop and think about how they work is critical.
-      </p>
+      </p> -->
       <p>
         If we're not in a good pace, we just have to try harder. Only once.
         "Just in time" becomes "Just this time" many times. So teams
@@ -254,10 +258,10 @@ const feature: Feature = {
           target="_blank"
           rel="noopener noreferrer"
           href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.052303#:~:text=The%20%E2%80%9Cfaster%2Dis%2Dslower,evacuation%20time%20can%20be%20achieved"
-          >faster is slower</a
+          >slower is faster</a
         >
-        is counter-intuitive but it is a fact. The more we push the more we are
-        slowing down the system.
+        is counter-intuitive. The more we push the more we are slowing down the
+        system.
       </p>
       <p>
         When money and pressure are in the game, fear, uncertainty, and doubt
@@ -280,7 +284,7 @@ const feature: Feature = {
         This is the question of team work.
       </p>
     </div>
-  </div>
+  </article>
 </template>
 
 <style lang="scss">

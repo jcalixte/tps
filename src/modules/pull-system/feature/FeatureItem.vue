@@ -13,7 +13,9 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
 <template>
   <div class="feature-item bin" :class="{ live: isLive }">
     <div>
-      <span class="numeric">({{ feature.complexity }})</span> {{ feature.name }}
+      <!--  [complexity]
+      <span class="numeric">({{ feature.complexity }})</span> -->
+      {{ feature.name }}
     </div>
     <div class="numeric">
       {{ feature.leadTime }}d

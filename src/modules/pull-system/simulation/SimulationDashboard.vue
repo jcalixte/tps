@@ -53,12 +53,13 @@ const strategies: Strategy[] = ['push', 'pull']
             {{ simulationStore.meanQuality(strategy) }}
           </td>
         </tr>
+        <!-- [complexity]
         <tr>
           <td>Complexity</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanComplexity(strategy) }}
           </td>
-        </tr>
+        </tr> -->
         <!-- [dps]
         <tr>
           <td>Team work exp.</td>

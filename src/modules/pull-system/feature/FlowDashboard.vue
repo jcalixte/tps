@@ -56,10 +56,11 @@ const featureStore = useFeatureStore()
         Quality issues
         <div class="numeric">{{ featureStore.qualityIssues }}</div>
       </div>
+      <!-- [complexity]
       <div class="card">
         Mean complexity
         <div class="numeric">{{ featureStore.meanComplexity }}</div>
-      </div>
+      </div> -->
     </div>
     <FlowControls />
   </div>
