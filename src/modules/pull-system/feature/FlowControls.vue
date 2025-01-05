@@ -10,6 +10,12 @@ const NUMBER_OF_FEATURES = 20
 withDefaults(defineProps<{ withEraser?: boolean }>(), { withEraser: true })
 
 const featureStore = useFeatureStore()
+
+const confirmReset = () => {
+  if (confirm('Are you sure you want to reset the board?')) {
+    featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES)
+  }
+}
 </script>
 
 <template>
@@ -32,10 +38,7 @@ const featureStore = useFeatureStore()
       <button @click="featureStore.nextDay('problem-solving')" :disabled="featureStore.isProjectFinished">
         <ProblemSolvingIcon color="white" />
       </button> -->
-      <button
-        v-if="withEraser"
-        @click="featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES)"
-      >
+      <button v-if="withEraser" @click="confirmReset">
         <EraserIcon color="white" />
       </button>
     </div>
