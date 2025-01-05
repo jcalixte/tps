@@ -20,7 +20,7 @@ const strategies: Strategy[] = ['push', 'pull']
     <table>
       <thead>
         <tr>
-          <th>mean values</th>
+          <th></th>
           <th class="numeric">push</th>
           <th class="numeric">pull</th>
           <!-- [dps]
@@ -30,13 +30,13 @@ const strategies: Strategy[] = ['push', 'pull']
       </thead>
       <tbody>
         <tr>
-          <td>Total days</td>
+          <td>Total days to finish</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanTotalDays(strategy) }}
           </td>
         </tr>
         <tr>
-          <td>Lead time</td>
+          <td>Mean lead time</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanLeadTime(strategy) }}
           </td>
@@ -48,7 +48,7 @@ const strategies: Strategy[] = ['push', 'pull']
           </td>
         </tr>
         <tr>
-          <td>Quality issue</td>
+          <td>Quality issues</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{ simulationStore.meanQuality(strategy) }}
           </td>
