@@ -93,6 +93,7 @@ export const initBoard = (
     feature.status = pickRandomElement(['doing', 'done'])
     feature.step = step.stepIndex
     feature.qualityIssue = 0
+    feature.leadTime = 0
   })
 
   return initialFeatures
