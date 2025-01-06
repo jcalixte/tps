@@ -160,9 +160,9 @@ const feature: Feature = {
       </p>
       <p>
         To make this happen we first need to setup blue bins: our security
-        stocks Blue bins make sure teams can work without any blockers. The next
-        team will always have material to transform. Here, we'll have 2 blue
-        bins per team.
+        stocks. Blue bins make sure teams can work without any blockers. The
+        next team will always have material to transform. Here, we'll have 2
+        blue bins per team, it seems a good tradeoff.
       </p>
       <!-- [dps]
      <h3>Problem solving: no production, just reflection</h3>
