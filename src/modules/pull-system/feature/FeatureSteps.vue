@@ -32,7 +32,7 @@ onMounted(() => featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES))
   align-items: stretch;
   margin: 0 1rem;
   border: 3px solid var(--primary-color);
-  height: 80vh;
+  height: 84vh;
   width: 100%;
   overflow-y: hidden;
 
@@ -51,12 +51,10 @@ onMounted(() => featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES))
 
   li {
     flex: 1;
-    min-height: 100%;
     margin: 0;
     color: var(--primary-color);
     display: flex;
     flex-direction: column;
-    max-height: 100%;
   }
 }
 </style>
