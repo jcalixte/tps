@@ -62,11 +62,11 @@ export const useFeatureStore = defineStore('feature', {
     qualityIssues: (state) =>
       state.features.map((f) => f.qualityIssue).reduce((a, b) => a + b, 0),
     meanQualityIssue: (state) => getMeanQualityIssue(state.features),
-    taktTime: (state): string => {
-      const taktTime = (
+    cycleTime: (state): string => {
+      const cycleTime = (
         state.meta.totalDays / state.features.filter(isFeatureDone).length || 0
       ).toFixed(2)
-      return taktTime === 'Infinity' ? '-' : taktTime
+      return cycleTime === 'Infinity' ? '-' : cycleTime
     },
     featuresGroupedByStep: (state) => {
       const groupedByStep: Record<number, Feature[]> = {}
@@ -82,12 +82,12 @@ export const useFeatureStore = defineStore('feature', {
       return groupedByStep
     },
     eta(): string {
-      if (this.taktTime === '-') {
+      if (this.cycleTime === '-') {
         return '-'
       }
 
       const eta = (
-        parseFloat(this.taktTime) *
+        parseFloat(this.cycleTime) *
         (this.features.filter((feature) => !isFeatureDone(feature)).length +
           this.backlog.length)
       ).toFixed(2)

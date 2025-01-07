@@ -42,9 +42,9 @@ const strategies: Strategy[] = ['push', 'pull']
           </td>
         </tr>
         <tr>
-          <td>Takt time</td>
+          <td>Cycle time</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
-            {{ simulationStore.meanTaktTime(strategy) }}
+            {{ simulationStore.meanCycleTime(strategy) }}
           </td>
         </tr>
         <tr>

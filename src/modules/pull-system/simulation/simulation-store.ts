@@ -8,7 +8,7 @@ import { defineStore } from 'pinia'
 
 type Mean = {
   leadTimeSum: number
-  taktTimeSum: number
+  cycleTimeSum: number
   complexitySum: number
   qualityIssueSum: number
   teamWorkExperienceSum: number
@@ -25,7 +25,7 @@ type State = {
 
 const initMean = (): Mean => ({
   leadTimeSum: 0,
-  taktTimeSum: 0,
+  cycleTimeSum: 0,
   complexitySum: 0,
   qualityIssueSum: 0,
   teamWorkExperienceSum: 0,
@@ -99,7 +99,7 @@ export const useSimulationStore = defineStore('dashboard', {
 
       this.dashboards.push(dashboard)
       this.mean[strategy].leadTimeSum += dashboard.analysis.meanLeadTime
-      this.mean[strategy].taktTimeSum +=
+      this.mean[strategy].cycleTimeSum +=
         dashboard.meta.totalDays / newState.features.length
       this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
       this.mean[strategy].qualityIssueSum += dashboard.analysis.meanQualityIssue
@@ -131,9 +131,9 @@ export const useSimulationStore = defineStore('dashboard', {
         state.mean[strategy].leadTimeSum,
         state.mean[strategy].simulations
       ),
-    meanTaktTime: (state) => (strategy: Strategy) =>
+    meanCycleTime: (state) => (strategy: Strategy) =>
       getRound(
-        state.mean[strategy].taktTimeSum,
+        state.mean[strategy].cycleTimeSum,
         state.mean[strategy].simulations
       ),
     meanComplexity: (state) => (strategy: Strategy) =>

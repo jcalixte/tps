@@ -7,7 +7,7 @@ defineProps<{
 }>()
 
 const simulationStore = useSimulationStore()
-const NUMBER_OF_SIMULATION = 200
+const NUMBER_OF_SIMULATION = 500
 
 // [dps]
 // const strategies: Strategy[] = ['push', 'pull', 'push-dps', 'pull-dps']

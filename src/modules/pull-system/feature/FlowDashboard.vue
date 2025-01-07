@@ -46,9 +46,9 @@ const featureStore = useFeatureStore()
         </div>
       </div>
       <div class="card">
-        Takt time
+        Cycle time
         <div class="data">
-          <span class="numeric">{{ featureStore.taktTime }}</span>
+          <span class="numeric">{{ featureStore.cycleTime }}</span>
           days
         </div>
       </div>

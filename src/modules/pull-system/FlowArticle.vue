@@ -43,9 +43,9 @@ const feature: Feature = {
         different strategy patterns and which is the most effective.
       </p>
       <p>
-        Let's see what happens when we want to create a Newsletter mobile app.
-        We have some functionalities to implement and we want to measure how
-        long it takes.
+        Let's see what happens when we want to create a news mobile app. We have
+        some functionalities to implement and we want to measure how long it
+        takes.
       </p>
       <p>
         <em
@@ -206,19 +206,19 @@ const feature: Feature = {
     <SimulationDashboard />
     <div class="text">
       <p>
-        Pull systems seem better. But before any conclusion, comparing two
-        simulations is not enough. Let's generate 200 projects delivering the 20
-        features of the Newsletter app and see what happens.
+        Let's simulate... 1000 news mobile app! 500 for each system and see what
+        are the trends.
       </p>
     </div>
     <SimulationControls type="multiple" class="above" />
     <SimulationDashboard />
     <div class="flow-multiple-simulation text">
       <p>
-        Okay, now we're pretty sure! The takt time is quite close actually. But
-        as the quality issue increase in the push system, these defects and
-        corrections pile up and generate at about 15 days of difference. For a
-        long time, I wanted a proof
+        Okay, now we're pretty sure! The cycle time - the time needed to
+        complete one feature - is quite close actually. But as the quality issue
+        increase in the push system, these defects and corrections pile up and
+        generate at about 15 days of difference. For a long time, I wanted a
+        proof
         <em>to trust the process</em>, that's the beauty of simulations. It's
         quite impossible to convince people when we're in the middle of the
         battle. If teams change every time, you are doomed to get this problem
