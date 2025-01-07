@@ -5,11 +5,14 @@ import FeatureSteps from '@/modules/pull-system/feature/FeatureSteps.vue'
 import FlowDashboard from '@/modules/pull-system/feature/FlowDashboard.vue'
 import SimulationControls from '@/modules/pull-system/simulation/SimulationControls.vue'
 import SimulationDashboard from '@/modules/pull-system/simulation/SimulationDashboard.vue'
-// import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
+// [dps] import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
 import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import FeatureItem from '@/modules/pull-system/feature/FeatureItem.vue'
 import QualityIssue from '@/modules/pull-system/feature/QualityIssue.vue'
+import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
+import { getRound } from '@/utils'
+import { computed } from 'vue'
 
 const feature: Feature = {
   name: 'As a user I can have access to the latest news from the homepage.',
@@ -19,6 +22,20 @@ const feature: Feature = {
   status: 'doing',
   step: 2
 }
+
+const simulationStore = useSimulationStore()
+const leadTimeDelta = computed(() =>
+  (
+    parseFloat(simulationStore.meanLeadTime('push')) -
+    parseFloat(simulationStore.meanLeadTime('pull'))
+  ).toFixed(2)
+)
+
+const SIMULATION_THRESHOLD = 20
+
+const displaySimulationConclusion = computed(() => {
+  return simulationStore.simulationsDone > SIMULATION_THRESHOLD
+})
 </script>
 
 <template>
@@ -178,10 +195,6 @@ const feature: Feature = {
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
     <div class="manual-simulation text">
-      <!-- TODO: Mettre ici le comportement en pull system et en push system.
-     En push system, on voit un goulot d'étranglement.
-     En pull system, on voit petit à petit du danse avec une passation de plus en plus facile.
-     Il n'empêche que dans les deux systèmes il y ai de la création de défaut -->
       <p>
         So what do you think? Not so obvious... So what can we learn? What are
         the patterns we can identify?
@@ -193,10 +206,13 @@ const feature: Feature = {
       </p>
       <p>
         In a primarly <PullSystemIcon /> pull system however, we see a smoother
-        flow of work with teams able to pass on features more easily and
-        continuously, leading to a more steady and predictable delivery. It's
-        not perfect, defects are still there. But when we start to see
-        synchronisation, we can see a better quality too.
+        flow of work with teams able to pass on features continuously, leading
+        to a more steady and predictable delivery. It's not perfect, defects are
+        still there. But when we start to see synchronisation, we can see a
+        better quality too. That enables the product to be deliver piece by
+        piece to the user. Furthermore! The batches of features going live are
+        smaller and this is great for the user who is waiting less time before
+        enjoying the new features.
       </p>
       <p>
         Here are two buttons to simulate the same project with only one strategy
@@ -207,23 +223,29 @@ const feature: Feature = {
     <SimulationDashboard />
     <div class="text">
       <p>
-        Let's simulate... 1000 news mobile app! 500 for each system and see what
-        are the trends.
+        Okay, we generally see that the <PullSystemIcon /> pull system is a bit
+        quicker, features are delivered sooner even if the cycle time is quite
+        the same. The real difference seems to be on the number of issues. In a
+        <PullSystemIcon /> pull system, teams are focus on a small number of
+        feature helping them having less overburden.
+      </p>
+      <p>
+        Now, what happens when we have a lot of projects to deliver? Are
+        patterns the same? Let's simulate... 1000 news mobile app! 500 for each
+        system and see what are the trends.
       </p>
     </div>
     <SimulationControls type="multiple" class="above" />
-    <SimulationDashboard />
     <div class="flow-multiple-simulation text">
-      <p>
+      <p v-if="displaySimulationConclusion">
         Okay, now we're pretty sure! The cycle time - the time needed to
         complete one feature - is quite close actually. But as the quality issue
         increase in the push system, these defects and corrections pile up and
-        generate at about 15 days of difference. For a long time, I wanted a
-        proof
-        <em>to trust the process</em>, that's the beauty of simulations. It's
-        quite impossible to convince people when we're in the middle of the
-        battle. If teams change every time, you are doomed to get this problem
-        over and over again.
+        generate at about <span class="numeric">{{ leadTimeDelta }}</span>
+        days of difference.
+      </p>
+      <p v-else>
+        Waiting for at least {{ SIMULATION_THRESHOLD }} simulations...
       </p>
       <p>
         Teams tend to underestimate how long a project will be. And how hard it
@@ -279,10 +301,11 @@ const feature: Feature = {
       </p>
       <p>
         So the <PullSystemIcon /> pull system is here to change our priority.
-        Developpers are the clients of the Designer team, as well as Designers
-        are the client of the Product team. Focusing on the lead time is asking
-        to the next team: "Is this what you need? How can we help each other?".
-        This is the question of team work.
+        Developpers are the clients of the Designer team, as Designers are the
+        client of the Product team. Focusing on the lead time is asking to the
+        next team: "Is this what you need? How can we give you everything you
+        need to deliver quality too?". This is <em>the true nature</em> of team
+        work.
       </p>
     </div>
   </article>
