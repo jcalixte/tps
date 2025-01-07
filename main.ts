@@ -26,15 +26,6 @@ if (display === 'house-only') {
   document.querySelectorAll('.hud')?.forEach((hud) => hud.remove())
 }
 
-const size = params.get('size')
-
-if (size === 'small') {
-  const body = document.querySelector('body')
-  if (body) {
-    body.style.fontSize = '15px'
-  }
-}
-
 const focusElements = params.getAll('focus')
 
 if (focusElements.length > 0) {
