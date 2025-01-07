@@ -117,7 +117,8 @@ const feature: Feature = {
         <QualityIssue class="inline" :quality-issue="feature.qualityIssue" />
         are the number of defects the feature has during the flow. For the sake
         of simplicity, we assume teams are capable of detecting every defects
-        and we never deliver defects.
+        and we never deliver defects. This means each defect will be reworked by
+        the team that introduced it.
       </p>
       <p>
         Okay! We have 20 features to deliver. It takes one day for each team to
