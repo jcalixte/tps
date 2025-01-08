@@ -45,13 +45,13 @@ const featureStore = useFeatureStore()
           days
         </div>
       </div>
-      <div class="card">
+      <!-- <div class="card">
         Cycle time
         <div class="data">
           <span class="numeric">{{ featureStore.cycleTime }}</span>
           days
         </div>
-      </div>
+      </div> -->
       <div class="card">
         Quality issues
         <div class="numeric">{{ featureStore.qualityIssues }}</div>

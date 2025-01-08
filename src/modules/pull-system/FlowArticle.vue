@@ -24,12 +24,12 @@ const feature: Feature = {
 }
 
 const simulationStore = useSimulationStore()
-const leadTimeDelta = computed(() =>
-  (
+const leadTimeDeltaFloat = computed(
+  () =>
     parseFloat(simulationStore.meanLeadTime('push')) -
     parseFloat(simulationStore.meanLeadTime('pull'))
-  ).toFixed(2)
 )
+const leadTimeDelta = computed(() => leadTimeDeltaFloat.value.toFixed(2))
 
 const SIMULATION_THRESHOLD = 20
 
@@ -200,9 +200,11 @@ const displaySimulationConclusion = computed(() => {
         the patterns we can identify?
       </p>
       <p>
-        In a primarly <PushSystemIcon /> push system, we see teams struggling
-        and stuck reworking the same features again and again to finally having
-        all features live all at once.
+        In a primarly <PushSystemIcon /> push system, depending on your
+        simulation. You can see teams going just fine. But when a problem
+        occurs, it starts to snowball. We see teams struggling and reworking the
+        same features again and again to finally having all features delivered
+        all at once.
       </p>
       <p>
         In a primarly <PullSystemIcon /> pull system however, we see a smoother
@@ -224,10 +226,9 @@ const displaySimulationConclusion = computed(() => {
     <div class="text">
       <p>
         Okay, we generally see that the <PullSystemIcon /> pull system is a bit
-        quicker, features are delivered sooner even if the cycle time is quite
-        the same. The real difference seems to be on the number of issues. In a
-        <PullSystemIcon /> pull system, teams are focus on a small number of
-        feature helping them having less overburden.
+        quicker, features are delivered sooner. The real difference seems to be
+        on the number of issues. In a <PullSystemIcon /> pull system, teams are
+        focus on a small number of feature helping them having less overburden.
       </p>
       <p>
         Now, what happens when we have a lot of projects to deliver? Are
@@ -238,11 +239,12 @@ const displaySimulationConclusion = computed(() => {
     <SimulationControls type="multiple" class="above" />
     <div class="flow-multiple-simulation text">
       <p v-if="displaySimulationConclusion">
-        Okay, now we're pretty sure! The cycle time - the time needed to
-        complete one feature - is quite close actually. But as the quality issue
-        increase in the push system, these defects and corrections pile up and
-        generate at about <span class="numeric">{{ leadTimeDelta }}</span>
-        days of difference.
+        Okay, now we're pretty sure! As the quality issue increase in the
+        <PushSystemIcon /> push system, these defects and corrections pile up
+        and generate at about
+        <span class="numeric">{{ leadTimeDelta }}</span>
+        days of difference<template v-if="leadTimeDeltaFloat > 12">!!</template
+        ><template v-else>.</template>
       </p>
       <p v-else>
         Waiting for at least {{ SIMULATION_THRESHOLD }} simulations...
