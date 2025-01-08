@@ -250,8 +250,9 @@ const displaySimulationConclusion = computed(() => {
         Waiting for at least {{ SIMULATION_THRESHOLD }} simulations...
       </p>
       <p>
-        Teams tend to underestimate how long a project will be. And how hard it
-        will be to work with others.
+        Teams tend to underestimate how long a project will be and how hard it
+        will be to work with others. The bad news is this is what I've seen in a
+        lot of software projects.
       </p>
       <!-- [dps]
       <p>
@@ -266,28 +267,14 @@ const displaySimulationConclusion = computed(() => {
         with a "I've done my job, if the project fails it's not my fault.". The
         fact is that it's nobody's fault, it's a system.
       </p>
+      <!-- [dps]
       <p>
         Short term objectives become the norm. It is never the right time to do
         problem solving. To think on how we work.
-      </p>
-      <p>
-        Pull system must be a constrain not a choice with the idea to build
-        around.
-      </p>
+      </p> -->
     </div>
     <SeparatorIcon />
     <div class="flow-conclusion text">
-      <p>
-        The fact that
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.052303#:~:text=The%20%E2%80%9Cfaster%2Dis%2Dslower,evacuation%20time%20can%20be%20achieved"
-          >slower is faster</a
-        >
-        is counter-intuitive. The more we push the more we are slowing down the
-        system.
-      </p>
       <p>
         When money and pressure are in the game, fear, uncertainty, and doubt
         spread out rapidly. So we rush, as fast as we can, and when a team has
@@ -298,11 +285,22 @@ const displaySimulationConclusion = computed(() => {
         product team will prepare their features, designers will design every
         screens, developers will rush to code. Then, they struggle to get these
         pieces to the very end. So the fear of having nothing to give to the
-        next team pushes us to produce just in case. Bugs lead to more bugs that
-        lead to more bugs. The productivity drops.
+        next team pushes us to produce just in case. Bugs lead to more bugs
+        leading to more bugs. The productivity drops.
       </p>
       <p>
-        So the <PullSystemIcon /> pull system is here to change our priority.
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.052303#:~:text=The%20%E2%80%9Cfaster%2Dis%2Dslower,evacuation%20time%20can%20be%20achieved"
+          >Slower is faster</a
+        >
+        is counter-intuitive. The more we push the more we are slowing down the
+        system. The <PullSystemIcon /> pull system must be a constrain not a
+        choice with the idea to build around.
+      </p>
+      <p>
+        The <PullSystemIcon /> pull system is here to change our priority.
         Developpers are the clients of the Designer team, as Designers are the
         client of the Product team. Focusing on the lead time is asking to the
         next team: "Is this what you need? How can we give you everything you
