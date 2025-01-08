@@ -196,29 +196,31 @@ const displaySimulationConclusion = computed(() => {
     <FeatureSteps alias="playground" />
     <div class="manual-simulation text">
       <p>
-        So what do you think? Not so obvious... So what can we learn? What are
-        the patterns we can identify?
+        So what do you think? What can we learn? What are the patterns we can
+        identify? Well it depends, but overall...
       </p>
+      <ol>
+        <li>
+          In a primarly <PushSystemIcon /> push system, you can see teams going
+          just fine but when a problem occurs, it starts to snowball. Teams
+          start to struggle and need to rework the same features again and again
+          to finally deliver many features all at once.
+        </li>
+        <li>
+          In a primarly <PullSystemIcon /> pull system however, we see a
+          smoother flow of work with teams able to pass on features
+          continuously, leading to a more steady and predictable delivery. It's
+          not perfect, defects are still there. But when we start to see
+          synchronisation, we can see a better quality too. That enables the
+          product to be deliver piece by piece to the user. Furthermore! The
+          batches of features going live are smaller and, for the user, this is
+          great!
+        </li>
+      </ol>
       <p>
-        In a primarly <PushSystemIcon /> push system, depending on your
-        simulation. You can see teams going just fine. But when a problem
-        occurs, it starts to snowball. We see teams struggling and reworking the
-        same features again and again to finally having all features delivered
-        all at once.
-      </p>
-      <p>
-        In a primarly <PullSystemIcon /> pull system however, we see a smoother
-        flow of work with teams able to pass on features continuously, leading
-        to a more steady and predictable delivery. It's not perfect, defects are
-        still there. But when we start to see synchronisation, we can see a
-        better quality too. That enables the product to be deliver piece by
-        piece to the user. Furthermore! The batches of features going live are
-        smaller and this is great for the user who is waiting less time before
-        enjoying the new features.
-      </p>
-      <p>
-        Here are two buttons to simulate the same project with only one strategy
-        involved so we can compare.
+        Now, to easily compare the two systems: let's simulate whole project
+        depending on if the teams use <PushSystemIcon /> push system or
+        <PullSystemIcon /> pull system.
       </p>
     </div>
     <SimulationControls type="single" class="above" />
