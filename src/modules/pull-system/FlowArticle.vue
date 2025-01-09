@@ -40,35 +40,35 @@ const displaySimulationConclusion = computed(() => {
 
 <template>
   <article class="flow-article">
-    <h1>Pull system</h1>
+    <h1>Pull System</h1>
     <!-- <h2>Ekiden (駅伝): long-distance running relay race</h2> -->
     <div class="flow-intro text">
       <p>
-        In lean manufacturing, one key aspect is the notion of
-        <em>lead time</em>: the time needed by the company to deliver the
-        product requested by the client starting when the client makes the
-        order. For lean practitioners, the way to deliver at the right time is
-        by improving how their delivery system works with... The pull system!
+        In lean manufacturing, a key concept is <em>lead time</em>: the time it
+        takes for a company to deliver a product from the moment a client places
+        an order. For lean practitioners, ensuring timely delivery involves
+        optimizing their delivery system using... the pull system!
       </p>
       <p>
-        The pull system is in opposition of the push system. Instead of trying
-        to make everyone work at their maximum capacity, we try to improve the
-        time it needs to deliver a feature.
+        The pull system contrasts with the push system. Instead of trying to
+        make everyone work at maximum capacity, the focus shifts to improving
+        the time required to deliver a feature.
       </p>
       <p>
-        I wanted to create a simulation to see what are the consequences of
-        different strategy patterns and which is the most effective.
+        I wanted to create a simulation to explore the consequences of different
+        strategic approaches and identify which one is most effective.
       </p>
       <p>
-        Let's see what happens when we want to create a news mobile app. We have
-        some functionalities to implement and we want to measure how long it
-        takes.
+        Imagine we're developing a mobile news app. We have several
+        functionalities to implement and want to measure how long each takes to
+        complete.
       </p>
       <p>
-        <em
-          >Note: as we'll visualize work done between teams, it needs space so
-          this article has a better experience on desktop.</em
-        >
+        <em>
+          Note: This article includes visualizations of team workflows that can
+          be too large for a mobile phone. For the best experience, please view
+          it on a desktop.
+        </em>
       </p>
     </div>
     <SeparatorIcon />
@@ -103,21 +103,20 @@ const displaySimulationConclusion = computed(() => {
     <!-- <SeparatorIcon /> -->
     <div class="flow-setup text">
       <p>
-        The project has just started, our goal is to make a product as fast as
-        you can. You'll have teams dedicated to the product, the design, the
-        coding and one making sure it is going live.
+        The project has just begun, and our goal is to deliver a product as
+        quickly as possible. We’ll have dedicated teams for product design,
+        coding, and ensuring the product goes live.
       </p>
       <p>
-        First things first, what is a feature? A feature is a piece of software
-        that enables <em>things</em> for the user. It can be the capability to
-        read articles or to share them or even to be able to read one without
-        the need for internet connection. In our simulation, a feature will be
-        represented as follow:
+        First, what is a feature? A feature is a software component that
+        provides a functionality for the user. Examples include the ability to
+        read articles, share content, or use the app offline. In our simulation,
+        a feature is represented as follows:
       </p>
       <FeatureItem :feature="feature" />
       <p>
-        It starts with the intention "<code>{{ feature.name }}</code
-        >". This is what we'll add to the mobile app.
+        Each feature starts with an intention: "<code>{{ feature.name }}</code
+        >". This defines what we will add to the mobile app.
       </p>
       <!-- [complexity]
       <p>
@@ -126,61 +125,48 @@ const displaySimulationConclusion = computed(() => {
         chance we introduce a defect.
       </p> -->
       <p>
-        <span class="numeric">{{ feature.leadTime }}d</span> is the number of
-        days the teams work on the feature. The goal is to reduce this number
-        and deliver as fast as possible.
+        <span class="numeric">{{ feature.leadTime }}d</span> indicates the
+        number of days teams work on the feature. The goal is to minimize this
+        number and deliver features as quickly as possible.
       </p>
       <p>
         <QualityIssue class="inline" :quality-issue="feature.qualityIssue" />
-        are the number of defects the feature has during the flow. For the sake
-        of simplicity, we assume teams are capable of detecting every defects
-        and we never deliver defects. This means each defect will be reworked by
-        the team that introduced it.
+        shows the number of defects found in the feature during its workflow.
+        For simplicity, we assume teams can identify all defects, and no
+        defective features are delivered. Any defect must be reworked by the
+        team that caused it.
       </p>
       <p>
-        Okay! We have 20 features to deliver. It takes one day for each team to
-        finish their part for each feature.
+        Okay! We have 20 features to deliver. Each team takes one day to
+        complete their part for a feature.
       </p>
       <!-- [dps] <p>Each day, you can choose between 3 strategies:</p> -->
-      <p>Each day, you can choose between 2 strategies:</p>
+      <p>Every day, you can choose between two strategies:</p>
       <ol>
         <li><PushSystemIcon /> Push system</li>
         <li><PullSystemIcon /> Pull system</li>
-        <!-- [dps]
-      <li>
-        <ProblemSolvingIcon /> Problem solving
-      </li> -->
       </ol>
       <p>
-        In this article we'll focus on how these strategies are efficient and
-        what are the impact on the quality the teams produce. Let's dive in each
-        strategy!
+        In this article, we’ll examine how these strategies affect efficiency
+        and quality. Let’s explore each one!
       </p>
-      <h3>The push system: start as many features as possible</h3>
+      <h3>The Push System: Start as Many Features as Possible</h3>
       <p>
-        By pushing features from the start, we try to maximize the time worked
-        by teams on the product. This way, no money is wasted, everyone has
-        everytime something to do.
+        In the push system, we aim to maximize the time teams spend working on
+        the product. This ensures no downtime, as everyone always has tasks to
+        complete.
       </p>
+      <h3>The Pull System: Produce Features When the Next Team Needs Them</h3>
       <p>
-        But it comes with a cost: the more feature ongoing in parallel, the more
-        it is difficult to focus and it is more likely to introduce a defect..
-      </p>
-      <h3>
-        The pull system: produce features only when the next team needs it
-      </h3>
-      <p>
-        Now, instead of pushing features, we wait for the next team to be ready.
-        It comes from the assumptions that we will never reach the best score
-        ever aka "the push system where everything goes right". We know we
-        prefer waiting for next team to be ready before doing some extra work
-        than having stock of feature pre-baked.
+        Instead of pushing features forward, the pull system waits until the
+        next team is ready. This approach acknowledges that the ideal "push
+        system where everything goes perfectly" is unrealistic. By prioritizing
+        readiness, we avoid creating a backlog of pre-prepared features.
       </p>
       <p>
-        To make this happen we first need to setup blue bins: our security
-        stocks. Blue bins make sure teams can work without any blockers. The
-        next team will always have material to transform. Here, we'll have 2
-        blue bins per team, it seems a good tradeoff.
+        To implement this, we introduce "blue bins" as safety stock. These bins
+        ensure teams always have work ready to process without delays. For our
+        simulation, each team has two blue bins, which provides a good balance.
       </p>
       <!-- [dps]
      <h3>Problem solving: no production, just reflection</h3>
@@ -196,31 +182,28 @@ const displaySimulationConclusion = computed(() => {
     <FeatureSteps alias="playground" />
     <div class="manual-simulation text">
       <p>
-        So what do you think? What can we learn? What are the patterns we can
-        identify? Well it depends, but overall...
+        What insights can we gain from these strategies? Here are some
+        observations:
       </p>
       <ol>
         <li>
-          In a primarly <PushSystemIcon /> push system, you can see teams going
-          just fine but when a problem occurs, it starts to snowball. Teams
-          start to struggle and need to rework the same features again and again
-          to finally deliver many features all at once.
+          In a predominantly <PushSystemIcon /> push system, teams perform well
+          initially, but issues can snowball when problems arise. Teams
+          struggle, leading to repeated rework, and many features are delivered
+          all at once.
         </li>
         <li>
-          In a primarly <PullSystemIcon /> pull system however, we see a
-          smoother flow of work with teams able to pass on features
-          continuously, leading to a more steady and predictable delivery. It's
-          not perfect, defects are still there. But when we start to see
-          synchronisation, we can see a better quality too. That enables the
-          product to be deliver piece by piece to the user. Furthermore! The
-          batches of features going live are smaller and, for the user, this is
-          great!
+          A <PullSystemIcon /> pull system creates a smoother workflow, with
+          teams passing features along continuously. This results in steadier
+          and more predictable delivery. Although defects still occur, the
+          synchronized workflow improves quality. Features are delivered in
+          smaller batches, which benefits users.
         </li>
       </ol>
       <p>
-        Now, to easily compare the two systems: let's simulate whole project
-        depending on if the teams use <PushSystemIcon /> push system or
-        <PullSystemIcon /> pull system.
+        Let’s compare the two systems by simulating the entire project using
+        either the <PushSystemIcon /> push system or the <PullSystemIcon /> pull
+        system.
       </p>
     </div>
     <SimulationControls type="single" class="above" />
@@ -241,20 +224,20 @@ const displaySimulationConclusion = computed(() => {
     <SimulationControls type="multiple" class="above" />
     <div class="flow-multiple-simulation text">
       <p v-if="displaySimulationConclusion">
-        Okay, now we're pretty sure! As the quality issue increase in the
-        <PushSystemIcon /> push system, these defects and corrections pile up
-        and generate at about
-        <span class="numeric">{{ leadTimeDelta }}</span>
-        days of difference<template v-if="leadTimeDeltaFloat > 12">!!</template
+        Now we’re pretty confident! As quality issues increase in the
+        <PushSystemIcon /> push system, defects and corrections accumulate,
+        leading to approximately
+        <span class="numeric">{{ leadTimeDelta }}</span> days of delay
+        <template v-if="leadTimeDeltaFloat > 12">!!</template
         ><template v-else>.</template>
       </p>
       <p v-else>
         Waiting for at least {{ SIMULATION_THRESHOLD }} simulations...
       </p>
       <p>
-        Teams tend to underestimate how long a project will be and how hard it
-        will be to work with others. The bad news is this is what I've seen in a
-        lot of software projects.
+        Teams often underestimate the complexity of a project and the challenges
+        of collaborating with others. Unfortunately, this is something I’ve
+        observed in many software projects.
       </p>
       <!-- [dps]
       <p>
@@ -262,12 +245,14 @@ const displaySimulationConclusion = computed(() => {
         team to stop and think about how they work is critical.
       </p> -->
       <p>
-        If we're not in a good pace, we just have to try harder. Only once.
-        "Just in time" becomes "Just this time" many times. So teams
-        overproduce. Creating stock and latent defects the teams need to rework.
-        The worse the project do, the more silot we become and we tend to argue
-        with a "I've done my job, if the project fails it's not my fault.". The
-        fact is that it's nobody's fault, it's a system.
+        If a project isn’t progressing well, the response is often to "try
+        harder"—just once. However, "Just in time" frequently turns into "Just
+        this time" over and over. This approach causes teams to overproduce,
+        creating unnecessary stock and latent defects that require rework. The
+        more the project struggles, the more siloed teams become, leading to
+        blame-shifting: "I did my part; if the project fails, it’s not my
+        fault." The reality is, it’s not anyone’s fault—it’s the system that’s
+        broken.
       </p>
       <!-- [dps]
       <p>
@@ -278,36 +263,29 @@ const displaySimulationConclusion = computed(() => {
     <SeparatorIcon />
     <div class="flow-conclusion text">
       <p>
-        When money and pressure are in the game, fear, uncertainty, and doubt
-        spread out rapidly. So we rush, as fast as we can, and when a team has
-        nothing to do, it becomes a disaster: money are being burned.
+        When under pressure to meet deadlines, fear and uncertainty can cause
+        teams to overproduce. Product teams prepare extra features, designers
+        create unnecessary screens, and developers rush through coding. This
+        "just in case" mentality results in wasted effort and latent defects
+        that require rework, slowing productivity.
       </p>
       <p>
-        Teams will overproduce. They will do every pieces they can as they can:
-        product team will prepare their features, designers will design every
-        screens, developers will rush to code. Then, they struggle to get these
-        pieces to the very end. So the fear of having nothing to give to the
-        next team pushes us to produce just in case. Bugs lead to more bugs
-        leading to more bugs. The productivity drops.
-      </p>
-      <p>
+        Counterintuitively,
         <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.052303#:~:text=The%20%E2%80%9Cfaster%2Dis%2Dslower,evacuation%20time%20can%20be%20achieved"
-          >Slower is faster</a
-        >
-        is counter-intuitive. The more we push the more we are slowing down the
-        system. The <PullSystemIcon /> pull system must be a constrain not a
-        choice with the idea to build around.
+          >slower is often faster</a
+        >. Excessive pushing slows down the system, while a
+        <PullSystemIcon /> pull system enforces constraints that prioritize
+        thoughtful delivery.
       </p>
       <p>
-        The <PullSystemIcon /> pull system is here to change our priority.
-        Developpers are the clients of the Designer team, as Designers are the
-        client of the Product team. Focusing on the lead time is asking to the
-        next team: "Is this what you need? How can we give you everything you
-        need to deliver quality too?". This is <em>the true nature</em> of team
-        work.
+        The pull system shifts priorities, treating developers as clients of the
+        design team, who in turn are clients of the product team. By focusing on
+        lead time, teams ask, "What do you need to succeed, and how can we
+        support you in delivering quality?" This embodies
+        <em>the true essence</em> of teamwork.
       </p>
     </div>
   </article>
