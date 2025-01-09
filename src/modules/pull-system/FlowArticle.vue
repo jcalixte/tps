@@ -165,8 +165,8 @@ const displaySimulationConclusion = computed(() => {
       </p>
       <p>
         To implement this, we introduce "blue bins" as safety stock. These bins
-        ensure teams always have work ready to process without delays. For our
-        simulation, each team has two blue bins, which provides a good balance.
+        ensure teams always have work ready to process without delays but we
+        stop whenever blue bins are full.
       </p>
       <!-- [dps]
      <h3>Problem solving: no production, just reflection</h3>
@@ -182,8 +182,8 @@ const displaySimulationConclusion = computed(() => {
     <FeatureSteps alias="playground" />
     <div class="manual-simulation text">
       <p>
-        What insights can we gain from these strategies? Here are some
-        observations:
+        Well, what do you think? Not so simple... What are the insights from
+        these strategies? Here are some observations:
       </p>
       <ol>
         <li>
@@ -206,7 +206,7 @@ const displaySimulationConclusion = computed(() => {
         system.
       </p>
     </div>
-    <SimulationControls type="single" class="above" />
+    <SimulationControls type="single" />
     <SimulationDashboard />
     <div class="text">
       <p>
@@ -216,12 +216,11 @@ const displaySimulationConclusion = computed(() => {
         focus on a small number of feature helping them having less overburden.
       </p>
       <p>
-        Now, what happens when we have a lot of projects to deliver? Are
-        patterns the same? Let's simulate... 1000 news mobile app! 500 for each
-        system and see what are the trends.
+        Do you mind comparing more projects? What happens when we simulate 1000
+        news mobile app! Are patterns the same?
       </p>
     </div>
-    <SimulationControls type="multiple" class="above" />
+    <SimulationControls type="multiple" />
     <div class="flow-multiple-simulation text">
       <p v-if="displaySimulationConclusion">
         Now we’re pretty confident! As quality issues increase in the
@@ -234,25 +233,22 @@ const displaySimulationConclusion = computed(() => {
       <p v-else>
         Waiting for at least {{ SIMULATION_THRESHOLD }} simulations...
       </p>
-      <p>
-        Teams often underestimate the complexity of a project and the challenges
-        of collaborating with others. Unfortunately, this is something I’ve
-        observed in many software projects.
-      </p>
       <!-- [dps]
       <p>
         Note that problem solving is always a good practice. The capacity of the
         team to stop and think about how they work is critical.
       </p> -->
       <p>
-        If a project isn’t progressing well, the response is often to "try
-        harder"—just once. However, "Just in time" frequently turns into "Just
-        this time" over and over. This approach causes teams to overproduce,
-        creating unnecessary stock and latent defects that require rework. The
-        more the project struggles, the more siloed teams become, leading to
-        blame-shifting: "I did my part; if the project fails, it’s not my
-        fault." The reality is, it’s not anyone’s fault—it’s the system that’s
-        broken.
+        Teams often underestimate the complexity of a project and the challenges
+        of collaborating with others. Unfortunately, this is something I’ve
+        observed in many software projects. If a software isn’t progressing
+        well, the response is often to "try harder"—just once. However, "Just in
+        time" frequently turns into "Just this time" over and over. This
+        approach causes teams to overproduce, creating unnecessary stock and
+        latent defects that require rework. The more the project struggles, the
+        more siloed teams become, leading to blame-shifting: "I did my part; if
+        the project fails, it’s not my fault." The reality is, it’s not anyone’s
+        fault—it’s the system that’s broken.
       </p>
       <!-- [dps]
       <p>
