@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main id="main-app">5S interactive coming soon</main>
+  <main id="main-app">Exploring 5S coming soon</main>
 </template>
 
 <style scoped lang="scss">
