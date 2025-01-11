@@ -110,6 +110,7 @@ const binContainerWidth = computed(() => {
 .feature-step {
   display: flex;
   flex-direction: column;
+  min-width: 235px;
 
   header {
     padding: 0.5rem;
