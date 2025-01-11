@@ -226,8 +226,9 @@ const displaySimulationConclusion = computed(() => {
         Now we’re pretty confident! As quality issues increase in the
         <PushSystemIcon /> push system, defects and corrections accumulate,
         leading to approximately
-        <span class="numeric">{{ leadTimeDelta }}</span> days of delay
-        <template v-if="leadTimeDeltaFloat > 12">!!</template
+        <span class="numeric">{{ leadTimeDelta }}</span> days of delay<template
+          v-if="leadTimeDeltaFloat > 12"
+          >!!</template
         ><template v-else>.</template>
       </p>
       <p v-else>
