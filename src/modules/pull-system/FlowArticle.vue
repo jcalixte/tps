@@ -307,6 +307,10 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
   max-width: 1080px;
   margin: auto;
 
+  h1 {
+    margin: 0 0 0.5rem;
+  }
+
   .created-at {
     font-size: 14pt;
     margin: 0;
