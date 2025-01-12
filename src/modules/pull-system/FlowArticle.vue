@@ -36,12 +36,20 @@ const SIMULATION_THRESHOLD = 20
 const displaySimulationConclusion = computed(() => {
   return simulationStore.simulationsDone > SIMULATION_THRESHOLD
 })
+
+const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+})
 </script>
 
 <template>
   <article class="flow-article">
     <h1>Pull System</h1>
-    <!-- <h2>Ekiden (駅伝): long-distance running relay race</h2> -->
+    <h2 class="created-at numeric">
+      {{ createdAt }}
+    </h2>
     <div class="flow-intro text">
       <p>
         In lean manufacturing, a key concept is <em>lead time</em>: the time it
@@ -298,6 +306,11 @@ const displaySimulationConclusion = computed(() => {
   width: 100%;
   max-width: 1080px;
   margin: auto;
+
+  .created-at {
+    font-size: 14pt;
+    margin: 0;
+  }
 
   .text {
     font-size: 16pt;
