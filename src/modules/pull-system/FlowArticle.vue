@@ -58,19 +58,24 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         optimizing their delivery system using... the pull system!
       </p>
       <p>
-        The pull system contrasts with the push system. Instead of trying to
-        make everyone work at maximum capacity, the focus shifts to improving
-        the time required to deliver a feature.
+        In a pull system, instead of trying to make everyone work at maximum
+        capacity, the focus shifts to improving the time required to deliver one
+        product.
       </p>
       <p>
-        I wanted to create a simulation to explore the consequences of different
-        strategic approaches and identify which one is most effective.
+        But few people will bet the success of their product on a system they
+        are not familiar with. This is where simulation helps. We can safely
+        explore the consequences of different strategic approaches and identify
+        which one is really most effective.
       </p>
       <p>
-        Imagine we're developing a mobile news app. We have several
+        We'll simulate the creation of a mobile news app with several
         functionalities to implement and want to measure how long each takes to
-        complete.
+        complete. Ready? Let's dive in!
       </p>
+    </div>
+    <SeparatorIcon />
+    <div class="text">
       <p>
         <em>
           Note: This article includes visualizations of team workflows that can
