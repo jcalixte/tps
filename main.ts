@@ -1,3 +1,5 @@
+import { domToPng } from 'modern-screenshot'
+
 const params = new URL(document.location.href).searchParams
 
 const display = params.get('display')
@@ -77,4 +79,19 @@ const colorParam = params.get('color')
 
 if (colorParam) {
   document.documentElement.style.setProperty('--color', `#${colorParam}`)
+}
+
+const screenshotHouseButton = document.querySelector('#screenshot-house')
+
+if (screenshotHouseButton) {
+  screenshotHouseButton.addEventListener('click', async () => {
+    const house = document.querySelector('#thinking-people-system')
+    if (house) {
+      const png = await domToPng(house)
+      const a = document.createElement('a')
+      a.href = png
+      a.download = 'thinking-people-system.png'
+      a.click()
+    }
+  })
 }

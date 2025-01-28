@@ -17,6 +17,9 @@ importers:
       comlink:
         specifier: ^4.4.2
         version: 4.4.2
+      modern-screenshot:
+        specifier: ^4.5.5
+        version: 4.5.5
       pinia:
         specifier: ^2.3.0
         version: 2.3.0(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
@@ -799,6 +802,9 @@ packages:
   micromatch@4.0.8:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
+
+  modern-screenshot@4.5.5:
+    resolution: {integrity: sha512-k5AC0UjY8YccnKn53upeQMzgDdPYkDN/706ma3yPHCwOZi+AoL0NeMlLS3nQwA/s0xrM7s8WO+UWnx5YJNpQeA==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -1664,6 +1670,8 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
     optional: true
+
+  modern-screenshot@4.5.5: {}
 
   ms@2.1.3: {}
 
