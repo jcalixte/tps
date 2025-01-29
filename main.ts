@@ -60,12 +60,6 @@ if (textHide === 'hide') {
   focusables.forEach((focusable) => focusable.classList.add('text-hide'))
 }
 
-const scrollParam = params.get('scroll')
-
-if (scrollParam === 'end') {
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-}
-
 const primaryColorParam = params.get('primary')
 
 if (primaryColorParam) {
