@@ -244,7 +244,7 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
           >!!</template
         ><template v-else>.</template>
       </p>
-      <p v-else>
+      <p v-else class="waiting-simulations">
         Waiting for at least {{ SIMULATION_THRESHOLD }} simulations...
       </p>
       <!-- [dps]
@@ -257,12 +257,12 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         of collaborating with others. Unfortunately, this is something I’ve
         observed in many software projects. If a software isn’t progressing
         well, the response is often to "try harder"—just once. However, "Just in
-        time" frequently turns into "Just this time" over and over. This
-        approach causes teams to overproduce, creating unnecessary stock and
-        latent defects that require rework. The more the project struggles, the
-        more siloed teams become, leading to blame-shifting: "I did my part; if
-        the project fails, it’s not my fault." The reality is, it’s not anyone’s
-        fault—it’s the system that’s broken.
+        time" frequently turns into try harder "Just this time" over and over.
+        This approach causes teams to overproduce, creating unnecessary stock
+        and latent defects that require rework. The more the project struggles,
+        the more siloed teams become, leading to blame-shifting: "I did my part;
+        if the project fails, it’s not my fault." The reality is, it’s not
+        anyone’s fault—it’s the system that’s broken.
       </p>
       <!-- [dps]
       <p>
@@ -276,8 +276,8 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         When under pressure to meet deadlines, fear and uncertainty can cause
         teams to overproduce. Product teams prepare extra features, designers
         create unnecessary screens, and developers rush through coding. This
-        "just in case" mentality results in wasted effort and latent defects
-        that require rework, slowing productivity.
+        "just in case" mindset results in wasted effort and latent defects that
+        require rework, slowing productivity.
       </p>
       <p>
         Counterintuitively,
@@ -344,6 +344,10 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
 
   .inline {
     display: inline;
+  }
+
+  .waiting-simulations {
+    font-style: italic;
   }
 }
 </style>
