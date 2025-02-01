@@ -21,8 +21,8 @@ importers:
         specifier: ^4.5.5
         version: 4.5.5
       pinia:
-        specifier: ^2.3.0
-        version: 2.3.0(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
+        specifier: ^2.3.1
+        version: 2.3.1(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
       random-js:
         specifier: ^2.1.0
         version: 2.1.0
@@ -831,8 +831,8 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
-  pinia@2.3.0:
-    resolution: {integrity: sha512-ohZj3jla0LL0OH5PlLTDMzqKiVw2XARmC1XYLdLWIPBMdhDW/123ZWr4zVAhtJm+aoSkFa13pYXskAvAscIkhQ==}
+  pinia@2.3.1:
+    resolution: {integrity: sha512-khUlZSwt9xXCaTbbxFYBKDc/bWAGWJjOgvxETwkTN7KRm66EeT1ZdZj6i2ceh9sP2Pzqsbc704r2yngBrxBVug==}
     peerDependencies:
       typescript: '>=4.4.4'
       vue: ^2.7.0 || ^3.5.11
@@ -1021,17 +1021,6 @@ packages:
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
-    engines: {node: '>=12'}
-    hasBin: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-
-  vue-demi@0.14.7:
-    resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
     engines: {node: '>=12'}
     hasBin: true
     peerDependencies:
@@ -1452,7 +1441,7 @@ snapshots:
       '@types/web-bluetooth': 0.0.20
       '@vueuse/metadata': 10.7.2
       '@vueuse/shared': 10.7.2(vue@3.5.13(typescript@5.7.2))
-      vue-demi: 0.14.7(vue@3.5.13(typescript@5.7.2))
+      vue-demi: 0.14.10(vue@3.5.13(typescript@5.7.2))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -1472,7 +1461,7 @@ snapshots:
 
   '@vueuse/shared@10.7.2(vue@3.5.13(typescript@5.7.2))':
     dependencies:
-      vue-demi: 0.14.7(vue@3.5.13(typescript@5.7.2))
+      vue-demi: 0.14.10(vue@3.5.13(typescript@5.7.2))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -1692,7 +1681,7 @@ snapshots:
   picomatch@2.3.1:
     optional: true
 
-  pinia@2.3.0(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)):
+  pinia@2.3.1(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.7.2)
@@ -1858,10 +1847,6 @@ snapshots:
       - terser
 
   vue-demi@0.14.10(vue@3.5.13(typescript@5.7.2)):
-    dependencies:
-      vue: 3.5.13(typescript@5.7.2)
-
-  vue-demi@0.14.7(vue@3.5.13(typescript@5.7.2)):
     dependencies:
       vue: 3.5.13(typescript@5.7.2)
 
