@@ -45,7 +45,7 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
 </script>
 
 <template>
-  <article class="flow-article">
+  <article class="flow-article with-article">
     <h1>Pull System</h1>
     <h2 class="created-at numeric">
       {{ createdAt }}
@@ -303,31 +303,6 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
 
 <style lang="scss">
 .flow-article {
-  color: black;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1080px;
-  margin: auto;
-
-  h1 {
-    margin: 0 0 0.5rem;
-  }
-
-  .created-at {
-    font-size: 14pt;
-    margin: 0;
-  }
-
-  .text {
-    font-size: 16pt;
-    max-width: 650px;
-    margin: auto;
-    text-align: justify;
-  }
-
   .above {
     z-index: 1;
     padding-top: 1rem;
