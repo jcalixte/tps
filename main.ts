@@ -89,3 +89,12 @@ if (screenshotHouseButton) {
     }
   })
 }
+
+const useValue = params.get('use-value')
+
+if (useValue !== null) {
+  const value = document.querySelectorAll('.use-value')
+  value.forEach((value) => {
+    value.classList.add('display-use-value')
+  })
+}
