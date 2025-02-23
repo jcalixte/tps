@@ -96,5 +96,11 @@ if (useValue !== null) {
   const value = document.querySelectorAll('.use-value')
   value.forEach((value) => {
     value.classList.add('display-use-value')
+
+    if (useValue === 'simple') {
+      value.classList.remove('raibow')
+    } else {
+      value.classList.add('raibow')
+    }
   })
 }

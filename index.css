@@ -172,7 +172,14 @@ details.hud li {
 .use-value {
   display: none;
   visibility: hidden;
-  text-align: center;
+}
+
+.display-use-value {
+  display: inline;
+  visibility: visible;
+}
+
+.raibow {
   text-decoration: underline;
   background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
   -webkit-background-clip: text;
@@ -180,11 +187,6 @@ details.hud li {
   color: transparent;
   animation: rainbow-animation 5s ease-in-out infinite;
   background-size: 400% 100%;
-}
-
-.display-use-value {
-  display: inline;
-  visibility: visible;
 }
 
 
