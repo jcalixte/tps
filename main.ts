@@ -1,4 +1,7 @@
 import { domToPng } from 'modern-screenshot'
+import hexColorRegex from 'hex-color-regex'
+
+const isColor = (color: string) => hexColorRegex().test(color)
 
 const params = new URL(document.location.href).searchParams
 
@@ -62,7 +65,7 @@ if (textHide === 'hide') {
 
 const primaryColorParam = params.get('primary')
 
-if (primaryColorParam) {
+if (primaryColorParam && isColor(`#${primaryColorParam}`)) {
   document.documentElement.style.setProperty(
     '--primary-color',
     `#${primaryColorParam}`
@@ -71,7 +74,7 @@ if (primaryColorParam) {
 
 const colorParam = params.get('color')
 
-if (colorParam) {
+if (colorParam && isColor(`#${colorParam}`)) {
   document.documentElement.style.setProperty('--color', `#${colorParam}`)
 }
 

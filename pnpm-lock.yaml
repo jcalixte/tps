@@ -17,6 +17,9 @@ importers:
       comlink:
         specifier: ^4.4.2
         version: 4.4.2
+      hex-color-regex:
+        specifier: ^1.1.0
+        version: 1.1.0
       modern-screenshot:
         specifier: ^4.5.5
         version: 4.5.5
@@ -36,6 +39,9 @@ importers:
       '@faker-js/faker':
         specifier: ^9.4.0
         version: 9.4.0
+      '@types/hex-color-regex':
+        specifier: ^1.1.3
+        version: 1.1.3
       '@types/node':
         specifier: ^22.10.2
         version: 22.10.2
@@ -647,6 +653,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/hex-color-regex@1.1.3':
+    resolution: {integrity: sha512-xOvT3NwAinCRD0knfP5wRVWGCUmQVtYO6TDMzLeVlUckdDvNOSgNCNGWmSbFde/Ll42QM6YQ4qHkrOpdhU3aVg==}
+
   '@types/node@22.10.2':
     resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
 
@@ -861,6 +870,9 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  hex-color-regex@1.1.0:
+    resolution: {integrity: sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==}
 
   immutable@5.0.3:
     resolution: {integrity: sha512-P8IdPQHq3lA1xVeBRi5VPqUm5HDgKnx0Ru51wZz5mjxHr5n3RWhjIpOFU7ybkUxfB+5IToy+OLaHYDBIWsv+uw==}
@@ -1486,6 +1498,8 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
+  '@types/hex-color-regex@1.1.3': {}
+
   '@types/node@22.10.2':
     dependencies:
       undici-types: 6.20.0
@@ -1786,6 +1800,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  hex-color-regex@1.1.0: {}
 
   immutable@5.0.3: {}
 
