@@ -19,7 +19,7 @@
     "chart.xkcd": "^1.1.15",
     "comlink": "^4.4.2",
     "hex-color-regex": "^1.1.0",
-    "modern-screenshot": "^4.5.5",
+    "modern-screenshot": "^4.6.0",
     "pinia": "^2.3.1",
     "random-js": "^2.1.0",
     "vue": "^3.5.13",
