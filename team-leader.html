@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Leader responsabilites in the Thinking People System</title>
+    <meta
+      name="description"
+      content="Author: Julien Calixte,
+    My understanding of the Thinking People System and
+    how it helps people and organization to improve"
+    />
+    <link rel="stylesheet" href="core.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="people-improvement.svg" />
+    <link rel="mask-icon" href="people-improvement.svg" color="#ffffff" />
+  </head>
+  <body>
+    <header class="hud">
+      <h1 class="thinking-people-system">Thinking People System</h1>
+    </header>
+    <main id="thinking-people-system">
+      <div class="customer-satisfaction-roof-parent">
+        <section class="customer-satisfaction-roof focusable">
+          <h2 class="customer-satisfaction">Is the customer satisfied?</h2>
+        </section>
+      </div>
+      <section class="levers">
+        <ul>
+          <li class="security focusable">Security</li>
+          <li class="quality focusable">Quality</li>
+          <li class="lead-time focusable">Lead&nbsp;time</li>
+          <li class="cost focusable">Cost</li>
+          <li class="environment focusable">Environment</li>
+        </ul>
+      </section>
+      <section class="pilars">
+        <section class="just-in-time-pilar">
+          <h3 class="just-in-time focusable">Just-in-time</h3>
+          <ul>
+            <li class="jit-question focusable">
+              Does the team deliver on time?
+            </li>
+          </ul>
+        </section>
+        <section class="people-improvement">
+          <svg
+            viewBox="0 0 1393 1288"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="1393" height="1288" />
+            <circle
+              cx="696.5"
+              cy="295.5"
+              r="88.5"
+              fill="var(--primary-color)"
+            />
+            <rect
+              x="537"
+              y="384"
+              width="319"
+              height="408"
+              rx="106"
+              fill="var(--primary-color)"
+            />
+            <rect
+              x="593"
+              y="672"
+              width="207"
+              height="408"
+              rx="103.5"
+              fill="var(--primary-color)"
+            />
+            <path
+              d="M657 1177L732 1220.3L732 1133.7L657 1177Z"
+              fill="var(--primary-color)"
+            />
+            <path
+              d="M746 107L671 63.6987V150.301L746 107Z"
+              fill="var(--primary-color)"
+            />
+            <circle
+              cx="696.5"
+              cy="643.5"
+              r="535"
+              stroke="var(--primary-color)"
+              stroke-width="23"
+            />
+          </svg>
+        </section>
+        <section class="jidoka-pilar">
+          <h3 class="jidoka focusable">Jidoka</h3>
+          <ul>
+            <li class="jidoka-question focusable">
+              Is the team focused on quality?
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section class="ground">
+        <section class="improvement">
+          <ul class="improvement-list focusable">
+            <li class="improvement-question focusable">
+              Do team members continuously learn and improve on their job?
+            </li>
+          </ul>
+        </section>
+        <section class="stability">
+          <ul class="stability-list focusable">
+            <li class="stability-question focusable">
+              Do team members maintain a clean and organized workspace?
+            </li>
+          </ul>
+        </section>
+      </section>
+    </main>
+    <details class="hud">
+      <summary>Enablers</summary>
+      <p>
+        You can use the following options to interact with the TPS. It works
+        with the query string. Like so:
+        <a href="https://thinking-people-system.house?text=hide"
+          >https://thinking-people-system.house?text=hide</a
+        >.
+      </p>
+      <ul>
+        <li>
+          <code>background color</code>: change the primary color
+          <code><a href="?primary=009432">in green</a></code>
+        </li>
+        <li>
+          <code>font color</code>: change the font color
+          <code><a href="?color=ff793f">in orange</a></code>
+        </li>
+        <li>
+          <code>display</code>: display without any HUD with the option
+          <code><a href="?display=house-only">house-only</a></code>
+        </li>
+        <li>
+          <code>focus</code>: focus only
+          <a href="?focus=pull-system">a part</a> of the TPS. Can be
+          <a href="?focus=pull-system&focus=andon&focus=quality">multiple</a>.
+          (Here are all the possible values:
+          <span id="focus-list"></span>
+          )
+        </li>
+        <li>
+          <code>text</code>: <a href="?text=hide">hide</a> text to only have the
+          house
+        </li>
+      </ul>
+      <p>
+        Screenshot the house:
+        <button class="button" id="screenshot-house">Screenshot</button>
+      </p>
+    </details>
+    <svg class="round-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="round">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+            result="flt_tag"
+          />
+          <feComposite in="SourceGraphic" in2="flt_tag" operator="atop" />
+        </filter>
+      </defs>
+    </svg>
+    <script type="module" src="main.ts"></script>
+  </body>
+</html>

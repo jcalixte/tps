@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         index: 'index.html',
         'pull-system': 'pull-system.html',
+        'team-leader': 'team-leader.html',
         '5s': '5s.html'
       }
     }
