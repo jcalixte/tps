@@ -230,7 +230,7 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
       </p>
       <p>
         Do you mind comparing more projects? What happens when we simulate 1000
-        news mobile app! Are patterns the same?
+        news mobile apps! Are patterns the same?
       </p>
     </div>
     <SimulationControls type="multiple" />
