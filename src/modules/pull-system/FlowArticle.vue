@@ -121,55 +121,50 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         coding, and ensuring the product goes live.
       </p>
       <p>
-        First, what is a feature? A feature is a software component that
-        provides a functionality for the user. Examples include the ability to
-        read articles, share content, or use the app offline. In our simulation,
-        a feature is represented as follows:
+        First, let's take a moment to define the most important element: the
+        feature. A feature is a software component that provides a functionality
+        for the user like the ability to read articles, share content, or use
+        the app offline. In our simulation, a feature is represented as follows:
       </p>
       <FeatureItem :feature="feature" />
       <p>
         Each feature starts with an intention: "<code>{{ feature.name }}</code
-        >". This defines what we will add to the mobile app.
+        >". "<span class="numeric">{{ feature.leadTime }}d</span>" indicates the
+        number of days teams work on the feature. The goal is to minimize this
+        number and deliver features as quickly as possible. "<QualityIssue
+          class="inline"
+          :quality-issue="feature.qualityIssue"
+        />" shows the number of defects found in the feature during its workflow
+        <em
+          >(For simplicity, we assume teams can identify all defects, and no
+          defective features are delivered)</em
+        >. Any defect must be reworked by the team that caused it.
       </p>
+      <p>It takes one day to each team to complete their part.</p>
       <!-- [complexity]
       <p>
         <span class="numeric">({{ feature.complexity }})</span> is the
         complexity of the feature. The more complex a feature is, the more
         chance we introduce a defect.
       </p> -->
-      <p>
-        <span class="numeric">{{ feature.leadTime }}d</span> indicates the
-        number of days teams work on the feature. The goal is to minimize this
-        number and deliver features as quickly as possible.
-      </p>
-      <p>
-        <QualityIssue class="inline" :quality-issue="feature.qualityIssue" />
-        shows the number of defects found in the feature during its workflow.
-        For simplicity, we assume teams can identify all defects, and no
-        defective features are delivered. Any defect must be reworked by the
-        team that caused it.
-      </p>
-      <p>
-        Okay! We have 20 features to deliver. Each team takes one day to
-        complete their part for a feature.
-      </p>
       <!-- [dps] <p>Each day, you can choose between 3 strategies:</p> -->
-      <p>Every day, you can choose between two strategies:</p>
-      <ol>
-        <li><PushSystemIcon /> Push system</li>
-        <li><PullSystemIcon /> Pull system</li>
-      </ol>
       <p>
-        In this article, we’ll examine how these strategies affect efficiency
-        and quality. Let’s explore each one!
+        Okay! We have 20 features to deliver and every day, you can choose
+        between two strategies:
       </p>
-      <h3>The Push System: Start as Many Features as Possible</h3>
+      <h3>
+        1. <PushSystemIcon /> The Push System: Start as Many Features as
+        Possible
+      </h3>
       <p>
         In the push system, we aim to maximize the time teams spend working on
         the product. This ensures no downtime, as everyone always has tasks to
         complete.
       </p>
-      <h3>The Pull System: Produce Features When the Next Team Needs Them</h3>
+      <h3>
+        2. <PullSystemIcon /> The Pull System: Produce Features When the Next
+        Team Needs Them
+      </h3>
       <p>
         Instead of pushing features forward, the pull system waits until the
         next team is ready. This approach acknowledges that the ideal "push
@@ -177,9 +172,9 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         readiness, we avoid creating a backlog of pre-prepared features.
       </p>
       <p>
-        To implement this, we introduce "blue bins" as safety stock. These bins
-        ensure teams always have work ready to process without delays but we
-        stop whenever blue bins are full.
+        We introduce "blue bins" as safety stocks: these bins ensure teams
+        always have work ready to process without delays
+        <em><strong>but</strong></em> teams stop whenever blue bins are full.
       </p>
       <!-- [dps]
      <h3>Problem solving: no production, just reflection</h3>
@@ -191,12 +186,15 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
       team learn and start to be extremely good at problem solving.
     </p> -->
     </div>
+    <div class="text">
+      <p>All set? Let's make this app!</p>
+    </div>
     <FlowDashboard class="above" />
     <FeatureSteps alias="playground" />
     <div class="manual-simulation text">
       <p>
-        Well, what do you think? Not so simple... What are the insights from
-        these strategies? Here are some observations:
+        Well, what do you think? Not so obvious... What can we say? Here are
+        some observations:
       </p>
       <ol>
         <li>
