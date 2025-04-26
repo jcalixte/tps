@@ -83,12 +83,20 @@ const screenshotHouseButton = document.querySelector('#screenshot-house')
 if (screenshotHouseButton) {
   screenshotHouseButton.addEventListener('click', async () => {
     const house = document.querySelector('#thinking-people-system')
-    if (house) {
-      const png = await domToPng(house)
-      const a = document.createElement('a')
-      a.href = png
-      a.download = 'thinking-people-system.png'
-      a.click()
+    if (!house) {
+      return
+    }
+
+    const png = await domToPng(house)
+
+    try {
+      const response = await fetch(png)
+      const blob = await response.blob()
+      await navigator.clipboard.write([
+        new ClipboardItem({ [blob.type]: blob })
+      ])
+    } catch (error) {
+      console.warn(error)
     }
   })
 }
