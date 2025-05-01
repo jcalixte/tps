@@ -32,7 +32,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "sass": "^1.85.0",
     "typescript": "^5.7.2",
-    "vite": "^6.0.9",
+    "vite": "^6.3.4",
     "vite-plugin-comlink": "^5.1.0",
     "vitest": "^2.1.9"
   }
