@@ -50,7 +50,9 @@ if (focusElements.length > 0) {
       focusable.classList.contains(element)
     )
 
-    if (!elementToFocus) {
+    if (elementToFocus) {
+      focusable.classList.add('focus')
+    } else {
       focusable.classList.add('no-focus')
     }
   })

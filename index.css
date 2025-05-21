@@ -30,6 +30,22 @@ li {
   color: var(--primary-color);
 }
 
+.no-focus.text-hide,
+.no-focus.text-hide a,
+.no-focus.text-hide a:visited,
+.no-focus.text-hide a:focus,
+.no-focus.text-hide a:focus-visible {
+  color: var(--primary-color-no-focus);
+}
+
+.focus.text-hide,
+.focus.text-hide a,
+.focus.text-hide a:visited,
+.focus.text-hide a:focus,
+.focus.text-hide a:focus-visible {
+  color: var(--color);
+}
+
 .customer-satisfaction-roof-parent {
   filter: url(#round);
   /* Making the triangle fit the rest of the house */
@@ -181,7 +197,14 @@ details.hud li {
 
 .raibow {
   text-decoration: underline;
-  background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
+  background: linear-gradient(
+    to right,
+    #6666ff,
+    #0099ff,
+    #00ff00,
+    #ff3399,
+    #6666ff
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -189,9 +212,7 @@ details.hud li {
   background-size: 400% 100%;
 }
 
-
 @keyframes rainbow-animation {
-
   0%,
   100% {
     background-position: 0 0;
