@@ -46,13 +46,13 @@ li {
   color: var(--color);
 }
 
-.customer-satisfaction-roof-parent {
+.customer-satisfaction-parent {
   filter: url(#round);
   /* Making the triangle fit the rest of the house */
   margin: 0 -1rem;
 }
 
-.customer-satisfaction-roof {
+.customer-satisfaction {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -63,8 +63,8 @@ li {
   font-size: clamp(15px, 2.1vw, 28px);
 }
 
-.customer-satisfaction-roof h2,
-.customer-satisfaction-roof p {
+.customer-satisfaction h2,
+.customer-satisfaction p {
   margin: 0;
   padding: 0 0.5rem 0.5rem;
   border-radius: 0;
