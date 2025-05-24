@@ -42,11 +42,8 @@ const size = params.get('size')
 if (size === 'small') {
   const body = document.querySelector('body')
   if (body) {
-    if (simpleCustomerSatisfaction) {
-      document.documentElement.style.setProperty('--min-height', '80px')
-    } else {
-      document.documentElement.style.setProperty('--min-height', '100px')
-    }
+    document.documentElement.style.setProperty('--min-height', '100px')
+    document.documentElement.style.setProperty('--gap', '0.5rem')
     document.documentElement.style.setProperty('--font-size', '13px')
     document.documentElement.style.setProperty('--min-font-size', '8px')
   }
