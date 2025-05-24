@@ -1,5 +1,5 @@
 body {
-  font-size: clamp(11px, 2.1vw, 28px);
+  font-size: clamp(var(--min-font-size, 11px), 2.1vw, var(--font-size, 28px));
 }
 
 ul {
@@ -59,8 +59,9 @@ li {
   align-items: center;
   text-align: center;
   clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
-  min-height: 150px;
-  font-size: clamp(15px, 2.1vw, 28px);
+  /* Set --min-height in JS or fallback to 150px if --font-size is 28px, otherwise 110px */
+  min-height: var(--min-height, 150px);
+  font-size: clamp(var(--min-font-size, 11px), 2.1vw, var(--font-size, 28px));
 }
 
 .customer-satisfaction h2,

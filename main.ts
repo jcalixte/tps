@@ -31,12 +31,20 @@ if (display === 'house-only') {
   document.querySelectorAll('.hud')?.forEach((hud) => hud.remove())
 }
 
+const simpleCustomerSatisfaction = params.get('customer-satisfaction')
+
+if (simpleCustomerSatisfaction === 'simple') {
+  document.querySelector('.value-analysis-value-engineering')?.remove()
+}
+
 const size = params.get('size')
 
 if (size === 'small') {
   const body = document.querySelector('body')
   if (body) {
-    body.style.fontSize = '15px'
+    document.documentElement.style.setProperty('--min-height', '100px')
+    document.documentElement.style.setProperty('--font-size', '13px')
+    document.documentElement.style.setProperty('--min-font-size', '8px')
   }
 }
 
