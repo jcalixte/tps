@@ -74,6 +74,15 @@ if (primaryColorParam && isColor(`#${primaryColorParam}`)) {
   )
 }
 
+const primaryColorNoFocusParam = params.get('primary-color-no-focus')
+
+if (primaryColorNoFocusParam && isColor(`#${primaryColorNoFocusParam}`)) {
+  document.documentElement.style.setProperty(
+    '--primary-color-no-focus',
+    `#${primaryColorNoFocusParam}`
+  )
+}
+
 const colorParam = params.get('color')
 
 if (colorParam && isColor(`#${colorParam}`)) {
