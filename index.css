@@ -47,9 +47,9 @@ li {
 }
 
 .customer-satisfaction-parent {
-  filter: url(#round);
+  /* filter: url(#round); */
   /* Making the triangle fit the rest of the house */
-  margin: 0 -var(--gap);
+  margin: 0 var(--gap);
 }
 
 .customer-satisfaction {
