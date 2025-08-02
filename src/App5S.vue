@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import CoffeeDay from '@/modules/5s/game/CoffeeDay.vue'
-
 const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
   year: 'numeric',
   month: 'long',
@@ -37,7 +35,6 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         As you look down at the paper, you see a bunch of lists, todos, and
         notes in a brown used paper. It looks like it has lived more than you.
       </p>
-      <CoffeeDay />
     </div>
   </article>
 </template>
