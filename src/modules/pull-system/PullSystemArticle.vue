@@ -11,7 +11,6 @@ import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import FeatureItem from '@/modules/pull-system/feature/FeatureItem.vue'
 import QualityIssue from '@/modules/pull-system/feature/QualityIssue.vue'
 import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
-import { getRound } from '@/utils'
 import { computed } from 'vue'
 
 const feature: Feature = {
@@ -24,12 +23,14 @@ const feature: Feature = {
 }
 
 const simulationStore = useSimulationStore()
-const leadTimeDeltaFloat = computed(
+const meanLeadTimeDeltaFloat = computed(
   () =>
     parseFloat(simulationStore.meanLeadTime('push')) -
     parseFloat(simulationStore.meanLeadTime('pull'))
 )
-const leadTimeDelta = computed(() => leadTimeDeltaFloat.value.toFixed(2))
+const meanLeadTimeDelta = computed(() =>
+  meanLeadTimeDeltaFloat.value.toFixed(2)
+)
 
 const SIMULATION_THRESHOLD = 20
 
@@ -236,10 +237,8 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
       <p v-if="displaySimulationConclusion">
         Now we’re pretty confident! As quality issues increase in the
         <PushSystemIcon /> push system, defects and corrections accumulate,
-        leading to approximately
-        <span class="numeric">{{ leadTimeDelta }}</span> days of delay<template
-          v-if="leadTimeDeltaFloat > 12"
-          >!!</template
+        leading to <span class="numeric">{{ meanLeadTimeDelta }}</span> days of
+        delay<template v-if="meanLeadTimeDeltaFloat > 12">!!</template
         ><template v-else>.</template>
       </p>
       <p v-else class="waiting-simulations">
@@ -275,7 +274,9 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         teams to overproduce. Product teams prepare extra features, designers
         create unnecessary screens, and developers rush through coding. This
         "just in case" mindset results in wasted effort and latent defects that
-        require rework, slowing productivity.
+        require rework, slowing productivity. Worse, as there are always work to
+        do in stock, we can just throw bad parts and move on a new piece,
+        increasing bad quality.
       </p>
       <p>
         Counterintuitively,

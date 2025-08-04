@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import FlowArticle from '@/modules/pull-system/FlowArticle.vue'
+import PullSystemArticle from '@/modules/pull-system/PullSystemArticle.vue'
 import { StarportCarrier } from 'vue-starport'
 </script>
 
 <template>
   <main id="main-app">
     <StarportCarrier>
-      <FlowArticle />
+      <PullSystemArticle />
     </StarportCarrier>
   </main>
 </template>

@@ -2,7 +2,7 @@
 // Outils globaux (16)
 // ----------------------
 
-import { Deliverable, Tool } from '@/modules/5s/types/activity'
+import { Deliverable, Tool, Work } from '@/modules/5s/types/workshop'
 
 export const tools: Tool[] = [
   { name: 'Drill', alias: 'power drill', cooldown: 2 },
@@ -28,133 +28,136 @@ export const tools: Tool[] = [
 // Outils utilisés : 0, 2, 3, 4, 5, 8, 10
 // ----------------------
 
-export const gardening: Deliverable[] = [
-  {
-    name: 'Vegetable Patch',
-    activities: [
-      {
-        name: 'Soil Preparation',
-        tasks: [
-          {
-            name: 'Loosen soil and compost',
-            tools: [tools[10], tools[4]]
-          }
-        ]
-      },
-      {
-        name: 'Plot Planning',
-        tasks: [
-          {
-            name: 'Mark row layout',
-            tools: [tools[2], tools[3]]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Compost Bin Assembly',
-    activities: [
-      {
-        name: 'Cut Panels',
-        tasks: [
-          {
-            name: 'Drill and shape wood panels',
-            tools: [tools[0], tools[5]]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Shrub Pruning',
-    activities: [
-      {
-        name: 'Dead Branch Removal',
-        tasks: [
-          {
-            name: 'Cut branches cleanly',
-            tools: [tools[8]]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Raised Garden Bed',
-    activities: [
-      {
-        name: 'Frame Layout',
-        tasks: [
-          {
-            name: 'Measure garden bed size',
-            tools: [tools[2], tools[3]]
-          }
-        ]
-      },
-      {
-        name: 'Frame Assembly',
-        tasks: [
-          {
-            name: 'Join corners with clamps',
-            tools: [tools[0], tools[5]]
-          }
-        ]
-      },
-      {
-        name: 'Soil Filling',
-        tasks: [
-          {
-            name: 'Add compost and soil',
-            tools: [tools[10]]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Herb Garden Planters',
-    activities: [
-      {
-        name: 'Trough Installation',
-        tasks: [
-          {
-            name: 'Fix containers to wall',
-            tools: [tools[0], tools[4]]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Watering Routine',
-    activities: [
-      {
-        name: 'Daily Watering',
-        tasks: [
-          {
-            name: 'Irrigate each section',
-            tools: [tools[9]]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Garden Signposts',
-    activities: [
-      {
-        name: 'Label Creation',
-        tasks: [
-          {
-            name: 'Write and install plant tags',
-            tools: [tools[3], tools[0]]
-          }
-        ]
-      }
-    ]
-  }
-]
+export const gardening: Work = {
+  name: 'gardening',
+  deliverables: [
+    {
+      name: 'Vegetable Patch',
+      activities: [
+        {
+          name: 'Soil Preparation',
+          tasks: [
+            {
+              name: 'Loosen soil and compost',
+              tools: [tools[10], tools[4]]
+            }
+          ]
+        },
+        {
+          name: 'Plot Planning',
+          tasks: [
+            {
+              name: 'Mark row layout',
+              tools: [tools[2], tools[3]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Compost Bin Assembly',
+      activities: [
+        {
+          name: 'Cut Panels',
+          tasks: [
+            {
+              name: 'Drill and shape wood panels',
+              tools: [tools[0], tools[5]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Shrub Pruning',
+      activities: [
+        {
+          name: 'Dead Branch Removal',
+          tasks: [
+            {
+              name: 'Cut branches cleanly',
+              tools: [tools[8]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Raised Garden Bed',
+      activities: [
+        {
+          name: 'Frame Layout',
+          tasks: [
+            {
+              name: 'Measure garden bed size',
+              tools: [tools[2], tools[3]]
+            }
+          ]
+        },
+        {
+          name: 'Frame Assembly',
+          tasks: [
+            {
+              name: 'Join corners with clamps',
+              tools: [tools[0], tools[5]]
+            }
+          ]
+        },
+        {
+          name: 'Soil Filling',
+          tasks: [
+            {
+              name: 'Add compost and soil',
+              tools: [tools[10]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Herb Garden Planters',
+      activities: [
+        {
+          name: 'Trough Installation',
+          tasks: [
+            {
+              name: 'Fix containers to wall',
+              tools: [tools[0], tools[4]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Watering Routine',
+      activities: [
+        {
+          name: 'Daily Watering',
+          tasks: [
+            {
+              name: 'Irrigate each section',
+              tools: [tools[9]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Garden Signposts',
+      activities: [
+        {
+          name: 'Label Creation',
+          tasks: [
+            {
+              name: 'Write and install plant tags',
+              tools: [tools[3], tools[0]]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 
 // ----------------------
 // CABINETMAKING (7 outils max)

@@ -21,7 +21,7 @@ export type Deliverable = {
   activities: NonEmptyArray<Activity>
 }
 
-export type Domain = {
+export type Work = {
   name: string
   deliverables: NonEmptyArray<Deliverable>
 }
