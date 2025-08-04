@@ -1,4 +1,4 @@
-type NonEmptyArray<T> = [T, ...T[]]
+import { NonEmptyArray } from '@/modules/5s/types/tools'
 
 export type Tool = {
   name: string
@@ -11,17 +11,12 @@ export type Task = {
   tools: NonEmptyArray<Tool>
 }
 
-export type Activity = {
+export type Part = {
   name: string
   tasks: NonEmptyArray<Task>
 }
 
-export type Deliverable = {
+export type BoardGame = {
   name: string
-  activities: NonEmptyArray<Activity>
-}
-
-export type Work = {
-  name: string
-  deliverables: NonEmptyArray<Deliverable>
+  parts: NonEmptyArray<Part>
 }
