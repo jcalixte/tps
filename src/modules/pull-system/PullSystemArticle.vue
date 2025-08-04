@@ -274,8 +274,8 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         teams to overproduce. Product teams prepare extra features, designers
         create unnecessary screens, and developers rush through coding. This
         "just in case" mindset results in wasted effort and latent defects that
-        require rework, slowing productivity. Worse, as there are always work to
-        do in stock, we can just throw bad parts and move on a new piece,
+        require rework, slowing productivity. Worse, as there is always work to
+        do, we can just throw bad parts and move on a new piece from stock,
         increasing bad quality.
       </p>
       <p>
@@ -285,7 +285,7 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
           rel="noopener noreferrer"
           href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.052303#:~:text=The%20%E2%80%9Cfaster%2Dis%2Dslower,evacuation%20time%20can%20be%20achieved"
           >slower is often faster</a
-        >. Excessive pushing slows down the system, while a
+        >. Excessive <PushSystemIcon /> pushing slows down the system, while a
         <PullSystemIcon /> pull system enforces constraints that prioritize
         thoughtful delivery.
       </p>

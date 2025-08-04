@@ -84,14 +84,16 @@ export const newBacklog = (type: 'bird' | 'mobile-app', limit?: number) => {
 
 export const initBoard = (
   steps: FeatureStep[],
-  features: Feature[]
+  features: Feature[],
+  fromStart = false
 ): Feature[] => {
   const initialFeatures = popNElement(features, 10)
 
   initialFeatures.forEach((feature) => {
-    const step = pickRandomElement(steps)
-    feature.status = pickRandomElement(['doing', 'done'])
-    feature.step = step.stepIndex
+    feature.status = fromStart ? 'doing' : pickRandomElement(['doing', 'done'])
+    feature.step = fromStart
+      ? steps.length - 1
+      : pickRandomElement(steps).stepIndex
     feature.qualityIssue = 0
     feature.leadTime = 0
   })

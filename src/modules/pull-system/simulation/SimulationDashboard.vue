@@ -51,6 +51,26 @@ const strategies: Strategy[] = ['push', 'pull']
             {{ simulationStore.meanLeadTime(strategy) }}
           </td>
         </tr>
+        <tr>
+          <td>Min lead time</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{
+              simulationStore.minLeadTime(strategy) === Infinity
+                ? '-'
+                : simulationStore.minLeadTime(strategy)
+            }}
+          </td>
+        </tr>
+        <tr>
+          <td>Max lead time</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{
+              simulationStore.maxLeadTime(strategy) === 0
+                ? '-'
+                : simulationStore.maxLeadTime(strategy)
+            }}
+          </td>
+        </tr>
         <!-- <tr>
           <td>Cycle time</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">

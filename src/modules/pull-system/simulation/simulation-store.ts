@@ -8,6 +8,8 @@ import { defineStore } from 'pinia'
 
 type Mean = {
   leadTimeSum: number
+  minLeadTime: number
+  maxLeadTime: number
   cycleTimeSum: number
   complexitySum: number
   qualityIssueSum: number
@@ -25,6 +27,8 @@ type State = {
 
 const initMean = (): Mean => ({
   leadTimeSum: 0,
+  minLeadTime: Infinity,
+  maxLeadTime: 0,
   cycleTimeSum: 0,
   complexitySum: 0,
   qualityIssueSum: 0,
@@ -67,7 +71,7 @@ export const useSimulationStore = defineStore('dashboard', {
     async simulate(strategy: Strategy) {
       const steps = featureSteps
       const backlog = await instance.newBacklog('mobile-app')
-      const features = await instance.initBoard(steps, backlog)
+      const features = await instance.initBoard(steps, backlog, true)
 
       const newState = await instance.simulate(
         {
@@ -99,6 +103,14 @@ export const useSimulationStore = defineStore('dashboard', {
 
       this.dashboards.push(dashboard)
       this.mean[strategy].leadTimeSum += dashboard.analysis.meanLeadTime
+      this.mean[strategy].minLeadTime = Math.min(
+        this.mean[strategy].minLeadTime,
+        ...newState.features.map((f) => f.leadTime)
+      )
+      this.mean[strategy].maxLeadTime = Math.max(
+        this.mean[strategy].maxLeadTime,
+        ...newState.features.map((f) => f.leadTime)
+      )
       this.mean[strategy].cycleTimeSum +=
         dashboard.meta.totalDays / newState.features.length
       this.mean[strategy].complexitySum += dashboard.analysis.meanComplexity
@@ -131,6 +143,10 @@ export const useSimulationStore = defineStore('dashboard', {
         state.mean[strategy].leadTimeSum,
         state.mean[strategy].simulations
       ),
+    minLeadTime: (state) => (strategy: Strategy) =>
+      state.mean[strategy].minLeadTime,
+    maxLeadTime: (state) => (strategy: Strategy) =>
+      state.mean[strategy].maxLeadTime,
     meanCycleTime: (state) => (strategy: Strategy) =>
       getRound(
         state.mean[strategy].cycleTimeSum,
