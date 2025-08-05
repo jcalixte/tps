@@ -3,7 +3,7 @@ import { BoardGame } from '@/modules/5s/types/workshop'
 
 export const boardGames: BoardGame[] = [
   {
-    name: 'Royal Chess',
+    name: 'Chess',
     parts: [
       {
         name: 'Chessboard Engraving',
