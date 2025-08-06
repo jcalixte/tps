@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
-import { tools } from '@/modules/5s/types/tools'
 import { toDuration } from '@/modules/5s/utils'
 import { ref, toValue } from 'vue'
 
@@ -27,7 +26,7 @@ const submit = () => {
 </script>
 
 <template>
-  <div class="board-game-workshop">
+  <div class="board-game-workshop prose">
     <aside>
       <h2>Tools</h2>
       <table>
@@ -38,7 +37,7 @@ const submit = () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tool in tools" :key="tool.alias">
+          <tr v-for="tool in boardGameStore.tools" :key="tool.alias">
             <td>{{ tool.name }}</td>
             <td>{{ tool.alias }}</td>
           </tr>
@@ -46,9 +45,10 @@ const submit = () => {
       </table>
     </aside>
 
-    <div class="main prose">
+    <div class="main">
       <h2>Workshop</h2>
       <button
+        class="btn"
         v-if="!boardGameStore.currentBoardGame"
         @click="boardGameStore.initGame"
       >
@@ -113,10 +113,10 @@ const submit = () => {
                         <ul>
                           <li
                             v-for="tool in boardGameStore.currentTask.tools"
-                            :key="tool.alias"
+                            :key="tool.id"
                             :class="{
                               'used-tool': boardGameStore.usedTools.some(
-                                (t) => t === tool.alias
+                                (t) => t === tool.id
                               )
                             }"
                           >
@@ -135,7 +135,7 @@ const submit = () => {
     </div>
 
     <aside
-      class="prose"
+      class="performance"
       v-if="duration !== null || boardGameStore.perfs.length > 0"
     >
       <h2>Performance</h2>
@@ -159,14 +159,13 @@ const submit = () => {
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code&display=swap');
 
 .board-game-workshop {
+  flex: 1;
   font-family: 'Google Sans Code', monospace;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-size: 14px;
-  min-width: 600px;
   display: flex;
-  justify-content: space-between;
   gap: 4rem;
 
   input {
@@ -184,10 +183,6 @@ form {
 .crafted,
 .used-tool {
   color: green;
-}
-
-button {
-  color: white;
 }
 
 aside {

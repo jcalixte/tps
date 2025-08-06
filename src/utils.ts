@@ -10,6 +10,13 @@ export const randomFloat = (min: number, max: number) => {
   return random.real(min, max)
 }
 
+export const randomAlias = () =>
+  Array.from({ length: 5 }, () =>
+    Math.random() < 0.9
+      ? String.fromCharCode(97 + Math.floor(Math.random() * 26))
+      : '-'
+  ).join('')
+
 export const getMean = (data: number[]) =>
   Math.round(100 * (sumElements(data) / data.length)) / 100
 

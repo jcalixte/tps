@@ -1,9 +1,12 @@
 import { boardGames } from '@/modules/5s/types/board-games'
-import { BoardGame, Part, Task } from '@/modules/5s/types/workshop'
+import { tools } from '@/modules/5s/types/tools'
+import { BoardGame, Part, Task, Tool } from '@/modules/5s/types/workshop'
 import { toDuration } from '@/modules/5s/utils'
+import { randomAlias } from '@/utils'
 import { defineStore } from 'pinia'
 
 type State = {
+  tools: Tool[]
   boardGames: BoardGame[]
   currentBoardGameIndex: number | null
   currentPartIndex: number | null
@@ -16,6 +19,7 @@ type State = {
 
 export const useBoardGameStore = defineStore('board-game', {
   state: (): State => ({
+    tools: [],
     boardGames: [],
     currentBoardGameIndex: null,
     currentPartIndex: null,
@@ -28,6 +32,10 @@ export const useBoardGameStore = defineStore('board-game', {
   actions: {
     initGame() {
       // this.boardGames = [boardGames[0], boardGames[1]]
+      this.tools = tools.map((t) => ({
+        ...t,
+        alias: randomAlias()
+      }))
       this.boardGames = [boardGames[0]]
       this.currentBoardGameIndex = 0
       this.currentPartIndex = 0
@@ -35,16 +43,22 @@ export const useBoardGameStore = defineStore('board-game', {
       this.start = new Date().toISOString()
       this.end = null
     },
-    craftWithTool(tool: string) {
+    craftWithTool(alias: string) {
       if (!this.currentTask) {
         return
       }
 
-      if (!this.currentTask.tools.some((t) => t.alias === tool)) {
+      const tool = this.tools.find((t) => t.alias === alias)
+
+      if (!tool) {
         return
       }
 
-      this.usedTools = [...this.usedTools, tool]
+      if (!this.currentTask.tools.some((t) => t.id === tool.id)) {
+        return
+      }
+
+      this.usedTools = [...this.usedTools, tool.id]
 
       if (this.usedTools.length === this.currentTask.tools.length) {
         this.usedTools = []
