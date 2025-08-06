@@ -2,9 +2,10 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { defineConfig } from 'vite'
 import { comlink } from 'vite-plugin-comlink'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [comlink(), vue()],
+  plugins: [comlink(), vue(), tailwindcss()],
   build: {
     rollupOptions: {
       input: {

@@ -1,3 +1,6 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+
 *:not(td):not(th) {
   border-radius: 0.5rem;
 }

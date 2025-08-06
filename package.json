@@ -15,13 +15,16 @@
   "author": "Julien Calixte <julienc@bam.tech>",
   "license": "ISC",
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
     "@vueuse/core": "^12.2.0",
     "chart.xkcd": "^1.1.15",
     "comlink": "^4.4.2",
+    "daisyui": "^5.0.50",
     "hex-color-regex": "^1.1.0",
     "modern-screenshot": "^4.5.5",
     "pinia": "^2.3.1",
     "random-js": "^2.1.0",
+    "tailwindcss": "^4.1.11",
     "vue": "^3.5.13",
     "vue-starport": "^0.4.0"
   },
