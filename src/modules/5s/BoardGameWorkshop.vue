@@ -10,14 +10,17 @@ const duration = ref<string | null>(null)
 
 setInterval(() => {
   duration.value = boardGameStore.start
-    ? toDuration(new Date(boardGameStore.start))
+    ? toDuration(
+        new Date(boardGameStore.start),
+        boardGameStore.end ? new Date(boardGameStore.end) : new Date()
+      )
     : null
 }, 1000)
 
 const submit = () => {
-  const tool = toValue(userInput)
+  const lastInput = toValue(userInput)
 
-  boardGameStore.craftWithTool(tool)
+  boardGameStore.craftWithTool(lastInput)
 
   userInput.value = ''
 }
@@ -43,7 +46,7 @@ const submit = () => {
       </table>
     </aside>
 
-    <div class="main">
+    <div class="main prose">
       <h2>Workshop</h2>
       <button
         v-if="!boardGameStore.currentBoardGame"
@@ -57,50 +60,97 @@ const submit = () => {
           <input type="text" v-model="userInput" autofocus />
         </form>
 
-        <h3>
-          {{ boardGameStore.currentBoardGame.name }}
-        </h3>
-        <div v-if="boardGameStore.currentTask">
-          <h4>current task</h4>
-          <p>{{ boardGameStore.currentTask.name }}</p>
-          with tools:
-          <ul>
-            <li
-              v-for="tool in boardGameStore.currentTask.tools"
-              :key="tool.alias"
-              :class="{
-                'used-tool': boardGameStore.usedTools.some(
-                  (t) => t === tool.alias
-                )
-              }"
-            >
-              {{ tool.name }}
-            </li>
-          </ul>
-        </div>
-        <hr />
-        <ul>
-          <li
-            v-for="part in boardGameStore.currentBoardGame.parts"
-            :key="part.name"
-          >
-            {{ part.name }}
+        <div class="card bg-base-100 w-96 shadow-sm">
+          <div class="card-body">
+            <h2 class="card-title">
+              {{ boardGameStore.currentBoardGame.name }}
+            </h2>
             <ul>
-              <li v-for="task in part.tasks" :key="task.name">
-                {{ task.name }} ({{
-                  task.tools.map((tool) => tool.name).join(', ')
-                }})
+              <li
+                v-for="(part, partIndex) in boardGameStore.currentBoardGame
+                  .parts"
+                :key="part.name"
+              >
+                <span
+                  :class="{
+                    crafted: boardGameStore.currentPartIndex
+                      ? partIndex <= boardGameStore.currentPartIndex
+                      : false
+                  }"
+                >
+                  {{ part.name }}
+                </span>
+                <template v-if="partIndex === boardGameStore.currentPartIndex">
+                  <div class="inline-grid *:[grid-area:1/1]">
+                    <div class="status status-primary animate-ping"></div>
+                    <div class="status status-primary"></div>
+                  </div>
+
+                  <ol>
+                    <li
+                      v-for="(task, taskIndex) in boardGameStore.currentPart
+                        ?.tasks"
+                      :key="task.name"
+                    >
+                      <span
+                        :class="{
+                          crafted: boardGameStore.currentTaskIndex
+                            ? taskIndex < boardGameStore.currentTaskIndex
+                            : false
+                        }"
+                        >{{ task.name }}</span
+                      >
+                      <template
+                        v-if="
+                          taskIndex === boardGameStore.currentTaskIndex &&
+                          boardGameStore.currentTask
+                        "
+                      >
+                        <div class="inline-grid *:[grid-area:1/1]">
+                          <div class="status status-primary animate-ping"></div>
+                          <div class="status status-primary"></div>
+                        </div>
+                        <ul>
+                          <li
+                            v-for="tool in boardGameStore.currentTask.tools"
+                            :key="tool.alias"
+                            :class="{
+                              'used-tool': boardGameStore.usedTools.some(
+                                (t) => t === tool.alias
+                              )
+                            }"
+                          >
+                            {{ tool.name }}
+                          </li>
+                        </ul>
+                      </template>
+                    </li>
+                  </ol>
+                </template>
               </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-    <aside v-if="duration">
+    <aside
+      class="prose"
+      v-if="duration !== null || boardGameStore.perfs.length > 0"
+    >
       <h2>Performance</h2>
 
       <p>{{ duration }}</p>
+
+      <template v-if="boardGameStore.perfs.length > 0">
+        <h3>Last performances</h3>
+
+        <ul>
+          <li v-for="perf in boardGameStore.perfs">
+            {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
+          </li>
+        </ul>
+      </template>
     </aside>
   </div>
 </template>
@@ -127,6 +177,11 @@ const submit = () => {
   }
 }
 
+form {
+  text-align: center;
+}
+
+.crafted,
 .used-tool {
   color: green;
 }

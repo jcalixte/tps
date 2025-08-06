@@ -11,6 +11,7 @@ type State = {
   usedTools: string[]
   start: string | null
   end: string | null
+  perfs: Array<[string, string]>
 }
 
 export const useBoardGameStore = defineStore('board-game', {
@@ -21,15 +22,18 @@ export const useBoardGameStore = defineStore('board-game', {
     currentTaskIndex: null,
     usedTools: [],
     start: null,
-    end: null
+    end: null,
+    perfs: []
   }),
   actions: {
     initGame() {
-      this.boardGames = [boardGames[0], boardGames[1]]
+      // this.boardGames = [boardGames[0], boardGames[1]]
+      this.boardGames = [boardGames[0]]
       this.currentBoardGameIndex = 0
       this.currentPartIndex = 0
       this.currentTaskIndex = 0
       this.start = new Date().toISOString()
+      this.end = null
     },
     craftWithTool(tool: string) {
       if (!this.currentTask) {
@@ -49,6 +53,7 @@ export const useBoardGameStore = defineStore('board-game', {
     },
     increment() {
       if (
+        !this.start ||
         !this.currentTask ||
         !this.currentPart ||
         !this.currentBoardGame ||
@@ -81,6 +86,7 @@ export const useBoardGameStore = defineStore('board-game', {
 
       // All board games complete
       this.end = new Date().toISOString()
+      this.perfs = [...this.perfs, [this.start, this.end]]
       this.currentBoardGameIndex = null
       this.currentPartIndex = null
       this.currentTaskIndex = null
