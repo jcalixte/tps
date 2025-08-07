@@ -29,20 +29,22 @@ const submit = () => {
   <div class="board-game-workshop prose">
     <aside>
       <h2>Tools</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Tool</th>
-            <th>Alias</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="tool in boardGameStore.tools" :key="tool.alias">
-            <td>{{ tool.name }}</td>
-            <td>{{ tool.alias }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>Alias</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="tool in boardGameStore.tools" :key="tool.alias">
+              <td>{{ tool.name }}</td>
+              <td>{{ tool.alias }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </aside>
 
     <div class="main">
