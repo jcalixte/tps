@@ -18,7 +18,7 @@ export const toDuration = (startDate: Date, endDate: Date = new Date()) => {
     parts.push(`${minutes}m`)
   }
 
-  parts.push(`${seconds}s`)
+  parts.push(`${seconds}s`.padStart(3, '0'))
 
   return parts.join(' ')
 }
