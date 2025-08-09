@@ -47,7 +47,7 @@ export const useBoardGameStore = defineStore('board-game', {
     initGame() {
       this.tools = tools.map((t) => ({
         ...t,
-        alias: randomAlias()
+        reference: randomAlias()
       }))
       this.boardGames = firstDemands
       this.currentBoardGameIndex = 0
@@ -61,7 +61,7 @@ export const useBoardGameStore = defineStore('board-game', {
         return
       }
 
-      const tool = this.tools.find((t) => t.alias === alias)
+      const tool = this.tools.find((t) => t.reference === alias)
 
       if (!tool) {
         return

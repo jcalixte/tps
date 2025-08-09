@@ -3,7 +3,7 @@ import { NonEmptyArray } from '@/modules/5s/types/tools'
 export type Tool = {
   name: string
   id: string
-  alias: string
+  reference: string
   cooldown: number
 }
 

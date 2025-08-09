@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
+import { shuffleArray } from '@/utils'
 import { computed } from 'vue'
 
 const boardGameStore = useBoardGameStore()
@@ -8,7 +9,9 @@ const isSeitonActivated = computed(() =>
 )
 
 const rawTools = computed(() =>
-  boardGameStore.tools.map((t) => `${t.name} (${t.alias})`).join(', ')
+  shuffleArray(
+    boardGameStore.tools.map((t) => `${t.name} (ref: ${t.reference})`)
+  ).join(', ')
 )
 </script>
 
@@ -24,9 +27,9 @@ const rawTools = computed(() =>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tool in boardGameStore.tools" :key="tool.alias">
+          <tr v-for="tool in boardGameStore.tools" :key="tool.reference">
             <td>{{ tool.name }}</td>
-            <td>{{ tool.alias }}</td>
+            <td>{{ tool.reference }}</td>
           </tr>
         </tbody>
       </table>
