@@ -10,7 +10,6 @@ import { NonEmptyArray } from '@/modules/5s/types/tools'
 export type Tool = {
   name: string
   alias: string
-  cooldown: number
 }
 
 export type Task = {
@@ -29,14 +28,14 @@ export type BoardGame = {
 }
 
 export const tools: Tool[] = [
-  { name: 'Card Printer', alias: 'card-printer', cooldown: 5 },
-  { name: 'Miniature Mold', alias: 'mini-mold', cooldown: 15 },
-  { name: 'Dice Engraver', alias: 'dice-engraver', cooldown: 10 },
-  { name: 'Board Cutter', alias: 'board-cutter', cooldown: 8 },
-  { name: 'Rulebook Designer', alias: 'rulebook-dzn', cooldown: 6 },
-  { name: 'Box Assembler', alias: 'box-asm', cooldown: 4 },
-  { name: 'Component Painter', alias: 'painter', cooldown: 12 },
-  { name: 'Lamination Machine', alias: 'laminator', cooldown: 7 }
+  { name: 'Card Printer', alias: 'card-printer' },
+  { name: 'Miniature Mold', alias: 'mini-mold' },
+  { name: 'Dice Engraver', alias: 'dice-engraver' },
+  { name: 'Board Cutter', alias: 'board-cutter' },
+  { name: 'Rulebook Designer', alias: 'rulebook-dzn' },
+  { name: 'Box Assembler', alias: 'box-asm' },
+  { name: 'Component Painter', alias: 'painter' },
+  { name: 'Lamination Machine', alias: 'laminator' }
 ]
 export type NonEmptyArray<T> = [T, ...T[]]
 

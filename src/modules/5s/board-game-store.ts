@@ -3,7 +3,7 @@ import { boardGames } from '@/modules/5s/types/board-games'
 import { tools } from '@/modules/5s/types/tools'
 import { BoardGame, Part, Task, Tool } from '@/modules/5s/types/workshop'
 import { toDuration } from '@/modules/5s/utils'
-import { randomAlias } from '@/utils'
+import { accumulate, randomAlias } from '@/utils'
 import { defineStore } from 'pinia'
 
 type State = {
@@ -17,13 +17,19 @@ type State = {
   meta: {
     start: string | null
     end: string | null
-    perfs: Array<[string, string]>
+    perfs: Array<{
+      start: string
+      end: string
+      boardGames: BoardGame[]
+      countGames: Record<string, number>
+      totalGames: number
+    }>
   }
 }
 
 const firstDemands = [
+  boardGames[0],
   boardGames[0]
-  // boardGames[0],
   // boardGames[0],
   // boardGames[0]
 ]
@@ -113,7 +119,17 @@ export const useBoardGameStore = defineStore('board-game', {
 
       // All board games complete
       this.meta.end = new Date().toISOString()
-      this.meta.perfs = [...this.meta.perfs, [this.meta.start, this.meta.end]]
+      const countGames = accumulate(this.boardGames.map((b) => b.name))
+      this.meta.perfs = [
+        ...this.meta.perfs,
+        {
+          start: this.meta.start,
+          end: this.meta.end,
+          boardGames: [...this.boardGames],
+          countGames,
+          totalGames: this.boardGames.length
+        }
+      ]
       this.currentBoardGameIndex = null
       this.currentPartIndex = null
       this.currentTaskIndex = null
@@ -162,6 +178,50 @@ export const useBoardGameStore = defineStore('board-game', {
       }
 
       return toDuration(new Date(this.meta.start), new Date(this.meta.end))
+    },
+    countUsedTools(): Record<string, number> {
+      const metaToolIds = this.meta.perfs
+        .flatMap((p) => p.boardGames)
+        .flatMap((b) => b.parts)
+        .flatMap((p) => p.tasks)
+        .flatMap((t) => t.tools)
+        .map((t) => t.id)
+
+      if (
+        !this.meta.start ||
+        !this.currentTask ||
+        !this.currentPart ||
+        !this.currentBoardGame ||
+        this.currentTaskIndex === null ||
+        this.currentPartIndex === null ||
+        this.currentBoardGameIndex === null
+      ) {
+        return accumulate(metaToolIds)
+      }
+
+      const currentBoardGameIndex = this.currentBoardGameIndex
+      const currentPartIndex = this.currentPartIndex
+      const currentTaskIndex = this.currentTaskIndex
+
+      const toolIds = this.boardGames
+        .filter((_, i) => i <= currentBoardGameIndex)
+        .flatMap((b, boardIndex) =>
+          boardIndex === currentBoardGameIndex
+            ? b.parts.filter((_, i) => i <= currentPartIndex)
+            : b.parts
+        )
+        .flatMap((p, partIndex) =>
+          partIndex === currentPartIndex
+            ? p.tasks.filter((_, i) => i <= currentTaskIndex)
+            : p.tasks
+        )
+        .flatMap((t, taskIndex) =>
+          taskIndex === currentTaskIndex
+            ? this.usedTools
+            : t.tools.map((t) => t.id)
+        )
+
+      return accumulate([...metaToolIds, ...toolIds])
     }
   }
 })

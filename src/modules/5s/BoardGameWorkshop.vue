@@ -1,29 +1,18 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
+import BoardGamePerformance from '@/modules/5s/BoardGamePerformance.vue'
 import BoardGameToolbox from '@/modules/5s/BoardGameToolbox.vue'
 import { _5S, is5S } from '@/modules/5s/types/5s'
-import { toDuration } from '@/modules/5s/utils'
 import { onMounted, ref, toValue } from 'vue'
 
 const userInput = ref('')
 const mode = ref<_5S | null>(null)
 const boardGameStore = useBoardGameStore()
-const duration = ref<string | null>(null)
-
 if (import.meta.env.DEV) {
   onMounted(() => {
     boardGameStore.initGame()
   })
 }
-
-setInterval(() => {
-  duration.value = boardGameStore.meta.start
-    ? toDuration(
-        new Date(boardGameStore.meta.start),
-        boardGameStore.meta.end ? new Date(boardGameStore.meta.end) : new Date()
-      )
-    : null
-}, 1000)
 
 const submit = () => {
   const lastInput = toValue(userInput)
@@ -48,6 +37,11 @@ const submit = () => {
   if (is5S(command)) {
     boardGameStore.activateS(command)
     return
+  }
+
+  // d for debug
+  if (command === 'd') {
+    boardGameStore.increment()
   }
 }
 </script>
@@ -151,18 +145,7 @@ const submit = () => {
     </div>
     <aside class="performance prose">
       <h2>Performance</h2>
-
-      <p class="duration numeric">{{ duration }}</p>
-
-      <template v-if="boardGameStore.meta.perfs.length > 0">
-        <h3>Last performances</h3>
-
-        <ul>
-          <li v-for="[start, end] in boardGameStore.meta.perfs">
-            {{ toDuration(new Date(start), new Date(end)) }}
-          </li>
-        </ul>
-      </template>
+      <BoardGamePerformance />
     </aside>
   </div>
 </template>
@@ -171,12 +154,6 @@ const submit = () => {
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code&display=swap');
 
 .board-game-workshop {
-  flex: 1;
-  font-family: 'Google Sans Code', monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 14px;
   display: flex;
   gap: 1rem;
   padding: 1rem;
@@ -218,7 +195,7 @@ aside,
   margin: 1rem;
 }
 
-.duration {
-  text-align: right;
+.card-title {
+  justify-content: center;
 }
 </style>

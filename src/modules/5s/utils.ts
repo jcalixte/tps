@@ -22,3 +22,7 @@ export const toDuration = (startDate: Date, endDate: Date = new Date()) => {
 
   return parts.join(' ')
 }
+
+export const toSeconds = (start: Date, endDate: Date): number => {
+  return Math.floor((endDate.getTime() - start.getTime()) / 1000)
+}

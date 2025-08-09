@@ -4,14 +4,36 @@ import { shuffleArray } from '@/utils'
 import { computed } from 'vue'
 
 const boardGameStore = useBoardGameStore()
+
+const isSeiriActivated = computed(() => boardGameStore.sUsed.includes('seiri'))
 const isSeitonActivated = computed(() =>
   boardGameStore.sUsed.includes('seiton')
 )
+// const isSeisoActivated = computed(() => boardGameStore.sUsed.includes('seiso'))
 
-const rawTools = computed(() =>
-  shuffleArray(
-    boardGameStore.tools.map((t) => `${t.name} (ref: ${t.reference})`)
-  ).join(', ')
+const neededTools = computed(
+  () =>
+    new Set(
+      boardGameStore.boardGames
+        .flatMap((g) => g.parts)
+        .flatMap((p) => p.tasks)
+        .flatMap((t) => t.tools)
+        .map((t) => t.id)
+    )
+)
+
+const tools = computed(() => {
+  if (isSeiriActivated.value) {
+    return boardGameStore.tools.filter((t) => neededTools.value.has(t.id))
+  } else {
+    return boardGameStore.tools
+  }
+})
+
+const toolsToDisplay = computed(() =>
+  shuffleArray(tools.value.map((t) => `${t.name} (ref: ${t.reference})`)).join(
+    ', '
+  )
 )
 </script>
 
@@ -23,18 +45,20 @@ const rawTools = computed(() =>
           <tr>
             <th>Tool</th>
             <th>Reference</th>
+            <th>Used</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tool in boardGameStore.tools" :key="tool.reference">
+          <tr v-for="tool in tools" :key="tool.reference">
             <td>{{ tool.name }}</td>
-            <td>{{ tool.reference }}</td>
+            <td class="numeric">{{ tool.reference }}</td>
+            <td>{{ boardGameStore.countUsedTools[tool.id] }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div v-else>
-      {{ rawTools }}
+      {{ toolsToDisplay }}
     </div>
   </div>
 </template>

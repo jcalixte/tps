@@ -4,7 +4,6 @@ export type Tool = {
   name: string
   id: string
   reference: string
-  cooldown: number
 }
 
 export type Task = {
