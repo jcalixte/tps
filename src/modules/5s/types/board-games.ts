@@ -8,7 +8,7 @@ export const boardGames: BoardGame[] = [
       {
         name: 'Chessboard Engraving',
         tasks: [
-          { name: 'Cut the board base', tools: chooseTools('board-cutter') },
+          { name: 'Cut the board base', tools: chooseTools('cutter') },
           {
             name: 'Apply lamination',
             tools: chooseTools('laminator', 'painter')
@@ -19,12 +19,8 @@ export const boardGames: BoardGame[] = [
         name: 'Piece Creation',
         tasks: [
           {
-            name: 'Mold pawns',
-            tools: chooseTools('mini-mold', 'painter')
-          },
-          {
-            name: 'Engrave royalty',
-            tools: chooseTools('dice-engraver', 'mini-mold')
+            name: 'Mold pieces',
+            tools: chooseTools('mini-mold', 'cutter')
           },
           {
             name: 'Paint pieces',
@@ -68,7 +64,7 @@ export const boardGames: BoardGame[] = [
         tasks: [
           {
             name: 'Cut dungeon tiles',
-            tools: chooseTools('board-cutter', 'laminator')
+            tools: chooseTools('cutter', 'laminator')
           }
         ]
       }
@@ -82,7 +78,7 @@ export const boardGames: BoardGame[] = [
         tasks: [
           {
             name: 'Print scenario deck',
-            tools: chooseTools('card-printer', 'rulebook-dzn')
+            tools: chooseTools('card-prisnter', 'rulebook-dzn')
           },
           {
             name: 'Apply finish',
@@ -113,7 +109,7 @@ export const boardGames: BoardGame[] = [
         tasks: [
           {
             name: 'Print map base',
-            tools: chooseTools('board-cutter', 'laminator')
+            tools: chooseTools('cutter', 'laminator')
           },
           {
             name: 'Add compass',
@@ -171,7 +167,7 @@ export const boardGames: BoardGame[] = [
         tasks: [
           {
             name: 'Print jungle layout',
-            tools: chooseTools('board-cutter', 'painter')
+            tools: chooseTools('cutter', 'painter')
           },
           {
             name: 'Seal board',
@@ -216,7 +212,7 @@ export const boardGames: BoardGame[] = [
         tasks: [
           {
             name: 'Cut castle walls',
-            tools: chooseTools('board-cutter', 'painter')
+            tools: chooseTools('cutter', 'painter')
           },
           {
             name: 'Reinforce walls',
