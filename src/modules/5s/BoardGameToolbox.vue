@@ -23,11 +23,17 @@ const neededTools = computed(
 )
 
 const tools = computed(() => {
-  if (isSeiriActivated.value) {
-    return boardGameStore.tools.filter((t) => neededTools.value.has(t.id))
-  } else {
-    return boardGameStore.tools
-  }
+  const toolsToUse = isSeiriActivated.value
+    ? boardGameStore.tools.filter((t) => neededTools.value.has(t.id))
+    : boardGameStore.tools
+
+  return isSeitonActivated.value
+    ? [...toolsToUse].sort(
+        (a, b) =>
+          (boardGameStore.countUsedTools[b.id] || 0) -
+          (boardGameStore.countUsedTools[a.id] || 0)
+      )
+    : toolsToUse
 })
 
 const toolsToDisplay = computed(() =>
@@ -40,7 +46,7 @@ const toolsToDisplay = computed(() =>
 <template>
   <div class="board-game-tools prose">
     <div class="overflow-x-auto" v-if="isSeitonActivated">
-      <table class="table table-zebra">
+      <table class="table table-md">
         <thead>
           <tr>
             <th>Tool</th>
@@ -48,13 +54,15 @@ const toolsToDisplay = computed(() =>
             <th>Used</th>
           </tr>
         </thead>
-        <tbody>
+        <transition-group name="list" tag="tbody">
           <tr v-for="tool in tools" :key="tool.reference">
             <td>{{ tool.name }}</td>
             <td class="numeric">{{ tool.reference }}</td>
-            <td>{{ boardGameStore.countUsedTools[tool.id] }}</td>
+            <td class="numeric count">
+              {{ boardGameStore.countUsedTools[tool.id] }}
+            </td>
           </tr>
-        </tbody>
+        </transition-group>
       </table>
     </div>
     <div v-else>
@@ -65,6 +73,20 @@ const toolsToDisplay = computed(() =>
 
 <style scoped lang="scss">
 .board-game-tools {
-  flex: 1;
+  .count {
+    text-align: right;
+  }
+
+  .list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
 }
 </style>
