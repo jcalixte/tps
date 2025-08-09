@@ -47,17 +47,23 @@ const submit = () => {
 </script>
 
 <template>
+  <header>
+    <button
+      class="btn"
+      v-if="!boardGameStore.currentBoardGame"
+      @click="boardGameStore.initGame"
+    >
+      start
+    </button>
+  </header>
   <div class="board-game-workshop">
-    <BoardGameToolbox class="aside" />
+    <aside class="prose">
+      <h2>Toolbox</h2>
+
+      <BoardGameToolbox />
+    </aside>
     <div class="main prose">
       <h2 class="title">Workshop</h2>
-      <button
-        class="btn"
-        v-if="!boardGameStore.currentBoardGame"
-        @click="boardGameStore.initGame"
-      >
-        start
-      </button>
 
       <div v-if="boardGameStore.currentBoardGame">
         <form @submit.prevent="submit">
@@ -137,25 +143,25 @@ const submit = () => {
         </div>
       </div>
     </div>
+    <aside
+      class="performance prose"
+      v-if="duration !== null || boardGameStore.meta.perfs.length > 0"
+    >
+      <h2>Performance</h2>
+
+      <p class="duration numeric">{{ duration }}</p>
+
+      <template v-if="boardGameStore.meta.perfs.length > 0">
+        <h3>Last performances</h3>
+
+        <ul>
+          <li v-for="perf in boardGameStore.meta.perfs">
+            {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
+          </li>
+        </ul>
+      </template>
+    </aside>
   </div>
-  <aside
-    class="performance"
-    v-if="duration !== null || boardGameStore.meta.perfs.length > 0"
-  >
-    <h2>Performance</h2>
-
-    <p>{{ duration }}</p>
-
-    <template v-if="boardGameStore.meta.perfs.length > 0">
-      <h3>Last performances</h3>
-
-      <ul>
-        <li v-for="perf in boardGameStore.meta.perfs">
-          {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
-        </li>
-      </ul>
-    </template>
-  </aside>
 </template>
 
 <style scoped lang="scss">
@@ -169,7 +175,8 @@ const submit = () => {
   font-style: normal;
   font-size: 14px;
   display: flex;
-  gap: 4rem;
+  gap: 1rem;
+  padding: 1rem;
 
   input {
     font-family: 'Google Sans Code', monospace;
@@ -177,6 +184,10 @@ const submit = () => {
     border-radius: 0;
     border: 2px solid blanchedalmond;
   }
+}
+
+h2 {
+  text-align: center;
 }
 
 form {
@@ -198,5 +209,13 @@ aside,
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.card {
+  margin: 1rem;
+}
+
+.duration {
+  text-align: right;
 }
 </style>

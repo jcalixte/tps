@@ -16,14 +16,13 @@ const rawTools = computed(() =>
 </script>
 
 <template>
-  <aside class="board-game-tools prose">
-    <h2>Toolbox</h2>
+  <div class="board-game-tools prose">
     <div class="overflow-x-auto" v-if="isSeitonActivated">
       <table class="table table-zebra">
         <thead>
           <tr>
             <th>Tool</th>
-            <th>Alias</th>
+            <th>Reference</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +36,7 @@ const rawTools = computed(() =>
     <div v-else>
       {{ rawTools }}
     </div>
-  </aside>
+  </div>
 </template>
 
 <style scoped lang="scss">
