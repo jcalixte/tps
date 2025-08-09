@@ -2,11 +2,15 @@
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
 import { toDuration, toSeconds } from '@/modules/5s/utils'
 import { getNatural } from '@/utils'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const boardGameStore = useBoardGameStore()
 
 const duration = ref<string | null>(null)
+
+const last10Perfs = computed(() =>
+  [...boardGameStore.meta.perfs].slice(-10).reverse()
+)
 
 setInterval(() => {
   duration.value = boardGameStore.meta.start
@@ -28,15 +32,13 @@ setInterval(() => {
       <table class="table">
         <thead>
           <tr>
-            <th>Round</th>
             <th>Duration</th>
             <th>Board Games</th>
             <th>Time / board game</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(perf, index) in boardGameStore.meta.perfs">
-            <td>{{ index + 1 }}</td>
+          <tr v-for="perf in last10Perfs">
             <td class="numeric">
               {{ toDuration(new Date(perf.start), new Date(perf.end)) }}
             </td>
@@ -54,7 +56,6 @@ setInterval(() => {
           </tr>
         </tbody>
       </table>
-      {{ boardGameStore.countUsedTools }}
     </template>
   </div>
 </template>
