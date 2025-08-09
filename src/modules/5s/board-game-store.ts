@@ -1,3 +1,4 @@
+import { _5S } from '@/modules/5s/types/5s'
 import { boardGames } from '@/modules/5s/types/board-games'
 import { tools } from '@/modules/5s/types/tools'
 import { BoardGame, Part, Task, Tool } from '@/modules/5s/types/workshop'
@@ -12,9 +13,12 @@ type State = {
   currentPartIndex: number | null
   currentTaskIndex: number | null
   usedTools: string[]
-  start: string | null
-  end: string | null
-  perfs: Array<[string, string]>
+  sUsed: _5S[]
+  meta: {
+    start: string | null
+    end: string | null
+    perfs: Array<[string, string]>
+  }
 }
 
 export const useBoardGameStore = defineStore('board-game', {
@@ -25,9 +29,12 @@ export const useBoardGameStore = defineStore('board-game', {
     currentPartIndex: null,
     currentTaskIndex: null,
     usedTools: [],
-    start: null,
-    end: null,
-    perfs: []
+    sUsed: [],
+    meta: {
+      start: null,
+      end: null,
+      perfs: []
+    }
   }),
   actions: {
     initGame() {
@@ -40,8 +47,8 @@ export const useBoardGameStore = defineStore('board-game', {
       this.currentBoardGameIndex = 0
       this.currentPartIndex = 0
       this.currentTaskIndex = 0
-      this.start = new Date().toISOString()
-      this.end = null
+      this.meta.start = new Date().toISOString()
+      this.meta.end = null
     },
     craftWithTool(alias: string) {
       if (!this.currentTask) {
@@ -67,7 +74,7 @@ export const useBoardGameStore = defineStore('board-game', {
     },
     increment() {
       if (
-        !this.start ||
+        !this.meta.start ||
         !this.currentTask ||
         !this.currentPart ||
         !this.currentBoardGame ||
@@ -99,11 +106,14 @@ export const useBoardGameStore = defineStore('board-game', {
       }
 
       // All board games complete
-      this.end = new Date().toISOString()
-      this.perfs = [...this.perfs, [this.start, this.end]]
+      this.meta.end = new Date().toISOString()
+      this.meta.perfs = [...this.meta.perfs, [this.meta.start, this.meta.end]]
       this.currentBoardGameIndex = null
       this.currentPartIndex = null
       this.currentTaskIndex = null
+    },
+    activateS(s: _5S) {
+      this.sUsed = [...this.sUsed, s]
     }
   },
   getters: {
@@ -141,11 +151,11 @@ export const useBoardGameStore = defineStore('board-game', {
       return this.currentPart.tasks[this.currentTaskIndex]
     },
     durationToComplete(): string | null {
-      if (!this.start || !this.end) {
+      if (!this.meta.start || !this.meta.end) {
         return null
       }
 
-      return toDuration(new Date(this.start), new Date(this.end))
+      return toDuration(new Date(this.meta.start), new Date(this.meta.end))
     }
   }
 })
