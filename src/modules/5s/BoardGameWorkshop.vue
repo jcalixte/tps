@@ -3,12 +3,18 @@ import { useBoardGameStore } from '@/modules/5s/board-game-store'
 import BoardGameToolbox from '@/modules/5s/BoardGameToolbox.vue'
 import { _5S, is5S } from '@/modules/5s/types/5s'
 import { toDuration } from '@/modules/5s/utils'
-import { ref, toValue } from 'vue'
+import { onMounted, ref, toValue } from 'vue'
 
 const userInput = ref('')
 const mode = ref<_5S | null>(null)
 const boardGameStore = useBoardGameStore()
 const duration = ref<string | null>(null)
+
+if (import.meta.env.DEV) {
+  onMounted(() => {
+    boardGameStore.initGame()
+  })
+}
 
 setInterval(() => {
   duration.value = boardGameStore.meta.start
@@ -47,16 +53,16 @@ const submit = () => {
 </script>
 
 <template>
-  <header>
+  <header v-if="!boardGameStore.currentBoardGame">
     <button
-      class="btn"
+      class="btn btn-primary"
       v-if="!boardGameStore.currentBoardGame"
       @click="boardGameStore.initGame"
     >
       start
     </button>
   </header>
-  <div class="board-game-workshop">
+  <div v-else class="board-game-workshop">
     <aside class="prose">
       <h2>Toolbox</h2>
 
@@ -65,7 +71,7 @@ const submit = () => {
     <div class="main prose">
       <h2 class="title">Workshop</h2>
 
-      <div v-if="boardGameStore.currentBoardGame">
+      <div>
         <form @submit.prevent="submit">
           <input type="text" v-model="userInput" autofocus />
         </form>
@@ -143,10 +149,7 @@ const submit = () => {
         </div>
       </div>
     </div>
-    <aside
-      class="performance prose"
-      v-if="duration !== null || boardGameStore.meta.perfs.length > 0"
-    >
+    <aside class="performance prose">
       <h2>Performance</h2>
 
       <p class="duration numeric">{{ duration }}</p>
@@ -155,8 +158,8 @@ const submit = () => {
         <h3>Last performances</h3>
 
         <ul>
-          <li v-for="perf in boardGameStore.meta.perfs">
-            {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
+          <li v-for="[start, end] in boardGameStore.meta.perfs">
+            {{ toDuration(new Date(start), new Date(end)) }}
           </li>
         </ul>
       </template>
