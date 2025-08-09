@@ -1,54 +1,56 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
+import BoardGameToolbox from '@/modules/5s/BoardGameToolbox.vue'
+import { _5S, is5S } from '@/modules/5s/types/5s'
 import { toDuration } from '@/modules/5s/utils'
 import { ref, toValue } from 'vue'
 
 const userInput = ref('')
+const mode = ref<_5S | null>(null)
 const boardGameStore = useBoardGameStore()
 const duration = ref<string | null>(null)
 
 setInterval(() => {
-  duration.value = boardGameStore.start
+  duration.value = boardGameStore.meta.start
     ? toDuration(
-        new Date(boardGameStore.start),
-        boardGameStore.end ? new Date(boardGameStore.end) : new Date()
+        new Date(boardGameStore.meta.start),
+        boardGameStore.meta.end ? new Date(boardGameStore.meta.end) : new Date()
       )
     : null
 }, 1000)
 
 const submit = () => {
   const lastInput = toValue(userInput)
-
-  boardGameStore.craftWithTool(lastInput)
-
   userInput.value = ''
+
+  if (!lastInput.startsWith('/')) {
+    boardGameStore.craftWithTool(lastInput)
+    return
+  }
+
+  if (lastInput === '/') {
+    mode.value = null
+    return
+  }
+
+  const command = lastInput.split('/').pop()
+
+  if (!command) {
+    return
+  }
+
+  if (is5S(command)) {
+    boardGameStore.activateS(command)
+    return
+  }
 }
 </script>
 
 <template>
-  <div class="board-game-workshop prose">
-    <aside>
-      <h2>Tools</h2>
-      <div class="overflow-x-auto">
-        <table class="table table-zebra">
-          <thead>
-            <tr>
-              <th>Tool</th>
-              <th>Alias</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="tool in boardGameStore.tools" :key="tool.alias">
-              <td>{{ tool.name }}</td>
-              <td>{{ tool.alias }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </aside>
-
-    <div class="main">
-      <h2>Workshop</h2>
+  <div class="board-game-workshop">
+    <BoardGameToolbox class="aside" />
+    <div class="main prose">
+      <h2 class="title">Workshop</h2>
       <button
         class="btn"
         v-if="!boardGameStore.currentBoardGame"
@@ -135,26 +137,25 @@ const submit = () => {
         </div>
       </div>
     </div>
-
-    <aside
-      class="performance"
-      v-if="duration !== null || boardGameStore.perfs.length > 0"
-    >
-      <h2>Performance</h2>
-
-      <p>{{ duration }}</p>
-
-      <template v-if="boardGameStore.perfs.length > 0">
-        <h3>Last performances</h3>
-
-        <ul>
-          <li v-for="perf in boardGameStore.perfs">
-            {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
-          </li>
-        </ul>
-      </template>
-    </aside>
   </div>
+  <aside
+    class="performance"
+    v-if="duration !== null || boardGameStore.meta.perfs.length > 0"
+  >
+    <h2>Performance</h2>
+
+    <p>{{ duration }}</p>
+
+    <template v-if="boardGameStore.meta.perfs.length > 0">
+      <h3>Last performances</h3>
+
+      <ul>
+        <li v-for="perf in boardGameStore.meta.perfs">
+          {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
+        </li>
+      </ul>
+    </template>
+  </aside>
 </template>
 
 <style scoped lang="scss">
@@ -187,12 +188,13 @@ form {
   color: green;
 }
 
-aside {
+aside,
+.aside {
   flex: 1;
 }
 
 .main {
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
