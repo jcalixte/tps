@@ -91,11 +91,6 @@ const submit = () => {
                   {{ part.name }}
                 </span>
                 <template v-if="partIndex === boardGameStore.currentPartIndex">
-                  <div class="inline-grid *:[grid-area:1/1]">
-                    <div class="status status-primary animate-ping"></div>
-                    <div class="status status-primary"></div>
-                  </div>
-
                   <ol>
                     <li
                       v-for="(task, taskIndex) in boardGameStore.currentPart
@@ -116,9 +111,9 @@ const submit = () => {
                           boardGameStore.currentTask
                         "
                       >
-                        <div class="inline-grid *:[grid-area:1/1]">
-                          <div class="status status-primary animate-ping"></div>
-                          <div class="status status-primary"></div>
+                        <div class="inline-grid *:[grid-area:1/1] ml-2">
+                          <div class="status status-info animate-ping"></div>
+                          <div class="status status-info"></div>
                         </div>
                         <ul>
                           <li
