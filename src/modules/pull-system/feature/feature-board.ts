@@ -1,13 +1,9 @@
-import { newsAppFeatures } from '@/data/app-feature'
 import type {
   Feature,
   FeatureStatus
 } from '@/modules/pull-system/feature/feature'
 import type { FeatureStep } from '@/modules/pull-system/feature/feature-steps'
-import {
-  birdFeatures,
-  mobileAppFeatures
-} from '@/modules/pull-system/feature/feature.fixture'
+import { mobileAppFeatures } from '@/modules/pull-system/feature/feature.fixture'
 import type { Strategy } from '@/modules/pull-system/lean/strategy'
 import type { FeatureState } from '@/store-type'
 import {
@@ -74,9 +70,8 @@ const mayBeInProgress = ({
   return feature.status
 }
 
-export const newBacklog = (type: 'bird' | 'mobile-app', limit?: number) => {
-  const initialFeatures =
-    type === 'bird' ? [...birdFeatures] : [...mobileAppFeatures]
+export const newBacklog = (limit?: number) => {
+  const initialFeatures = [...mobileAppFeatures]
   return limit !== undefined
     ? popNElement(shuffleArray(initialFeatures), limit)
     : shuffleArray(initialFeatures)

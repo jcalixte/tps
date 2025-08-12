@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
 import BoardGamePerformance from '@/modules/5s/BoardGamePerformance.vue'
-import BoardGameToolbox from '@/modules/5s/Toolbox.vue'
+import BoardGameToolbox from '@/modules/5s/BoardGameToolbox.vue'
 import { _5S, is5S } from '@/modules/5s/types/5s'
 import { onMounted, ref, toValue } from 'vue'
 
