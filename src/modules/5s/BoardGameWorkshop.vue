@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
+import BoardGamePerformance from '@/modules/5s/BoardGamePerformance.vue'
+import BoardGameToolbox from '@/modules/5s/BoardGameToolbox.vue'
 import BoardGameToolbox from '@/modules/5s/Toolbox.vue'
 import { _5S, is5S } from '@/modules/5s/types/5s'
-import { toDuration } from '@/modules/5s/utils'
-import { ref, toValue } from 'vue'
+import { _5S, is5S } from '@/modules/5s/types/5s'
+import { onMounted, ref, toValue } from 'vue'
 
 const userInput = ref('')
 const mode = ref<_5S | null>(null)
@@ -18,6 +20,11 @@ setInterval(() => {
       )
     : null
 }, 1000)
+if (import.meta.env.DEV) {
+  onMounted(() => {
+    boardGameStore.initGame()
+  })
+}
 
 const submit = () => {
   const lastInput = toValue(userInput)
@@ -43,23 +50,34 @@ const submit = () => {
     boardGameStore.activateS(command)
     return
   }
+
+  // d for debug
+  if (command === 'd') {
+    boardGameStore.increment()
+  }
 }
 </script>
 
 <template>
-  <div class="board-game-workshop prose">
-    <BoardGameToolbox />
-    <div class="main">
-      <h2>Workshop</h2>
-      <button
-        class="btn"
-        v-if="!boardGameStore.currentBoardGame"
-        @click="boardGameStore.initGame"
-      >
-        start
-      </button>
+  <header v-if="!boardGameStore.currentBoardGame">
+    <button
+      class="btn btn-primary"
+      v-if="!boardGameStore.currentBoardGame"
+      @click="boardGameStore.initGame"
+    >
+      start
+    </button>
+  </header>
+  <div v-else class="board-game-workshop">
+    <aside class="prose">
+      <h2>Toolbox</h2>
 
-      <div v-if="boardGameStore.currentBoardGame">
+      <BoardGameToolbox />
+    </aside>
+    <div class="main prose">
+      <h2 class="title">Workshop</h2>
+
+      <div>
         <form @submit.prevent="submit">
           <input type="text" v-model="userInput" autofocus />
         </form>
@@ -85,11 +103,6 @@ const submit = () => {
                   {{ part.name }}
                 </span>
                 <template v-if="partIndex === boardGameStore.currentPartIndex">
-                  <div class="inline-grid *:[grid-area:1/1]">
-                    <div class="status status-primary animate-ping"></div>
-                    <div class="status status-primary"></div>
-                  </div>
-
                   <ol>
                     <li
                       v-for="(task, taskIndex) in boardGameStore.currentPart
@@ -110,9 +123,9 @@ const submit = () => {
                           boardGameStore.currentTask
                         "
                       >
-                        <div class="inline-grid *:[grid-area:1/1]">
-                          <div class="status status-primary animate-ping"></div>
-                          <div class="status status-primary"></div>
+                        <div class="inline-grid *:[grid-area:1/1] ml-2">
+                          <div class="status status-info animate-ping"></div>
+                          <div class="status status-info"></div>
                         </div>
                         <ul>
                           <li
@@ -137,24 +150,9 @@ const submit = () => {
         </div>
       </div>
     </div>
-
-    <aside
-      class="performance"
-      v-if="duration !== null || boardGameStore.meta.perfs.length > 0"
-    >
+    <aside class="performance prose">
       <h2>Performance</h2>
-
-      <p>{{ duration }}</p>
-
-      <template v-if="boardGameStore.meta.perfs.length > 0">
-        <h3>Last performances</h3>
-
-        <ul>
-          <li v-for="perf in boardGameStore.meta.perfs">
-            {{ toDuration(new Date(perf[0]), new Date(perf[1])) }}
-          </li>
-        </ul>
-      </template>
+      <BoardGamePerformance />
     </aside>
   </div>
 </template>
@@ -163,14 +161,9 @@ const submit = () => {
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code&display=swap');
 
 .board-game-workshop {
-  flex: 1;
-  font-family: 'Google Sans Code', monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 14px;
   display: flex;
-  gap: 4rem;
+  gap: 1rem;
+  padding: 1rem;
 
   input {
     font-family: 'Google Sans Code', monospace;
@@ -178,6 +171,10 @@ const submit = () => {
     border-radius: 0;
     border: 2px solid blanchedalmond;
   }
+}
+
+h2 {
+  text-align: center;
 }
 
 form {
@@ -189,14 +186,23 @@ form {
   color: green;
 }
 
-aside {
+aside,
+.aside {
   flex: 1;
 }
 
 .main {
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.card {
+  margin: 1rem;
+}
+
+.card-title {
+  justify-content: center;
 }
 </style>

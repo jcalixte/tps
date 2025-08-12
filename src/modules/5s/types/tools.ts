@@ -1,18 +1,51 @@
 import { Tool } from '@/modules/5s/types/workshop'
 
 export const tools: Tool[] = [
-  { name: 'Card Printer', id: 'card-printer', alias: '', cooldown: 5 },
-  { name: 'Miniature Mold', id: 'mini-mold', alias: '', cooldown: 15 },
-  { name: 'Dice Engraver', id: 'dice-engraver', alias: '', cooldown: 10 },
-  { name: 'Board Cutter', id: 'board-cutter', alias: '', cooldown: 8 },
-  { name: 'Rulebook Designer', id: 'rulebook-dzn', alias: '', cooldown: 6 },
-  { name: 'Box Assembler', id: 'box-asm', alias: '', cooldown: 4 },
-  { name: 'Component Painter', id: 'painter', alias: '', cooldown: 12 },
-  { name: 'Lamination Machine', id: 'laminator', alias: '', cooldown: 7 }
+  { name: 'Card Printer', id: 'card-printer', reference: '' },
+  { name: 'Miniature Mold', id: 'mini-mold', reference: '' },
+  { name: 'Dice Engraver', id: 'dice-engraver', reference: '' },
+  { name: 'Cutter', id: 'cutter', reference: '' },
+  { name: 'Rulebook Designer', id: 'rulebook-dzn', reference: '' },
+  { name: 'Box Assembler', id: 'box-asm', reference: '' },
+  { name: 'Component Painter', id: 'painter', reference: '' },
+  { name: 'Lamination Machine', id: 'laminator', reference: '' },
+  // Additional realistic tools
+  {
+    name: 'Shrink Wrap Machine',
+    id: 'shrink-wrap',
+    reference: ''
+  },
+  {
+    name: 'Punch Board Cutter',
+    id: 'punch-cutter',
+    reference: ''
+  },
+  {
+    name: 'Sticker Applicator',
+    id: 'sticker-applicator',
+    reference: ''
+  },
+  {
+    name: 'Foil Stamping Press',
+    id: 'foil-stamp',
+    reference: ''
+  },
+  {
+    name: 'Scanner',
+    id: 'scanner',
+    reference: ''
+  },
+  {
+    name: 'Instruction Sheet Folder',
+    id: 'sheet-folder',
+    reference: ''
+  },
+  { name: 'Plastic Bag Sealer', id: 'bag-sealer', reference: '' },
+  { name: 'Barcode Printer', id: 'barcode-printer', reference: '' }
 ]
 export type NonEmptyArray<T> = [T, ...T[]]
 
 export const idToTools = (id: string): Tool => tools.find((t) => t.id === id)!
 
-export const chooseTools = (...ides: string[]): NonEmptyArray<Tool> =>
-  ides.map(idToTools) as NonEmptyArray<Tool>
+export const chooseTools = (...ids: string[]): NonEmptyArray<Tool> =>
+  ids.map(idToTools) as NonEmptyArray<Tool>

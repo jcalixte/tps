@@ -21,6 +21,9 @@ export const getMean = (data: number[]) =>
 export const getRound = (data: number, total: number) =>
   (Math.round(100 * (data / total)) / 100 || 0).toFixed(2)
 
+export const getNatural = (data: number, total: number) =>
+  (Math.round(100 * (data / total)) / 100 || 0).toFixed(0)
+
 export const shuffleArray = <T>(array: T[]) => {
   let currentIndex = array.length,
     randomIndex
@@ -35,6 +38,13 @@ export const shuffleArray = <T>(array: T[]) => {
   }
 
   return array
+}
+
+export const accumulate = (array: string[]) => {
+  return array.reduce<Record<string, number>>((acc, toolId) => {
+    acc[toolId] = (acc[toolId] || 0) + 1
+    return acc
+  }, {})
 }
 
 export const popNElement = <T>(array: T[], numberOfElements: number) => {

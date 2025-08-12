@@ -1,44 +1,92 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
+import { shuffleArray } from '@/utils'
 import { computed } from 'vue'
 
 const boardGameStore = useBoardGameStore()
+
+const isSeiriActivated = computed(() => boardGameStore.sUsed.includes('seiri'))
 const isSeitonActivated = computed(() =>
   boardGameStore.sUsed.includes('seiton')
 )
+// const isSeisoActivated = computed(() => boardGameStore.sUsed.includes('seiso'))
 
-const rawTools = boardGameStore.tools
-  .map((t) => `${t.name} (${t.alias})`)
-  .join(', ')
+const neededTools = computed(
+  () =>
+    new Set(
+      boardGameStore.boardGames
+        .flatMap((g) => g.parts)
+        .flatMap((p) => p.tasks)
+        .flatMap((t) => t.tools)
+        .map((t) => t.id)
+    )
+)
+
+const tools = computed(() => {
+  const toolsToUse = isSeiriActivated.value
+    ? boardGameStore.tools.filter((t) => neededTools.value.has(t.id))
+    : boardGameStore.tools
+
+  return isSeitonActivated.value
+    ? [...toolsToUse].sort(
+        (a, b) =>
+          (boardGameStore.countUsedTools[b.id] || 0) -
+          (boardGameStore.countUsedTools[a.id] || 0)
+      )
+    : toolsToUse
+})
+
+const toolsToDisplay = computed(() =>
+  shuffleArray(tools.value.map((t) => `${t.name} (ref: ${t.reference})`)).join(
+    ', '
+  )
+)
 </script>
 
 <template>
-  <aside class="board-game-tools">
-    <h2>Tools</h2>
+  <div class="board-game-tools prose">
     <div class="overflow-x-auto" v-if="isSeitonActivated">
-      <table class="table table-zebra">
+      <table class="table table-md">
         <thead>
           <tr>
             <th>Tool</th>
-            <th>Alias</th>
+            <th>Reference</th>
+            <th>Used</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="tool in boardGameStore.tools" :key="tool.alias">
+        <transition-group name="list" tag="tbody">
+          <tr v-for="tool in tools" :key="tool.reference">
             <td>{{ tool.name }}</td>
-            <td>{{ tool.alias }}</td>
+            <td class="numeric">{{ tool.reference }}</td>
+            <td class="numeric count">
+              {{ boardGameStore.countUsedTools[tool.id] }}
+            </td>
           </tr>
-        </tbody>
+        </transition-group>
       </table>
     </div>
     <div v-else>
-      {{ rawTools }}
+      {{ toolsToDisplay }}
     </div>
-  </aside>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .board-game-tools {
-  flex: 1;
+  .count {
+    text-align: right;
+  }
+
+  .list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
 }
 </style>
