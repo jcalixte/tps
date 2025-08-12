@@ -1,25 +1,14 @@
 <script setup lang="ts">
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
 import BoardGamePerformance from '@/modules/5s/BoardGamePerformance.vue'
-import BoardGameToolbox from '@/modules/5s/BoardGameToolbox.vue'
 import BoardGameToolbox from '@/modules/5s/Toolbox.vue'
-import { _5S, is5S } from '@/modules/5s/types/5s'
 import { _5S, is5S } from '@/modules/5s/types/5s'
 import { onMounted, ref, toValue } from 'vue'
 
 const userInput = ref('')
 const mode = ref<_5S | null>(null)
 const boardGameStore = useBoardGameStore()
-const duration = ref<string | null>(null)
 
-setInterval(() => {
-  duration.value = boardGameStore.meta.start
-    ? toDuration(
-        new Date(boardGameStore.meta.start),
-        boardGameStore.meta.end ? new Date(boardGameStore.meta.end) : new Date()
-      )
-    : null
-}, 1000)
 if (import.meta.env.DEV) {
   onMounted(() => {
     boardGameStore.initGame()
