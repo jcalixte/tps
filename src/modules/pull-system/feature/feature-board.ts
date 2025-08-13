@@ -72,6 +72,7 @@ const mayBeInProgress = ({
 
 export const newBacklog = (limit?: number) => {
   const initialFeatures = [...mobileAppFeatures]
+
   return limit !== undefined
     ? popNElement(shuffleArray(initialFeatures), limit)
     : shuffleArray(initialFeatures)
@@ -249,8 +250,8 @@ export const nextDay = (
   strategy: Strategy | 'problem-solving'
 ): FeatureState => {
   state.meta.totalDays++
-  // // each day, the teams know how to better work together
-  // state.meta.teamWorkExperience += 0.1
+  // each day, the teams know how to better work together
+  // state.meta.teamWorkExperience += 0.1 // Removed with a simplified version of pull system without the problem-solving strategy
 
   if (strategy === 'problem-solving') {
     const hasTeamLearned = randomFloat(0, 1) > 0.25
@@ -301,7 +302,7 @@ export const simulate = (
 ): FeatureState => {
   let i = 0
 
-  while (!isProjectFinished(state.features) && i++ < HARD_STOP) {
+  while (i++ < HARD_STOP && !isProjectFinished(state.features)) {
     if (strategy.includes('dps')) {
       if (state.meta.totalDays % 5 === 0) {
         state = nextDay(state, 'problem-solving')

@@ -13,7 +13,7 @@ const featureStore = useFeatureStore()
 
 const confirmReset = () => {
   if (confirm('Are you sure you want to reset the board?')) {
-    featureStore.initBoard('mobile-app', NUMBER_OF_FEATURES)
+    featureStore.initBoard(NUMBER_OF_FEATURES)
   }
 }
 </script>
