@@ -12,7 +12,7 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
 
 <template>
   <div class="feature-item bin" :class="{ live: isLive }">
-    <div>
+    <div class="feature-name">
       <!--  [complexity]
       <span class="numeric">({{ feature.complexity }})</span> -->
       {{ feature.name }}
@@ -37,11 +37,15 @@ const hasQualityIssues = computed(() => props.feature.qualityIssue > 0)
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  justify-content: space-around;
+  justify-content: space-between;
 
   &.live {
     visibility: hidden;
     opacity: 0;
+  }
+
+  .feature-name {
+    flex: 1;
   }
 }
 </style>
