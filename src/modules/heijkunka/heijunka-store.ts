@@ -3,7 +3,7 @@ import {
   NUMBER_OF_HOURS_PER_DAY
 } from '@/modules/heijkunka/heijunka-config'
 import { ProductType } from '@/modules/heijkunka/types/product-type'
-import { pickRandomElement } from '@/utils'
+import { getMean, pickRandomElement } from '@/utils'
 import { defineStore } from 'pinia'
 
 type Order = {
@@ -12,7 +12,7 @@ type Order = {
   product: ProductType
 }
 
-type Stock = {
+type Inventory = {
   shirt: number
   jeans: number
   shoes: number
@@ -21,7 +21,7 @@ type Stock = {
 
 type HeijunkaState = {
   money: number
-  inventory: Stock
+  inventory: Inventory
   orders: Order[]
   planning: ProductType[]
   validatedPlanning: boolean
@@ -30,22 +30,22 @@ type HeijunkaState = {
   }
 }
 
-const getStockByProduct = (
+const getInventoryByProduct = (
   product: ProductType,
   planning: ProductType[],
   currentDay: number
 ): number => {
-  const stock = planning.filter(
+  const inventory = planning.filter(
     (p, index) =>
       index >= (currentDay - 1) * NUMBER_OF_HOURS_PER_DAY &&
       index < currentDay * NUMBER_OF_HOURS_PER_DAY &&
       p === product
   ).length
 
-  return stock
+  return inventory
 }
 
-const initialInventory: Stock = {
+const initialInventory: Inventory = {
   shirt: 0,
   jeans: 0,
   shoes: 0,
@@ -72,21 +72,21 @@ export const useHeijunkaStore = defineStore('heijunka', {
 
       this.meta.currentHour++
 
-      // Add to stock every day
+      // Add to inventory every day
       if (this.meta.currentHour % NUMBER_OF_HOURS_PER_DAY === 0) {
         this.inventory = {
           shirt:
             this.inventory.shirt +
-            getStockByProduct('shirt', this.planning, this.currentDay),
+            getInventoryByProduct('shirt', this.planning, this.currentDay),
           jeans:
             this.inventory.jeans +
-            getStockByProduct('jeans', this.planning, this.currentDay),
+            getInventoryByProduct('jeans', this.planning, this.currentDay),
           shoes:
             this.inventory.shoes +
-            getStockByProduct('shoes', this.planning, this.currentDay),
+            getInventoryByProduct('shoes', this.planning, this.currentDay),
           hat:
             this.inventory.hat +
-            getStockByProduct('hat', this.planning, this.currentDay)
+            getInventoryByProduct('hat', this.planning, this.currentDay)
         }
       }
 
@@ -117,9 +117,9 @@ export const useHeijunkaStore = defineStore('heijunka', {
 
       // Use the inventory to deliver orders
       this.orders = this.orders.map((order, index): Order => {
-        const stock = this.inventory[order.product]
+        const productInventory = this.inventory[order.product]
 
-        if (stock === 0) {
+        if (productInventory === 0) {
           return order
         }
 
@@ -127,7 +127,8 @@ export const useHeijunkaStore = defineStore('heijunka', {
           (o, i) => i < index && o.product !== order.product
         ).length
 
-        const newStatus = index - offset < stock ? 'received' : 'requested'
+        const newStatus =
+          index - offset < productInventory ? 'received' : 'requested'
 
         return {
           ...order,
@@ -151,6 +152,12 @@ export const useHeijunkaStore = defineStore('heijunka', {
     currentDay: (state) =>
       Math.ceil(state.meta.currentHour / NUMBER_OF_HOURS_PER_DAY),
     gameEnded: (state) =>
-      state.meta.currentHour >= NUMBER_OF_DAYS * NUMBER_OF_HOURS_PER_DAY
+      state.meta.currentHour >= NUMBER_OF_DAYS * NUMBER_OF_HOURS_PER_DAY,
+    meanLeadTime: (state) =>
+      getMean(
+        state.orders
+          .filter((o) => o.status === 'received')
+          .map((o) => o.leadTime)
+      )
   }
 })

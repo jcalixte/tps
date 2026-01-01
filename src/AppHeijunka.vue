@@ -20,6 +20,21 @@ const orders = ref(
   )
 )
 
+const levelingPlanning: ProductType[] = [
+  'shirt',
+  'shirt',
+  'jeans',
+  'shoes',
+  'hat',
+  'shirt',
+  'shirt',
+  'jeans',
+  'shoes',
+  'hat',
+  'shirt',
+  'jeans'
+]
+
 const orderIndex = (dayIndex: number, hourIndex: number) => {
   return dayIndex * hoursCount + hourIndex
 }
@@ -85,6 +100,10 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         </span>
         <button class="button-outline" @click="heijunkaStore.reset()">
           reset
+        </button>
+
+        <button class="button-outline" @click="orders = levelingPlanning">
+          levelling
         </button>
       </section>
       <section class="factory">
@@ -285,6 +304,10 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
             </li>
           </ol>
         </div>
+      </section>
+
+      <section class="dashboard">
+        Mean lead time: {{ heijunkaStore.meanLeadTime }}
       </section>
     </div>
   </article>
