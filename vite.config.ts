@@ -12,7 +12,8 @@ export default defineConfig({
         index: 'index.html',
         'pull-system': 'pull-system.html',
         'team-leader': 'team-leader.html',
-        '5s': '5s.html'
+        '5s': '5s.html',
+        heijunka: 'heijunka.html'
       }
     }
   },

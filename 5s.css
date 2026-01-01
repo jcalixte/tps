@@ -34,15 +34,6 @@ h1 {
   margin: 0 0 0.5rem;
 }
 
-.created-at {
-  font-size: 14pt;
-  margin: 0;
-}
-
-.numeric {
-  font-family: 'Cutive Mono', monospace;
-  font-weight: bold;
-}
 article {
   display: flex;
   flex-direction: column;
