@@ -47,7 +47,7 @@ export const accumulate = (array: string[]) => {
   }, {})
 }
 
-export const popNElement = <T>(array: T[], numberOfElements: number) => {
+export const popNElement = <T>(array: T[], numberOfElements: number): T[] => {
   const poppedElements: T[] = []
 
   for (let i = 0; i < numberOfElements; i++) {

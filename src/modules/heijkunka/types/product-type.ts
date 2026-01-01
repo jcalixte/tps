@@ -1,1 +1,1 @@
-export type ProductType = 'shirt' | 'jeans' | 'shoes'
+export type ProductType = 'shirt' | 'jeans' | 'shoes' | 'hat'
