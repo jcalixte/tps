@@ -26,7 +26,7 @@ const storyIndex = ref(0)
 </script>
 
 <template>
-  <article id="main-app">
+  <article>
     <h1>5S</h1>
     <h2 class="created-at numeric">
       {{ createdAt }}

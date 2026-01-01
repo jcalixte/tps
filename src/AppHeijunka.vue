@@ -34,7 +34,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
 </script>
 
 <template>
-  <article id="main-app">
+  <article>
     <h1>Heijunka</h1>
     <h2 class="created-at numeric">
       {{ createdAt }}
@@ -287,7 +287,6 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         </div>
       </section>
     </div>
-    <BoardGameWorkshop />
   </article>
 </template>
 

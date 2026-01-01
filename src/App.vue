@@ -4,7 +4,7 @@ import { StarportCarrier } from 'vue-starport'
 </script>
 
 <template>
-  <main id="main-app">
+  <main>
     <StarportCarrier>
       <PullSystemArticle />
     </StarportCarrier>
