@@ -9,6 +9,11 @@
   --gap: 1rem;
 }
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 *:not(td):not(th) {
   border-radius: 0.3rem;
 }

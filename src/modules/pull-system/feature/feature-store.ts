@@ -34,9 +34,10 @@ export const useFeatureStore = defineStore('feature', {
     meta: resetMeta()
   }),
   actions: {
-    async initBoard(type: 'bird' | 'mobile-app', limit?: number) {
-      this.backlog = newBacklog(type, limit)
+    async initBoard(limit?: number) {
+      this.backlog = newBacklog(limit)
       this.steps = featureSteps
+
       const initialSteps = featureSteps.filter(
         (step) => step.title !== 'Release' && step.title !== 'Development'
       )

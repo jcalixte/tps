@@ -70,7 +70,7 @@ export const useSimulationStore = defineStore('dashboard', {
   actions: {
     async simulate(strategy: Strategy) {
       const steps = featureSteps
-      const backlog = await instance.newBacklog('mobile-app')
+      const backlog = await instance.newBacklog()
       const features = await instance.initBoard(steps, backlog, true)
 
       const newState = await instance.simulate(

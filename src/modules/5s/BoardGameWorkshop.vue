@@ -8,6 +8,7 @@ import { onMounted, ref, toValue } from 'vue'
 const userInput = ref('')
 const mode = ref<_5S | null>(null)
 const boardGameStore = useBoardGameStore()
+
 if (import.meta.env.DEV) {
   onMounted(() => {
     boardGameStore.initGame()

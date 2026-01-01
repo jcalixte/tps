@@ -46,12 +46,6 @@ const strategies: Strategy[] = ['push', 'pull']
           </td>
         </tr>
         <tr>
-          <td>Mean lead time</td>
-          <td class="numeric" v-for="strategy in strategies" :key="strategy">
-            {{ simulationStore.meanLeadTime(strategy) }}
-          </td>
-        </tr>
-        <tr>
           <td>Min lead time</td>
           <td class="numeric" v-for="strategy in strategies" :key="strategy">
             {{
@@ -69,6 +63,12 @@ const strategies: Strategy[] = ['push', 'pull']
                 ? '-'
                 : simulationStore.maxLeadTime(strategy)
             }}
+          </td>
+        </tr>
+        <tr>
+          <td>Mean lead time</td>
+          <td class="numeric" v-for="strategy in strategies" :key="strategy">
+            {{ simulationStore.meanLeadTime(strategy) }}
           </td>
         </tr>
         <!-- <tr>

@@ -238,7 +238,7 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         Now we’re pretty confident! As quality issues increase in the
         <PushSystemIcon /> push system, defects and corrections accumulate,
         leading to <span class="numeric">{{ meanLeadTimeDelta }}</span> days of
-        delay<template v-if="meanLeadTimeDeltaFloat > 12">!!</template
+        delay<template v-if="meanLeadTimeDeltaFloat > 12">!</template
         ><template v-else>.</template>
       </p>
       <p v-else class="waiting-simulations">

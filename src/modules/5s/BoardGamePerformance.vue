@@ -3,7 +3,6 @@ import { Chart as ChartJS, registerables } from 'chart.js'
 import { useBoardGameStore } from '@/modules/5s/board-game-store'
 import { toDuration, toSeconds } from '@/modules/5s/utils'
 import { getNatural } from '@/utils'
-import { _ } from '@faker-js/faker/dist/airline-D6ksJFwG'
 import { computed, ref } from 'vue'
 import { Bar } from 'vue-chartjs'
 
