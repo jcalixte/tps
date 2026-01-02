@@ -85,7 +85,21 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       </p>
       <p>
         You know, from your years of experience, that in 3 days, you sell
-        approximately 5 shirts, 3 jeans, 2 pairs of shoes and 2 hats.
+        approximately
+        <ul>
+          <li>
+            5 shirts <ShirtItem v-for="_ in Array(5)" />
+          </li>
+          <li>
+            3 jeans <JeanItem v-for="_ in Array(3)" />
+          </li>
+          <li>
+            2 pairs of shoes <ShoeItem v-for="_ in Array(2)" />
+          </li>
+          <li>
+            2 hats <HatItem v-for="_ in Array(2)" />
+          </li>
+        </ul>
       </p>
       <section class="commands">
         <button
@@ -132,6 +146,9 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         <button class="button-outline" @click="orders = [...batchPlanning]">
           batch
         </button>
+        <div>
+          <button class="button-outline" @click="heijunkaStore.simulateMonth()">Simulate a month</button>
+        </div>
       </section>
       <section class="factory">
         <h2>Factory</h2>

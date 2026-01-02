@@ -37,8 +37,8 @@ const getInventoryByProduct = (
 ): number => {
   const inventory = planning.filter(
     (p, index) =>
-      index >= (currentDay - 1) * NUMBER_OF_HOURS_PER_DAY &&
-      index < currentDay * NUMBER_OF_HOURS_PER_DAY &&
+      index >= ((currentDay % NUMBER_OF_DAYS) - 1) * NUMBER_OF_HOURS_PER_DAY &&
+      index < (currentDay % NUMBER_OF_DAYS) * NUMBER_OF_HOURS_PER_DAY &&
       p === product
   ).length
 
@@ -146,13 +146,18 @@ export const useHeijunkaStore = defineStore('heijunka', {
       this.planning = []
       this.orders = []
       this.inventory = { ...initialInventory }
+    },
+    simulateMonth() {
+      for (let index = 0; index < 30; index++) {
+        this.newHour()
+      }
     }
   },
   getters: {
     currentDay: (state) =>
       Math.ceil(state.meta.currentHour / NUMBER_OF_HOURS_PER_DAY),
-    gameEnded: (state) =>
-      state.meta.currentHour >= NUMBER_OF_DAYS * NUMBER_OF_HOURS_PER_DAY,
+    gameEnded: () => false,
+    // state.meta.currentHour >= NUMBER_OF_DAYS * NUMBER_OF_HOURS_PER_DAY,
     meanLeadTime: (state) => getMean(state.orders.map((o) => o.leadTime))
   }
 })
