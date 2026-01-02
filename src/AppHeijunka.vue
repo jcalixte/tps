@@ -384,6 +384,9 @@ li {
 
 .shop {
   display: flex;
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
+  padding: 0 0.5rem;
 
   & > div {
     flex: 1;
