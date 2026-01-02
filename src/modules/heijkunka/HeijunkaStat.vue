@@ -25,7 +25,7 @@ const renderChart = () => {
     xLabel: 'Products',
     yLabel: '# of orders',
     data: {
-      labels: products.map((p) => [`${p} ordered`, `${p} made |`]).flat(),
+      labels: products.map((p) => [`${p} ordered`, `${p} made`]).flat(),
       datasets: [
         {
           data: products
@@ -55,9 +55,8 @@ watch([orders, inventory], renderChart, { deep: true })
   </div>
 </template>
 
-<!-- 
 <style scoped lang="scss">
 .heijunka-stat {
+  width: 100%;
 }
 </style>
--->
