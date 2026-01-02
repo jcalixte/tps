@@ -4,15 +4,17 @@
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    fill="currentColor"
-    class="icon icon-tabler icons-tabler-filled icon-tabler-columns-2"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="icon icon-tabler icons-tabler-outline icon-tabler-layout-columns"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path
-      d="M4 2h6a1 1 0 0 1 1 1v18a1 1 0 0 1 -1 1h-6a2 2 0 0 1 -2 -2v-16a2 2 0 0 1 2 -2"
+      d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
     />
-    <path
-      d="M14 2h6a2 2 0 0 1 2 2v16a2 2 0 0 1 -2 2h-6a1 1 0 0 1 -1 -1v-18a1 1 0 0 1 1 -1"
-    />
+    <path d="M12 4l0 16" />
   </svg>
 </template>

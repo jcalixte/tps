@@ -93,6 +93,11 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         <li>2 pairs of shoes <ShoeItem v-for="_ in Array(2)" /></li>
         <li>2 hats <HatItem v-for="_ in Array(2)" /></li>
       </ul>
+      <p>
+        As there are 4 hours of production per day, you must produce 4 products
+        per day to meet the 12 orders every 3 days. At the end, you produce 1
+        product every hour.
+      </p>
       <section class="factory">
         <h2>Factory</h2>
 
@@ -158,10 +163,6 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
             <path d="M7 4v16l13 -8z" />
           </svg> -->
         </button>
-        <span v-if="heijunkaStore.meta.currentHour > 0">
-          day: {{ heijunkaStore.currentDay }} | current hour:
-          {{ heijunkaStore.meta.currentHour }} hours
-        </span>
         <button class="button-outline" @click="heijunkaStore.reset()">
           reset
         </button>
@@ -178,6 +179,12 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           </button>
         </div>
       </section>
+      <div>
+        <span v-if="heijunkaStore.meta.currentHour > 0">
+          day: {{ heijunkaStore.currentDay }} | current hour:
+          {{ heijunkaStore.meta.currentHour }} hours
+        </span>
+      </div>
 
       <section class="dashboard">
         Mean lead time: {{ heijunkaStore.meanLeadTime }}
