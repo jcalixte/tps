@@ -153,11 +153,6 @@ export const useHeijunkaStore = defineStore('heijunka', {
       Math.ceil(state.meta.currentHour / NUMBER_OF_HOURS_PER_DAY),
     gameEnded: (state) =>
       state.meta.currentHour >= NUMBER_OF_DAYS * NUMBER_OF_HOURS_PER_DAY,
-    meanLeadTime: (state) =>
-      getMean(
-        state.orders
-          .filter((o) => o.status === 'received')
-          .map((o) => o.leadTime)
-      )
+    meanLeadTime: (state) => getMean(state.orders.map((o) => o.leadTime))
   }
 })

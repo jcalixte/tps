@@ -20,6 +20,21 @@ const orders = ref(
   )
 )
 
+const batchPlanning: ProductType[] = [
+  'shirt',
+  'shirt',
+  'shirt',
+  'shirt',
+  'shirt',
+  'jeans',
+  'jeans',
+  'jeans',
+  'shoes',
+  'shoes',
+  'hat',
+  'hat'
+]
+
 const levelingPlanning: ProductType[] = [
   'shirt',
   'shirt',
@@ -57,11 +72,12 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
     <div class="text">
       <p>
         You're selling shirts, jeans and shoes in a little town that is quite
-        specific: every day someone get to your shop and buys 1 item.
+        specific: every hour someone get to your shop and buys 1 item and they
+        won't leave until they are satisfied!
       </p>
       <p>
-        You know, from your years of experience, that shirts sell twice as much
-        as
+        You know, from your years of experience, that in 3 days, you sell
+        approximately 5 shirts, 3 jeans, 2 pairs of shoes and 2 hats.
       </p>
       <section class="commands">
         <button
@@ -102,32 +118,49 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           reset
         </button>
 
-        <button class="button-outline" @click="orders = levelingPlanning">
+        <button class="button-outline" @click="orders = [...levelingPlanning]">
           levelling
+        </button>
+        <button class="button-outline" @click="orders = [...batchPlanning]">
+          batch
         </button>
       </section>
       <section class="factory">
         <h2>Factory</h2>
 
-        <ul>
-          <li v-for="(day, dayIndex) in days" :key="day">
-            Day {{ day }}
-            <div class="day-production-plan">
-              <select
-                v-for="(hour, hourIndex) in hours"
-                v-model="orders[orderIndex(dayIndex, hourIndex)]"
-                :name="`day-${day}-hour-${hour}`"
-                :id="`day-${day}-hour-${hour}`"
-                :disabled="heijunkaStore.validatedPlanning"
-              >
-                <option value="shirt">Shirt</option>
-                <option value="jeans">Jeans</option>
-                <option value="shoes">Shoes</option>
-                <option value="hat">Hat</option>
-              </select>
-            </div>
-          </li>
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Hour 1</th>
+              <th scope="col">Hour 2</th>
+              <th scope="col">Hour 3</th>
+              <th scope="col">Hour 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(day, dayIndex) in days" :key="day">
+              <th scope="row">Day {{ day }}</th>
+              <td v-for="(hour, hourIndex) in hours">
+                <select
+                  v-model="orders[orderIndex(dayIndex, hourIndex)]"
+                  :name="`day-${day}-hour-${hour}`"
+                  :id="`day-${day}-hour-${hour}`"
+                  :disabled="heijunkaStore.validatedPlanning"
+                >
+                  <option value="shirt">Shirt</option>
+                  <option value="jeans">Jeans</option>
+                  <option value="shoes">Shoes</option>
+                  <option value="hat">Hat</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="dashboard">
+        Mean lead time: {{ heijunkaStore.meanLeadTime }}
       </section>
 
       <section class="shop">
@@ -309,6 +342,26 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       <section class="dashboard">
         Mean lead time: {{ heijunkaStore.meanLeadTime }}
       </section>
+
+      <p>
+        The longer the lead time is, the longer it takes to have return on
+        investment. You paid for the raw material, the workforce, the machines
+        but until the client receives the product you won't get paid.
+      </p>
+      <p>
+        The more stock there is, the more latent payments there are and the more
+        paymeents are still waiting, the more you need to be good at planning
+        batches.
+      </p>
+      <p>
+        Producing a bit of everything with small batches is the way to go and
+        that's the core of Heijunka
+      </p>
+      <h2>What heijunka needs: SMED</h2>
+      <p>
+        We didn't talk here about how we manage products that need different
+        time to be produced.
+      </p>
     </div>
   </article>
 </template>
@@ -326,12 +379,6 @@ main {
 li {
   display: flex;
   gap: 1rem;
-  align-items: center;
-}
-
-.day-production-plan {
-  display: flex;
-  gap: 0.5rem;
   align-items: center;
 }
 
