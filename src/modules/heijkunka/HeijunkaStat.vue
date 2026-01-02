@@ -9,7 +9,7 @@ const svgElement = ref<VNodeRef | null>(null)
 const products: ProductType[] = ['shirt', 'jeans', 'shoes', 'hat']
 
 const heijunkaStore = useHeijunkaStore()
-const { orders } = storeToRefs(heijunkaStore)
+const { orders, inventory } = storeToRefs(heijunkaStore)
 
 const renderChart = () => {
   if (orders.value.length === 0) {
@@ -25,13 +25,15 @@ const renderChart = () => {
     xLabel: 'Products',
     yLabel: '# of orders',
     data: {
-      labels: products,
+      labels: products.map((p) => [`${p} ordered`, `${p} made |`]).flat(),
       datasets: [
         {
-          data: products.map(
-            (product) =>
-              orders.value.filter((o) => o.product === product).length
-          )
+          data: products
+            .map((product) => [
+              orders.value.filter((o) => o.product === product).length,
+              inventory.value[product]
+            ])
+            .flat()
         }
       ]
     },
@@ -44,7 +46,7 @@ const renderChart = () => {
 }
 
 onMounted(renderChart)
-watch(orders, renderChart, { deep: true })
+watch([orders, inventory], renderChart, { deep: true })
 </script>
 
 <template>

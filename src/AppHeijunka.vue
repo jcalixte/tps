@@ -86,21 +86,47 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       <p>
         You know, from your years of experience, that in 3 days, you sell
         approximately
-        <ul>
-          <li>
-            5 shirts <ShirtItem v-for="_ in Array(5)" />
-          </li>
-          <li>
-            3 jeans <JeanItem v-for="_ in Array(3)" />
-          </li>
-          <li>
-            2 pairs of shoes <ShoeItem v-for="_ in Array(2)" />
-          </li>
-          <li>
-            2 hats <HatItem v-for="_ in Array(2)" />
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>5 shirts <ShirtItem v-for="_ in Array(5)" /></li>
+        <li>3 jeans <JeanItem v-for="_ in Array(3)" /></li>
+        <li>2 pairs of shoes <ShoeItem v-for="_ in Array(2)" /></li>
+        <li>2 hats <HatItem v-for="_ in Array(2)" /></li>
+      </ul>
+      <section class="factory">
+        <h2>Factory</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Hour 1</th>
+              <th scope="col">Hour 2</th>
+              <th scope="col">Hour 3</th>
+              <th scope="col">Hour 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(day, dayIndex) in days" :key="day">
+              <th scope="row">Day {{ day }}</th>
+              <td v-for="(hour, hourIndex) in hours">
+                <select
+                  v-model="orders[orderIndex(dayIndex, hourIndex)]"
+                  :name="`day-${day}-hour-${hour}`"
+                  :id="`day-${day}-hour-${hour}`"
+                  :disabled="heijunkaStore.validatedPlanning"
+                >
+                  <option value="shirt">Shirt</option>
+                  <option value="jeans">Jeans</option>
+                  <option value="shoes">Shoes</option>
+                  <option value="hat">Hat</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <section class="commands">
         <button
           v-if="!heijunkaStore.validatedPlanning"
@@ -147,45 +173,16 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           batch
         </button>
         <div>
-          <button class="button-outline" @click="heijunkaStore.simulateMonth()">Simulate a month</button>
+          <button class="button-outline" @click="heijunkaStore.simulateMonth()">
+            Simulate a month
+          </button>
         </div>
-      </section>
-      <section class="factory">
-        <h2>Factory</h2>
-
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Day</th>
-              <th scope="col">Hour 1</th>
-              <th scope="col">Hour 2</th>
-              <th scope="col">Hour 3</th>
-              <th scope="col">Hour 4</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(day, dayIndex) in days" :key="day">
-              <th scope="row">Day {{ day }}</th>
-              <td v-for="(hour, hourIndex) in hours">
-                <select
-                  v-model="orders[orderIndex(dayIndex, hourIndex)]"
-                  :name="`day-${day}-hour-${hour}`"
-                  :id="`day-${day}-hour-${hour}`"
-                  :disabled="heijunkaStore.validatedPlanning"
-                >
-                  <option value="shirt">Shirt</option>
-                  <option value="jeans">Jeans</option>
-                  <option value="shoes">Shoes</option>
-                  <option value="hat">Hat</option>
-                </select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </section>
 
       <section class="dashboard">
         Mean lead time: {{ heijunkaStore.meanLeadTime }}
+        <hr />
+        Orders made: {{ heijunkaStore.orders.length }}
       </section>
 
       <HeijunkaStat />
@@ -197,7 +194,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           <section class="shop-shirt">
             <ShirtItem
               v-for="shirt in Array.from(
-                { length: heijunkaStore.inventory.shirt },
+                { length: heijunkaStore.remainingInventory.shirt },
                 (_, i) => i
               )"
               :key="shirt"
@@ -206,7 +203,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           <section class="shop-jeans">
             <JeanItem
               v-for="jeans in Array.from(
-                { length: heijunkaStore.inventory.jeans },
+                { length: heijunkaStore.remainingInventory.jeans },
                 (_, i) => i
               )"
               :key="jeans"
@@ -215,7 +212,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           <section class="shop-shoes">
             <ShoeItem
               v-for="shoes in Array.from(
-                { length: heijunkaStore.inventory.shoes },
+                { length: heijunkaStore.remainingInventory.shoes },
                 (_, i) => i
               )"
               :key="shoes"
@@ -224,7 +221,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
           <section class="shop-hat">
             <HatItem
               v-for="hat in Array.from(
-                { length: heijunkaStore.inventory.hat },
+                { length: heijunkaStore.remainingInventory.hat },
                 (_, i) => i
               )"
               :key="hat"
@@ -234,7 +231,10 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         <div class="orders">
           <h2>Orders</h2>
           <ol>
-            <li class="order" v-for="order in heijunkaStore.orders">
+            <li
+              class="order"
+              v-for="order in heijunkaStore.orders.toReversed()"
+            >
               <RequestedStatus v-show="order.status === 'requested'" />
               <ReceivedStatus v-show="order.status === 'received'" />
 
@@ -250,6 +250,8 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
 
       <section class="dashboard">
         Mean lead time: {{ heijunkaStore.meanLeadTime }}
+        <hr />
+        Orders made: {{ heijunkaStore.orders.length }}
       </section>
 
       <p>
