@@ -2,9 +2,9 @@
 import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import type { Strategy } from '@/modules/pull-system/lean/strategy'
-import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
+import { usePullSystemSimulationStore } from '@/modules/pull-system/simulation/pull-system-simulation-store'
 
-const simulationStore = useSimulationStore()
+const simulationStore = usePullSystemSimulationStore()
 
 const strategies: Strategy[] = ['push', 'pull']
 // [dps]

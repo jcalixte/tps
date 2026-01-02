@@ -3,14 +3,14 @@ import SeparatorIcon from '@/icons/SeparatorIcon.vue'
 import type { Feature } from '@/modules/pull-system/feature/feature'
 import FeatureSteps from '@/modules/pull-system/feature/FeatureSteps.vue'
 import FlowDashboard from '@/modules/pull-system/feature/FlowDashboard.vue'
-import SimulationControls from '@/modules/pull-system/simulation/SimulationControls.vue'
-import SimulationDashboard from '@/modules/pull-system/simulation/SimulationDashboard.vue'
+import PullSystemSimulationControls from '@/modules/pull-system/simulation/PullSystemSimulationControls.vue'
+import PullSystemSimulationDashboard from '@/modules/pull-system/simulation/PullSystemSimulationDashboard.vue'
 // [dps] import ProblemSolvingIcon from '@/icons/ProblemSolvingIcon.vue'
 import PullSystemIcon from '@/icons/PullSystemIcon.vue'
 import PushSystemIcon from '@/icons/PushSystemIcon.vue'
 import FeatureItem from '@/modules/pull-system/feature/FeatureItem.vue'
 import QualityIssue from '@/modules/pull-system/feature/QualityIssue.vue'
-import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
+import { usePullSystemSimulationStore } from '@/modules/pull-system/simulation/pull-system-simulation-store'
 import { computed } from 'vue'
 
 const feature: Feature = {
@@ -22,7 +22,7 @@ const feature: Feature = {
   step: 2
 }
 
-const simulationStore = useSimulationStore()
+const simulationStore = usePullSystemSimulationStore()
 const meanLeadTimeDeltaFloat = computed(
   () =>
     parseFloat(simulationStore.meanLeadTime('push')) -
@@ -218,8 +218,8 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         system.
       </p>
     </div>
-    <SimulationControls type="single" />
-    <SimulationDashboard />
+    <PullSystemSimulationControls type="single" />
+    <PullSystemSimulationDashboard />
     <div class="text">
       <p>
         Okay, we generally see that the <PullSystemIcon /> pull system is a bit
@@ -232,7 +232,7 @@ const createdAt = new Date('2025-01-08').toLocaleDateString(undefined, {
         news mobile apps! Are patterns the same?
       </p>
     </div>
-    <SimulationControls type="multiple" />
+    <PullSystemSimulationControls type="multiple" />
     <div class="flow-multiple-simulation text">
       <p v-if="displaySimulationConclusion">
         Now we’re pretty confident! As quality issues increase in the

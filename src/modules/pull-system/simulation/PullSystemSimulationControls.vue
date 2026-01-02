@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { Strategy } from '@/modules/pull-system/lean/strategy'
-import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
+import { usePullSystemSimulationStore } from '@/modules/pull-system/simulation/pull-system-simulation-store'
 
 defineProps<{
   type: 'single' | 'multiple'
 }>()
 
-const simulationStore = useSimulationStore()
+const simulationStore = usePullSystemSimulationStore()
 const NUMBER_OF_SIMULATION = 500
 
 // [dps]

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useSimulationStore } from '@/modules/pull-system/simulation/simulation-store'
+import { usePullSystemSimulationStore } from '@/modules/pull-system/simulation/pull-system-simulation-store'
 import { popNElement } from '@/utils'
 import chartXkcd from 'chart.xkcd'
 import { onMounted, ref, watch } from 'vue'
 
-const simulationStore = useSimulationStore()
+const simulationStore = usePullSystemSimulationStore()
 const SAMPLE = 15
 const svgElement = ref<HTMLInputElement | null>(null)
 const isChartInit = ref(false)
