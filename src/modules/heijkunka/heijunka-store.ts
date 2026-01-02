@@ -24,7 +24,6 @@ type HeijunkaState = {
   inventory: Inventory
   orders: Order[]
   planning: ProductType[]
-  validatedPlanning: boolean
   meta: {
     currentHour: number
   }
@@ -58,7 +57,6 @@ export const useHeijunkaStore = defineStore('heijunka', {
     inventory: { ...initialInventory },
     orders: [],
     planning: [],
-    validatedPlanning: false,
     meta: {
       currentHour: 0
     }
@@ -136,12 +134,7 @@ export const useHeijunkaStore = defineStore('heijunka', {
         }
       })
     },
-    validatePlanning(planning: ProductType[]) {
-      this.validatedPlanning = true
-      this.planning = planning
-    },
     reset() {
-      this.validatedPlanning = false
       this.meta.currentHour = 0
       this.planning = []
       this.orders = []
