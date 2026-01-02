@@ -7,6 +7,14 @@ import {
 } from '@/modules/heijkunka/heijunka-config'
 import { ProductType } from '@/modules/heijkunka/types/product-type'
 import { pickRandomElement } from './utils'
+import HeijunkaStat from '@/modules/heijkunka/HeijunkaStat.vue'
+import ShirtItem from '@/modules/heijkunka/assets/ShirtItem.vue'
+import ShoeItem from '@/modules/heijkunka/assets/ShoeItem.vue'
+import JeanItem from '@/modules/heijkunka/assets/JeanItem.vue'
+import HatItem from '@/modules/heijkunka/assets/HatItem.vue'
+import ReceivedStatus from '@/modules/heijkunka/assets/ReceivedStatus.vue'
+import RequestedStatus from '@/modules/heijkunka/assets/RequestedStatus.vue'
+import OrderItem from '@/modules/heijkunka/assets/OrderItem.vue'
 
 const days = Array.from({ length: NUMBER_OF_DAYS }, (_, i) => i + 1)
 const hours = Array.from({ length: NUMBER_OF_HOURS_PER_DAY }, (_, i) => i + 1)
@@ -163,173 +171,57 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         Mean lead time: {{ heijunkaStore.meanLeadTime }}
       </section>
 
+      <HeijunkaStat />
+
       <section class="shop">
         <div class="inventory">
           <h2>Inventory</h2>
 
           <section class="shop-shirt">
-            <svg
+            <ShirtItem
               v-for="shirt in Array.from(
                 { length: heijunkaStore.inventory.shirt },
                 (_, i) => i
               )"
               :key="shirt"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-shirt"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M15 4l6 2v5h-3v8a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1v-8h-3v-5l6 -2a3 3 0 0 0 6 0"
-              />
-            </svg>
+            />
           </section>
           <section class="shop-jeans">
-            <svg
+            <JeanItem
               v-for="jeans in Array.from(
                 { length: heijunkaStore.inventory.jeans },
                 (_, i) => i
               )"
               :key="jeans"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="icon icon-tabler icons-tabler-filled icon-tabler-columns-2"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M4 2h6a1 1 0 0 1 1 1v18a1 1 0 0 1 -1 1h-6a2 2 0 0 1 -2 -2v-16a2 2 0 0 1 2 -2"
-              />
-              <path
-                d="M14 2h6a2 2 0 0 1 2 2v16a2 2 0 0 1 -2 2h-6a1 1 0 0 1 -1 -1v-18a1 1 0 0 1 1 -1"
-              />
-            </svg>
+            />
           </section>
           <section class="shop-shoes">
-            <svg
+            <ShoeItem
               v-for="shoes in Array.from(
                 { length: heijunkaStore.inventory.shoes },
                 (_, i) => i
               )"
               :key="shoes"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-shoe"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M4 6h5.426a1 1 0 0 1 .863 .496l1.064 1.823a3 3 0 0 0 1.896 1.407l4.677 1.114a4 4 0 0 1 3.074 3.89v2.27a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1z"
-              />
-              <path d="M14 13l1 -2" />
-              <path d="M8 18v-1a4 4 0 0 0 -4 -4h-1" />
-              <path d="M10 12l1.5 -3" />
-            </svg>
+            />
           </section>
           <section class="shop-hat">
-            <svg
+            <HatItem
               v-for="hat in Array.from(
                 { length: heijunkaStore.inventory.hat },
                 (_, i) => i
               )"
               :key="hat"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-chef-hat"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M12 3c1.918 0 3.52 1.35 3.91 3.151a4 4 0 0 1 2.09 7.723l0 7.126h-12v-7.126a4 4 0 1 1 2.092 -7.723a4 4 0 0 1 3.908 -3.151z"
-              />
-              <path d="M6.161 17.009l11.839 -.009" />
-            </svg>
+            />
           </section>
         </div>
         <div class="orders">
           <h2>Orders</h2>
           <ol>
             <li class="order" v-for="order in heijunkaStore.orders">
-              <span v-show="order.status === 'requested'">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-hourglass-empty"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"
-                  />
-                  <path
-                    d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"
-                  />
-                </svg>
-              </span>
-              <span v-show="order.status === 'received'">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="icon icon-tabler icons-tabler-filled icon-tabler-rosette-discount-check"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                  />
-                </svg>
-              </span>
+              <RequestedStatus v-show="order.status === 'requested'" />
+              <ReceivedStatus v-show="order.status === 'received'" />
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-file-barcode"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                <path
-                  d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
-                />
-                <path d="M8 13h1v3h-1z" />
-                <path d="M12 13v3" />
-                <path d="M15 13h1v3h-1z" />
-              </svg>
+              <OrderItem />
 
               <span class="numeric">
                 {{ order.product }} | {{ order.leadTime }}
