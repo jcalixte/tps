@@ -109,16 +109,16 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       <table>
         <thead>
           <tr>
-            <th scope="col">Day</th>
-            <th scope="col">Hour 1</th>
-            <th scope="col">Hour 2</th>
-            <th scope="col">Hour 3</th>
-            <th scope="col">Hour 4</th>
+            <th scope="col"></th>
+            <th scope="col">hour 1</th>
+            <th scope="col">hour 2</th>
+            <th scope="col">hour 3</th>
+            <th scope="col">hour 4</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(day, dayIndex) in days" :key="day">
-            <th scope="row">Day {{ day }}</th>
+            <th scope="row">day {{ day }}</th>
             <td v-for="(hour, hourIndex) in hours">
               <select
                 v-model="orders[orderIndex(dayIndex, hourIndex)]"
