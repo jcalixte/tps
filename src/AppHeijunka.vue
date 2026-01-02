@@ -345,8 +345,8 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
 
       <p>
         The longer the lead time is, the longer it takes to have return on
-        investment. You paid for the raw material, the workforce, the machines
-        but until the client receives the product you won't get paid.
+        investment. You already paid for the raw material, the workforce, the
+        machines but until the client receives the product you won't get paid.
       </p>
       <p>
         The more stock there is, the more latent payments there are and the more
