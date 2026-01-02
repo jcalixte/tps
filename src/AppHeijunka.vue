@@ -152,21 +152,23 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         :disabled="!heijunkaStore.validatedPlanning"
       >
         next hour
-        <!-- <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-player-play"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M7 4v16l13 -8z" />
-          </svg> -->
+        <!--
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-player-play"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M7 4v16l13 -8z" />
+        </svg>
+        -->
       </button>
       <button class="button-outline" @click="heijunkaStore.reset()">
         reset
@@ -212,7 +214,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         batch
       </button>
       <button class="button-outline" @click="heijunkaStore.simulateMonth()">
-        Simulate a month
+        simulate a month
       </button>
     </section>
     <div>
