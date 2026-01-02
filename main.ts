@@ -129,9 +129,9 @@ if (useValue !== null) {
     value.classList.add('display-use-value')
 
     if (useValue === 'simple') {
-      value.classList.remove('raibow')
+      value.classList.remove('rainbow')
     } else {
-      value.classList.add('raibow')
+      value.classList.add('rainbow')
     }
   })
 }
