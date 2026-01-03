@@ -23,7 +23,6 @@ type HeijunkaState = {
   money: number
   inventory: Inventory
   orders: Order[]
-  planning: ProductType[]
   meta: {
     currentHour: number
   }
@@ -56,18 +55,12 @@ export const useHeijunkaStore = defineStore('heijunka', {
     money: 100,
     inventory: { ...initialInventory },
     orders: [],
-    planning: [],
     meta: {
       currentHour: 0
     }
   }),
   actions: {
-    newHour() {
-      // End of the production
-      if (this.gameEnded) {
-        return
-      }
-
+    newHour(planning: ProductType[]) {
       this.meta.currentHour++
 
       // Add to inventory every day
@@ -75,16 +68,16 @@ export const useHeijunkaStore = defineStore('heijunka', {
         this.inventory = {
           shirt:
             this.inventory.shirt +
-            getInventoryByProduct('shirt', this.planning, this.currentDay),
+            getInventoryByProduct('shirt', planning, this.currentDay),
           jeans:
             this.inventory.jeans +
-            getInventoryByProduct('jeans', this.planning, this.currentDay),
+            getInventoryByProduct('jeans', planning, this.currentDay),
           shoes:
             this.inventory.shoes +
-            getInventoryByProduct('shoes', this.planning, this.currentDay),
+            getInventoryByProduct('shoes', planning, this.currentDay),
           hat:
             this.inventory.hat +
-            getInventoryByProduct('hat', this.planning, this.currentDay)
+            getInventoryByProduct('hat', planning, this.currentDay)
         }
       }
 
@@ -136,13 +129,12 @@ export const useHeijunkaStore = defineStore('heijunka', {
     },
     reset() {
       this.meta.currentHour = 0
-      this.planning = []
       this.orders = []
       this.inventory = { ...initialInventory }
     },
-    simulateMonth() {
+    simulateMonth(planning: ProductType[]) {
       for (let index = 0; index < 80; index++) {
-        this.newHour()
+        this.newHour(planning)
       }
     }
   },
@@ -171,7 +163,6 @@ export const useHeijunkaStore = defineStore('heijunka', {
         0
       )
     }),
-    gameEnded: () => false,
     // state.meta.currentHour >= NUMBER_OF_DAYS * NUMBER_OF_HOURS_PER_DAY,
     meanLeadTime: (state) => getMean(state.orders.map((o) => o.leadTime))
   }

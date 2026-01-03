@@ -19,7 +19,7 @@ import OrderItem from '@/modules/heijkunka/assets/OrderItem.vue'
 const days = Array.from({ length: NUMBER_OF_DAYS }, (_, i) => i + 1)
 const hours = Array.from({ length: NUMBER_OF_HOURS_PER_DAY }, (_, i) => i + 1)
 
-const orders = ref(
+const planning = ref(
   Array.from(
     { length: days.length * hours.length },
     (): ProductType => pickRandomElement(['shirt', 'jeans', 'shoes', 'hat'])
@@ -56,7 +56,7 @@ const levelingPlanning: ProductType[] = [
   'jeans'
 ]
 
-const orderIndex = (dayIndex: number, hourIndex: number) => {
+const planningIndex = (dayIndex: number, hourIndex: number) => {
   return dayIndex * hours.length + hourIndex
 }
 
@@ -121,7 +121,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
             <th scope="row">day {{ day }}</th>
             <td v-for="(hour, hourIndex) in hours">
               <select
-                v-model="orders[orderIndex(dayIndex, hourIndex)]"
+                v-model="planning[planningIndex(dayIndex, hourIndex)]"
                 :name="`day-${day}-hour-${hour}`"
                 :id="`day-${day}-hour-${hour}`"
               >
@@ -137,7 +137,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
     </section>
 
     <section class="commands">
-      <button class="button-outline" @click="heijunkaStore.newHour()">
+      <button class="button-outline" @click="heijunkaStore.newHour(planning)">
         next hour
         <!--
         <svg
@@ -161,7 +161,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         reset
       </button>
 
-      <button class="button-outline" @click="orders = [...levelingPlanning]">
+      <button class="button-outline" @click="planning = [...levelingPlanning]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -184,7 +184,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         </svg>
         levelling
       </button>
-      <button class="button-outline" @click="orders = [...batchPlanning]">
+      <button class="button-outline" @click="planning = [...batchPlanning]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -200,7 +200,10 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         </svg>
         batch
       </button>
-      <button class="button-outline" @click="heijunkaStore.simulateMonth()">
+      <button
+        class="button-outline"
+        @click="heijunkaStore.simulateMonth(planning)"
+      >
         simulate a month
       </button>
     </section>
@@ -270,7 +273,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
             <OrderItem />
 
             <span class="numeric">
-              {{ order.product }} | {{ order.leadTime }}
+              {{ order.product }} {{ order.leadTime }}
             </span>
           </li>
         </ol>
@@ -319,7 +322,11 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       what you can make per day.
     </p>
     <h2>Heijunka is fun</h2>
-    <p>There's no ///</p>
+    <p>
+      For craftspersonns, there's no such thing repeating over and over again
+      the making of the same product - even if you love doing it - work needs
+      diversity. This is what the heijunka adds by doing a bit of everything.
+    </p>
   </article>
 </template>
 
@@ -352,6 +359,11 @@ li {
   border: 2px solid var(--primary-color);
   border-radius: 1rem;
   padding: 0 0.5rem;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+  }
 
   & > div {
     flex: 1;
