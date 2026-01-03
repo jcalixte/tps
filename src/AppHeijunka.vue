@@ -115,10 +115,11 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">hour 1</th>
-            <th scope="col">hour 2</th>
-            <th scope="col">hour 3</th>
-            <th scope="col">hour 4</th>
+            <th scope="col">8:00</th>
+            <th scope="col">9:00</th>
+            <th scope="col">10:00</th>
+            <th scope="col">11:00</th>
+            <th>dock</th>
           </tr>
         </thead>
         <tbody>
@@ -135,6 +136,27 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
                 <option value="shoes">Shoes</option>
                 <option value="hat">Hat</option>
               </select>
+            </td>
+            <td>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-truck"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path
+                  d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"
+                />
+              </svg>
             </td>
           </tr>
         </tbody>
@@ -215,7 +237,8 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
     <div>
       <span v-if="heijunkaStore.meta.currentHour > 0">
         day: {{ heijunkaStore.currentDay }} | current hour:
-        {{ heijunkaStore.meta.currentHour }} hours
+        {{ heijunkaStore.meta.currentHour }} hours | cash flow:
+        {{ heijunkaStore.cashFlow }}
       </span>
     </div>
 
@@ -357,6 +380,12 @@ li {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+.factory {
+  border: 2px solid var(--primary-color);
+  padding: 0 1rem;
+  margin: 1rem 0;
 }
 
 .shop {

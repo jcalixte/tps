@@ -1,4 +1,5 @@
 import {
+  INITIAL_CASH_FLOW,
   NUMBER_OF_DAYS,
   NUMBER_OF_HOURS_PER_DAY
 } from '@/modules/heijkunka/heijunka-config'
@@ -20,7 +21,6 @@ type Inventory = {
 }
 
 type HeijunkaState = {
-  money: number
   inventory: Inventory
   orders: Order[]
   meta: {
@@ -52,7 +52,6 @@ const initialInventory: Inventory = {
 
 export const useHeijunkaStore = defineStore('heijunka', {
   state: (): HeijunkaState => ({
-    money: 100,
     inventory: { ...initialInventory },
     orders: [],
     meta: {
@@ -141,6 +140,10 @@ export const useHeijunkaStore = defineStore('heijunka', {
   getters: {
     currentDay: (state) =>
       Math.ceil(state.meta.currentHour / NUMBER_OF_HOURS_PER_DAY),
+    cashFlow: (state) =>
+      INITIAL_CASH_FLOW -
+      state.meta.currentHour * 3 +
+      state.orders.filter((o) => o.status === 'received').length * 4,
     remainingInventory: (state): Inventory => ({
       shirt: Math.max(
         state.inventory.shirt -
