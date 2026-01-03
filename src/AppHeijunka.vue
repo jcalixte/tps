@@ -124,7 +124,6 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
                 v-model="orders[orderIndex(dayIndex, hourIndex)]"
                 :name="`day-${day}-hour-${hour}`"
                 :id="`day-${day}-hour-${hour}`"
-                :disabled="heijunkaStore.validatedPlanning"
               >
                 <option value="shirt">Shirt</option>
                 <option value="jeans">Jeans</option>
@@ -138,19 +137,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
     </section>
 
     <section class="commands">
-      <button
-        v-if="!heijunkaStore.validatedPlanning"
-        class="button-outline"
-        @click="heijunkaStore.validatePlanning(orders)"
-      >
-        validate planning
-      </button>
-      <button
-        v-else-if="!heijunkaStore.gameEnded"
-        class="button-outline"
-        @click="heijunkaStore.newHour()"
-        :disabled="!heijunkaStore.validatedPlanning"
-      >
+      <button class="button-outline" @click="heijunkaStore.newHour()">
         next hour
         <!--
         <svg
@@ -369,5 +356,11 @@ li {
   & > div {
     flex: 1;
   }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 </style>
