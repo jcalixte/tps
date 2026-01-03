@@ -103,6 +103,11 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       per day to meet the 12 orders every 3 days. At the end, you produce 1
       product every hour.
     </p>
+    <p>
+      The mere reality is that we don't really know the exact orders we'll have.
+      This is presisely the whole point of plannification, it is a bet into the
+      future. The play is to know how to bet.
+    </p>
     <section class="factory">
       <h2>Factory</h2>
 
