@@ -39,7 +39,18 @@ const renderChart = () => {
     },
     options: {
       showLegend: true,
-      fontFamily: 'Noto Serif'
+      fontFamily: 'Noto Serif',
+      dataColors: [
+        '#55efc4',
+        '#00b894',
+        '#81ecec',
+        '#00cec9',
+        '#74b9ff',
+        '#0984e3',
+        '#a29bfe',
+        '#6c5ce7'
+      ],
+      strokeColor: 'var(--primary-color)'
     }
   }
   new chartXkcd.Bar(svgElement.value, config)
