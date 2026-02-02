@@ -13,7 +13,7 @@ const focusList = document.querySelector('#focus-list')
 if (focusList) {
   focusables.forEach((focusable, index) => {
     const a = document.createElement('a')
-    a.textContent = [...focusable.classList]
+    a.textContent = Array.from(focusable.classList)
       .filter((c) => c !== 'focusable')
       .join(' ')
     a.href = `?focus=${a.textContent}`
@@ -103,6 +103,7 @@ const screenshotHouseButton = document.querySelector('#screenshot-house')
 if (screenshotHouseButton) {
   screenshotHouseButton.addEventListener('click', async () => {
     const house = document.querySelector('#thinking-people-system')
+
     if (!house) {
       return
     }
