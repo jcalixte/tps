@@ -142,8 +142,8 @@ export const useHeijunkaStore = defineStore('heijunka', {
       Math.ceil(state.meta.currentHour / NUMBER_OF_HOURS_PER_DAY),
     cashFlow: (state) =>
       INITIAL_CASH_FLOW -
-      state.meta.currentHour * 3 +
-      state.orders.filter((o) => o.status === 'received').length * 4,
+      state.meta.currentHour * 1 +
+      state.orders.filter((o) => o.status === 'received').length * 2,
     remainingInventory: (state): Inventory => ({
       shirt: Math.max(
         state.inventory.shirt -

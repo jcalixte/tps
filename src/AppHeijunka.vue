@@ -238,7 +238,7 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       <span v-if="heijunkaStore.meta.currentHour > 0">
         day: {{ heijunkaStore.currentDay }} | current hour:
         {{ heijunkaStore.meta.currentHour }} hours | cash flow:
-        {{ heijunkaStore.cashFlow }}
+        {{ heijunkaStore.cashFlow }}€
       </span>
     </div>
 
@@ -247,8 +247,6 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       <hr />
       Orders made: {{ heijunkaStore.orders.length }}
     </section>
-
-    <HeijunkaStat />
 
     <section class="shop">
       <div class="inventory">
@@ -300,9 +298,12 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
 
             <OrderItem />
 
-            <span class="numeric">
-              {{ order.product }} {{ order.leadTime }}
-            </span>
+            <ShirtItem v-show="order.product === 'shirt'" />
+            <JeanItem v-show="order.product === 'jeans'" />
+            <ShoeItem v-show="order.product === 'shoes'" />
+            <HatItem v-show="order.product === 'hat'" />
+
+            <span class="numeric">{{ order.leadTime }}</span>
           </li>
         </ol>
       </div>
@@ -313,6 +314,8 @@ const createdAt = new Date('2026-01-01').toLocaleDateString(undefined, {
       <hr />
       Orders made: {{ heijunkaStore.orders.length }}
     </section>
+
+    <HeijunkaStat />
 
     <p>
       The longer the lead time is, the longer it takes to have return on
@@ -401,6 +404,14 @@ li {
 
   & > div {
     flex: 1;
+  }
+}
+
+.orders {
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 }
 

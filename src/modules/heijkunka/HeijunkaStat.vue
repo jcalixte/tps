@@ -22,10 +22,10 @@ const renderChart = () => {
 
   const config = {
     title: `Orders made`,
-    xLabel: 'Products',
+    xLabel: 'Products (ordered | made)',
     yLabel: '# of orders',
     data: {
-      labels: products.map((p) => [`${p} ordered`, `${p} made`]).flat(),
+      labels: products.map((p) => [`${p} o`, `${p}`]).flat(),
       datasets: [
         {
           data: products
