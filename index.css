@@ -64,6 +64,10 @@ li {
   font-size: clamp(var(--min-font-size, 11px), 2.1vw, var(--font-size, 28px));
 }
 
+.customer-satisfaction h2 {
+  display: block;
+}
+
 .customer-satisfaction h2,
 .customer-satisfaction p {
   margin: 0;
