@@ -23,7 +23,7 @@
     "daisyui": "^5.0.50",
     "hex-color-regex": "^1.1.0",
     "modern-screenshot": "^4.6.8",
-    "pinia": "^2.3.1",
+    "pinia": "^3.0.4",
     "random-js": "^2.1.0",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.13",
