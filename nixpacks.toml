@@ -2,7 +2,4 @@
 NIXPACKS_NODE_VERSION = "24"
 
 [phases.setup]
-nixPkgs = ["pnpm"]
-
-[phases.install]
-cmds = ["pnpm install --no-frozen-lockfile --force"]
+nixPkgs = ["nodejs_24", "pnpm"]
