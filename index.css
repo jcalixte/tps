@@ -2,6 +2,11 @@ body {
   font-size: clamp(var(--min-font-size, 11px), 2.1vw, var(--font-size, 28px));
 }
 
+#thinking-people-system {
+  max-width: 1400px;
+  margin: auto;
+}
+
 ul {
   padding-left: 0;
   margin: 0;
